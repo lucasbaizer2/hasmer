@@ -47,9 +47,8 @@ namespace HbcUtil {
 
         private List<HbcInstruction> DisassembleFunction(HbcFuncHeader func) {
             foreach (HbcInstruction insn in func.Disassemble()) {
-                Console.WriteLine(insn.Opcode);
-                Console.WriteLine(Source.BytecodeFormat.Definitions[insn.Opcode].Name);
-                Console.WriteLine(string.Join(", ", insn.Operands));
+                // Console.WriteLine(insn.Opcode);
+                Console.WriteLine(Source.BytecodeFormat.Definitions[insn.Opcode].Name + " " + string.Join(", ", insn.Operands));
             }
             return func.Disassemble().ToList();
         }

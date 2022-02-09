@@ -18,7 +18,7 @@ namespace HbcUtil {
                 HbcInstructionOperandType.UInt16 => reader.ReadUInt16(),
                 HbcInstructionOperandType.UInt32 => reader.ReadUInt32(),
                 HbcInstructionOperandType.Addr8 => reader.ReadSByte(),
-                HbcInstructionOperandType.Addr32 => reader.ReadUInt32(),
+                HbcInstructionOperandType.Addr32 => reader.ReadInt32(),
                 HbcInstructionOperandType.Imm32 => reader.ReadUInt32(),
                 HbcInstructionOperandType.Double => reader.ReadDouble(),
                 HbcInstructionOperandType.UInt8S => reader.ReadByte(),
@@ -32,7 +32,7 @@ namespace HbcUtil {
             };
         }
 
-        public T GetValue<T>() {
+        public T GetValue<T>(HbcFile hbc) {
             if (RawValue is not T) {
                 throw new Exception($"Operand {Type} cannot be represented as {nameof(T)}");
             }

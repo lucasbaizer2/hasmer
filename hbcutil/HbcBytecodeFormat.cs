@@ -31,7 +31,6 @@ namespace HbcUtil {
         public List<HbcInstructionOperandType> OperandTypes { get; set; }
     }
 
-    [JsonConverter(typeof(HbcInstructionDefinitionConverter))]
     public class HbcBytecodeFormat {
         [JsonProperty]
         public int Version { get; set; }
@@ -42,41 +41,5 @@ namespace HbcUtil {
         /// </summary>
         [JsonProperty]
         public List<HbcInstructionDefinition> Definitions { get; set; }
-    }
-
-    public class HbcInstructionDefinitionConverter : JsonConverter {
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) {
-            throw new NotImplementedException();
-        }
-
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) {
-            JObject obj = JObject.Load(reader);
-
-            int version = (int)obj["Version"];
-            JObject opcodesObject = (JObject)obj["Opcodes"];
-            List<JProperty> properties = opcodesObject.Properties().ToList();
-            List<HbcInstructionDefinition> definitions = new List<HbcInstructionDefinition>(properties.Count);
-
-            for (int i = 0; i < properties.Count; i++) {
-                JProperty prop = properties[i];
-                string opcodeName = prop.Name;
-                List<HbcInstructionOperandType> operandTypes = prop.Value.ToObject<List<HbcInstructionOperandType>>();
-
-                definitions.Add(new HbcInstructionDefinition {
-                    Opcode = i,
-                    Name = opcodeName,
-                    OperandTypes = operandTypes
-                });
-            }
-
-            return new HbcBytecodeFormat {
-                Version = version,
-                Definitions = definitions
-            };
-        }
-
-        public override bool CanWrite => false;
-
-        public override bool CanConvert(Type objectType) => false;
     }
 }

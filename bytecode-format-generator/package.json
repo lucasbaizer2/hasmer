@@ -1,0 +1,17 @@
+{
+  "name": "bytecode-format-generator",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^17.0.16",
+    "typescript": "^4.5.5"
+  },
+  "scripts": {
+    "all": "tsc && node build/index.js"
+  },
+  "dependencies": {
+    "axios": "^0.25.0",
+    "simple-git": "^3.1.1"
+  }
+}

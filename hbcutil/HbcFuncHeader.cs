@@ -29,6 +29,7 @@ namespace HbcUtil {
             using BinaryReader reader = new BinaryReader(ms);
             while (ms.Position < DeclarationFile.InstructionOffset - Offset + BytecodeSizeInBytes) {
                 byte opcodeValue = reader.ReadByte();
+                Console.WriteLine(opcodeValue);
                 HbcInstructionDefinition def = DeclarationFile.BytecodeFormat.Definitions[opcodeValue];
 
                 List<HbcInstructionOperand> operands = new List<HbcInstructionOperand>(def.OperandTypes.Count);
