@@ -26,9 +26,14 @@ namespace HbcUtil {
     }
 
     public class HbcInstructionDefinition {
+        [JsonProperty]
         public int Opcode { get; set; }
+        [JsonProperty]
         public string Name { get; set; }
+        [JsonProperty]
         public List<HbcInstructionOperandType> OperandTypes { get; set; }
+        [JsonProperty]
+        public bool IsJump { get; set; }
     }
 
     public class HbcBytecodeFormat {

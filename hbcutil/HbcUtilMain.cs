@@ -5,9 +5,10 @@ using Ionic.Zip;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
+using HbcUtil.Assembler;
 
 namespace HbcUtil {
-    public class Program {
+    public class HbcUtilMain {
         static void Main(string[] args) {
             string apkPath = @"C:\Users\Lucas\Downloads\herald.apk";
 
@@ -22,7 +23,13 @@ namespace HbcUtil {
 
             HbcReader reader = new HbcReader(ms);
             HbcFile file = new HbcFile(reader);
-            HbcDecompiler decompiler = new HbcDecompiler(file);
+            HbcDisassembler disassembler = new HbcDisassembler(file);
+            string disassembly = disassembler.Disassemble();
+
+            File.WriteAllText("output.hasm", disassembly);
+
+            // HbcDecompiler decompiler = new HbcDecompiler(file);
+            // decompiler.Decompile();
         }
     }
 }

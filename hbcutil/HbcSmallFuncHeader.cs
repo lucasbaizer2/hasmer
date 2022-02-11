@@ -10,5 +10,9 @@ using System.IO;
 namespace HbcUtil {
     public class HbcSmallFuncHeader : HbcFuncHeader {
         public HbcFuncHeader Large { get; set; }
+
+        public override HbcFuncHeader GetAssemblerHeader() {
+            return Large ?? this;
+        }
     }
 }

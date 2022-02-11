@@ -1,0 +1,25 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace HbcUtil.Decompile.AST {
+    public class Literal : ISyntax {
+        public PrimitiveValue Value { get; set; }
+
+        public Literal(PrimitiveValue value) {
+            Value = value;
+        }
+
+        public void Write(SourceCodeBuilder builder) {
+            if (Value.TypeCode == TypeCode.String) {
+                builder.Write("'");
+                builder.Write(Value.ToString());
+                builder.Write("'");
+            } else {
+                builder.Write(Value.ToString());
+            }
+        }
+    }
+}

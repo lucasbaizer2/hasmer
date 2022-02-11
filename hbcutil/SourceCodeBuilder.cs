@@ -5,38 +5,40 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace HbcUtil {
-    public class CodeBuilder {
-        private StringBuilder Builder = new StringBuilder();
+    public class SourceCodeBuilder {
+        public StringBuilder Builder { get; }
+
         private int IndentationLevel = 0;
         private string IndentationCharacter;
 
-        public CodeBuilder(string indentationCharacter) {
+        public SourceCodeBuilder(string indentationCharacter) {
             IndentationCharacter = indentationCharacter;
+            Builder = new StringBuilder();
         }
 
-        public void Emit(string code) {
-            if (code.StartsWith("}")) {
-                IndentationLevel--;
-            }
-
+        public void NewLine() {
+            Builder.AppendLine();
             if (IndentationLevel > 0) {
                 Builder.Append(string.Concat(Enumerable.Repeat(IndentationCharacter, IndentationLevel)));
             }
-
-            Builder.Append(code);
-            Builder.Append("\r\n");
-
-            if (code.EndsWith("{")) {
-                IndentationLevel++;
-            }
         }
 
-        public void Emit(CodeBuilder cls) {
+        public void Write(string code) {
+            Builder.Append(code);
+        }
+
+        public void AddIndent(int amount) {
+            IndentationLevel += amount;
+        }
+
+        /*
+        public void Emit(SourceCodeBuilder cls) {
             string[] lines = cls.ToString().Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
             foreach (string line in lines) {
                 Emit(line.TrimStart());
             }
         }
+        */
 
         public override string ToString() {
             return Builder.ToString();

@@ -57,8 +57,8 @@
   },
   "StringStorage": [ "UInt8", "$" ],
   "ArrayBuffer": [ "UInt8", "$" ],
-  "ObjKeyBuffer": [ "UInt8", "$" ],
-  "ObjValueBuffer": [ "UInt8", "$" ],
+  "ObjectKeyBuffer": [ "UInt8", "$" ],
+  "ObjectValueBuffer": [ "UInt8", "$" ],
   "RegExpTableEntry": {
     "Offset": "UInt32",
     "Length": "UInt32"

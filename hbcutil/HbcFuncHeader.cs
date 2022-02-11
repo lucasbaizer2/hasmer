@@ -8,7 +8,18 @@ using Newtonsoft.Json.Linq;
 using System.IO;
 
 namespace HbcUtil {
+    public enum HbcFuncHeaderFlags : byte {
+        ProhibitCall = 0x00,
+        ProhibitConstruct = 0x01,
+        ProhibitNone = 0x02,
+        StrictMode = 0x04,
+        HasExceptionHandler = 0x08,
+        HasDebugInfo = 0x10,
+        Overflowed = 0x20
+    }
+
     public class HbcFuncHeader : HbcEncodedItem {
+        public uint FunctionId { get; set; }
         public uint Offset { get; set; }
         public uint ParamCount { get; set; }
         public uint BytecodeSizeInBytes { get; set; }
@@ -18,18 +29,24 @@ namespace HbcUtil {
         public uint EnvironmentSize { get; set; }
         public uint HighestReadCacheIndex { get; set; }
         public uint HighestWriteCacheIndex { get; set; }
-        public byte Flags { get; set; }
+        public HbcFuncHeaderFlags Flags { get; set; }
         [JsonIgnore]
         public HbcFile DeclarationFile { get; set; }
 
+        public virtual HbcFuncHeader GetAssemblerHeader() {
+            return this;
+        }
+
         public IEnumerable<HbcInstruction> Disassemble() {
+            uint offset = GetAssemblerHeader().Offset - DeclarationFile.InstructionOffset;
+
             using MemoryStream ms = new MemoryStream(DeclarationFile.Instructions);
-            ms.Position = DeclarationFile.InstructionOffset - Offset;
+            ms.Position = offset;
 
             using BinaryReader reader = new BinaryReader(ms);
-            while (ms.Position < DeclarationFile.InstructionOffset - Offset + BytecodeSizeInBytes) {
+            while (ms.Position < offset + BytecodeSizeInBytes) {
+                long startPos = ms.Position;
                 byte opcodeValue = reader.ReadByte();
-                Console.WriteLine(opcodeValue);
                 HbcInstructionDefinition def = DeclarationFile.BytecodeFormat.Definitions[opcodeValue];
 
                 List<HbcInstructionOperand> operands = new List<HbcInstructionOperand>(def.OperandTypes.Count);
@@ -37,9 +54,12 @@ namespace HbcUtil {
                     operands.Add(HbcInstructionOperand.FromReader(reader, type));
                 }
 
+                long endPos = ms.Position;
                 yield return new HbcInstruction {
                     Opcode = opcodeValue,
-                    Operands = operands
+                    Operands = operands,
+                    Offset = (uint)ms.Position - offset,
+                    Length = (uint)(endPos - startPos)
                 };
             }
         }
