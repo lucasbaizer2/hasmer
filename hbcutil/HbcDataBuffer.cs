@@ -24,14 +24,14 @@ namespace HbcUtil {
             Buffer = buffer;
         }
 
-        public PrimitiveValue[] Read(HbcFile source, uint offset, uint length) {
+        public PrimitiveValue[] Read(HbcFile source, uint offset, uint length, out HbcDataBufferTagType tagType) {
             PrimitiveValue[] values = new PrimitiveValue[length];
 
             using MemoryStream ms = new MemoryStream(Buffer);
             using BinaryReader reader = new BinaryReader(ms);
             ms.Position = offset;
 
-            HbcDataBufferTagType tagType = ReadTagType(reader);
+            tagType = ReadTagType(reader);
             for (int i = 0; i < length; i++) {
                 values[i] = ReadValue(source, tagType, reader);
             }
@@ -43,7 +43,7 @@ namespace HbcUtil {
             // new PrimitiveValue made for each switch to preserve the PrimitiveValue type tagging mechanism for numbers
             return tagType switch {
                 HbcDataBufferTagType.ByteString => new PrimitiveValue(source.StringTable[reader.ReadByte()]),
-                HbcDataBufferTagType.ShortString => new PrimitiveValue(source.StringTable[reader.ReadUInt16()]),
+                HbcDataBufferTagType.ShortString => new PrimitiveValue(reader.ReadUInt16()),
                 HbcDataBufferTagType.LongString => new PrimitiveValue(reader.ReadUInt32()),
                 HbcDataBufferTagType.Number => new PrimitiveValue(reader.ReadDouble()),
                 HbcDataBufferTagType.Integer => new PrimitiveValue(reader.ReadInt32()),

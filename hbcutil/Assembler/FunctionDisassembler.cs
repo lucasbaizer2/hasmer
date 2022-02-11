@@ -5,16 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace HbcUtil.Assembler {
-    class FunctionDisassembler {
-        public HbcFile Source { get; set; }
+    public class FunctionDisassembler {
+        public HbcDisassembler Disassembler { get; set; }
+        public HbcFile Source => Disassembler.Source;
         public HbcFuncHeader Func { get; set; }
 
         private List<HbcInstruction> Instructions;
         private Dictionary<uint, string> LabelTable = new Dictionary<uint, string>();
         private int OpcodePadding;
 
-        public FunctionDisassembler(HbcFile source, HbcFuncHeader func) {
-            Source = source;
+        public FunctionDisassembler(HbcDisassembler disassembler, HbcFuncHeader func) {
+            Disassembler = disassembler;
             Func = func;
             Instructions = func.Disassemble().ToList();
         }
@@ -64,17 +65,30 @@ namespace HbcUtil.Assembler {
             }
         }
 
+        private string GetFunctionName(uint id) {
+            HbcSmallFuncHeader func = Source.SmallFuncHeaders[id];
+            string functionName = Source.StringTable[func.FunctionName];
+            if (functionName == "") {
+                return $"$closure${Func.FunctionId}";
+            }
+            return functionName;
+        }
+
         private string AnnotateClosure(uint closureIndex) {
             return $"Function <{GetFunctionName(closureIndex)}>()";
         }
 
         private string AnnotateArray(uint arrayBufferIndex, ushort elements) {
-            return $"[{string.Join<PrimitiveValue>(", ", Source.ArrayBuffer.Read(Source, arrayBufferIndex, elements))}]";
+            PrimitiveValue[] read = Source.ArrayBuffer.Read(Source, arrayBufferIndex, elements, out HbcDataBufferTagType tagType);
+            string stringified = $".data D{arrayBufferIndex} {tagType}[{string.Join<PrimitiveValue>(", ", read)}]";
+            Disassembler.DataDeclarations[arrayBufferIndex] = stringified;
+
+            return $".data D{arrayBufferIndex}";
         }
 
         private string AnnotateObject(uint keyBufferIndex, uint valueBufferIndex, ushort elements) {
-            PrimitiveValue[] keys = Source.ObjectKeyBuffer.Read(Source, keyBufferIndex, elements);
-            PrimitiveValue[] values = Source.ObjectValueBuffer.Read(Source, valueBufferIndex, elements);
+            // PrimitiveValue[] keys = Source.ObjectKeyBuffer.Read(Source, keyBufferIndex, elements);
+            // PrimitiveValue[] values = Source.ObjectValueBuffer.Read(Source, valueBufferIndex, elements);
 
             return "";
         }
@@ -85,7 +99,7 @@ namespace HbcUtil.Assembler {
                 "CreateClosureLongIndex" => AnnotateClosure(insn.Operands[2].GetValue<uint>()),
                 "NewArrayWithBuffer" => AnnotateArray(insn.Operands[3].GetValue<ushort>(), insn.Operands[2].GetValue<ushort>()),
                 "NewArrayWithBufferLong" => AnnotateArray(insn.Operands[3].GetValue<uint>(), insn.Operands[2].GetValue<ushort>()),
-                "NewObjectWithBuffer" => AnnotateObject(insn.Operands[3].GetValue<ushort>(), insn.Operands[4].GetValue<ushort>(), insn.Operands[2].GetValue<ushort>()),
+                // "NewObjectWithBuffer" => AnnotateObject(insn.Operands[3].GetValue<ushort>(), insn.Operands[4].GetValue<ushort>(), insn.Operands[2].GetValue<ushort>()),
                 _ => null
             };
 
@@ -93,15 +107,6 @@ namespace HbcUtil.Assembler {
                 builder.Write("    # ");
                 builder.Write(annotation);
             }
-        }
-
-        private string GetFunctionName(uint id) {
-            HbcSmallFuncHeader func = Source.SmallFuncHeaders[id];
-            string functionName = Source.StringTable[func.FunctionName];
-            if (functionName == "") {
-                return $"$closure${Func.FunctionId}";
-            }
-            return functionName;
         }
 
         public string Disassemble() {
