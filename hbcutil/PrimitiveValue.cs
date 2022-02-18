@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace HbcUtil {
     public class PrimitiveValue {
         public TypeCode TypeCode { get; private set; }
-        private object RawValue;
+        public object RawValue { get; private set; }
 
         public PrimitiveValue() : this(null) { }
 

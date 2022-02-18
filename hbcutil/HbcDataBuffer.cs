@@ -17,6 +17,17 @@ namespace HbcUtil {
         Integer = 7 << 4
     }
 
+    public class HbcDataBufferPrefix {
+        public uint Length { get; set; }
+        public HbcDataBufferTagType TagType { get; set; }
+    }
+
+    public class HbcDataBufferItems {
+        public HbcDataBufferPrefix Prefix { get; set; }
+        public PrimitiveValue[] Items { get; set; }
+        public uint Offset { get; set; }
+    }
+
     public class HbcDataBuffer {
         private byte[] Buffer;
 
@@ -24,27 +35,51 @@ namespace HbcUtil {
             Buffer = buffer;
         }
 
-        public PrimitiveValue[] Read(HbcFile source, uint offset, uint length, out HbcDataBufferTagType tagType) {
-            PrimitiveValue[] values = new PrimitiveValue[length];
+        public List<HbcDataBufferItems> ReadAll(HbcFile source) {
+            using MemoryStream ms = new MemoryStream(Buffer);
+            using BinaryReader reader = new BinaryReader(ms);
 
+            List<HbcDataBufferItems> itemsList = new List<HbcDataBufferItems>();
+            while (ms.Position < ms.Length) {
+                uint offset = (uint)ms.Position;
+                HbcDataBufferPrefix prefix = ReadTagType(reader);
+                PrimitiveValue[] values = new PrimitiveValue[prefix.Length];
+                for (int i = 0; i < values.Length; i++) {
+                    values[i] = ReadValue(source, prefix.TagType, reader);
+                }
+                itemsList.Add(new HbcDataBufferItems {
+                    Prefix = prefix,
+                    Items = values,
+                    Offset = offset
+                });
+            }
+
+            return itemsList;
+        }
+
+        public HbcDataBufferItems Read(HbcFile source, uint offset) {
             using MemoryStream ms = new MemoryStream(Buffer);
             using BinaryReader reader = new BinaryReader(ms);
             ms.Position = offset;
 
-            tagType = ReadTagType(reader);
-            for (int i = 0; i < length; i++) {
-                values[i] = ReadValue(source, tagType, reader);
+            HbcDataBufferPrefix prefix = ReadTagType(reader);
+            PrimitiveValue[] values = new PrimitiveValue[prefix.Length];
+            for (int i = 0; i < values.Length; i++) {
+                values[i] = ReadValue(source, prefix.TagType, reader);
             }
 
-            return values;
+            return new HbcDataBufferItems {
+                Prefix = prefix,
+                Items = values
+            };
         }
 
         private PrimitiveValue ReadValue(HbcFile source, HbcDataBufferTagType tagType, BinaryReader reader) {
             // new PrimitiveValue made for each switch to preserve the PrimitiveValue type tagging mechanism for numbers
             return tagType switch {
                 HbcDataBufferTagType.ByteString => new PrimitiveValue(source.StringTable[reader.ReadByte()]),
-                HbcDataBufferTagType.ShortString => new PrimitiveValue(reader.ReadUInt16()),
-                HbcDataBufferTagType.LongString => new PrimitiveValue(reader.ReadUInt32()),
+                HbcDataBufferTagType.ShortString => new PrimitiveValue(source.StringTable[reader.ReadUInt16()]),
+                HbcDataBufferTagType.LongString => new PrimitiveValue(source.StringTable[reader.ReadUInt32()]),
                 HbcDataBufferTagType.Number => new PrimitiveValue(reader.ReadDouble()),
                 HbcDataBufferTagType.Integer => new PrimitiveValue(reader.ReadInt32()),
                 HbcDataBufferTagType.Null => new PrimitiveValue(null),
@@ -54,14 +89,20 @@ namespace HbcUtil {
             };
         }
 
-        private HbcDataBufferTagType ReadTagType(BinaryReader reader) {
+        private HbcDataBufferPrefix ReadTagType(BinaryReader reader) {
             const byte TAG_MASK = 0x70;
 
             byte keyTag = reader.ReadByte();
             if ((keyTag & 0x80) == 0x80) {
-                reader.BaseStream.Position += 1; // skip length value
+                return new HbcDataBufferPrefix {
+                    TagType = (HbcDataBufferTagType)(keyTag & TAG_MASK),
+                    Length = (uint)(keyTag & 0x0F) << 8 | reader.ReadByte()
+                };
             }
-            return (HbcDataBufferTagType)(keyTag & TAG_MASK);
+            return new HbcDataBufferPrefix {
+                TagType = (HbcDataBufferTagType)(keyTag & TAG_MASK),
+                Length = (uint)(keyTag & 0x0F)
+            };
         }
     }
 }

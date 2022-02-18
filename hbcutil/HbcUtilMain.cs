@@ -28,6 +28,9 @@ namespace HbcUtil {
 
             File.WriteAllText("output.hasm", disassembly);
 
+            HbcAssembler assembler = new HbcAssembler(disassembly);
+            byte[] assembled = assembler.Assemble();
+
             // HbcDecompiler decompiler = new HbcDecompiler(file);
             // decompiler.Decompile();
         }

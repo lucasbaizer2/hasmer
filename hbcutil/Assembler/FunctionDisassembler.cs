@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace HbcUtil.Assembler {
     public class FunctionDisassembler {
@@ -69,7 +71,7 @@ namespace HbcUtil.Assembler {
             HbcSmallFuncHeader func = Source.SmallFuncHeaders[id];
             string functionName = Source.StringTable[func.FunctionName];
             if (functionName == "") {
-                return $"$closure${Func.FunctionId}";
+                return $"$closure${id}";
             }
             return functionName;
         }
@@ -78,35 +80,56 @@ namespace HbcUtil.Assembler {
             return $"Function <{GetFunctionName(closureIndex)}>()";
         }
 
-        private string AnnotateArray(uint arrayBufferIndex, ushort elements) {
-            PrimitiveValue[] read = Source.ArrayBuffer.Read(Source, arrayBufferIndex, elements, out HbcDataBufferTagType tagType);
-            string stringified = $".data D{arrayBufferIndex} {tagType}[{string.Join<PrimitiveValue>(", ", read)}]";
-            Disassembler.DataDeclarations[arrayBufferIndex] = stringified;
-
-            return $".data D{arrayBufferIndex}";
+        private string AnnotateArray(uint arrayBufferIndex) {
+            return $"Array Buffer Index = {arrayBufferIndex}, .data {DisassembleArray(arrayBufferIndex)}";
         }
 
-        private string AnnotateObject(uint keyBufferIndex, uint valueBufferIndex, ushort elements) {
-            // PrimitiveValue[] keys = Source.ObjectKeyBuffer.Read(Source, keyBufferIndex, elements);
-            // PrimitiveValue[] values = Source.ObjectValueBuffer.Read(Source, valueBufferIndex, elements);
+        private string DisassembleArray(uint arrayBufferIndex) {
+            HbcDataBufferItems items = Disassembler.DataDisassembler.ArrayBuffer.Reverse<HbcDataBufferItems>().First(x => x.Offset <= arrayBufferIndex);
+            int disasmIndex = Disassembler.DataDisassembler.ArrayBuffer.IndexOf(items);
+            uint addedOffset = arrayBufferIndex - items.Offset;
+            if (addedOffset != 0) {
+                return $"A{disasmIndex}+{addedOffset}";
+            }
+            return $"A{disasmIndex}";
+        }
 
-            return "";
+        private string AnnotateObject(uint keyBufferIndex, uint valueBufferIndex, ushort length) {
+            PrimitiveValue[] keys = Disassembler.DataDisassembler.GetElementSeries(Disassembler.DataDisassembler.KeyBuffer, keyBufferIndex, length);
+            PrimitiveValue[] values = Disassembler.DataDisassembler.GetElementSeries(Disassembler.DataDisassembler.ValueBuffer, valueBufferIndex, length);
+
+            JObject obj = new JObject();
+            for (int i = 0; i < length; i++) {
+                obj[keys[i].ToString()] = new JValue(values[i].RawValue);
+            }
+
+            return obj.ToString(Formatting.None);
         }
 
         private void AnnotateInstruction(SourceCodeBuilder builder, HbcInstruction insn) {
             string annotation = Source.BytecodeFormat.Definitions[insn.Opcode].Name switch {
                 "CreateClosure" => AnnotateClosure(insn.Operands[2].GetValue<ushort>()),
                 "CreateClosureLongIndex" => AnnotateClosure(insn.Operands[2].GetValue<uint>()),
-                "NewArrayWithBuffer" => AnnotateArray(insn.Operands[3].GetValue<ushort>(), insn.Operands[2].GetValue<ushort>()),
-                "NewArrayWithBufferLong" => AnnotateArray(insn.Operands[3].GetValue<uint>(), insn.Operands[2].GetValue<ushort>()),
+                "NewArrayWithBuffer" => AnnotateArray(insn.Operands[3].GetValue<ushort>()),
+                "NewArrayWithBufferLong" => AnnotateArray(insn.Operands[3].GetValue<uint>()),
                 // "NewObjectWithBuffer" => AnnotateObject(insn.Operands[3].GetValue<ushort>(), insn.Operands[4].GetValue<ushort>(), insn.Operands[2].GetValue<ushort>()),
+                // "NewObjectWithBufferLong" => AnnotateObject(insn.Operands[3].GetValue<uint>(), insn.Operands[4].GetValue<uint>(), insn.Operands[2].GetValue<ushort>()),
                 _ => null
             };
 
             if (annotation != null) {
-                builder.Write("    # ");
+                builder.Write("# ");
                 builder.Write(annotation);
             }
+        }
+
+        private string OperandToDisassembly(HbcInstruction insn, int operandIndex) {
+            HbcInstructionOperand operand = insn.Operands[operandIndex];
+            return Source.BytecodeFormat.Definitions[insn.Opcode].Name switch {
+                "NewArrayWithBuffer" when operandIndex == 3 => DisassembleArray(operand.GetValue<ushort>()),
+                "NewArrayWithBufferLong" when operandIndex == 3 => DisassembleArray(operand.GetValue<uint>()),
+                _ => operand.ToDisassembly(Source)
+            };
         }
 
         public string Disassemble() {
@@ -153,6 +176,8 @@ namespace HbcUtil.Assembler {
             builder.NewLine();
 
             foreach (HbcInstruction insn in Instructions) {
+                int startLength = builder.Builder.Length;
+
                 if (LabelTable.ContainsKey(insn.Offset)) {
                     builder.NewLine();
                     builder.Write(".label ");
@@ -170,7 +195,7 @@ namespace HbcUtil.Assembler {
                     HbcInstructionOperand operand = insn.Operands[i];
                     string readable = operand.Type switch {
                         HbcInstructionOperandType.Addr8 or HbcInstructionOperandType.Addr32 => LabelTable[GetJumpInstructionTarget(insn, operand)],
-                        _ => operand.ToDisassembly(Source)
+                        _ => OperandToDisassembly(insn, i)
                     };
                     builder.Write(readable);
 
@@ -179,6 +204,12 @@ namespace HbcUtil.Assembler {
                     }
                 }
 
+                const int ANNOTATION_OFFSET = 50;
+                int operationLength = builder.Builder.Length - startLength;
+                int annotationPadding = ANNOTATION_OFFSET - operationLength;
+                if (annotationPadding > 0) {
+                    builder.Write(new string(' ', annotationPadding));
+                }
                 AnnotateInstruction(builder, insn);
 
                 builder.NewLine();

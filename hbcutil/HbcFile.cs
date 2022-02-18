@@ -77,10 +77,6 @@ namespace HbcUtil {
             ArrayBuffer = new HbcDataBuffer((byte[])HbcEncodedItem.ParseFromDefinition(reader, def["ArrayBuffer"]));
             reader.Align();
 
-            Console.WriteLine(smallStringTable.Length);
-            Console.WriteLine(overflowStringTable.Length);
-            Console.WriteLine(stringStorage.Length);
-
             def["ObjectKeyBuffer"][1] = Header.ObjKeyBufferSize;
             ObjectKeyBuffer = new HbcDataBuffer((byte[])HbcEncodedItem.ParseFromDefinition(reader, def["ObjectKeyBuffer"]));
             reader.Align();

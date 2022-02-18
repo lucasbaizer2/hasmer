@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace HbcUtil.Assembler {
     public class HbcDisassembler {
-        public Dictionary<uint, string> DataDeclarations { get; private set; }
         public HbcFile Source { get; }
+        public Dictionary<uint, string> DataDeclarations { get; private set; }
+        public DataDisassembler DataDisassembler { get; private set; }
 
         public HbcDisassembler(HbcFile source) {
             Source = source;
@@ -15,26 +16,21 @@ namespace HbcUtil.Assembler {
         }
 
         public string Disassemble() {
-            StringBuilder functions = new StringBuilder();
+            StringBuilder builder = new StringBuilder();
+            builder.Append(".hasm ");
+            builder.AppendLine(Source.Header.Version.ToString());
+            builder.AppendLine();
+
+            DataDisassembler = new DataDisassembler(this);
+            builder.AppendLine(DataDisassembler.Disassemble());
+
             foreach (HbcSmallFuncHeader func in Source.SmallFuncHeaders) {
                 FunctionDisassembler decompiler = new FunctionDisassembler(this, func.GetAssemblerHeader());
-                functions.Append(decompiler.Disassemble());
-                functions.AppendLine();
-                functions.AppendLine();
+                builder.AppendLine(decompiler.Disassemble());
+                builder.AppendLine();
             }
 
-            StringBuilder output = new StringBuilder();
-            List<uint> dataKeys = DataDeclarations.Keys.ToList();
-            dataKeys.Sort();
-            foreach (uint dataKey in dataKeys) {
-                output.AppendLine(DataDeclarations[dataKey]);
-                output.AppendLine();
-            }
-
-            output.AppendLine();
-            output.Append(functions);
-
-            return output.ToString();
+            return builder.ToString();
         }
     }
 }
