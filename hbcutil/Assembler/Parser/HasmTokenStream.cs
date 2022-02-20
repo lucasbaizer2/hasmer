@@ -6,37 +6,65 @@ using System.Threading.Tasks;
 
 namespace HbcUtil.Assembler.Parser {
     public class HasmTokenStream {
-        public static readonly IHasmTokenParser DeclarationParser = new HasmDeclarationParser();
-        public static readonly IHasmTokenParser HasmIntegerParser = new HasmIntegerParser();
-
-        private static readonly IHasmTokenParser[] TokenParsers = new IHasmTokenParser[] {
-            DeclarationParser
-        };
-
-        private HasmStringStream Stream;
+        private AssemblerState State;
 
         public HasmTokenStream(string hasm) {
-            Stream = new HasmStringStream(hasm);
+            State = new AssemblerState {
+                Stream = new HasmStringStream(hasm)
+            };
+        }
+
+        public HasmTokenStream(AssemblerState state) {
+            State = state;
         }
 
         public IEnumerable<HasmToken> ReadTokens() {
-            while (!Stream.IsFinished) {
-                if (Stream.Lines[Stream.CurrentLine].Trim() == "") {
-                    Stream.CurrentLine++;
+            while (!State.Stream.IsFinished) {
+                if (State.Stream.Lines[State.Stream.CurrentLine].Trim() == "") {
+                    State.Stream.CurrentLine++;
                     continue;
                 }
 
+                State.Stream.SkipWhitespace();
+
+                List<IHasmTokenParser> tokenParsers = new List<IHasmTokenParser> {
+                    IHasmTokenParser.DeclarationParser,
+                    IHasmTokenParser.CommentParser
+                };
+                if (State.CurrentFunction != null) {
+                    tokenParsers.Add(IHasmTokenParser.InstructionParser);
+                }
+
                 bool parsed = false;
-                foreach (IHasmTokenParser parser in TokenParsers) {
-                    if (parser.CanParse(Stream)) {
-                        yield return parser.Parse(Stream);
+                foreach (IHasmTokenParser parser in tokenParsers) {
+                    HasmStringStreamState state = State.Stream.SaveState();
+                    if (parser.CanParse(State)) {
+                        State.Stream.LoadState(state);
+                        HasmToken token = parser.Parse(State);
+                        if (token != null) { // tokens like comments can return null, just ignore them
+                            yield return token;
+                        }
+
+                        if (State.BytecodeFormat == null) {
+                            if (token is HasmVersionDeclarationToken ver) {
+                                int value = ver.Version.Value;
+                                State.BytecodeFormat = ResourceManager.ReadEmbeddedResource<HbcBytecodeFormat>($"Bytecode{value}");
+                            } else {
+                                throw new HasmParserException(State.Stream, "expecting '.hasm' declaration");
+                            }
+                        }
+
                         parsed = true;
                         break;
+                    } else {
+                        State.Stream.LoadState(state);
                     }
                 }
 
+                State.Stream.SkipWhitespace();
+
                 if (!parsed) {
-                    throw new HasmParserException(Stream, "invalid statement");
+                    throw new HasmParserException(State.Stream, "invalid statement");
                 }
             }
         }

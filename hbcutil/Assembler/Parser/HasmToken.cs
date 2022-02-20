@@ -3,52 +3,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace HbcUtil.Assembler.Parser {
     public class HasmToken {
-        public HasmTokenType TokenType { get; set; }
-        public string RawValue { get; set; }
+        [JsonIgnore]
         public int Line { get; set; }
+        [JsonIgnore]
         public int Column { get; set; }
-        public List<HasmToken> Children { get; set; }
 
-        public HasmToken(HasmStringStream stream, string raw) {
-            RawValue = raw;
+#pragma warning disable IDE0051 // Remove unused private members
+        [JsonProperty("TokenType")]
+        private string JsonTokenType => GetType().Name;
+        [JsonProperty("Line")]
+        private int JsonLine => Line + 1;
+        [JsonProperty("Column")]
+        private int JsonColumn => Column + 1;
+#pragma warning restore IDE0051 // Remove unused private members
 
-            if (stream.CurrentColumn == 0) { // last token ended the line
-                Line = stream.CurrentLine - 1;
-                Column = stream.Lines[Line].Length - raw.Length;
-            } else {
-                Line = stream.CurrentLine;
-                Column = stream.CurrentColumn - raw.Length;
-            }
+        public HasmToken(HasmStringStreamState state) {
+            Line = state.CurrentLine;
+            Column = state.CurrentColumn;
         }
 
         public void Write(SourceCodeBuilder builder) {
-            builder.Write(TokenType.ToString());
-            builder.Write("('");
-            builder.Write(RawValue);
-            builder.Write("') at [");
-            builder.Write(Line.ToString());
-            builder.Write(", ");
-            builder.Write(Column.ToString());
-            builder.Write("]");
-
-            if (Children != null) {
-                builder.Write(" {");
-                builder.AddIndent(1);
-                builder.NewLine();
-
-                foreach (HasmToken child in Children) {
-                    child.Write(builder);
-                    builder.Write(",");
-                    builder.NewLine();
-                }
-
-                builder.Builder.Remove(builder.Builder.Length - 4, 4);
-                builder.AddIndent(-1);
-                builder.Write("}");
-            }
+            string serialized = JsonConvert.SerializeObject(this, Formatting.Indented);
+            builder.Write(serialized);
         }
     }
 }

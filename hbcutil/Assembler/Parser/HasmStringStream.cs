@@ -5,10 +5,24 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace HbcUtil.Assembler.Parser {
+    public struct HasmStringStreamState {
+        public int CurrentLine { get; set; }
+        public int CurrentColumn { get; set; }
+    }
+
+    public enum HasmStringStreamWhitespaceMode {
+        Remove,
+        Keep
+    }
+
     public class HasmStringStream {
+        private const string WordCharacters = "ABCDEFGHIJKLMNOPQRSTUVQXYZabcdefghijklmnopqrstuvqxyz0123456789_";
+        private const string OperatorCharacters = "<>[]()+-/*{},.";
+
         public int CurrentLine { get; set; }
         public int CurrentColumn { get; set; }
         public string[] Lines { get; set; }
+        public HasmStringStreamWhitespaceMode WhitespaceMode { get; set; }
 
         private string CurrentContent => Lines[CurrentLine].Substring(CurrentColumn);
 
@@ -17,11 +31,12 @@ namespace HbcUtil.Assembler.Parser {
         public HasmStringStream(string hasm) {
             string lineSeparator = hasm.Contains("\r\n") ? "\r\n" : "\n";
             Lines = hasm.Split(lineSeparator).ToArray();
+            WhitespaceMode = HasmStringStreamWhitespaceMode.Remove;
         }
 
-        public string Peek(int length) {
+        private string Peek(int length) {
             if (IsFinished) {
-                throw new Exception("stream is finished");
+                throw new Exception("asm.Stream is finished");
             }
             if (length > CurrentContent.Length) {
                 return null;
@@ -30,32 +45,60 @@ namespace HbcUtil.Assembler.Parser {
         }
 
         public void SkipWhitespace() {
-            while (Peek(1) == " ") {
-                Advance(1);
+            if (WhitespaceMode == HasmStringStreamWhitespaceMode.Remove) {
+                while (Peek(1) == " ") {
+                    Advance(1);
+                }
             }
         }
 
-        public string PeekWord() {
-            int start = 0;
-            while (Peek(start + 1).Trim() == "") {
-                start++;
+        public string PeekCharacters(int length) {
+            SkipWhitespace();
+            return Peek(length);
+        }
+
+        public string AdvanceCharacters(int length) {
+            string chars = PeekCharacters(length);
+            Advance(chars.Length);
+            return chars;
+        }
+
+        public string PeekOperator() {
+            SkipWhitespace();
+            string peeked = Peek(1);
+            if (peeked == null) {
+                return null;
             }
+            if (!OperatorCharacters.Contains(peeked)) {
+                return null;
+            }
+            return peeked;
+        }
+
+        public string AdvanceOperator() {
+            string op = PeekOperator();
+            Advance(op.Length);
+            return op;
+        }
+
+        public string PeekWord() {
+            SkipWhitespace();
             for (int i = 1; ; i++) {
-                string peeked = Peek(start + i);
+                string peeked = Peek(i);
                 if (peeked == null) { // end of line, return token
-                    string previous = Peek(start + i - 1);
-                    previous = previous.Substring(start);
-                    return previous;
+                    return Peek(i - 1);
                 }
-                peeked = peeked.Substring(start);
-                if (peeked[peeked.Length - 1] == ' ') {
-                    return peeked.Substring(0, peeked.Length - 1);
+                if (!WordCharacters.Contains(peeked[peeked.Length - 1])) {
+                    string word = peeked.Substring(0, peeked.Length - 1);
+                    if (word == "") {
+                        return null;
+                    }
+                    return word;
                 }
             }
         }
 
         public string AdvanceWord() {
-            SkipWhitespace();
             string word = PeekWord();
             Advance(word.Length);
             return word;
@@ -63,7 +106,7 @@ namespace HbcUtil.Assembler.Parser {
 
         public void Advance(int length) {
             if (IsFinished) {
-                throw new Exception("stream is finished");
+                throw new Exception("asm.Stream is finished");
             }
             if (length > CurrentContent.Length) {
                 throw new Exception("cannot advance beyond line length");
@@ -73,6 +116,18 @@ namespace HbcUtil.Assembler.Parser {
                 CurrentLine++;
                 CurrentColumn = 0;
             }
+        }
+
+        public HasmStringStreamState SaveState() {
+            return new HasmStringStreamState {
+                CurrentLine = CurrentLine,
+                CurrentColumn = CurrentColumn
+            };
+        }
+
+        public void LoadState(HasmStringStreamState state) {
+            CurrentLine = state.CurrentLine;
+            CurrentColumn = state.CurrentColumn;
         }
     }
 }

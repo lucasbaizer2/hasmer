@@ -18,7 +18,7 @@ namespace HbcUtil {
             using MemoryStream ms = new MemoryStream((int)bundleEntry.UncompressedSize);
             bundleEntry.Extract(ms);
 
-            // reset the position of the memory stream to prepare it for being read from
+            // reset the position of the memory asm.Stream to prepare it for being read from
             ms.Position = 0;
 
             HbcReader reader = new HbcReader(ms);

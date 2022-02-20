@@ -6,8 +6,16 @@ using System.Threading.Tasks;
 
 namespace HbcUtil.Assembler.Parser {
     public interface IHasmTokenParser {
-        bool CanParse(HasmStringStream stream);
+        public static readonly IHasmTokenParser CommentParser = new HasmCommentParser();
+        public static readonly IHasmTokenParser DeclarationParser = new HasmDeclarationParser();
+        public static readonly IHasmTokenParser IntegerParser = new HasmIntegerParser();
+        public static readonly IHasmTokenParser NumberParser = new HasmNumberParser();
+        public static readonly IHasmTokenParser StringParser = new HasmStringParser();
+        public static readonly IHasmTokenParser LabelParser = new HasmLabelParser();
+        public static readonly IHasmTokenParser InstructionParser = new HasmInstructionParser();
 
-        HasmToken Parse(HasmStringStream stream);
+        bool CanParse(AssemblerState asm);
+
+        HasmToken Parse(AssemblerState asm);
     }
 }

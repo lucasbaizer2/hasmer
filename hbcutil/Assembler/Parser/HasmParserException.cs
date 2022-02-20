@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 
 namespace HbcUtil.Assembler.Parser {
     public class HasmParserException : Exception {
-        private HasmStringStream Stream;
+        private int Line;
+        private int Column;
         private string ErrorMessage;
 
-        public override string Message => $"{ErrorMessage} at {Stream.CurrentLine + 1},{Stream.CurrentColumn}";
+        public override string Message => $"{ErrorMessage} at {Line},{Column}";
 
         public HasmParserException(HasmStringStream stream, string message) {
-            Stream = stream;
+            Line = stream.CurrentLine + 1;
+            Column = stream.CurrentColumn + 1;
             ErrorMessage = message;
         }
     }

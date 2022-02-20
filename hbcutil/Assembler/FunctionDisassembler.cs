@@ -73,6 +73,7 @@ namespace HbcUtil.Assembler {
             if (functionName == "") {
                 return $"$closure${id}";
             }
+            functionName = functionName.Replace(">", "\\>");
             return functionName;
         }
 
@@ -217,8 +218,7 @@ namespace HbcUtil.Assembler {
 
             builder.AddIndent(-1);
             builder.Builder.Remove(builder.Builder.Length - 4, 4);
-            builder.Write(".end ");
-            builder.Write(GetFunctionType());
+            builder.Write(".end");
 
             return builder.ToString();
         }

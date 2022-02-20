@@ -37,7 +37,7 @@ namespace HbcUtil.Assembler {
                 HbcDataBufferItems items = buffer[i];
                 IEnumerable<PrimitiveValue> mapped = items.Items.Select(x => {
                     if (x.TypeCode == TypeCode.String) {
-                        x.SetValue('"' + x.GetValue<string>() + '"');
+                        x.SetValue('"' + x.GetValue<string>().Replace("\"", "\\\"") + '"');
                     }
                     return x;
                 });
@@ -45,7 +45,8 @@ namespace HbcUtil.Assembler {
                     HbcDataBufferTagType.ByteString or HbcDataBufferTagType.ShortString or HbcDataBufferTagType.LongString => "String",
                     _ => items.Prefix.TagType.ToString()
                 };
-                builder.AppendLine($".data {prefix}{i} {tagType}[{string.Join(", ", mapped)}] # offset = {items.Offset}");
+                string joined = string.Join(", ", mapped);
+                builder.AppendLine($".data {prefix}{i} {tagType}[{joined}] # offset = {items.Offset}");
             }
             builder.AppendLine();
         }
