@@ -9,9 +9,15 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
+
     - name: Install Doxygen
       run: sudo apt-get install doxygen -y
       shell: bash
+
+    - name: Debug
+      run: ls -al
+      shell: bash
+      working-directory: hbcutil
 
     - name: Generate Doxygen Documentation
       run: doxygen ./doxygen.cfg
