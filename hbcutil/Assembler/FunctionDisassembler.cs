@@ -34,8 +34,8 @@ namespace HbcUtil.Assembler {
 
         private uint GetJumpInstructionTarget(HbcInstruction insn, HbcInstructionOperand operand) {
             return operand.Type switch {
-                HbcInstructionOperandType.Addr8 => (uint)((int)insn.Offset + insn.Length + insn.Operands[0].GetValue<sbyte>()),
-                HbcInstructionOperandType.Addr32 => (uint)((int)insn.Offset + insn.Length + insn.Operands[0].GetValue<int>()),
+                HbcInstructionOperandType.Addr8 => (uint)((int)insn.Offset + operand.GetValue<sbyte>()),
+                HbcInstructionOperandType.Addr32 => (uint)((int)insn.Offset + operand.GetValue<int>()),
                 _ => throw new InvalidOperationException("invalid jump operand")
             };
         }
@@ -176,6 +176,7 @@ namespace HbcUtil.Assembler {
             }
             builder.NewLine();
 
+            List<uint> usedLabels = new List<uint>();
             foreach (HbcInstruction insn in Instructions) {
                 int startLength = builder.Builder.Length;
 
@@ -184,6 +185,8 @@ namespace HbcUtil.Assembler {
                     builder.Write(".label ");
                     builder.Write(LabelTable[insn.Offset]);
                     builder.NewLine();
+
+                    usedLabels.Add(insn.Offset);
                 }
 
                 string name = Source.BytecodeFormat.Definitions[insn.Opcode].Name;
@@ -219,6 +222,15 @@ namespace HbcUtil.Assembler {
             builder.AddIndent(-1);
             builder.Builder.Remove(builder.Builder.Length - 4, 4);
             builder.Write(".end");
+
+            foreach (uint offset in usedLabels) {
+                LabelTable.Remove(offset);
+            }
+            if (LabelTable.Count > 0) {
+                foreach (string labelName in LabelTable.Values) {
+                    Console.WriteLine($"Error: could not find label destination in <{GetFunctionName(Func.FunctionId)}>: {labelName}");
+                }
+            }
 
             return builder.ToString();
         }

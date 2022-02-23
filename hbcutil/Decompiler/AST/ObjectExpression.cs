@@ -31,6 +31,11 @@ namespace HbcUtil.Decompiler.AST {
         }
 
         public void Write(SourceCodeBuilder builder) {
+            if (Properties.Count == 0) {
+                builder.Write("{}");
+                return;
+            }
+
             builder.Write("{");
             builder.AddIndent(1);
             builder.NewLine();
@@ -41,8 +46,8 @@ namespace HbcUtil.Decompiler.AST {
                 builder.NewLine();
             }
 
+            builder.Builder.Remove(builder.Builder.Length - 4, 4);
             builder.AddIndent(-1);
-            builder.NewLine();
             builder.Write("}");
         }
     }

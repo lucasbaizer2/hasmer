@@ -24,10 +24,15 @@ namespace HbcUtil.Assembler {
             DataDisassembler = new DataDisassembler(this);
             builder.AppendLine(DataDisassembler.Disassemble());
 
+            int x = 0;
             foreach (HbcSmallFuncHeader func in Source.SmallFuncHeaders) {
                 FunctionDisassembler decompiler = new FunctionDisassembler(this, func.GetAssemblerHeader());
                 builder.AppendLine(decompiler.Disassemble());
                 builder.AppendLine();
+
+                if (x++ > 2000) {
+                    break;
+                }
             }
 
             return builder.ToString();

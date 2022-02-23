@@ -13,5 +13,23 @@ namespace HbcUtil.Decompiler {
         public int CurrentInstructionIndex { get; set; }
         public HbcInstruction Instruction => Instructions[CurrentInstructionIndex];
         public BlockStatement Block { get; set; }
+
+        public DecompilerContext DeepCopy() {
+            ISyntax[] registers = new ISyntax[State.Registers.Length];
+            Array.Copy(State.Registers, registers, registers.Length);
+            string[] variables = new string[State.Variables.Length];
+            Array.Copy(State.Variables, variables, variables.Length);
+
+            return new DecompilerContext {
+                Source = Source,
+                Instructions = new List<HbcInstruction>(Instructions),
+                State = new FunctionState((uint)State.Registers.Length) {
+                    Registers = registers,
+                    Variables = variables
+                },
+                Block = Block,
+                CurrentInstructionIndex = CurrentInstructionIndex
+            };
+        }
     }
 }

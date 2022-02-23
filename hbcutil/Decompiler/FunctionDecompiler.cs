@@ -49,13 +49,37 @@ namespace HbcUtil.Decompiler {
         }
 
         private static void JNotEqual(DecompilerContext context) {
-            BlockStatement block = new BlockStatement();
             sbyte jump = context.Instruction.Operands[0].GetValue<sbyte>();
-            if (jump < 0) {
-                // not yet implemented
-            } else if (jump > 0) {
+            byte leftRegister = context.Instruction.Operands[1].GetValue<byte>();
+            byte rightRegister = context.Instruction.Operands[2].GetValue<byte>();
 
+            IfStatement block = new IfStatement();
+            block.Consequent = new BlockStatement();
+            block.Test = new BinaryExpression {
+                Left = context.State.Registers[leftRegister],
+                Right = context.State.Registers[rightRegister],
+                Operator = "=="
+            };
+
+            if (jump < 0) {
+                throw new NotImplementedException();
+            } else if (jump > 0) {
+                DecompilerContext contextCopy = context.DeepCopy();
+                contextCopy.Block = block.Consequent;
+                contextCopy.Instructions = context.Instructions.Where(x => x.Offset > context.Instruction.Offset && x.Offset < context.Instruction.Offset + jump).ToList();
+                contextCopy.CurrentInstructionIndex = 0;
+
+                int insnIndex = 0;
+                while (insnIndex < contextCopy.Instructions.Count) {
+                    ObserveInstruction(contextCopy, insnIndex);
+                    insnIndex++;
+                }
+
+                int to = (int)context.Instruction.Offset + jump;
+                int toIndex = context.Instructions.FindIndex(insn => insn.Offset == to);
+                context.CurrentInstructionIndex = toIndex - 1;
             }
+            context.Block.Body.Add(block);
         }
 
         private static void GetGlobalObject(DecompilerContext context) {
@@ -83,7 +107,7 @@ namespace HbcUtil.Decompiler {
                 Operator = "=",
                 Left = new MemberExpression {
                     Object = new Identifier(context.State.Variables[resultRegister]),
-                    Property = new Literal(new PrimitiveValue(context.Source.StringTable[identifierRegister]))
+                    Property = new Identifier(context.Source.StringTable[identifierRegister])
                 },
                 Right = context.State.Registers[sourceRegister]
             });
@@ -105,9 +129,10 @@ namespace HbcUtil.Decompiler {
             byte sourceRegister = context.Instruction.Operands[1].GetValue<byte>();
             uint identifierRegister = context.Instruction.Operands[2].GetValue<uint>();
 
-            context.State.Registers[resultRegister] = new MemberExpression {
+            context.State.Registers[resultRegister] = new MemberExpression(false) {
                 Object = context.State.Registers[sourceRegister],
-                Property = context.State.Registers[identifierRegister]
+                Property = context.State.Registers[identifierRegister],
+                IsComputed = true
             };
         }
 
@@ -195,20 +220,18 @@ namespace HbcUtil.Decompiler {
             context.Block.Body.Add(ret);
         }
 
-        private void ObserveInstruction(DecompilerContext context, int insnIndex) {
+        private static void ObserveInstruction(DecompilerContext context, int insnIndex) {
             context.CurrentInstructionIndex = insnIndex;
             HbcInstruction insn = context.Instructions[insnIndex];
-            string opcodeName = Source.BytecodeFormat.Definitions[insn.Opcode].Name;
-
-            Console.WriteLine(opcodeName);
+            string opcodeName = context.Source.BytecodeFormat.Definitions[insn.Opcode].Name;
 
             if (InstructionHandlers.ContainsKey(opcodeName)) {
                 InstructionHandler handler = InstructionHandlers[opcodeName];
                 handler(context);
             }
 
-            if (insnIndex + 1 < context.Instructions.Count) {
-                ObserveInstruction(context, insnIndex + 1);
+            if (context.CurrentInstructionIndex == insnIndex) {
+                context.CurrentInstructionIndex++;
             }
         }
 
@@ -229,7 +252,9 @@ namespace HbcUtil.Decompiler {
                 State = new FunctionState(Header.FrameSize)
             };
 
-            ObserveInstruction(context, 0);
+            while (context.CurrentInstructionIndex < context.Instructions.Count) {
+                ObserveInstruction(context, context.CurrentInstructionIndex);
+            }
 
             State.DebugPrint();
 
