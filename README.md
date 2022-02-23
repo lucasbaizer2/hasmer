@@ -21,4 +21,4 @@ The `hbcutil` directory contains the Visual Studio C# project for the actual cod
 
 # License
 
-See [LICENSE.md](LICENSE.md).
+See the [LICENSE](LICENSE) file.
