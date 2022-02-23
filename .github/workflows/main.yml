@@ -34,4 +34,4 @@ jobs:
         github_token: ${{ inputs.github_token }}
         branch: gh-pages
         folder: hbcutil/bin/docs/html
-        target-folder: docs
+        target_folder: docs
