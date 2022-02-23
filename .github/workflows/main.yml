@@ -10,10 +10,12 @@ jobs:
     - name: Install Doxygen
       run: sudo apt-get install doxygen -y
       shell: bash
+      working-directory: .
 
     - name: Generate Doxygen Documentation
       run: doxygen ./doxygen.cfg
       shell: bash
+      working-directory: .
       
     - name: Create .nojekyll (ensures pages with underscores work on gh pages)
       run: touch docs/html/.nojekyll
