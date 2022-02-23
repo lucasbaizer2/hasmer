@@ -20,7 +20,7 @@ jobs:
       working-directory: hbcutil
 
     - name: Generate Doxygen Documentation
-      run: doxygen ./doxygen.cfg
+      run: doxygen ./Doxyfile
       shell: bash
       working-directory: hbcutil
       
