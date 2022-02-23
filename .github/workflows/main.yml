@@ -7,10 +7,21 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Doxygen
-      uses: DenverCoder1/doxygen-github-pages-action@v1
+    - name: Install Doxygen
+      run: sudo apt-get install doxygen -y
+      shell: bash
+
+    - name: Generate Doxygen Documentation
+      run: doxygen ./doxygen.cfg
+      shell: bash
+      
+    - name: Create .nojekyll (ensures pages with underscores work on gh pages)
+      run: touch docs/html/.nojekyll
+      shell: bash
+
+    - name: Deploy to GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@3.7.1
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        github_token: ${{ inputs.github_token }}
         branch: gh-pages
         folder: docs/html
