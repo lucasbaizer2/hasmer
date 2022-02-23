@@ -351,3 +351,4 @@ MigrationBackup/
 
 # custom hbcutil ignore
 **/launchSettings.json
+/docs
