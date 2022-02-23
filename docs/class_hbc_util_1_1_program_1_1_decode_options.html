@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>hbcutil: HbcUtil.HbcWriter Class Reference</title>
+<title>hbcutil: HbcUtil.Program.DecodeOptions Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,46 +61,35 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="namespace_hbc_util.html">HbcUtil</a></li><li class="navelem"><a class="el" href="class_hbc_util_1_1_hbc_writer.html">HbcWriter</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespace_hbc_util.html">HbcUtil</a></li><li class="navelem"><a class="el" href="class_hbc_util_1_1_program.html">Program</a></li><li class="navelem"><a class="el" href="class_hbc_util_1_1_program_1_1_decode_options.html">DecodeOptions</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="class_hbc_util_1_1_hbc_writer-members.html">List of all members</a>  </div>
+<a href="#properties">Properties</a> &#124;
+<a href="class_hbc_util_1_1_program_1_1_decode_options-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">HbcUtil.HbcWriter Class Reference</div>  </div>
+<div class="title">HbcUtil.Program.DecodeOptions Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p>Represents a BinaryWriter which can write individual bits.  
- <a href="class_hbc_util_1_1_hbc_writer.html#details">More...</a></p>
-<div class="dynheader">
-Inheritance diagram for HbcUtil.HbcWriter:</div>
-<div class="dyncontent">
- <div class="center">
-  <img src="class_hbc_util_1_1_hbc_writer.png" alt=""/>
- </div></div>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
-Public Member Functions</h2></td></tr>
-<tr class="memitem:afce561098488eb1caf4ad200d3c62b21"><td class="memItemLeft" align="right" valign="top"><a id="afce561098488eb1caf4ad200d3c62b21"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>HbcWriter</b> (Stream stream)</td></tr>
-<tr class="separator:afce561098488eb1caf4ad200d3c62b21"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7cbf0b99f4d36a84366d1ff87bdf490f"><td class="memItemLeft" align="right" valign="top"><a id="a7cbf0b99f4d36a84366d1ff87bdf490f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>Align</b> ()</td></tr>
-<tr class="separator:a7cbf0b99f4d36a84366d1ff87bdf490f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6fcced4abe9e4af2969539dc5f873247"><td class="memItemLeft" align="right" valign="top"><a id="a6fcced4abe9e4af2969539dc5f873247"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>WriteBit</b> (byte bit)</td></tr>
-<tr class="separator:a6fcced4abe9e4af2969539dc5f873247"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a19b211ef75f40f2c23d4ba2722dbb89b"><td class="memItemLeft" align="right" valign="top"><a id="a19b211ef75f40f2c23d4ba2722dbb89b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>WriteBits</b> (uint bits)</td></tr>
-<tr class="separator:a19b211ef75f40f2c23d4ba2722dbb89b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
+Properties</h2></td></tr>
+<tr class="memitem:ac925fcd4c1049a9518076a631b10e973"><td class="memItemLeft" align="right" valign="top"><a id="ac925fcd4c1049a9518076a631b10e973"></a>
+string&#160;</td><td class="memItemRight" valign="bottom"><b>InputPath</b><code> [get, set]</code></td></tr>
+<tr class="separator:ac925fcd4c1049a9518076a631b10e973"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada5fbd80973fbe3f634f28a2ff8928b2"><td class="memItemLeft" align="right" valign="top"><a id="ada5fbd80973fbe3f634f28a2ff8928b2"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>Decompile</b><code> [get, set]</code></td></tr>
+<tr class="separator:ada5fbd80973fbe3f634f28a2ff8928b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a9f222309a223cb2c2fb63832dbe801"><td class="memItemLeft" align="right" valign="top"><a id="a3a9f222309a223cb2c2fb63832dbe801"></a>
+string&#160;</td><td class="memItemRight" valign="bottom"><b>OutputDirectory</b><code> [get, set]</code></td></tr>
+<tr class="separator:a3a9f222309a223cb2c2fb63832dbe801"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d43004ecd01b6c59b00d2f565d1210f"><td class="memItemLeft" align="right" valign="top"><a id="a3d43004ecd01b6c59b00d2f565d1210f"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>IsApk</b><code> [get, set]</code></td></tr>
+<tr class="separator:a3d43004ecd01b6c59b00d2f565d1210f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Represents a BinaryWriter which can write individual bits. </p>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
-<li>Common/HbcWriter.cs</li>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li>Program.cs</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
