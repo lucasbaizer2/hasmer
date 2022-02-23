@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using System.IO;
 
 namespace HbcUtil {
+    /// <summary>
+    /// Represents an operand of Hermes bytecode instruction.
+    /// </summary>
     public class HbcInstructionOperand {
         /// <summary>
         /// The type of operand that is represented by the object.
@@ -98,6 +101,9 @@ namespace HbcUtil {
         }
     }
 
+    /// <summary>
+    /// Represents an instruction in Hermes bytecode.
+    /// </summary>
     public class HbcInstruction {
         /// <summary>
         /// The one-byte instruction opcode.

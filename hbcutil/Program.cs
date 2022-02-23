@@ -10,7 +10,7 @@ using HbcUtil.Decompiler;
 using CommandLine;
 
 namespace HbcUtil {
-    public class HbcUtilMain {
+    public class Program {
         [Verb("decode", HelpText = "Disassembles or decompiles a Hermes bytecode file.")]
         public class DecodeOptions {
             [Option('i', "in", Required = true, HelpText = "The path to a Hermes bytecode file.")]

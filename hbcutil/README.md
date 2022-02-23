@@ -4,7 +4,7 @@ This directory contains the C# source code for `hbutil`, using the .NET 5.0 plat
 
 # Documentation
 
-The latest auto-generated docs can be found online [here](https://lucasbaizer2.github.io/hbcutil/annotated.html).
+The latest auto-generated docs can be found online [here](https://lucasbaizer2.github.io/hbcutil/docs/annotated.html).
 
 You can generate your own docs locally using [Doxygen](https://www.doxygen.nl/index.html). Run in the parent of this directory (i.e. root of the git repository):
 ```
