@@ -5,9 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace HbcUtil.Assembler.Parser {
+    /// <summary>
+    /// Represents an integer, either a 4-byte signed integer or a 4-byte unsigned integer specifically.
+    /// </summary>
     public class HasmIntegerToken : HasmLiteralToken {
+        /// <summary>
+        /// The integer value. This is stored a long to be able to handle both int and uint types.
+        /// </summary>
         private long Value { get; set; }
 
+        /// <summary>
+        /// Returns the value as a 4-byte unsigned integer; throws an exception if the value is not in bounds.
+        /// </summary>
         public uint GetValueAsUInt32() {
             if (Value < uint.MinValue || Value > uint.MaxValue) {
                 throw new HasmParserException(Line, Column, $"integer is not uint: {Value}");
@@ -15,6 +24,9 @@ namespace HbcUtil.Assembler.Parser {
             return (uint)Value;
         }
 
+        /// <summary>
+        /// Returns the value as a 4-byte signed integer; throws an exception if the value is not in bounds.
+        /// </summary>
         public int GetValueAsInt32() {
             if (Value < int.MinValue || Value > int.MaxValue) {
                 throw new HasmParserException(Line, Column, $"integer is not int: {Value}");
@@ -27,8 +39,11 @@ namespace HbcUtil.Assembler.Parser {
         }
     }
 
+    /// <summary>
+    /// Parses an integer.
+    /// </summary>
     public class HasmIntegerParser : IHasmTokenParser {
-        public bool CanParse(AssemblerState asm) {
+        public bool CanParse(HasmReaderState asm) {
             HasmStringStreamState state = asm.Stream.SaveState();
             if (asm.Stream.PeekOperator() == "-") { // negative number
                 asm.Stream.AdvanceOperator();
@@ -44,7 +59,7 @@ namespace HbcUtil.Assembler.Parser {
             return long.TryParse(word, out long _);
         }
 
-        public HasmToken Parse(AssemblerState asm) {
+        public HasmToken Parse(HasmReaderState asm) {
             if (!CanParse(asm)) {
                 throw new HasmParserException(asm.Stream, "invalid integer");
             }

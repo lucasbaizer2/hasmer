@@ -5,6 +5,9 @@ using System.Text;
 using System.IO;
 
 namespace HbcUtil {
+    /// <summary>
+    /// Represents a BinaryReader that can also read individual bits.
+    /// </summary>
     public class HbcReader : BinaryReader {
         private byte? CurrentByte;
         private int Index;

@@ -7,21 +7,48 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace HbcUtil.Assembler {
+    /// <summary>
+    /// Disassembles a function from Hermes bytecode into Hasm assembly.
+    /// </summary>
     public class FunctionDisassembler {
+        /// <summary>
+        /// The disassembler being used.
+        /// </summary>
         public HbcDisassembler Disassembler { get; set; }
+        /// <summary>
+        /// The file which declares the function being disassembled.
+        /// </summary>
         public HbcFile Source => Disassembler.Source;
+        /// <summary>
+        /// The header of the function being disassembled.
+        /// </summary>
         public HbcFuncHeader Func { get; set; }
 
+        /// <summary>
+        /// The parsed instructions of the function.
+        /// </summary>
         private List<HbcInstruction> Instructions;
+        /// <summary>
+        /// The mapping of all labels to write. Index = offset of the label in bytes (like instruction offset), Value = name of the label at that offset.
+        /// </summary>
         private Dictionary<uint, string> LabelTable = new Dictionary<uint, string>();
+        /// <summary>
+        /// The maximum amount of padding to add after each instruction before the operands are written.
+        /// </summary>
         private int OpcodePadding;
 
+        /// <summary>
+        /// Creates a new FunctionDisassembler given the header of the function to disassemble.
+        /// </summary>
         public FunctionDisassembler(HbcDisassembler disassembler, HbcFuncHeader func) {
             Disassembler = disassembler;
             Func = func;
             Instructions = func.Disassemble().ToList();
         }
 
+        /// <summary>
+        /// Regarding all instructions in the function, finds the mininum padding before the operands, placed after the operators.
+        /// </summary>
         private void FindOpcodePadding() {
             foreach (HbcInstruction insn in Instructions) {
                 string name = Source.BytecodeFormat.Definitions[insn.Opcode].Name;
@@ -32,14 +59,51 @@ namespace HbcUtil.Assembler {
             OpcodePadding++;
         }
 
+        /// <summary>
+        /// Gets the instruction that is jumped to by a jumping instruction and its register operand.
+        /// Note that this can be interpreted as the instruction before the one that is jumped to.
+        /// <example>
+        /// As an example, let's suppose GetJumpInstructionTarget was called regarding the "Jmp L2" instruction:
+        /// <code>
+        ///     LoadParam r3, 2 <br />                        
+        ///     GetEnvironment r0, 1 <br />                        
+        ///     LoadFromEnvironment r1, r0, 3 <br />                    
+        ///     GetByIdShort r1, r1, 1, "default" <br />         
+        ///     LoadConstNull r2 <br />
+        ///     JNotEqual L1, r1, r2 <br />
+        ///     LoadConstUndefined r1 <br />
+        ///     Call2 r1, r3, r1, r2 <br />
+        ///     Jmp L2 <br /> <br />
+        ///      
+        ///     .label L1 <br />
+        ///     LoadFromEnvironment r0, r0, 3 <br />                    
+        ///     GetByIdShort r2, r0, 1, "default" <br />          
+        ///     GetById r1, r2, 2, "getCurrentGrayscaleState" <br />
+        ///     LoadParam r0, 1 <br />                        
+        ///     Call3 r0, r1, r2, r0, r3 <br /><br />
+        ///     
+        ///     .label L2 <br /> 
+        ///     LoadConstUndefined r0 <br />
+        ///     Ret r0
+        /// </code>
+        /// The returned offset will be that of "Call3".
+        /// </example>
+        /// </summary>
         private uint GetJumpInstructionTarget(HbcInstruction insn, HbcInstructionOperand operand) {
-            return operand.Type switch {
+            string insnName = Source.BytecodeFormat.Definitions[insn.Opcode].Name;
+            uint offset = operand.Type switch {
                 HbcInstructionOperandType.Addr8 => (uint)((int)insn.Offset + operand.GetValue<sbyte>()),
                 HbcInstructionOperandType.Addr32 => (uint)((int)insn.Offset + operand.GetValue<int>()),
                 _ => throw new InvalidOperationException("invalid jump operand")
             };
+            return insnName switch {
+                _ => offset - insn.Length
+            };
         }
 
+        /// <summary>
+        /// Finds all locations jumped to throughought the function's bytecode and builds a table of all instructions jumped to.
+        /// </summary>
         private void BuildLabelTable() {
             List<uint> labelOffsets = new List<uint>();
             foreach (HbcInstruction insn in Instructions) {
@@ -57,6 +121,9 @@ namespace HbcUtil.Assembler {
             }
         }
 
+        /// <summary>
+        /// Gets the type of a function per its flags.
+        /// </summary>
         private string GetFunctionType() {
             if (Func.Flags.HasFlag(HbcFuncHeaderFlags.ProhibitNone)) {
                 return "Function";
@@ -67,6 +134,9 @@ namespace HbcUtil.Assembler {
             }
         }
 
+        /// <summary>
+        /// Gets the name of a function, or the autogenerated name of a closure if it's an unnamed closure.
+        /// </summary>
         private string GetFunctionName(uint id) {
             HbcSmallFuncHeader func = Source.SmallFuncHeaders[id];
             string functionName = Source.StringTable[func.FunctionName];
@@ -77,14 +147,23 @@ namespace HbcUtil.Assembler {
             return functionName;
         }
 
+        /// <summary>
+        /// Annotates an instruction that refers to a closure.
+        /// </summary>
         private string AnnotateClosure(uint closureIndex) {
             return $"Function <{GetFunctionName(closureIndex)}>()";
         }
 
+        /// <summary>
+        /// Annotates an instruction that refers to the array buffer.
+        /// </summary>
         private string AnnotateArray(uint arrayBufferIndex) {
             return $"Array Buffer Index = {arrayBufferIndex}, .data {DisassembleArray(arrayBufferIndex)}";
         }
 
+        /// <summary>
+        /// Returns the label-name of an item in the array buffer.
+        /// </summary>
         private string DisassembleArray(uint arrayBufferIndex) {
             HbcDataBufferItems items = Disassembler.DataDisassembler.ArrayBuffer.Reverse<HbcDataBufferItems>().First(x => x.Offset <= arrayBufferIndex);
             int disasmIndex = Disassembler.DataDisassembler.ArrayBuffer.IndexOf(items);
@@ -107,6 +186,9 @@ namespace HbcUtil.Assembler {
             return obj.ToString(Formatting.None);
         }
 
+        /// <summary>
+        /// Adds a comment to an instruction if neccessary.
+        /// </summary>
         private void AnnotateInstruction(SourceCodeBuilder builder, HbcInstruction insn) {
             string annotation = Source.BytecodeFormat.Definitions[insn.Opcode].Name switch {
                 "CreateClosure" => AnnotateClosure(insn.Operands[2].GetValue<ushort>()),
@@ -124,6 +206,9 @@ namespace HbcUtil.Assembler {
             }
         }
 
+        /// <summary>
+        /// Converts an operand to disassembly in the most human-readable format possible.
+        /// </summary>
         private string OperandToDisassembly(HbcInstruction insn, int operandIndex) {
             HbcInstructionOperand operand = insn.Operands[operandIndex];
             return Source.BytecodeFormat.Definitions[insn.Opcode].Name switch {
@@ -133,6 +218,9 @@ namespace HbcUtil.Assembler {
             };
         }
 
+        /// <summary>
+        /// Disassembles the function's header and bytecode into human and machine-readable disassembly.
+        /// </summary>
         public string Disassemble() {
             FindOpcodePadding();
             BuildLabelTable();
@@ -180,15 +268,6 @@ namespace HbcUtil.Assembler {
             foreach (HbcInstruction insn in Instructions) {
                 int startLength = builder.Builder.Length;
 
-                if (LabelTable.ContainsKey(insn.Offset)) {
-                    builder.NewLine();
-                    builder.Write(".label ");
-                    builder.Write(LabelTable[insn.Offset]);
-                    builder.NewLine();
-
-                    usedLabels.Add(insn.Offset);
-                }
-
                 string name = Source.BytecodeFormat.Definitions[insn.Opcode].Name;
                 builder.Write(name);
 
@@ -210,13 +289,19 @@ namespace HbcUtil.Assembler {
 
                 const int ANNOTATION_OFFSET = 50;
                 int operationLength = builder.Builder.Length - startLength;
-                int annotationPadding = ANNOTATION_OFFSET - operationLength;
-                if (annotationPadding > 0) {
-                    builder.Write(new string(' ', annotationPadding));
-                }
+                int annotationPadding = Math.Max(1, ANNOTATION_OFFSET - operationLength);
+                builder.Write(new string(' ', annotationPadding));
                 AnnotateInstruction(builder, insn);
 
                 builder.NewLine();
+                if (LabelTable.ContainsKey(insn.Offset)) { // the NEXT instruction is the one that hermes executes, so we put a label for it here
+                    builder.NewLine();
+                    builder.Write(".label ");
+                    builder.Write(LabelTable[insn.Offset]);
+                    builder.NewLine();
+
+                    usedLabels.Add(insn.Offset);
+                }
             }
 
             builder.AddIndent(-1);

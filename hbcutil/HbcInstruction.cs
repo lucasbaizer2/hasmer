@@ -7,9 +7,18 @@ using System.IO;
 
 namespace HbcUtil {
     public class HbcInstructionOperand {
+        /// <summary>
+        /// The type of operand that is represented by the object.
+        /// </summary>
         public HbcInstructionOperandType Type { get; set; }
+        /// <summary>
+        /// The raw value of the object, represented as a PrimitiveValue to preserve type information.
+        /// </summary>
         public PrimitiveValue Value { private get; set; }
 
+        /// <summary>
+        /// Reads the operand from a stream of binary data.
+        /// </summary>
         public static HbcInstructionOperand FromReader(BinaryReader reader, HbcInstructionOperandType type) {
             object rawValue = type switch {
                 HbcInstructionOperandType.Reg8 => reader.ReadByte(),
@@ -32,10 +41,16 @@ namespace HbcUtil {
             };
         }
 
+        /// <summary>
+        /// Returns the value as the given type.
+        /// </summary>
         public T GetValue<T>() {
             return Value.GetValue<T>();
         }
 
+        /// <summary>
+        /// Returns the value, or is the value is a string, the string the value points to.
+        /// </summary>
         public T GetResolvedValue<T>(HbcFile file) {
             return Type switch {
                 HbcInstructionOperandType.UInt8S => (T)(object)file.StringTable[GetValue<byte>()],
@@ -45,6 +60,9 @@ namespace HbcUtil {
             };
         }
 
+        /// <summary>
+        /// Converts a double to a string, catching edge cases.
+        /// </summary>
         private string ToDoubleString(double d) {
             if (double.IsNegativeInfinity(d)) {
                 return "-Infinity";
@@ -58,6 +76,9 @@ namespace HbcUtil {
             return d.ToString("0." + format);
         }
 
+        /// <summary>
+        /// Converts the operand to a human-readable format used for disassembly.
+        /// </summary>
         public string ToDisassembly(HbcFile file) {
             return Type switch {
                 HbcInstructionOperandType.Reg8 => $"r{GetValue<byte>()}",
@@ -78,11 +99,26 @@ namespace HbcUtil {
     }
 
     public class HbcInstruction {
+        /// <summary>
+        /// The one-byte instruction opcode.
+        /// </summary>
         public byte Opcode { get; set; }
+        /// <summary>
+        /// The offset of the instruction relative to the function definition.
+        /// </summary>
         public uint Offset { get; set; }
+        /// <summary>
+        /// The total length of the instruction and its operands in bytes.
+        /// </summary>
         public uint Length { get; set; }
+        /// <summary>
+        /// The operands passed to the instruction.
+        /// </summary>
         public List<HbcInstructionOperand> Operands { get; set; }
 
+        /// <summary>
+        /// Converts the instruction into a human-readable disassembly format used for debugging.
+        /// </summary>
         public string ToDisassembly(HbcFile file) {
             string name = file.BytecodeFormat.Definitions[Opcode].Name;
             string operandString = string.Join(", ", Operands.Select(x => x.ToDisassembly(file)));

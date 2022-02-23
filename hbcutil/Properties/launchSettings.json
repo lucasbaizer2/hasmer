@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "hbcutil": {
+      "commandName": "Project",
+      "commandLineArgs": "-i herald.apk -a -d",
+      "workingDirectory": "C:\\Users\\Lucas\\Downloads"
+    }
+  }
+}

@@ -5,14 +5,23 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace HbcUtil.Assembler.Parser {
+    /// <summary>
+    /// Represents a string literal.
+    /// </summary>
     public class HasmStringToken : HasmLiteralToken {
+        /// <summary>
+        /// The value of the string, without double quotes.
+        /// </summary>
         public string Value { get; set; }
 
         public HasmStringToken(HasmStringStreamState state) : base(state) { }
     }
 
+    /// <summary>
+    /// Parses an escaped string surrounded by double quotes.
+    /// </summary>
     public class HasmStringParser : IHasmTokenParser {
-        public bool CanParse(AssemblerState asm) {
+        public bool CanParse(HasmReaderState asm) {
             string op = asm.Stream.PeekCharacters(1);
             if (op != "\"") {
                 return false;
@@ -35,7 +44,7 @@ namespace HbcUtil.Assembler.Parser {
             return false;
         }
 
-        public HasmToken Parse(AssemblerState asm) {
+        public HasmToken Parse(HasmReaderState asm) {
             if (!CanParse(asm)) {
                 throw new HasmParserException(asm.Stream, "invalid string");
             }

@@ -5,19 +5,34 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace HbcUtil.Assembler.Parser {
+    /// <summary>
+    /// Represents a stream of Hasm tokens parsed from a Hasm file.
+    /// </summary>
     public class HasmTokenStream {
-        public AssemblerState State { get; set; }
+        /// <summary>
+        /// The current state of the reader.
+        /// </summary>
+        public HasmReaderState State { get; set; }
 
+        /// <summary>
+        /// Creates a new HasmTokenStream from raw Hasm assembly.
+        /// </summary>
         public HasmTokenStream(string hasm) {
-            State = new AssemblerState {
+            State = new HasmReaderState {
                 Stream = new HasmStringStream(hasm)
             };
         }
 
-        public HasmTokenStream(AssemblerState state) {
+        /// <summary>
+        /// Creates a new HasmTokenStream from an existing state.
+        /// </summary>
+        public HasmTokenStream(HasmReaderState state) {
             State = state;
         }
 
+        /// <summary>
+        /// Gets an enumerator returning each next token, parsed from the Hasm file.
+        /// </summary>
         public IEnumerable<HasmToken> ReadTokens() {
             while (!State.Stream.IsFinished) {
                 if (State.Stream.Lines[State.Stream.CurrentLine].Trim() == "") {

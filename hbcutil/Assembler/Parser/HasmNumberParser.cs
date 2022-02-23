@@ -5,14 +5,25 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace HbcUtil.Assembler.Parser {
+    /// <summary>
+    /// Represents an 8-byte IEEE754 floating-point value.
+    /// 
+    /// This is directly equivalent to the "number" type in JavaScript.
+    /// </summary>
     public class HasmNumberToken : HasmLiteralToken {
+        /// <summary>
+        /// The parsed value.
+        /// </summary>
         public double Value { get; set; }
 
         public HasmNumberToken(HasmStringStreamState state) : base(state) { }
     }
 
+    /// <summary>
+    /// Parses an 8-byte IEEE754 floating-point value.
+    /// </summary>
     public class HasmNumberParser : IHasmTokenParser {
-        public bool CanParse(AssemblerState asm) {
+        public bool CanParse(HasmReaderState asm) {
             HasmStringStreamState state = asm.Stream.SaveState();
 
             if (asm.Stream.PeekOperator() == "-") { // negative number
@@ -42,7 +53,7 @@ namespace HbcUtil.Assembler.Parser {
             return double.TryParse(intPart, out double _);
         }
 
-        public HasmToken Parse(AssemblerState asm) {
+        public HasmToken Parse(HasmReaderState asm) {
             if (!CanParse(asm)) {
                 throw new HasmParserException(asm.Stream, "invalid number");
             }

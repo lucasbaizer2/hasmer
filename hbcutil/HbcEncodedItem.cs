@@ -8,7 +8,13 @@ using System.Reflection;
 using System.IO;
 
 namespace HbcUtil {
+    /// <summary>
+    /// Represents an item whose parsing format is defined in JSON, whose value corresponds to a series of data in a Hermes bytecode file.
+    /// </summary>
     public abstract class HbcEncodedItem {
+        /// <summary>
+        /// Converts the name of a type in JSON to the .NET type.
+        /// </summary>
         private static Type GetTypeFromName(string name) {
             switch (name) {
                 case "UInt8":
@@ -24,6 +30,9 @@ namespace HbcUtil {
             }
         }
 
+        /// <summary>
+        /// Reads a value from the buffer given the type of the value.
+        /// </summary>
         private static object ReadType(HbcReader reader, string type) {
             if (type == "UInt8") {
                 return reader.ReadByte();
@@ -38,6 +47,9 @@ namespace HbcUtil {
             }
         }
 
+        /// <summary>
+        /// Writes a value to the buffer given the type.
+        /// </summary>
         private static void WriteType(HbcWriter writer, string type, object value) {
             if (type == "UInt8") {
                 writer.Write((byte)value);
@@ -52,6 +64,9 @@ namespace HbcUtil {
             }
         }
 
+        /// <summary>
+        /// Writes a complex value given the definition and corresponding object.
+        /// </summary>
         public static void WriteFromDefinition(HbcWriter writer, JToken def, object value) {
             if (def.Type == JTokenType.Array) {
 
@@ -61,6 +76,9 @@ namespace HbcUtil {
             }
         }
 
+        /// <summary>
+        /// Reads a simple value given its definition.
+        /// </summary>
         public static object ReadFromDefinition(HbcReader reader, JToken def) {
             if (def.Type == JTokenType.Array) {
                 JArray tuple = (JArray)def;
@@ -91,6 +109,9 @@ namespace HbcUtil {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Reads a complex value given its definition.
+        /// </summary>
         public static T Decode<T>(HbcReader reader, JObject obj) where T : HbcEncodedItem, new() {
             T decoded = new T();
 
@@ -103,6 +124,9 @@ namespace HbcUtil {
             return decoded;
         }
 
+        /// <summary>
+        /// Encodes a complex value given its definition.
+        /// </summary>
         public static void Encode<T>(HbcWriter writer, JObject obj, T item) where T : HbcEncodedItem {
             foreach (JProperty property in obj.Properties()) {
                 PropertyInfo info = typeof(T).GetProperty(property.Name, BindingFlags.Public | BindingFlags.Instance);

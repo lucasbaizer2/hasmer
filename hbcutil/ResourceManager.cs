@@ -9,6 +9,9 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace HbcUtil {
+    /// <summary>
+    /// Utility for working with embedded resources.
+    /// </summary>
     public class ResourceManager {
         /// <summary>
         /// Loads an embedded resource and returns its contents.

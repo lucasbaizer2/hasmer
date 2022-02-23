@@ -5,12 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace HbcUtil.Assembler.Parser {
+    /// <summary>
+    /// Parses a comment (starting with a '#') from the stream.
+    /// </summary>
     public class HasmCommentParser : IHasmTokenParser {
-        public bool CanParse(AssemblerState asm) {
+        public bool CanParse(HasmReaderState asm) {
             return asm.Stream.PeekCharacters(1) == "#";
         }
 
-        public HasmToken Parse(AssemblerState asm) {
+        public HasmToken Parse(HasmReaderState asm) {
             if (!CanParse(asm)) {
                 throw new HasmParserException(asm.Stream, "invalid comment");
             }

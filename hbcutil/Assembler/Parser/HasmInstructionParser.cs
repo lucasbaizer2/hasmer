@@ -5,13 +5,25 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace HbcUtil.Assembler.Parser {
+    /// <summary>
+    /// Represents a Hasm instruction's operand.
+    /// </summary>
     public class HasmOperandToken : HasmToken {
+        /// <summary>
+        /// The type of the operand.
+        /// </summary>
         public HbcInstructionOperandType OperandType { get; set; }
+        /// <summary>
+        /// The value represented by the operand.
+        /// </summary>
         public PrimitiveValue Value { get; set; }
 
         public HasmOperandToken(HasmStringStreamState state) : base(state) { }
     }
 
+    /// <summary>
+    /// Parses a Hasm instruction's operand.
+    /// </summary>
     public class HasmOperandParser : IHasmTokenParser {
         private HbcInstructionDefinition Instruction;
         private int OperandIndex;
@@ -22,11 +34,11 @@ namespace HbcUtil.Assembler.Parser {
             OperandIndex = operand;
         }
 
-        public bool CanParse(AssemblerState asm) {
+        public bool CanParse(HasmReaderState asm) {
             throw new NotImplementedException();
         }
 
-        public HasmToken Parse(AssemblerState asm) {
+        public HasmToken Parse(HasmReaderState asm) {
             HasmStringStreamState state = asm.Stream.SaveState();
             if (Type == HbcInstructionOperandType.Reg8 || Type == HbcInstructionOperandType.Reg32) {
                 string reg = asm.Stream.PeekWord();
@@ -86,22 +98,34 @@ namespace HbcUtil.Assembler.Parser {
         }
     }
 
+    /// <summary>
+    /// Represents a Hasm instruction.
+    /// </summary>
     public class HasmInstructionToken : HasmToken {
+        /// <summary>
+        /// The name of the instruction.
+        /// </summary>
         public string Instruction { get; set; }
+        /// <summary>
+        /// The operands passed to the instruction.
+        /// </summary>
         public List<HasmOperandToken> Operands { get; set; }
 
         public HasmInstructionToken(HasmStringStreamState state) : base(state) { }
     }
 
+    /// <summary>
+    /// Parses a Hasm instruction.
+    /// </summary>
     public class HasmInstructionParser : IHasmTokenParser {
-        public bool CanParse(AssemblerState asm) {
+        public bool CanParse(HasmReaderState asm) {
             // throw new NotImplementedException();
 
             string instruction = asm.Stream.PeekWord();
             return instruction != null;
         }
 
-        public HasmToken Parse(AssemblerState asm) {
+        public HasmToken Parse(HasmReaderState asm) {
             HasmStringStreamState state = asm.Stream.SaveState();
             string instruction = asm.Stream.AdvanceWord();
 

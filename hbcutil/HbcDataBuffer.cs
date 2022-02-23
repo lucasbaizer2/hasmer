@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using System.IO;
 
 namespace HbcUtil {
+    /// <summary>
+    /// Represents the type of a series of data in the DataBuffer.
+    /// </summary>
     public enum HbcDataBufferTagType {
         Null = 0,
         True = 1 << 4,
@@ -17,24 +20,57 @@ namespace HbcUtil {
         Integer = 7 << 4
     }
 
+    /// <summary>
+    /// Represents the header of an array in the data buffer.
+    /// </summary>
     public class HbcDataBufferPrefix {
+        /// <summary>
+        /// The amount of values represented by the array.
+        /// </summary>
         public uint Length { get; set; }
+        /// <summary>
+        /// The type of the data in the data buffer.
+        /// </summary>
         public HbcDataBufferTagType TagType { get; set; }
     }
 
+    /// <summary>
+    /// Represents an entry in the data buffer (data type and subsequent items).
+    /// </summary>
     public class HbcDataBufferItems {
+        /// <summary>
+        /// The header for the data buffer entry.
+        /// </summary>
         public HbcDataBufferPrefix Prefix { get; set; }
+        /// <summary>
+        /// The items for the data buffer entry.
+        /// </summary>
         public PrimitiveValue[] Items { get; set; }
+        /// <summary>
+        /// The offset of the entry (from the start of the header) relative to the start of the entire buffer.
+        /// </summary>
         public uint Offset { get; set; }
     }
 
+    /// <summary>
+    /// Represents a Hermes data buffer, such as the array buffer.
+    /// </summary>
     public class HbcDataBuffer {
+        /// <summary>
+        /// The raw binary of the buffer.
+        /// </summary>
         private byte[] Buffer;
 
+        /// <summary>
+        /// Creates a new HbcDataBuffer given the raw binary data in the buffer.
+        /// </summary>
         public HbcDataBuffer(byte[] buffer) {
             Buffer = buffer;
         }
 
+        /// <summary>
+        /// Reads the entire buffer and disassembles it into HbcDataBufferItems objects for each entry in the buffer.
+        /// </summary>
         public List<HbcDataBufferItems> ReadAll(HbcFile source) {
             using MemoryStream ms = new MemoryStream(Buffer);
             using BinaryReader reader = new BinaryReader(ms);
@@ -57,6 +93,9 @@ namespace HbcUtil {
             return itemsList;
         }
 
+        /// <summary>
+        /// Disassembles a single HbcDataBufferItems from an offset in the data buffer (i.e. from an instruction operand).
+        /// </summary>
         public HbcDataBufferItems Read(HbcFile source, uint offset) {
             using MemoryStream ms = new MemoryStream(Buffer);
             using BinaryReader reader = new BinaryReader(ms);
@@ -74,6 +113,9 @@ namespace HbcUtil {
             };
         }
 
+        /// <summary>
+        /// Reads a single PrimitiveValue from a stream given the type of the value.
+        /// </summary>
         private PrimitiveValue ReadValue(HbcFile source, HbcDataBufferTagType tagType, BinaryReader reader) {
             // new PrimitiveValue made for each switch to preserve the PrimitiveValue type tagging mechanism for numbers
             return tagType switch {
@@ -89,6 +131,9 @@ namespace HbcUtil {
             };
         }
 
+        /// <summary>
+        /// Reads the tag type (and length) for an entry in the data buffer. All subsequent items will have that type.
+        /// </summary>
         private HbcDataBufferPrefix ReadTagType(BinaryReader reader) {
             const byte TAG_MASK = 0x70;
 

@@ -6,23 +6,59 @@ using System.IO;
 using Newtonsoft.Json.Linq;
 
 namespace HbcUtil {
+    /// <summary>
+    /// Represents a parsed Hermes bytecode file.
+    /// </summary>
     public class HbcFile {
+        /// <summary>
+        /// The header of the file.
+        /// </summary>
         public HbcHeader Header { get; set; }
+        /// <summary>
+        /// The bytecode format definition found, given the version of the Hermes bytecode in the file.
+        /// </summary>
         public HbcBytecodeFormat BytecodeFormat { get; set; }
+        /// <summary>
+        /// The headers of all functions in the binary.
+        /// </summary>
         public HbcSmallFuncHeader[] SmallFuncHeaders { get; set; }
         public HbcRegExpTableEntry[] RegExpTable { get; set; }
         public HbcCjsModuleTableEntry[] CjsModuleTable { get; set; }
+        /// <summary>
+        /// The Array Buffer, which contains all constant array data.
+        /// </summary>
         public HbcDataBuffer ArrayBuffer { get; set; }
+        /// <summary>
+        /// The Object Key Buffer, which contains the keys of all constant objects.
+        /// </summary>
         public HbcDataBuffer ObjectKeyBuffer { get; set; }
+        /// <summary>
+        /// The Object Value Buffer, which contains the values of all constant objects.
+        /// </summary>
         public HbcDataBuffer ObjectValueBuffer { get; set; }
         public byte[] RegExpStorage { get; set; }
+        /// <summary>
+        /// Contains all function instructions. Use the function headers (SmallFuncHeaders) to find which function correlates to which instructions.
+        /// </summary>
         public byte[] Instructions { get; set; }
+        /// <summary>
+        /// The offset of the Instructions table in the binary.
+        /// </summary>
         public uint InstructionOffset { get; set; }
 
+        /// <summary>
+        /// The parsed string table. Index = string index (i.e. from an operand, etc.), Value = string at that index.
+        /// </summary>
         public string[] StringTable { get; private set; }
 
+        /// <summary>
+        /// Creates a new bytecode file (probably to be writen out). Does not parse anything.
+        /// </summary>
         public HbcFile() { }
 
+        /// <summary>
+        /// Parses an entire Hermes bytecode file from the given reader.
+        /// </summary>
         public HbcFile(HbcReader reader) {
             JObject def = ResourceManager.LoadJsonObject("BytecodeFileFormat");
             Header = HbcEncodedItem.Decode<HbcHeader>(reader, (JObject)def["Header"]);
@@ -116,6 +152,9 @@ namespace HbcUtil {
             BytecodeFormat = ResourceManager.ReadEmbeddedResource<HbcBytecodeFormat>($"Bytecode{Header.Version}");
         }
 
+        /// <summary>
+        /// Writes the Hermes bytecode file and serializes it to a byte array.
+        /// </summary>
         public byte[] Write() {
             using MemoryStream ms = new MemoryStream();
             using BinaryWriter writer = new BinaryWriter(ms);
@@ -123,6 +162,9 @@ namespace HbcUtil {
             return new byte[0];
         }
 
+        /// <summary>
+        /// Creates a parsed string table from the raw string storage data.
+        /// </summary>
         private void CreateStringTable(byte[] stringStorage, HbcSmallStringTableEntry[] smallStringTable, HbcOverflowStringTableEntry[] overflowStringTable) {
             const uint MAX_STRING_LENGTH = 0xFF;
 

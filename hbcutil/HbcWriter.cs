@@ -5,9 +5,12 @@ using System.Text;
 using System.IO;
 
 namespace HbcUtil {
+    /// <summary>
+    /// Represents a BinaryWriter which can write individual bits.
+    /// </summary>
     public class HbcWriter : BinaryWriter {
-        private byte? CurrentByte;
-        private int Index;
+        // private byte? CurrentByte;
+        // private int Index;
 
         public HbcWriter(Stream stream) : base(stream) {
         }
@@ -18,11 +21,11 @@ namespace HbcUtil {
             }
         }
 
-        public byte ReadBit() {
+        public void WriteBit(byte bit) {
             throw new NotImplementedException();
         }
 
-        public uint ReadBits(int amount) {
+        public void WriteBits(uint bits) {
             throw new NotImplementedException();
         }
     }

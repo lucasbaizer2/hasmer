@@ -5,12 +5,21 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace HbcUtil.Assembler.Parser {
+    /// <summary>
+    /// Represents a ".hasm" version declaration.
+    /// </summary>
     public class HasmVersionDeclarationToken : HasmToken {
+        /// <summary>
+        /// The token which declares the version of the Hasm bytecode.
+        /// </summary>
         public HasmIntegerToken Version { get; set; }
 
         public HasmVersionDeclarationToken(HasmStringStreamState state) : base(state) { }
     }
 
+    /// <summary>
+    /// The type of data being declared in a ".data" declaration.
+    /// </summary>
     [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
     public enum HasmDataDeclarationType {
         String,
@@ -21,16 +30,31 @@ namespace HbcUtil.Assembler.Parser {
         False
     }
 
+    /// <summary>
+    /// Represents a ".data" declaration.
+    /// </summary>
     public class HasmDataDeclarationToken : HasmToken {
+        /// <summary>
+        /// The label of the data.
+        /// </summary>
         public HasmLabelToken Label { get; set; }
+        /// <summary>
+        /// The type of the data.
+        /// </summary>
         public HasmDataDeclarationType DataType { get; set; }
+        /// <summary>
+        /// The tokens that define the contents of the data.
+        /// </summary>
         public List<HasmLiteralToken> Data { get; set; }
 
         public HasmDataDeclarationToken(HasmStringStreamState state) : base(state) { }
     }
 
+    /// <summary>
+    /// Parses a declaration (i.e. a token which starts with ".").
+    /// </summary>
     public class HasmDeclarationParser : IHasmTokenParser {
-        public bool CanParse(AssemblerState asm) {
+        public bool CanParse(HasmReaderState asm) {
             string op = asm.Stream.PeekOperator();
             if (op != ".") {
                 return false;
@@ -45,7 +69,7 @@ namespace HbcUtil.Assembler.Parser {
             return word == "hasm" || word == "data" || word == "start" || word == "end" || word == "id" || word == "params" || word == "registers" || word == "symbols" || word == "label" || word == "strict";
         }
 
-        public HasmToken Parse(AssemblerState asm) {
+        public HasmToken Parse(HasmReaderState asm) {
             HasmStringStreamState state = asm.Stream.SaveState();
 
             asm.Stream.AdvanceOperator(); // skip "." before declaration

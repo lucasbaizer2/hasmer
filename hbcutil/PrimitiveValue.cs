@@ -5,16 +5,37 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace HbcUtil {
+    /// <summary>
+    /// A wrapper type for any other given type, which keeps track of the original type that was passed.
+    /// This is used to ensure that primitive types can maintain their original type when cast from object to their type.
+    /// By just using object, all primitive values are coerced into a double, which is undesirable.
+    /// </summary>
     public class PrimitiveValue {
+        /// <summary>
+        /// The type code of the original value passed.
+        /// </summary>
         public TypeCode TypeCode { get; private set; }
+        /// <summary>
+        /// The raw value, stored as an object. You probably don't want to use this, use GetValue() instead.
+        /// </summary>
         public object RawValue { get; private set; }
 
+        /// <summary>
+        /// Creates a new PrimitiveValue, defaulting to null as the value.
+        /// </summary>
         public PrimitiveValue() : this(null) { }
 
+        /// <summary>
+        /// Creates a new PrimitiveValue given the raw value.
+        /// </summary>
+        /// <param name="rawValue"></param>
         public PrimitiveValue(object rawValue) {
             SetValue(rawValue);
         }
 
+        /// <summary>
+        /// Overrides the current raw value with a new one. The type code is also changed to the type of the raw value.
+        /// </summary>
         public void SetValue(object rawValue) {
             RawValue = rawValue;
             if (rawValue == null) {
@@ -27,6 +48,9 @@ namespace HbcUtil {
             }
         }
 
+        /// <summary>
+        /// Returns the raw value coerced to type T. It is the duty of the caller to ensure that the type actually is of type T before calling.
+        /// </summary>
         public T GetValue<T>() {
             return Type.GetTypeCode(typeof(T)) switch {
                 TypeCode.Byte => (T)Convert.ChangeType(Convert.ToByte(RawValue), typeof(T)),

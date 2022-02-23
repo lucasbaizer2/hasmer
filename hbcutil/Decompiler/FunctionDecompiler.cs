@@ -11,10 +11,11 @@ namespace HbcUtil.Decompiler {
 
         private static readonly Dictionary<string, InstructionHandler> InstructionHandlers = new Dictionary<string, InstructionHandler> {
             ["GetGlobalObject"] = GetGlobalObject,
-            ["TryGetById"] = GetById,
             ["GetByVal"] = GetByVal,
-            ["GetByIdShort"] = GetById,
             ["TryGetByVal"] = GetByVal,
+            ["GetById"] = GetById,
+            ["GetByIdShort"] = GetById,
+            ["TryGetById"] = GetById,
             ["TryGetByIdLong"] = GetById,
             ["LoadConstEmpty"] = LoadConstEmpty,
             ["LoadConstUndefined"] = LoadConstUndefined,
@@ -22,18 +23,24 @@ namespace HbcUtil.Decompiler {
             ["LoadConstTrue"] = LoadConstTrue,
             ["LoadConstFalse"] = LoadConstFalse,
             ["LoadConstZero"] = LoadConstZero,
+            ["LoadConstString"] = LoadConstString,
             ["JNotEqual"] = JNotEqual,
+            ["JStrictEqual"] = JStrictEqual,
             ["PutById"] = PutById,
             ["PutByIdLong"] = PutById,
             ["PutNewOwnById"] = PutById,
             ["PutNewOwnByIdShort"] = PutById,
             ["PutNewOwnByIdLong"] = PutById,
+            ["Construct"] = Construct,
             ["Call2"] = Call2,
+            ["Call3"] = Call3,
             ["LoadParam"] = LoadParam,
             ["GetEnvironment"] = GetEnvironment,
             ["LoadFromEnvironment"] = LoadFromEnvironment,
             ["Ret"] = Ret,
-            ["NewObject"] = NewObject
+            ["Mov"] = Mov,
+            ["NewObject"] = NewObject,
+            ["CreateClosure"] = CreateClosure
         };
 
         private HbcFile Source;
@@ -48,38 +55,81 @@ namespace HbcUtil.Decompiler {
             State = new FunctionState(header.FrameSize);
         }
 
-        private static void JNotEqual(DecompilerContext context) {
-            sbyte jump = context.Instruction.Operands[0].GetValue<sbyte>();
+        private static void WriteRemainingRegisters(DecompilerContext context) {
+            for (int i = 0; i < context.State.Registers.Length; i++) {
+                ISyntax register = context.State.Registers[i];
+                if (register is CallExpression) {
+                    context.Block.Body.Add(register);
+                    context.State.Registers[i] = null;
+                }
+            }
+        }
+
+        private static BlockStatement DecompileConditionalBlock(DecompilerContext context, uint start, uint end) {
+            BlockStatement block = new BlockStatement();
+
+            context.Block = block;
+            context.Instructions = context.Instructions.Where(x => x.Offset > start && x.Offset <= end).ToList();
+            context.CurrentInstructionIndex = 0;
+
+            while (context.CurrentInstructionIndex < context.Instructions.Count) {
+                ObserveInstruction(context, context.CurrentInstructionIndex);
+            }
+
+            return block;
+        }
+
+        private static void ConditionalJump(DecompilerContext context, string op) {
+            int jump = context.Instruction.Operands[0].GetValue<int>();
             byte leftRegister = context.Instruction.Operands[1].GetValue<byte>();
             byte rightRegister = context.Instruction.Operands[2].GetValue<byte>();
 
             IfStatement block = new IfStatement();
-            block.Consequent = new BlockStatement();
             block.Test = new BinaryExpression {
                 Left = context.State.Registers[leftRegister],
                 Right = context.State.Registers[rightRegister],
-                Operator = "=="
+                Operator = op
             };
 
             if (jump < 0) {
                 throw new NotImplementedException();
             } else if (jump > 0) {
-                DecompilerContext contextCopy = context.DeepCopy();
-                contextCopy.Block = block.Consequent;
-                contextCopy.Instructions = context.Instructions.Where(x => x.Offset > context.Instruction.Offset && x.Offset < context.Instruction.Offset + jump).ToList();
-                contextCopy.CurrentInstructionIndex = 0;
+                DecompilerContext consequentContext = context.DeepCopy();
 
-                int insnIndex = 0;
-                while (insnIndex < contextCopy.Instructions.Count) {
-                    ObserveInstruction(contextCopy, insnIndex);
-                    insnIndex++;
+                uint start = context.Instruction.Offset;
+                uint to = (uint)((int)context.Instruction.Offset - (int)context.Instruction.Length + jump);
+
+                int toIndex = context.Instructions.FindIndex(insn => insn.Offset == to);
+                HbcInstruction endInstruction = context.Instructions[toIndex];
+                string endInstructionName = context.Source.BytecodeFormat.Definitions[endInstruction.Opcode].Name;
+                if (endInstructionName == "Jmp") { // unconditional jump means else statement
+                    block.Consequent = DecompileConditionalBlock(consequentContext, start, to - endInstruction.Length); // remove the Jmp from the consequent block
+
+                    DecompilerContext alternateContext = context.DeepCopy();
+                    jump = endInstruction.Operands[0].GetValue<int>();
+                    start = endInstruction.Offset;
+                    to = (uint)((int)endInstruction.Offset - (int)endInstruction.Length + jump);
+                    block.Alternate = DecompileConditionalBlock(alternateContext, start, to);
+                    toIndex = context.Instructions.FindIndex(insn => insn.Offset == to);
+
+                    WriteRemainingRegisters(alternateContext);
+                } else {
+                    block.Consequent = DecompileConditionalBlock(consequentContext, start, to);
                 }
 
-                int to = (int)context.Instruction.Offset + jump;
-                int toIndex = context.Instructions.FindIndex(insn => insn.Offset == to);
-                context.CurrentInstructionIndex = toIndex - 1;
+                WriteRemainingRegisters(consequentContext);
+                context.CurrentInstructionIndex = toIndex + 1;
             }
+
             context.Block.Body.Add(block);
+        }
+
+        private static void JNotEqual(DecompilerContext context) {
+            ConditionalJump(context, "==");
+        }
+
+        private static void JStrictEqual(DecompilerContext context) {
+            ConditionalJump(context, "===");
         }
 
         private static void GetGlobalObject(DecompilerContext context) {
@@ -124,6 +174,13 @@ namespace HbcUtil.Decompiler {
             });
         }
 
+        private static void CreateClosure(DecompilerContext context) {
+            byte resultRegister = context.Instruction.Operands[0].GetValue<byte>();
+            uint closureId = context.Instruction.Operands[2].GetValue<uint>();
+
+            context.State.Registers[resultRegister] = new Identifier($"$closure${closureId}");
+        }
+
         private static void GetByVal(DecompilerContext context) {
             byte resultRegister = context.Instruction.Operands[0].GetValue<byte>();
             byte sourceRegister = context.Instruction.Operands[1].GetValue<byte>();
@@ -166,19 +223,53 @@ namespace HbcUtil.Decompiler {
             context.State.Registers[register] = new Literal(new PrimitiveValue(0));
         }
 
-        private static void Call2(DecompilerContext context) {
+        private static void LoadConstString(DecompilerContext context) {
+            byte register = context.Instruction.Operands[0].GetValue<byte>();
+            string str = context.Instruction.Operands[1].GetResolvedValue<string>(context.Source);
+            context.State.Registers[register] = new Literal(new PrimitiveValue(str));
+        }
+
+        private static void CallWithArgs(DecompilerContext context, params byte[] args) {
             byte resultRegister = context.Instruction.Operands[0].GetValue<byte>();
             byte functionRegister = context.Instruction.Operands[1].GetValue<byte>();
-            byte arg0Register = context.Instruction.Operands[2].GetValue<byte>();
-            byte arg1Register = context.Instruction.Operands[3].GetValue<byte>();
 
             context.State.Registers[resultRegister] = new CallExpression {
                 Callee = context.State.Registers[functionRegister],
-                Arguments = new List<ISyntax>() {
-                        context.State.Registers[arg0Register],
-                        context.State.Registers[arg1Register]
-                    }
+                Arguments = args.Select(arg => context.State.Registers[arg]).ToList()
             };
+            context.State.Registers[functionRegister] = null;
+        }
+
+        private static void Construct(DecompilerContext context) {
+            byte resultRegister = context.Instruction.Operands[0].GetValue<byte>();
+            byte constructorRegister = context.Instruction.Operands[1].GetValue<byte>();
+            uint argumentsCount = context.Instruction.Operands[2].GetValue<uint>();
+
+            List<ISyntax> arguments = new List<ISyntax>((int)argumentsCount);
+            for (int i = 0; i < argumentsCount; i++) {
+                arguments.Add(new Literal(new PrimitiveValue(null)));
+            }
+
+            context.State.Registers[resultRegister] = new UnaryExpression {
+                Operator = "new",
+                Argument = new CallExpression {
+                    Callee = context.State.Registers[constructorRegister],
+                    Arguments = arguments
+                }
+            };
+        }
+
+        private static void Call2(DecompilerContext context) {
+            CallWithArgs(context,
+                context.Instruction.Operands[2].GetValue<byte>(),
+                context.Instruction.Operands[3].GetValue<byte>());
+        }
+
+        private static void Call3(DecompilerContext context) {
+            CallWithArgs(context,
+                context.Instruction.Operands[2].GetValue<byte>(),
+                context.Instruction.Operands[3].GetValue<byte>(),
+                context.Instruction.Operands[4].GetValue<byte>());
         }
 
         private static void LoadParam(DecompilerContext context) {
@@ -218,6 +309,14 @@ namespace HbcUtil.Decompiler {
             };
 
             context.Block.Body.Add(ret);
+            context.State.Registers[register] = null;
+        }
+
+        private static void Mov(DecompilerContext context) {
+            byte toRegister = context.Instruction.Operands[0].GetValue<byte>();
+            byte fromRegister = context.Instruction.Operands[1].GetValue<byte>();
+
+            context.State.Registers[toRegister] = context.State.Registers[fromRegister];
         }
 
         private static void ObserveInstruction(DecompilerContext context, int insnIndex) {
@@ -228,6 +327,8 @@ namespace HbcUtil.Decompiler {
             if (InstructionHandlers.ContainsKey(opcodeName)) {
                 InstructionHandler handler = InstructionHandlers[opcodeName];
                 handler(context);
+            } else {
+                Console.WriteLine("No handler for instruction: " + opcodeName);
             }
 
             if (context.CurrentInstructionIndex == insnIndex) {
@@ -235,7 +336,10 @@ namespace HbcUtil.Decompiler {
             }
         }
 
-        public void Decompile() {
+        /// <summary>
+        /// Converts the function into human-readable decompiled JavaScript.
+        /// </summary>
+        public string Decompile() {
             BlockStatement block = new BlockStatement();
             FunctionDeclaration func = new FunctionDeclaration {
                 Name = new Identifier(Source.StringTable[Header.FunctionName]),
@@ -255,6 +359,7 @@ namespace HbcUtil.Decompiler {
             while (context.CurrentInstructionIndex < context.Instructions.Count) {
                 ObserveInstruction(context, context.CurrentInstructionIndex);
             }
+            WriteRemainingRegisters(context);
 
             State.DebugPrint();
 
@@ -262,7 +367,9 @@ namespace HbcUtil.Decompiler {
 
             SourceCodeBuilder builder = new SourceCodeBuilder("    ");
             func.Write(builder);
+
             Console.WriteLine(builder.ToString());
+            return builder.ToString();
         }
     }
 }

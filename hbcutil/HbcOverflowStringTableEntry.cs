@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace HbcUtil {
+    /// <summary>
+    /// Represents a string that was too large to be in the normal string table.
+    /// </summary>
     public class HbcOverflowStringTableEntry : HbcEncodedItem {
         public uint Offset { get; set; }
         public uint Length { get; set; }

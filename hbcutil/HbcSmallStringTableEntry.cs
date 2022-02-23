@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace HbcUtil {
+    /// <summary>
+    /// Represents a string in the string raw buffer. Used for creating the string table.
+    /// </summary>
     public class HbcSmallStringTableEntry : HbcEncodedItem {
         public uint IsUTF16 { get; set; }
         public uint Offset { get; set; }

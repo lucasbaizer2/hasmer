@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace HbcUtil.Assembler.Parser {
+    /// <summary>
+    /// Represents a class which can parse Hasm tokens from a Hasm file.
+    /// </summary>
     public interface IHasmTokenParser {
         public static readonly IHasmTokenParser CommentParser = new HasmCommentParser();
         public static readonly IHasmTokenParser DeclarationParser = new HasmDeclarationParser();
@@ -14,8 +17,16 @@ namespace HbcUtil.Assembler.Parser {
         public static readonly IHasmTokenParser LabelParser = new HasmLabelParser();
         public static readonly IHasmTokenParser InstructionParser = new HasmInstructionParser();
 
-        bool CanParse(AssemblerState asm);
+        /// <summary>
+        /// Returns true if a valid token can be parsed immediately, or false if one cannot.
+        /// 
+        /// This method should not affect the current stream's state.
+        /// </summary>
+        bool CanParse(HasmReaderState asm);
 
-        HasmToken Parse(AssemblerState asm);
+        /// <summary>
+        /// Parses a token from the stream, affecting its state.
+        /// </summary>
+        HasmToken Parse(HasmReaderState asm);
     }
 }

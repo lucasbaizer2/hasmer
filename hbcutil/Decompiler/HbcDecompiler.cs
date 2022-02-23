@@ -13,13 +13,22 @@ namespace HbcUtil.Decompiler {
             Source = source;
         }
 
-        public void Decompile() {
+        /// <summary>
+        /// Converts the bytecode file into human-readable diassembled JavaScript.
+        /// </summary>
+        public string Decompile() {
+            StringBuilder builder = new StringBuilder();
+
             foreach (HbcSmallFuncHeader func in Source.SmallFuncHeaders) {
-                if (Source.StringTable[func.FunctionName] == "define" && func.FrameSize == 7) {
+                if (func.FunctionId == 173) {
                     FunctionDecompiler decompiler = new FunctionDecompiler(Source, func.GetAssemblerHeader());
-                    decompiler.Decompile();
+                    string decompiled = decompiler.Decompile();
+                    builder.AppendLine(decompiled);
+                    builder.AppendLine();
                 }
             }
+
+            return builder.ToString();
         }
     }
 }
