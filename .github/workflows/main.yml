@@ -10,17 +10,15 @@ jobs:
     - name: Install Doxygen
       run: sudo apt-get install doxygen -y
       shell: bash
-      working-directory: hbcutil
 
     - name: Generate Doxygen Documentation
       run: doxygen ./doxygen.cfg
       shell: bash
-      working-directory: hbcutil
       
     - name: Create .nojekyll (ensures pages with underscores work on gh pages)
       run: touch html/.nojekyll
       shell: bash
-      working-directory: hbcutil/bin/docs
+      working-directory: bin/docs
 
     - name: Deploy to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@3.7.1
