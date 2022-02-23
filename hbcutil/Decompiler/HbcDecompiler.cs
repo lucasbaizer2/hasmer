@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace HbcUtil.Decompile {
+namespace HbcUtil.Decompiler {
     public class HbcDecompiler {
         private HbcFile Source;
 

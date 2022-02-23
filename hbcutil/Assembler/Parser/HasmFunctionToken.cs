@@ -12,6 +12,7 @@ namespace HbcUtil.Assembler.Parser {
         public uint ParameterCoumt { get; set; }
         public uint RegisterCount { get; set; }
         public uint Symbols { get; set; }
+        public bool Strict { get; set; }
 
         public HasmFunctionToken(HasmStringStreamState state) : base(state) { }
     }

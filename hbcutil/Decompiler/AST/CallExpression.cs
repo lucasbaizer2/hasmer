@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HbcUtil.Decompile.AST {
+namespace HbcUtil.Decompiler.AST {
     public class CallExpression : ISyntax {
         public ISyntax Callee { get; set; }
         public List<ISyntax> Arguments { get; set; }

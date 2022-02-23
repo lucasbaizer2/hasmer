@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HbcUtil.Decompile.AST {
+namespace HbcUtil.Decompiler.AST {
     public class FunctionDeclaration : ISyntax {
         public Identifier Name { get; set; }
         public bool IsGenerator { get; set; }

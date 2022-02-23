@@ -45,6 +45,19 @@ namespace HbcUtil {
             };
         }
 
+        private string ToDoubleString(double d) {
+            if (double.IsNegativeInfinity(d)) {
+                return "-Infinity";
+            } else if (double.IsPositiveInfinity(d)) {
+                return "Infinity";
+            } else if (double.IsNaN(d)) {
+                return "NaN";
+            }
+
+            string format = new string('#', 324); // https://stackoverflow.com/a/14964797
+            return d.ToString("0." + format);
+        }
+
         public string ToDisassembly(HbcFile file) {
             return Type switch {
                 HbcInstructionOperandType.Reg8 => $"r{GetValue<byte>()}",
@@ -55,10 +68,10 @@ namespace HbcUtil {
                 HbcInstructionOperandType.Addr8 => $"Addr8({GetValue<sbyte>()})",
                 HbcInstructionOperandType.Addr32 => $"Addr32({GetValue<int>()})",
                 HbcInstructionOperandType.Imm32 => GetValue<uint>().ToString(),
-                HbcInstructionOperandType.Double => GetValue<double>().ToString(),
-                HbcInstructionOperandType.UInt8S => $"\"{file.StringTable[GetValue<byte>()]}\"",
-                HbcInstructionOperandType.UInt16S => $"\"{file.StringTable[GetValue<ushort>()]}\"",
-                HbcInstructionOperandType.UInt32S => $"\"{file.StringTable[GetValue<uint>()]}\"",
+                HbcInstructionOperandType.Double => ToDoubleString(GetValue<double>()),
+                HbcInstructionOperandType.UInt8S => $"\"{StringEscape.Escape(file.StringTable[GetValue<byte>()])}\"",
+                HbcInstructionOperandType.UInt16S => $"\"{StringEscape.Escape(file.StringTable[GetValue<ushort>()])}\"",
+                HbcInstructionOperandType.UInt32S => $"\"{StringEscape.Escape(file.StringTable[GetValue<uint>()])}\"",
                 _ => throw new InvalidOperationException("invalid operand type"),
             };
         }

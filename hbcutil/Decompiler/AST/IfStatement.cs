@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HbcUtil.Decompile.AST {
+namespace HbcUtil.Decompiler.AST {
     public class IfStatement : ISyntax {
         public ISyntax Test { get; set; }
         public BlockStatement Consequent { get; set; }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HbcUtil.Decompile.AST {
+namespace HbcUtil.Decompiler.AST {
     public class ObjectExpressionProperty : ISyntax {
         public ISyntax Key { get; set; }
         public ISyntax Value { get; set; }

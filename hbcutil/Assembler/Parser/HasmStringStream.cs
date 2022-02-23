@@ -16,7 +16,7 @@ namespace HbcUtil.Assembler.Parser {
     }
 
     public class HasmStringStream {
-        private const string WordCharacters = "ABCDEFGHIJKLMNOPQRSTUVQXYZabcdefghijklmnopqrstuvqxyz0123456789_";
+        private const string WordCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_";
         private const string OperatorCharacters = "<>[]()+-/*{},.";
 
         public int CurrentLine { get; set; }
@@ -60,6 +60,7 @@ namespace HbcUtil.Assembler.Parser {
         public string AdvanceCharacters(int length) {
             string chars = PeekCharacters(length);
             Advance(chars.Length);
+            SkipWhitespace();
             return chars;
         }
 
@@ -72,12 +73,14 @@ namespace HbcUtil.Assembler.Parser {
             if (!OperatorCharacters.Contains(peeked)) {
                 return null;
             }
+            SkipWhitespace();
             return peeked;
         }
 
         public string AdvanceOperator() {
             string op = PeekOperator();
             Advance(op.Length);
+            SkipWhitespace();
             return op;
         }
 
@@ -93,6 +96,7 @@ namespace HbcUtil.Assembler.Parser {
                     if (word == "") {
                         return null;
                     }
+                    SkipWhitespace();
                     return word;
                 }
             }
@@ -101,6 +105,7 @@ namespace HbcUtil.Assembler.Parser {
         public string AdvanceWord() {
             string word = PeekWord();
             Advance(word.Length);
+            SkipWhitespace();
             return word;
         }
 

@@ -57,8 +57,6 @@ namespace HbcUtil.Assembler.Parser {
             asm.Stream.WhitespaceMode = HasmStringStreamWhitespaceMode.Remove;
 
             string toString = builder.ToString();
-            toString = toString.Replace("\\\\", "\\");
-
             return new HasmStringToken(state) {
                 Value = toString
             };

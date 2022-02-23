@@ -36,6 +36,9 @@ namespace HbcUtil.Assembler.Parser {
                 return double.TryParse($"{intPart}.{fractionPart}", out double _);
             }
             asm.Stream.LoadState(state);
+            if (intPart == "Infinity" || intPart == "NaN") {
+                return true;
+            }
             return double.TryParse(intPart, out double _);
         }
 
@@ -49,7 +52,7 @@ namespace HbcUtil.Assembler.Parser {
             double multiplier = 1.0;
             if (asm.Stream.PeekOperator() == "-") { // negative number
                 asm.Stream.AdvanceOperator();
-                 multiplier = -1.0;
+                multiplier = -1.0;
             }
 
             string intPart = asm.Stream.AdvanceWord();
@@ -61,8 +64,18 @@ namespace HbcUtil.Assembler.Parser {
                     Value = double.Parse($"{intPart}.{fractionPart}") * multiplier
                 };
             } else {
+                if (intPart == "Infinity") {
+                    return new HasmNumberToken(state) {
+                        Value = multiplier == 1.0 ? double.PositiveInfinity : double.NegativeInfinity
+                    };
+                }
+                if (intPart == "NaN") {
+                    return new HasmNumberToken(state) {
+                        Value = double.NaN
+                    };
+                }
                 return new HasmNumberToken(state) {
-                    Value = double.Parse(intPart)
+                    Value = double.Parse(intPart) * multiplier
                 };
             }
         }

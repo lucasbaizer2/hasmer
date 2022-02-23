@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HbcUtil.Assembler.Parser {
     public class HasmTokenStream {
-        private AssemblerState State;
+        public AssemblerState State { get; set; }
 
         public HasmTokenStream(string hasm) {
             State = new AssemblerState {
@@ -40,14 +40,21 @@ namespace HbcUtil.Assembler.Parser {
                     HasmStringStreamState state = State.Stream.SaveState();
                     if (parser.CanParse(State)) {
                         State.Stream.LoadState(state);
-                        HasmToken token = parser.Parse(State);
+                        HasmToken token;
+                        try {
+                            token = parser.Parse(State);
+                        } catch (HasmParserException) {
+                            throw;
+                        } catch (Exception e) {
+                            throw new HasmParserException(State.Stream, e);
+                        }
                         if (token != null) { // tokens like comments can return null, just ignore them
                             yield return token;
                         }
 
                         if (State.BytecodeFormat == null) {
                             if (token is HasmVersionDeclarationToken ver) {
-                                int value = ver.Version.Value;
+                                uint value = ver.Version.GetValueAsUInt32();
                                 State.BytecodeFormat = ResourceManager.ReadEmbeddedResource<HbcBytecodeFormat>($"Bytecode{value}");
                             } else {
                                 throw new HasmParserException(State.Stream, "expecting '.hasm' declaration");

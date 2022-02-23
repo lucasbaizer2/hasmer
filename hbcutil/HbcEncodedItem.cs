@@ -38,7 +38,30 @@ namespace HbcUtil {
             }
         }
 
-        public static object ParseFromDefinition(HbcReader reader, JToken def) {
+        private static void WriteType(HbcWriter writer, string type, object value) {
+            if (type == "UInt8") {
+                writer.Write((byte)value);
+            } else if (type == "UInt16") {
+                writer.Write((ushort)value);
+            } else if (type == "UInt32") {
+                writer.Write((uint)value);
+            } else if (type == "UInt64") {
+                writer.Write((ulong)value);
+            } else {
+                throw new Exception("bad type: " + type);
+            }
+        }
+
+        public static void WriteFromDefinition(HbcWriter writer, JToken def, object value) {
+            if (def.Type == JTokenType.Array) {
+
+            } else {
+                string type = (string)def;
+                WriteType(writer, type, value);
+            }
+        }
+
+        public static object ReadFromDefinition(HbcReader reader, JToken def) {
             if (def.Type == JTokenType.Array) {
                 JArray tuple = (JArray)def;
                 string type = (string)tuple[0];
@@ -56,6 +79,7 @@ namespace HbcUtil {
                     }
                 } else if (tuple[1].Type == JTokenType.String) {
                     // TODO
+                    throw new NotImplementedException();
                 } else {
                     throw new Exception("bad tuple definition");
                 }
@@ -72,11 +96,18 @@ namespace HbcUtil {
 
             foreach (JProperty property in obj.Properties()) {
                 PropertyInfo info = typeof(T).GetProperty(property.Name, BindingFlags.Public | BindingFlags.Instance);
-                object value = ParseFromDefinition(reader, property.Value);
+                object value = ReadFromDefinition(reader, property.Value);
                 info.SetValue(decoded, value);
             }
 
             return decoded;
+        }
+
+        public static void Encode<T>(HbcWriter writer, JObject obj, T item) where T : HbcEncodedItem {
+            foreach (JProperty property in obj.Properties()) {
+                PropertyInfo info = typeof(T).GetProperty(property.Name, BindingFlags.Public | BindingFlags.Instance);
+                WriteFromDefinition(writer, property.Value, info.GetValue(item));
+            }
         }
     }
 }

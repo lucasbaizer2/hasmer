@@ -7,19 +7,21 @@ using Newtonsoft.Json.Linq;
 
 namespace HbcUtil {
     public class HbcFile {
-        public HbcHeader Header { get; private set; }
-        public HbcBytecodeFormat BytecodeFormat { get; private set; }
-        public HbcSmallFuncHeader[] SmallFuncHeaders { get; private set; }
-        public HbcRegExpTableEntry[] RegExpTable { get; private set; }
-        public HbcCjsModuleTableEntry[] CjsModuleTable { get; private set; }
-        public HbcDataBuffer ArrayBuffer { get; private set; }
-        public HbcDataBuffer ObjectKeyBuffer { get; private set; }
-        public HbcDataBuffer ObjectValueBuffer { get; private set; }
-        public byte[] RegExpStorage { get; private set; }
-        public byte[] Instructions { get; private set; }
-        public uint InstructionOffset { get; private set; }
+        public HbcHeader Header { get; set; }
+        public HbcBytecodeFormat BytecodeFormat { get; set; }
+        public HbcSmallFuncHeader[] SmallFuncHeaders { get; set; }
+        public HbcRegExpTableEntry[] RegExpTable { get; set; }
+        public HbcCjsModuleTableEntry[] CjsModuleTable { get; set; }
+        public HbcDataBuffer ArrayBuffer { get; set; }
+        public HbcDataBuffer ObjectKeyBuffer { get; set; }
+        public HbcDataBuffer ObjectValueBuffer { get; set; }
+        public byte[] RegExpStorage { get; set; }
+        public byte[] Instructions { get; set; }
+        public uint InstructionOffset { get; set; }
 
         public string[] StringTable { get; private set; }
+
+        public HbcFile() { }
 
         public HbcFile(HbcReader reader) {
             JObject def = ResourceManager.LoadJsonObject("BytecodeFileFormat");
@@ -70,19 +72,19 @@ namespace HbcUtil {
             reader.Align();
 
             def["StringStorage"][1] = Header.StringStorageSize;
-            byte[] stringStorage = (byte[])HbcEncodedItem.ParseFromDefinition(reader, def["StringStorage"]);
+            byte[] stringStorage = (byte[])HbcEncodedItem.ReadFromDefinition(reader, def["StringStorage"]);
             reader.Align();
 
             def["ArrayBuffer"][1] = Header.ArrayBufferSize;
-            ArrayBuffer = new HbcDataBuffer((byte[])HbcEncodedItem.ParseFromDefinition(reader, def["ArrayBuffer"]));
+            ArrayBuffer = new HbcDataBuffer((byte[])HbcEncodedItem.ReadFromDefinition(reader, def["ArrayBuffer"]));
             reader.Align();
 
             def["ObjectKeyBuffer"][1] = Header.ObjKeyBufferSize;
-            ObjectKeyBuffer = new HbcDataBuffer((byte[])HbcEncodedItem.ParseFromDefinition(reader, def["ObjectKeyBuffer"]));
+            ObjectKeyBuffer = new HbcDataBuffer((byte[])HbcEncodedItem.ReadFromDefinition(reader, def["ObjectKeyBuffer"]));
             reader.Align();
 
             def["ObjectValueBuffer"][1] = Header.ObjValueBufferSize;
-            ObjectValueBuffer = new HbcDataBuffer((byte[])HbcEncodedItem.ParseFromDefinition(reader, def["ObjectValueBuffer"]));
+            ObjectValueBuffer = new HbcDataBuffer((byte[])HbcEncodedItem.ReadFromDefinition(reader, def["ObjectValueBuffer"]));
             reader.Align();
 
             RegExpTable = new HbcRegExpTableEntry[Header.RegExpCount];
@@ -94,7 +96,7 @@ namespace HbcUtil {
             reader.Align();
 
             def["RegExpStorage"][1] = Header.RegExpStorageSize;
-            RegExpStorage = (byte[])HbcEncodedItem.ParseFromDefinition(reader, def["RegExpStorage"]);
+            RegExpStorage = (byte[])HbcEncodedItem.ReadFromDefinition(reader, def["RegExpStorage"]);
             reader.Align();
 
             CjsModuleTable = new HbcCjsModuleTableEntry[Header.RegExpCount];
@@ -112,6 +114,13 @@ namespace HbcUtil {
             CreateStringTable(stringStorage, smallStringTable, overflowStringTable);
 
             BytecodeFormat = ResourceManager.ReadEmbeddedResource<HbcBytecodeFormat>($"Bytecode{Header.Version}");
+        }
+
+        public byte[] Write() {
+            using MemoryStream ms = new MemoryStream();
+            using BinaryWriter writer = new BinaryWriter(ms);
+
+            return new byte[0];
         }
 
         private void CreateStringTable(byte[] stringStorage, HbcSmallStringTableEntry[] smallStringTable, HbcOverflowStringTableEntry[] overflowStringTable) {

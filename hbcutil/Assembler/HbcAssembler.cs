@@ -3,25 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using HbcUtil.Assembler.Parser;
 using System.IO;
+using HbcUtil.Assembler.Parser;
+using HbcUtil.Assembler.Visitor;
 
 namespace HbcUtil.Assembler {
     public class HbcAssembler {
-        public HbcAssembler(string source) {
-            using FileStream fs = File.OpenWrite("debug.json");
+        private string Source;
 
-            HasmTokenStream stream = new HasmTokenStream(source);
-            foreach (HasmToken token in stream.ReadTokens()) {
-                SourceCodeBuilder builder = new SourceCodeBuilder("    ");
-                token.Write(builder);
-                fs.Write(Encoding.UTF8.GetBytes(builder.ToString()));
-                fs.Flush();
-            }
+        public HbcAssembler(string source) {
+            Source = source;
         }
 
         public byte[] Assemble() {
-            return new byte[0];
+            HasmTokenStream stream = new HasmTokenStream(Source);
+            HbcBuilder writer = new HbcBuilder(stream);
+            return writer.Write();
         }
     }
 }

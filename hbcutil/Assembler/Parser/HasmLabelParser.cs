@@ -16,6 +16,7 @@ namespace HbcUtil.Assembler.Parser {
     public class HasmLabelToken : HasmToken {
         public LabelType LabelType { get; set; }
         public HasmIntegerToken LabelIndex { get; set; }
+        public int? DeclaredOffset { get; set; }
 
         public HasmLabelToken(HasmStringStreamState state) : base(state) { }
     }
@@ -38,6 +39,14 @@ namespace HbcUtil.Assembler.Parser {
                 return false;
             }
 
+            if (asm.Stream.PeekOperator() == "+" || asm.Stream.PeekOperator() == "-") {
+                asm.Stream.AdvanceOperator();
+                if (!IHasmTokenParser.IntegerParser.CanParse(asm)) {
+                    asm.Stream.LoadState(state);
+                    return false;
+                }
+            }
+
             asm.Stream.LoadState(state);
             return true;
         }
@@ -50,9 +59,20 @@ namespace HbcUtil.Assembler.Parser {
             HasmStringStreamState state = asm.Stream.SaveState();
             LabelType labelType = (LabelType)asm.Stream.AdvanceCharacters(1)[0];
             HasmIntegerToken labelIndex = (HasmIntegerToken)IHasmTokenParser.IntegerParser.Parse(asm);
+            int? declaredOffset = null;
+            if (asm.Stream.PeekOperator() == "+" || asm.Stream.PeekOperator() == "-") {
+                string op = asm.Stream.AdvanceOperator();
+                HasmIntegerToken labelOffset = (HasmIntegerToken)IHasmTokenParser.IntegerParser.Parse(asm);
+                int offset = labelOffset.GetValueAsInt32();
+                if (op == "-") {
+                    offset = -offset;
+                }
+                declaredOffset = offset;
+            }
             return new HasmLabelToken(state) {
                 LabelType = labelType,
-                LabelIndex = labelIndex
+                LabelIndex = labelIndex,
+                DeclaredOffset = declaredOffset
             };
         }
     }

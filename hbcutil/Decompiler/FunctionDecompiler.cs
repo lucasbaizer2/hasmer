@@ -3,24 +3,37 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using HbcUtil.Decompile.AST;
+using HbcUtil.Decompiler.AST;
 
-namespace HbcUtil.Decompile {
+namespace HbcUtil.Decompiler {
     public class FunctionDecompiler {
         private delegate void InstructionHandler(DecompilerContext context);
 
         private static readonly Dictionary<string, InstructionHandler> InstructionHandlers = new Dictionary<string, InstructionHandler> {
             ["GetGlobalObject"] = GetGlobalObject,
             ["TryGetById"] = GetById,
-            ["GetByIdShort"] = GetById,
             ["GetByVal"] = GetByVal,
+            ["GetByIdShort"] = GetById,
+            ["TryGetByVal"] = GetByVal,
+            ["TryGetByIdLong"] = GetById,
             ["LoadConstEmpty"] = LoadConstEmpty,
             ["LoadConstUndefined"] = LoadConstUndefined,
             ["LoadConstNull"] = LoadConstNull,
             ["LoadConstTrue"] = LoadConstTrue,
             ["LoadConstFalse"] = LoadConstFalse,
             ["LoadConstZero"] = LoadConstZero,
-            ["JNotEqual"] = JNotEqual
+            ["JNotEqual"] = JNotEqual,
+            ["PutById"] = PutById,
+            ["PutByIdLong"] = PutById,
+            ["PutNewOwnById"] = PutById,
+            ["PutNewOwnByIdShort"] = PutById,
+            ["PutNewOwnByIdLong"] = PutById,
+            ["Call2"] = Call2,
+            ["LoadParam"] = LoadParam,
+            ["GetEnvironment"] = GetEnvironment,
+            ["LoadFromEnvironment"] = LoadFromEnvironment,
+            ["Ret"] = Ret,
+            ["NewObject"] = NewObject
         };
 
         private HbcFile Source;
@@ -61,10 +74,36 @@ namespace HbcUtil.Decompile {
             };
         }
 
+        private static void PutById(DecompilerContext context) {
+            byte resultRegister = context.Instruction.Operands[0].GetValue<byte>();
+            byte sourceRegister = context.Instruction.Operands[1].GetValue<byte>();
+            uint identifierRegister = context.Instruction.Operands[2].GetValue<uint>();
+
+            context.Block.Body.Add(new AssignmentExpression {
+                Operator = "=",
+                Left = new MemberExpression {
+                    Object = new Identifier(context.State.Variables[resultRegister]),
+                    Property = new Literal(new PrimitiveValue(context.Source.StringTable[identifierRegister]))
+                },
+                Right = context.State.Registers[sourceRegister]
+            });
+        }
+
+        private static void NewObject(DecompilerContext context) {
+            byte resultRegister = context.Instruction.Operands[0].GetValue<byte>();
+            context.State.Variables[resultRegister] = "var" + resultRegister;
+
+            context.Block.Body.Add(new AssignmentExpression {
+                Left = new Identifier(context.State.Variables[resultRegister]),
+                Right = new ObjectExpression(),
+                Operator = "="
+            });
+        }
+
         private static void GetByVal(DecompilerContext context) {
             byte resultRegister = context.Instruction.Operands[0].GetValue<byte>();
             byte sourceRegister = context.Instruction.Operands[1].GetValue<byte>();
-            byte identifierRegister = context.Instruction.Operands[2].GetValue<byte>();
+            uint identifierRegister = context.Instruction.Operands[2].GetValue<uint>();
 
             context.State.Registers[resultRegister] = new MemberExpression {
                 Object = context.State.Registers[sourceRegister],
@@ -128,40 +167,48 @@ namespace HbcUtil.Decompile {
             context.State.Registers[register] = new Identifier(identifier);
         }
 
-        private void ObserveInstruction(BlockStatement block, int insnIndex) {
-            HbcInstruction insn = Instructions[insnIndex];
+        private static void GetEnvironment(DecompilerContext context) {
+            byte register = context.Instruction.Operands[0].GetValue<byte>();
+            byte environment = context.Instruction.Operands[1].GetValue<byte>();
+
+            context.State.Registers[register] = new Identifier($"__ENVIRONMENT_{environment}");
+        }
+
+        private static void LoadFromEnvironment(DecompilerContext context) {
+            byte destination = context.Instruction.Operands[0].GetValue<byte>();
+            byte environment = context.Instruction.Operands[1].GetValue<byte>();
+            byte slot = context.Instruction.Operands[2].GetValue<byte>();
+
+            context.State.Registers[destination] = new MemberExpression {
+                Object = context.State.Registers[environment],
+                Property = new Literal(new PrimitiveValue(slot)),
+                IsComputed = true
+            };
+        }
+
+        private static void Ret(DecompilerContext context) {
+            byte register = context.Instruction.Operands[0].GetValue<byte>();
+            ReturnStatement ret = new ReturnStatement {
+                Argument = context.State.Registers[register]
+            };
+
+            context.Block.Body.Add(ret);
+        }
+
+        private void ObserveInstruction(DecompilerContext context, int insnIndex) {
+            context.CurrentInstructionIndex = insnIndex;
+            HbcInstruction insn = context.Instructions[insnIndex];
             string opcodeName = Source.BytecodeFormat.Definitions[insn.Opcode].Name;
 
-            if (opcodeName == "Call2") {
+            Console.WriteLine(opcodeName);
 
-            } else if (opcodeName == "LoadParam") {
-
-            } else if (opcodeName == "GetEnvironment") {
-                byte register = insn.Operands[0].GetValue<byte>();
-                byte environment = insn.Operands[1].GetValue<byte>();
-
-                State.Registers[register] = new Identifier($"__ENVIRONMENT_{environment}");
-            } else if (opcodeName == "LoadFromEnvironment") {
-                byte destination = insn.Operands[0].GetValue<byte>();
-                byte environment = insn.Operands[1].GetValue<byte>();
-                byte slot = insn.Operands[2].GetValue<byte>();
-
-                State.Registers[destination] = new MemberExpression {
-                    Object = State.Registers[environment],
-                    Property = new Literal(new PrimitiveValue(slot)),
-                    IsComputed = true
-                };
-            } else if (opcodeName == "Ret") {
-                byte register = insn.Operands[0].GetValue<byte>();
-                ReturnStatement ret = new ReturnStatement {
-                    Argument = State.Registers[register]
-                };
-
-                block.Body.Add(ret);
+            if (InstructionHandlers.ContainsKey(opcodeName)) {
+                InstructionHandler handler = InstructionHandlers[opcodeName];
+                handler(context);
             }
 
-            if (insnIndex + 1 < Instructions.Count) {
-                ObserveInstruction(block, insnIndex + 1);
+            if (insnIndex + 1 < context.Instructions.Count) {
+                ObserveInstruction(context, insnIndex + 1);
             }
         }
 
@@ -174,8 +221,15 @@ namespace HbcUtil.Decompile {
                                     : new List<Identifier>(),
                 Body = block
             };
+            DecompilerContext context = new DecompilerContext {
+                Block = block,
+                Source = Source,
+                CurrentInstructionIndex = 0,
+                Instructions = Instructions,
+                State = new FunctionState(Header.FrameSize)
+            };
 
-            ObserveInstruction(block, 0);
+            ObserveInstruction(context, 0);
 
             State.DebugPrint();
 

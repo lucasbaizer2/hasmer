@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using HbcUtil.Assembler;
+using HbcUtil.Decompiler;
 
 namespace HbcUtil {
     public class HbcUtilMain {
@@ -28,11 +29,11 @@ namespace HbcUtil {
 
             File.WriteAllText("output.hasm", disassembly);
 
-            HbcAssembler assembler = new HbcAssembler(disassembly);
-            byte[] assembled = assembler.Assemble();
+            // HbcAssembler assembler = new HbcAssembler(disassembly);
+            // byte[] assembled = assembler.Assemble();
 
-            // HbcDecompiler decompiler = new HbcDecompiler(file);
-            // decompiler.Decompile();
+            HbcDecompiler decompiler = new HbcDecompiler(file);
+            decompiler.Decompile();
         }
     }
 }

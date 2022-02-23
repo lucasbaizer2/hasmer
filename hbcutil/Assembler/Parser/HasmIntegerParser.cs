@@ -6,9 +6,25 @@ using System.Threading.Tasks;
 
 namespace HbcUtil.Assembler.Parser {
     public class HasmIntegerToken : HasmLiteralToken {
-        public int Value { get; set; }
+        private long Value { get; set; }
 
-        public HasmIntegerToken(HasmStringStreamState state) : base(state) { }
+        public uint GetValueAsUInt32() {
+            if (Value < uint.MinValue || Value > uint.MaxValue) {
+                throw new HasmParserException(Line, Column, $"integer is not uint: {Value}");
+            }
+            return (uint)Value;
+        }
+
+        public int GetValueAsInt32() {
+            if (Value < int.MinValue || Value > int.MaxValue) {
+                throw new HasmParserException(Line, Column, $"integer is not int: {Value}");
+            }
+            return (int)Value;
+        }
+
+        public HasmIntegerToken(HasmStringStreamState state, long value) : base(state) {
+            Value = value;
+        }
     }
 
     public class HasmIntegerParser : IHasmTokenParser {
@@ -25,7 +41,7 @@ namespace HbcUtil.Assembler.Parser {
             }
 
             asm.Stream.LoadState(state);
-            return int.TryParse(word, out int _);
+            return long.TryParse(word, out long _);
         }
 
         public HasmToken Parse(AssemblerState asm) {
@@ -42,9 +58,7 @@ namespace HbcUtil.Assembler.Parser {
             }
 
             string word = asm.Stream.AdvanceWord();
-            return new HasmIntegerToken(state) {
-                Value = int.Parse(word) * multiplier
-            };
+            return new HasmIntegerToken(state, long.Parse(word) * multiplier);
         }
     }
 }

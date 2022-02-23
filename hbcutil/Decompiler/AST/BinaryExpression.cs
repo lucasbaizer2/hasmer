@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HbcUtil.Decompile.AST {
+namespace HbcUtil.Decompiler.AST {
     public class AssignmentExpression : ISyntax {
         public ISyntax Left { get; set; }
         public ISyntax Right { get; set; }

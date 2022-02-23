@@ -17,5 +17,16 @@ namespace HbcUtil.Assembler.Parser {
             Column = stream.CurrentColumn + 1;
             ErrorMessage = message;
         }
+
+        public HasmParserException(HasmStringStream stream, Exception e) : base(e.Message, e) {
+            Line = stream.CurrentLine + 1;
+            Column = stream.CurrentColumn + 1;
+        }
+
+        public HasmParserException(int line, int col, string message) {
+            Line = line + 1;
+            Column = col + 1;
+            ErrorMessage = message;
+        }
     }
 }

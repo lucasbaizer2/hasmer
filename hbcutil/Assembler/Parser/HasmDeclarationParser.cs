@@ -42,7 +42,7 @@ namespace HbcUtil.Assembler.Parser {
                 return false;
             }
 
-            return word == "hasm" || word == "data" || word == "start" || word == "end" || word == "id" || word == "params" || word == "registers" || word == "symbols";
+            return word == "hasm" || word == "data" || word == "start" || word == "end" || word == "id" || word == "params" || word == "registers" || word == "symbols" || word == "label" || word == "strict";
         }
 
         public HasmToken Parse(AssemblerState asm) {
@@ -136,10 +136,6 @@ namespace HbcUtil.Assembler.Parser {
 
                 HasmTokenStream bodyStream = new HasmTokenStream(asm);
                 foreach (HasmToken token in bodyStream.ReadTokens()) {
-                    SourceCodeBuilder scb = new SourceCodeBuilder("    ");
-                    token.Write(scb);
-                    Console.WriteLine(scb.ToString());
-
                     if (token is HasmSimpleToken simple && simple.Value == "end") {
                         asm.CurrentFunction = null;
                         break;
@@ -152,8 +148,10 @@ namespace HbcUtil.Assembler.Parser {
                 return new HasmSimpleToken(state) {
                     Value = "end"
                 };
-            } else if (word == "id" || word == "params" || word == "registers" || word == "symbols") {
-                asm.Stream.AdvanceWord();
+            } else if (word == "id" || word == "params" || word == "registers" || word == "symbols" || word == "label" || word == "strict") {
+                if (word != "strict") {
+                    asm.Stream.AdvanceWord();
+                }
                 return null;
             }
 
