@@ -20,7 +20,7 @@ namespace HbcUtil.Decompiler {
             StringBuilder builder = new StringBuilder();
 
             foreach (HbcSmallFuncHeader func in Source.SmallFuncHeaders) {
-                if (func.FunctionId == 173) {
+                if (func.FunctionId == 173 || func.FunctionId == 174) {
                     FunctionDecompiler decompiler = new FunctionDecompiler(Source, func.GetAssemblerHeader());
                     string decompiled = decompiler.Decompile();
                     builder.AppendLine(decompiled);

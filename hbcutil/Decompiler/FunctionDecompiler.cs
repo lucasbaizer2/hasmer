@@ -40,7 +40,8 @@ namespace HbcUtil.Decompiler {
             ["Ret"] = Ret,
             ["Mov"] = Mov,
             ["NewObject"] = NewObject,
-            ["CreateClosure"] = CreateClosure
+            ["CreateClosure"] = CreateClosure,
+            ["CreateThis"] = CreateThis
         };
 
         private HbcFile Source;
@@ -179,6 +180,14 @@ namespace HbcUtil.Decompiler {
             uint closureId = context.Instruction.Operands[2].GetValue<uint>();
 
             context.State.Registers[resultRegister] = new Identifier($"$closure${closureId}");
+        }
+
+        private static void CreateThis(DecompilerContext context) {
+            byte resultRegister = context.Instruction.Operands[0].GetValue<byte>();
+            byte prototypeRegister = context.Instruction.Operands[1].GetValue<byte>();
+
+            // CreateThis is a VM construct more or less, so we can just consider the prototype definition as the "this" instance
+            context.State.Registers[resultRegister] = context.State.Registers[prototypeRegister];
         }
 
         private static void GetByVal(DecompilerContext context) {

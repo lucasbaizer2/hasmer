@@ -1,0 +1,15 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "npm: all",
+			"type": "npm",
+			"script": "all",
+			"problemMatcher": [],
+			"detail": "tsc && node scripts-build/copy-instructions.js",
+			"options": {
+				"cwd": "${workspaceFolder}"
+			}
+		}
+	]
+}

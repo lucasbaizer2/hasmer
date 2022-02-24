@@ -14,19 +14,19 @@ The output docs can be found at `docs/html` (relative to the root directory).
 
 # Setup
 
-If running on a non-Windows OS, or you just really hate Visual Studio, you can use the cross-platform .NET SDK from the command line to build the project.
+You will need the .NET 5 SDK to compile this project. See the [.NET SDK download page](https://dotnet.microsoft.com/en-us/download) for information on how to download the .NET SDK for your operating system.
 
-See the [.NET SDK download page](https://dotnet.microsoft.com/en-us/download) for information on how to download the .NET SDK for your operating system.
+If running on a non-Windows OS, or you just really hate Visual Studio, you can use the cross-platform .NET SDK CLI to build the project.
 
 # Building
 
-You can either open the solution file (see `hbcutil.sln` in parent directory) in Visual Studio and build from there, or you can build from the command line using the .NET SDK:
+You can either open the solution file (see `hbcutil.sln` in parent directory) in Visual Studio and build from there, or you can build from the command line using the .NET SDK CLI:
 ```
 dotnet build
 ```
 Ensure you run the above command with the current working directory as being the directory that contains the `hbcutil.csproj` file (which is also the directrory this README is in).
 
-Building with the .NET SDK will generate the executable in the `bin\Debug\net5.0` directory. You can make a release build using:
+Building with the .NET SDK CLI will generate the executable in the `bin\Debug\net5.0` directory. You can make a release build using:
 ```
 dotnet build -c Release
 ```

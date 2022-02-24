@@ -1,0 +1,42 @@
+{
+    "name": "hasm-vscode",
+    "displayName": "hasm-vscode",
+    "description": "Tools for hbcutil's Hermes assembly",
+    "repository": "https://github.com/LucasBaizer2/hbcutil",
+    "version": "1.0.0",
+    "engines": {
+        "vscode": "^1.64.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [
+            {
+                "id": "hasm",
+                "aliases": [
+                    "Hasm",
+                    "hasm"
+                ],
+                "extensions": [
+                    ".hasm"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "hasm",
+                "scopeName": "source.hasm",
+                "path": "./syntaxes/hasm.tmLanguage.json"
+            }
+        ]
+    },
+    "scripts": {
+        "all": "tsc && node scripts-build/copy-instructions.js"
+    },
+    "devDependencies": {
+        "@types/node": "^17.0.21",
+        "typescript": "^4.5.5"
+    }
+}

@@ -19,7 +19,12 @@ This is used for generating definition files for prior versions, as well as new 
 
 The `hbcutil` directory contains the Visual Studio C# project for the actual code of the application.
 
-See the [bytecode-format-generator README](./bytecode-format-generator/README.md) and the [hbcutil README](./hbcutil/README.md) for more detailed information.
+The `hasm-vscode` directory contains the source for the Visual Studio Code extension for working with Hasm assembly.
+
+See each subproject's README for more detailed information:
+* [bytecode-format-generator](./bytecode-format-generator/README.md)
+* [hbcutil](./hbcutil/README.md)
+* [hasm-vscode](./hasm-vscode/README.md)
 
 # License
 
