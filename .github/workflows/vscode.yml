@@ -14,19 +14,18 @@ jobs:
       with:
         node-version: '14'
       
-    - name: Insall Yarn
+    - name: Insall Global Dependencies
       run: npm install -g yarn
+      run: npm install -g vsce
 
     - name: Install NPM Dependencies
       run: yarn install
+      working-directory: hasm-vscode
 
     - name: Compile and Execute Scripts
       run: yarn all
       working-directory: hasm-vscode
-
-    - name: Install VSCE
-      run: npm install -g vsce
-
+      
     - run: mkdir extension-build
       shell: bash
       working-directory: hasm-vscode
