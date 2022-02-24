@@ -6,11 +6,21 @@ hbcutil can disassemble bytecode of any Hermes version into a human and machine-
 
 hbcutil can compile Hasm files into Hermes bytecode files (versions 40-86), allowing you to edit the disassembly of a Hermes file and assemble your changes, allowing modifications to Hermes bytecode.
 
-hbcutil also has a very WIP decompiler.
+hbcutil also has a very WIP decompiler, which decompiles Hermes bytecode into JavaScript.
 
 # Using
 
 // TODO guide on how to use the command line
+
+# Hasm VS Code Extension
+
+The `hasm-vscode` subproject is a Visual Studio Code extension that provides syntax highlighting for Hasm assembly.
+
+You can download the latest version of the extension [here](https://lucasbaizer2.github.io/hbcutil/extension/hasm.vsix).
+
+To install the `vsix` extension file into Visual Studio Code, navigate to the extensions menu in VS Code. In the upper right hand corner of that window, click the three dots (ellipses) and select "Install from VSIX..." from the drop-down menu that appears. Navigate to the location of the VSIX file and the extension should immediately install.
+
+Once the extension in installed, all `.hasm` files will have syntax highlighting.
 
 # Directory Structure
 
