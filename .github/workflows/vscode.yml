@@ -1,0 +1,49 @@
+name: Hasm VS Code Extension for GitHub Pages
+on:
+  push:
+    branches: [ master ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Install Node
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+      
+    - name: Insall Yarn
+      run: npm install -g yarn
+
+    - name: Install NPM Dependencies
+      run: yarn install
+
+    - name: Compile and Execute Scripts
+      run: yarn all
+      working-directory: hasm-vscode
+
+    - name: Install VSCE
+      run: npm install -g vsce
+
+    - run: mkdir extension-build
+      shell: bash
+      working-directory: hasm-vscode
+
+    - name: Generate VSIX Extension File
+      run: vsce package -o extension-build/hasm.vsix --yarn
+      working-directory: hasm-vscode
+      
+    - name: Create .nojekyll (ensures pages with underscores work on gh pages)
+      run: touch extension-build/.nojekyll
+      shell: bash
+      working-directory: hasm-vscode
+
+    - name: Deploy to GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@3.7.1
+      with:
+        github_token: ${{ inputs.github_token }}
+        branch: gh-pages
+        folder: hasm-vscode/extension-build
+        target_folder: extension

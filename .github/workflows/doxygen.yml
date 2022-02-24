@@ -1,5 +1,4 @@
 name: Doxygen for GitHub Pages
-
 on:
   push:
     branches: [ master ]

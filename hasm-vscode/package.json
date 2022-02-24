@@ -1,8 +1,19 @@
 {
-    "name": "hasm-vscode",
-    "displayName": "hasm-vscode",
+    "name": "hasm",
+    "displayName": "Hasm",
+    "author": {
+        "name": "Lucas Baizer"
+    },
+    "publisher": "lucasbaizer",
     "description": "Tools for hbcutil's Hermes assembly",
-    "repository": "https://github.com/LucasBaizer2/hbcutil",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/LucasBaizer2/hbcutil"
+    },
+    "bugs": {
+        "url": "https://github.com/LucasBaizer2/hbcutil/issues"
+    },
+    "license": "MIT",
     "version": "1.0.0",
     "engines": {
         "vscode": "^1.64.0"
