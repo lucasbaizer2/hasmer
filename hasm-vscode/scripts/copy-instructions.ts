@@ -18,7 +18,7 @@ interface BytecodeDefinitionFile {
     const syntaxFilePath = path.join(process.cwd(), 'syntaxes', 'hasm.tmLanguage.json');
     const syntaxJson = JSON.parse(fs.readFileSync(syntaxFilePath, 'utf8'));
 
-    const bytecodeDirectory = path.join(process.cwd(), '..', 'hbcutil', 'Resources');
+    const bytecodeDirectory = path.join(process.cwd(), '..', 'hasmer', 'Resources');
     const files = fs.readdirSync(bytecodeDirectory);
 
     const definitionFileNameRegex = /^Bytecode[0-9]+\.json$/;

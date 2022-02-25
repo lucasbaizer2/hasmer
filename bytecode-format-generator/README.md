@@ -43,5 +43,5 @@ After doing the above setup and finally executing the script:
 ```
 yarn all
 ```
-Wait for it to complete, then copy all the JSON definition files from `./definitions` to `../hbcutil/Resources`. Ensure every JSON file is included as an embedded resource (declared in `hbcutil.csproj`). You can either select all the files to be Embedded Resources in Visual Studio, or if using the .NET SDK CLI you can add the XML entries manually in `hbcutil.csproj`.
+Wait for it to complete, then copy all the JSON definition files from `./definitions` to `../hasmer/Resources`. Ensure every JSON file is included as an embedded resource (declared in `hasmer.csproj`). You can either select all the files to be Embedded Resources in Visual Studio, or if using the .NET SDK CLI you can add the XML entries manually in `hasmer.csproj`.
 

@@ -5,13 +5,13 @@
         "name": "Lucas Baizer"
     },
     "publisher": "lucasbaizer",
-    "description": "Tools for hbcutil's Hermes assembly",
+    "description": "Tools for hasmer's Hermes assembly",
     "repository": {
         "type": "git",
-        "url": "https://github.com/LucasBaizer2/hbcutil"
+        "url": "https://github.com/LucasBaizer2/hasmer"
     },
     "bugs": {
-        "url": "https://github.com/LucasBaizer2/hbcutil/issues"
+        "url": "https://github.com/LucasBaizer2/hasmer/issues"
     },
     "license": "MIT",
     "version": "1.0.0",

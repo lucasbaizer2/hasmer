@@ -15,22 +15,22 @@ jobs:
 
     - run: mkdir -p bin/docs
       shell: bash
-      working-directory: hbcutil
+      working-directory: hasmer
 
     - name: Generate Doxygen Documentation
       run: doxygen ./Doxyfile
       shell: bash
-      working-directory: hbcutil
+      working-directory: hasmer
       
     - name: Create .nojekyll (ensures pages with underscores work on gh pages)
       run: touch html/.nojekyll
       shell: bash
-      working-directory: hbcutil/bin/docs
+      working-directory: hasmer/bin/docs
 
     - name: Deploy to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@3.7.1
       with:
         github_token: ${{ inputs.github_token }}
         branch: gh-pages
-        folder: hbcutil/bin/docs/html
+        folder: hasmer/bin/docs/html
         target_folder: docs
