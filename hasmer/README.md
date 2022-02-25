@@ -1,6 +1,6 @@
 # hasmer
 
-This directory contains the C# source code for `hbutil`, using the .NET 5.0 platform.
+This directory contains the C# source code for `hasmer`, using the .NET 5.0 platform.
 
 # Documentation
 
