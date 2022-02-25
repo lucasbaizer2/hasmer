@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['loadjsonobject_360',['LoadJsonObject',['../class_hbc_util_1_1_resource_manager.html#aebe4da080a3f8571b44c14e31573d058',1,'HbcUtil::ResourceManager']]],
-  ['loadstate_361',['LoadState',['../class_hbc_util_1_1_assembler_1_1_parser_1_1_hasm_string_stream.html#ae69e86a73d072d8258ba47b449564c17',1,'HbcUtil::Assembler::Parser::HasmStringStream']]]
+  ['loadjsonobject_360',['LoadJsonObject',['../class_hasmer_1_1_resource_manager.html#a4c728f81f74d6fa19242bcccf0872114',1,'Hasmer::ResourceManager']]],
+  ['loadstate_361',['LoadState',['../class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_string_stream.html#a4d4506d6ef478062885e6df51c9461e0',1,'Hasmer::Assembler::Parser::HasmStringStream']]]
 ];

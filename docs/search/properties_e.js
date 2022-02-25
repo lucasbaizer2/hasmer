@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['paramcount_475',['ParamCount',['../class_hbc_util_1_1_hbc_func_header.html#a1eb149a3df937889bc3847a81627c0f7',1,'HbcUtil::HbcFuncHeader']]],
-  ['parametercount_476',['ParameterCount',['../class_hbc_util_1_1_assembler_1_1_parser_1_1_hasm_function_token.html#a70a04888676fb8eae09597349ff5818b',1,'HbcUtil::Assembler::Parser::HasmFunctionToken']]],
-  ['prefix_477',['Prefix',['../class_hbc_util_1_1_hbc_data_buffer_items.html#aa47a4bd00807b65f8c35596d37e11219',1,'HbcUtil::HbcDataBufferItems']]]
+  ['paramcount_475',['ParamCount',['../class_hasmer_1_1_hbc_func_header.html#ad6884b102a6e401d22dfa8e5560ee4de',1,'Hasmer::HbcFuncHeader']]],
+  ['parametercount_476',['ParameterCount',['../class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_function_token.html#a9a278c626a98677e6007ce6b0e36b45f',1,'Hasmer::Assembler::Parser::HasmFunctionToken']]],
+  ['prefix_477',['Prefix',['../class_hasmer_1_1_hbc_data_buffer_items.html#ac8178cfd6abee275f76223ff61c85c27',1,'Hasmer::HbcDataBufferItems']]]
 ];

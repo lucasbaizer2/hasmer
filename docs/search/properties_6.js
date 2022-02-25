@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['globalcodeindex_442',['GlobalCodeIndex',['../class_hbc_util_1_1_hbc_header.html#a3b2d90993b59076fbcfb859f073e1c7a',1,'HbcUtil::HbcHeader']]]
+  ['globalcodeindex_442',['GlobalCodeIndex',['../class_hasmer_1_1_hbc_header.html#a31d8886ccc7a7a4c33f428c9754a934a',1,'Hasmer::HbcHeader']]]
 ];

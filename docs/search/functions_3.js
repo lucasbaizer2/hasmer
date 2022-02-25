@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['encode_3c_20t_20_3e_334',['Encode&lt; T &gt;',['../class_hbc_util_1_1_hbc_encoded_item.html#abd7a238519cc28e411ddd23f3bfa229b',1,'HbcUtil::HbcEncodedItem']]],
-  ['escape_335',['Escape',['../class_hbc_util_1_1_string_escape.html#aebed4d8251293753adacb20587ed8206',1,'HbcUtil::StringEscape']]]
+  ['encode_3c_20t_20_3e_334',['Encode&lt; T &gt;',['../class_hasmer_1_1_hbc_encoded_item.html#abb34c3baab4b8883080ed171b7f0b20b',1,'Hasmer::HbcEncodedItem']]],
+  ['escape_335',['Escape',['../class_hasmer_1_1_string_escape.html#ac3e02c780ae677dc327b6353abb98b27',1,'Hasmer::StringEscape']]]
 ];

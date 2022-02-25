@@ -1,14 +1,14 @@
 var searchData=
 [
-  ['smallfuncheaders_481',['SmallFuncHeaders',['../class_hbc_util_1_1_hbc_file.html#af5b636507352daa80e86e3228f42c382',1,'HbcUtil::HbcFile']]],
-  ['source_482',['Source',['../class_hbc_util_1_1_assembler_1_1_data_disassembler.html#aab930d6d521650d77120b84743c53ab4',1,'HbcUtil.Assembler.DataDisassembler.Source()'],['../class_hbc_util_1_1_assembler_1_1_hbc_disassembler.html#a0b50dcc2a4bbf05e9ee0f024f87f856e',1,'HbcUtil.Assembler.HbcDisassembler.Source()'],['../class_hbc_util_1_1_decompiler_1_1_hbc_decompiler.html#a76cf462e401277b1304b0b69fbf9aacb',1,'HbcUtil.Decompiler.HbcDecompiler.Source()']]],
-  ['sourcehash_483',['SourceHash',['../class_hbc_util_1_1_hbc_header.html#a191b4e0b42ce6b93be3482b3d5aad8b5',1,'HbcUtil::HbcHeader']]],
-  ['state_484',['State',['../class_hbc_util_1_1_assembler_1_1_parser_1_1_hasm_token_stream.html#a88f312a5d4eb5e41758eb8d9d8515942',1,'HbcUtil.Assembler.Parser.HasmTokenStream.State()'],['../class_hbc_util_1_1_decompiler_1_1_decompiler_context.html#a56c047edea56992867af7a9e4fe964d1',1,'HbcUtil.Decompiler.DecompilerContext.State()']]],
-  ['storage_485',['Storage',['../class_hbc_util_1_1_decompiler_1_1_register_tracker.html#acc7c428028219b63a91cf7a55d26efb4',1,'HbcUtil::Decompiler::RegisterTracker']]],
-  ['stream_486',['Stream',['../class_hbc_util_1_1_assembler_1_1_parser_1_1_hasm_reader_state.html#aa9999190b6e953fdef367f142ba33e2c',1,'HbcUtil::Assembler::Parser::HasmReaderState']]],
-  ['strict_487',['Strict',['../class_hbc_util_1_1_assembler_1_1_parser_1_1_hasm_function_token.html#a6f7ecfc6455d99654b56cb8b7a9abac9',1,'HbcUtil::Assembler::Parser::HasmFunctionToken']]],
-  ['stringcount_488',['StringCount',['../class_hbc_util_1_1_hbc_header.html#adc99891135997536853064f7852402a0',1,'HbcUtil::HbcHeader']]],
-  ['stringstoragesize_489',['StringStorageSize',['../class_hbc_util_1_1_hbc_header.html#ace96fd455c476be69b91ca1f9fb61cd4',1,'HbcUtil::HbcHeader']]],
-  ['stringtable_490',['StringTable',['../class_hbc_util_1_1_hbc_file.html#a70adb9c8233f4a2e1d2cf7eb504e12b2',1,'HbcUtil::HbcFile']]],
-  ['symbols_491',['Symbols',['../class_hbc_util_1_1_assembler_1_1_parser_1_1_hasm_function_token.html#abf943e98e4992db1ec1cdd0074a050e7',1,'HbcUtil::Assembler::Parser::HasmFunctionToken']]]
+  ['smallfuncheaders_481',['SmallFuncHeaders',['../class_hasmer_1_1_hbc_file.html#a51633aa511a536fd2e8ee5c14256cfc7',1,'Hasmer::HbcFile']]],
+  ['source_482',['Source',['../class_hasmer_1_1_assembler_1_1_data_disassembler.html#ae4925e8b895b2d7ca1eeb5140e0c9452',1,'Hasmer.Assembler.DataDisassembler.Source()'],['../class_hasmer_1_1_assembler_1_1_hbc_disassembler.html#aa2f169029f91dfdc555330d09bbf11f1',1,'Hasmer.Assembler.HbcDisassembler.Source()'],['../class_hasmer_1_1_decompiler_1_1_hbc_decompiler.html#a545b7cace3964f772141e86d0d58732c',1,'Hasmer.Decompiler.HbcDecompiler.Source()']]],
+  ['sourcehash_483',['SourceHash',['../class_hasmer_1_1_hbc_header.html#a9fe3b56904196b28b2f36bcc093afd23',1,'Hasmer::HbcHeader']]],
+  ['state_484',['State',['../class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_token_stream.html#a3011eecef5135ee5655265de45f0de1c',1,'Hasmer.Assembler.Parser.HasmTokenStream.State()'],['../class_hasmer_1_1_decompiler_1_1_decompiler_context.html#a74f82d96bfc00dda3e31dfc92fe14ad5',1,'Hasmer.Decompiler.DecompilerContext.State()']]],
+  ['storage_485',['Storage',['../class_hasmer_1_1_decompiler_1_1_register_tracker.html#a70248796f05a49be374a448baa078fd6',1,'Hasmer::Decompiler::RegisterTracker']]],
+  ['stream_486',['Stream',['../class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_reader_state.html#ab8189e024f64f29fb159d73594c0c11a',1,'Hasmer::Assembler::Parser::HasmReaderState']]],
+  ['strict_487',['Strict',['../class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_function_token.html#a73047a75babb1fc596a05e8946fb6f65',1,'Hasmer::Assembler::Parser::HasmFunctionToken']]],
+  ['stringcount_488',['StringCount',['../class_hasmer_1_1_hbc_header.html#a4881a2fd17f10bdc8002d11da5d79c3d',1,'Hasmer::HbcHeader']]],
+  ['stringstoragesize_489',['StringStorageSize',['../class_hasmer_1_1_hbc_header.html#aa653f3c0de8e43c00f7006587f29ba8f',1,'Hasmer::HbcHeader']]],
+  ['stringtable_490',['StringTable',['../class_hasmer_1_1_hbc_file.html#a2de90cb1512dd69cfc672982ec27ba30',1,'Hasmer::HbcFile']]],
+  ['symbols_491',['Symbols',['../class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_function_token.html#a4b88ac914484d0caeff60db9913e3da4',1,'Hasmer::Assembler::Parser::HasmFunctionToken']]]
 ];

@@ -1,11 +1,11 @@
 var searchData=
 [
-  ['id_444',['Id',['../class_hbc_util_1_1_assembler_1_1_parser_1_1_hasm_function_token.html#ad0cec7794465a0cd9dd98b5289bd6c3a',1,'HbcUtil::Assembler::Parser::HasmFunctionToken']]],
-  ['infooffset_445',['InfoOffset',['../class_hbc_util_1_1_hbc_func_header.html#a2631b4dd39b16e36c967dbe0080913ef',1,'HbcUtil::HbcFuncHeader']]],
-  ['instruction_446',['Instruction',['../class_hbc_util_1_1_assembler_1_1_parser_1_1_hasm_instruction_token.html#a8edc565170c70bea5fc03e78af36a34b',1,'HbcUtil::Assembler::Parser::HasmInstructionToken']]],
-  ['instructionoffset_447',['InstructionOffset',['../class_hbc_util_1_1_hbc_file.html#ad3998e1f3b377792861d925cd8d45660',1,'HbcUtil::HbcFile']]],
-  ['instructions_448',['Instructions',['../class_hbc_util_1_1_hbc_file.html#a00119727143faeccc43f65d0a2b4db88',1,'HbcUtil.HbcFile.Instructions()'],['../class_hbc_util_1_1_decompiler_1_1_decompiler_context.html#ad440b9c5c3720b878717728b62a159cd',1,'HbcUtil.Decompiler.DecompilerContext.Instructions()']]],
-  ['isjump_449',['IsJump',['../class_hbc_util_1_1_hbc_instruction_definition.html#a60bd9830dc22160838c7bbeeef6c91af',1,'HbcUtil::HbcInstructionDefinition']]],
-  ['isredundant_450',['IsRedundant',['../class_hbc_util_1_1_decompiler_1_1_a_s_t_1_1_identifier.html#a7b67563619fca29338d4ff8bf71e9e6a',1,'HbcUtil::Decompiler::AST::Identifier']]],
-  ['items_451',['Items',['../class_hbc_util_1_1_hbc_data_buffer_items.html#a4b42ea1c326ea0a0feca448af6c065e9',1,'HbcUtil::HbcDataBufferItems']]]
+  ['id_444',['Id',['../class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_function_token.html#a38a2fafeafe8096178d9ddf894b1bbc8',1,'Hasmer::Assembler::Parser::HasmFunctionToken']]],
+  ['infooffset_445',['InfoOffset',['../class_hasmer_1_1_hbc_func_header.html#a86d403e5948bca94972970ab5a40f740',1,'Hasmer::HbcFuncHeader']]],
+  ['instruction_446',['Instruction',['../class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_instruction_token.html#a6dd7eb74abe447c7b184990a50b6eee7',1,'Hasmer::Assembler::Parser::HasmInstructionToken']]],
+  ['instructionoffset_447',['InstructionOffset',['../class_hasmer_1_1_hbc_file.html#a17191e7fc01694897ee6dc1c932b305a',1,'Hasmer::HbcFile']]],
+  ['instructions_448',['Instructions',['../class_hasmer_1_1_hbc_file.html#a833ee60b3b228cd9ff7fc26c16262607',1,'Hasmer.HbcFile.Instructions()'],['../class_hasmer_1_1_decompiler_1_1_decompiler_context.html#a19413498971ad979bf4feb47b62efa17',1,'Hasmer.Decompiler.DecompilerContext.Instructions()']]],
+  ['isjump_449',['IsJump',['../class_hasmer_1_1_hbc_instruction_definition.html#a092499e9f7c6d49688507c788db4e4b2',1,'Hasmer::HbcInstructionDefinition']]],
+  ['isredundant_450',['IsRedundant',['../class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_identifier.html#a8cb01edee071b5af1d54f09656509265',1,'Hasmer::Decompiler::AST::Identifier']]],
+  ['items_451',['Items',['../class_hasmer_1_1_hbc_data_buffer_items.html#a1e87bb91d387fdbb71be050ac6e88b9d',1,'Hasmer::HbcDataBufferItems']]]
 ];

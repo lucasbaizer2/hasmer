@@ -1,12 +1,12 @@
 var searchData=
 [
-  ['getassemblerheader_59',['GetAssemblerHeader',['../class_hbc_util_1_1_hbc_func_header.html#a245ee0f33ec9cdb92c9a953621536ff4',1,'HbcUtil.HbcFuncHeader.GetAssemblerHeader()'],['../class_hbc_util_1_1_hbc_small_func_header.html#a7e203be8ce8e5f81356e94a794e07efc',1,'HbcUtil.HbcSmallFuncHeader.GetAssemblerHeader()']]],
-  ['getdeepparent_60',['GetDeepParent',['../class_hbc_util_1_1_decompiler_1_1_decompiler_context.html#af27c83c6fb858f5e8433b0f7e159c113',1,'HbcUtil::Decompiler::DecompilerContext']]],
-  ['getelementseries_61',['GetElementSeries',['../class_hbc_util_1_1_assembler_1_1_data_disassembler.html#a94d2abd9004f4c4ed4906b89e912b41e',1,'HbcUtil::Assembler::DataDisassembler']]],
-  ['getfunctionname_62',['GetFunctionName',['../class_hbc_util_1_1_hbc_func_header.html#a3baf3d0bff24568c1931b5bf9f3973a6',1,'HbcUtil::HbcFuncHeader']]],
-  ['getresolvedvalue_3c_20t_20_3e_63',['GetResolvedValue&lt; T &gt;',['../class_hbc_util_1_1_hbc_instruction_operand.html#aa7112a4ee1f28b4fa6006036db925d0d',1,'HbcUtil::HbcInstructionOperand']]],
-  ['getvalue_3c_20t_20_3e_64',['GetValue&lt; T &gt;',['../class_hbc_util_1_1_hbc_instruction_operand.html#a12ad87a97ae1d8f45f28c30acd59c456',1,'HbcUtil.HbcInstructionOperand.GetValue&lt; T &gt;()'],['../class_hbc_util_1_1_primitive_value.html#aaaf4b45ec6866c0320c84e7a7531b0dc',1,'HbcUtil.PrimitiveValue.GetValue&lt; T &gt;()']]],
-  ['getvalueasint32_65',['GetValueAsInt32',['../class_hbc_util_1_1_assembler_1_1_parser_1_1_hasm_integer_token.html#a301fd545b4b15be7336915a74f4b8ec7',1,'HbcUtil::Assembler::Parser::HasmIntegerToken']]],
-  ['getvalueasuint32_66',['GetValueAsUInt32',['../class_hbc_util_1_1_assembler_1_1_parser_1_1_hasm_integer_token.html#a06e2f25858f2dbfa21eb54e2381a5e4b',1,'HbcUtil::Assembler::Parser::HasmIntegerToken']]],
-  ['globalcodeindex_67',['GlobalCodeIndex',['../class_hbc_util_1_1_hbc_header.html#a3b2d90993b59076fbcfb859f073e1c7a',1,'HbcUtil::HbcHeader']]]
+  ['getassemblerheader_59',['GetAssemblerHeader',['../class_hasmer_1_1_hbc_func_header.html#ae1e9b942bfe1abe422cb6feaa9c5059e',1,'Hasmer.HbcFuncHeader.GetAssemblerHeader()'],['../class_hasmer_1_1_hbc_small_func_header.html#a34445ae5f8e8ac4be4d159e07f5dabba',1,'Hasmer.HbcSmallFuncHeader.GetAssemblerHeader()']]],
+  ['getdeepparent_60',['GetDeepParent',['../class_hasmer_1_1_decompiler_1_1_decompiler_context.html#a454fc34eefcd4f4f5311db913c64a387',1,'Hasmer::Decompiler::DecompilerContext']]],
+  ['getelementseries_61',['GetElementSeries',['../class_hasmer_1_1_assembler_1_1_data_disassembler.html#a70519ce0b3d1436624c609239500c892',1,'Hasmer::Assembler::DataDisassembler']]],
+  ['getfunctionname_62',['GetFunctionName',['../class_hasmer_1_1_hbc_func_header.html#a657f960e73fa7d02080a101bbdddb62b',1,'Hasmer::HbcFuncHeader']]],
+  ['getresolvedvalue_3c_20t_20_3e_63',['GetResolvedValue&lt; T &gt;',['../class_hasmer_1_1_hbc_instruction_operand.html#a1a1423cec84b03593328f60a6a84c928',1,'Hasmer::HbcInstructionOperand']]],
+  ['getvalue_3c_20t_20_3e_64',['GetValue&lt; T &gt;',['../class_hasmer_1_1_hbc_instruction_operand.html#ac39a214c498cf86e4e1efd9d3580eef6',1,'Hasmer.HbcInstructionOperand.GetValue&lt; T &gt;()'],['../class_hasmer_1_1_primitive_value.html#a97ef37d795e4304ea4e22e107f1c6ada',1,'Hasmer.PrimitiveValue.GetValue&lt; T &gt;()']]],
+  ['getvalueasint32_65',['GetValueAsInt32',['../class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_integer_token.html#a168a0df13a36824f873a2f56ce2ef43d',1,'Hasmer::Assembler::Parser::HasmIntegerToken']]],
+  ['getvalueasuint32_66',['GetValueAsUInt32',['../class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_integer_token.html#ab8238ee9c026dc9ee62e444a80a62a33',1,'Hasmer::Assembler::Parser::HasmIntegerToken']]],
+  ['globalcodeindex_67',['GlobalCodeIndex',['../class_hasmer_1_1_hbc_header.html#a31d8886ccc7a7a4c33f428c9754a934a',1,'Hasmer::HbcHeader']]]
 ];

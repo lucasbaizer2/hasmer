@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['name_157',['Name',['../class_hbc_util_1_1_hbc_instruction_definition.html#ad13ddf166ca0c5238948758a10c66a4c',1,'HbcUtil.HbcInstructionDefinition.Name()'],['../class_hbc_util_1_1_decompiler_1_1_a_s_t_1_1_identifier.html#a243e3c2a03e3ed968875f348faaa1ecd',1,'HbcUtil.Decompiler.AST.Identifier.Name()']]],
-  ['newline_158',['NewLine',['../class_hbc_util_1_1_source_code_builder.html#aaafb20aac41fa5ba85d0953360fce11b',1,'HbcUtil::SourceCodeBuilder']]]
+  ['name_157',['Name',['../class_hasmer_1_1_hbc_instruction_definition.html#afef75103ee8539a131135c1f77cd47aa',1,'Hasmer.HbcInstructionDefinition.Name()'],['../class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_identifier.html#ae3eda4432388b56e6de43fe4aa129be4',1,'Hasmer.Decompiler.AST.Identifier.Name()']]],
+  ['newline_158',['NewLine',['../class_hasmer_1_1_source_code_builder.html#a9c1633d1e8596875e65b213db6fe65f6',1,'Hasmer::SourceCodeBuilder']]]
 ];

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['arraybuffer_414',['ArrayBuffer',['../class_hbc_util_1_1_assembler_1_1_data_disassembler.html#a5521ea83d7c6d5716dbf2766aec7b65b',1,'HbcUtil.Assembler.DataDisassembler.ArrayBuffer()'],['../class_hbc_util_1_1_hbc_file.html#a24b0be2346a137cc005b0ac6f8166ab3',1,'HbcUtil.HbcFile.ArrayBuffer()']]],
-  ['arraybuffersize_415',['ArrayBufferSize',['../class_hbc_util_1_1_hbc_header.html#a16c6c87bb1f5bc54e64d0e538ef3798d',1,'HbcUtil::HbcHeader']]]
+  ['arraybuffer_414',['ArrayBuffer',['../class_hasmer_1_1_assembler_1_1_data_disassembler.html#a20fa07505f0478227e51097e6b993077',1,'Hasmer.Assembler.DataDisassembler.ArrayBuffer()'],['../class_hasmer_1_1_hbc_file.html#acadbecf59fddad2809613185c3b2bdcc',1,'Hasmer.HbcFile.ArrayBuffer()']]],
+  ['arraybuffersize_415',['ArrayBufferSize',['../class_hasmer_1_1_hbc_header.html#a0514de04573b28198331df5895f6ca1d',1,'Hasmer::HbcHeader']]]
 ];
