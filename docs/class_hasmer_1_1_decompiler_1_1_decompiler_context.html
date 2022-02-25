@@ -95,9 +95,6 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a6f6379b85a4714f51e767fc20945b39e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_hasmer_1_1_hbc_instruction.html">HbcInstruction</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_decompiler_1_1_decompiler_context.html#a6f6379b85a4714f51e767fc20945b39e">Instruction</a> =&gt; <a class="el" href="class_hasmer_1_1_decompiler_1_1_decompiler_context.html#a19413498971ad979bf4feb47b62efa17">Instructions</a>[<a class="el" href="class_hasmer_1_1_decompiler_1_1_decompiler_context.html#a39e8201e6562eff7fc6b51529862f1d7">CurrentInstructionIndex</a>]</td></tr>
 <tr class="memdesc:a6f6379b85a4714f51e767fc20945b39e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The current instruction being analyzed.  <a href="class_hasmer_1_1_decompiler_1_1_decompiler_context.html#a6f6379b85a4714f51e767fc20945b39e">More...</a><br /></td></tr>
 <tr class="separator:a6f6379b85a4714f51e767fc20945b39e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aede1e6508564ddb4d4f67b5142aa7479"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_hasmer_1_1_decompiler_1_1_decompiler_context.html">DecompilerContext</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_decompiler_1_1_decompiler_context.html#aede1e6508564ddb4d4f67b5142aa7479">Parent</a></td></tr>
-<tr class="memdesc:aede1e6508564ddb4d4f67b5142aa7479"><td class="mdescLeft">&#160;</td><td class="mdescRight">The decompiler context of the parent function, i.e. if this function is a closure, this will be the decompiler context of the callee. A parent of null means that the function is at the root.  <a href="class_hasmer_1_1_decompiler_1_1_decompiler_context.html#aede1e6508564ddb4d4f67b5142aa7479">More...</a><br /></td></tr>
-<tr class="separator:aede1e6508564ddb4d4f67b5142aa7479"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
 Properties</h2></td></tr>
@@ -116,6 +113,12 @@ Properties</h2></td></tr>
 <tr class="memitem:a4c3a3ddd8e5004c87faf616b3985680a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_block_statement.html">BlockStatement</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_decompiler_1_1_decompiler_context.html#a4c3a3ddd8e5004c87faf616b3985680a">Block</a><code> [get, set]</code></td></tr>
 <tr class="memdesc:a4c3a3ddd8e5004c87faf616b3985680a"><td class="mdescLeft">&#160;</td><td class="mdescRight">The current source tree code block that is being analyzed.  <a href="class_hasmer_1_1_decompiler_1_1_decompiler_context.html#a4c3a3ddd8e5004c87faf616b3985680a">More...</a><br /></td></tr>
 <tr class="separator:a4c3a3ddd8e5004c87faf616b3985680a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aede1e6508564ddb4d4f67b5142aa7479"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_hasmer_1_1_decompiler_1_1_decompiler_context.html">DecompilerContext</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_decompiler_1_1_decompiler_context.html#aede1e6508564ddb4d4f67b5142aa7479">Parent</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:aede1e6508564ddb4d4f67b5142aa7479"><td class="mdescLeft">&#160;</td><td class="mdescRight">The decompiler context of the parent function, i.e. if this function is a closure, this will be the decompiler context of the callee. A parent of null means that the function is at the root.  <a href="class_hasmer_1_1_decompiler_1_1_decompiler_context.html#aede1e6508564ddb4d4f67b5142aa7479">More...</a><br /></td></tr>
+<tr class="separator:aede1e6508564ddb4d4f67b5142aa7479"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4c96a8a084aacae88527865a7a81c52"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_hasmer_1_1_hbc_func_header.html">HbcFuncHeader</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_decompiler_1_1_decompiler_context.html#ae4c96a8a084aacae88527865a7a81c52">Function</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:ae4c96a8a084aacae88527865a7a81c52"><td class="mdescLeft">&#160;</td><td class="mdescRight">The header of the function that is being decompiled.  <a href="class_hasmer_1_1_decompiler_1_1_decompiler_context.html#ae4c96a8a084aacae88527865a7a81c52">More...</a><br /></td></tr>
+<tr class="separator:ae4c96a8a084aacae88527865a7a81c52"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents the context of a function as it is being decompiled. </p>
@@ -189,22 +192,6 @@ Properties</h2></td></tr>
 </div><div class="memdoc">
 
 <p>The current instruction being analyzed. </p>
-
-</div>
-</div>
-<a id="aede1e6508564ddb4d4f67b5142aa7479"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aede1e6508564ddb4d4f67b5142aa7479">&#9670;&nbsp;</a></span>Parent</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_hasmer_1_1_decompiler_1_1_decompiler_context.html">DecompilerContext</a> Hasmer.Decompiler.DecompilerContext.Parent</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>The decompiler context of the parent function, i.e. if this function is a closure, this will be the decompiler context of the callee. A parent of null means that the function is at the root. </p>
 
 </div>
 </div>
@@ -297,6 +284,30 @@ Properties</h2></td></tr>
 
 </div>
 </div>
+<a id="ae4c96a8a084aacae88527865a7a81c52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4c96a8a084aacae88527865a7a81c52">&#9670;&nbsp;</a></span>Function</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_hasmer_1_1_hbc_func_header.html">HbcFuncHeader</a> Hasmer.Decompiler.DecompilerContext.Function</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The header of the function that is being decompiled. </p>
+
+</div>
+</div>
 <a id="a19413498971ad979bf4feb47b62efa17"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a19413498971ad979bf4feb47b62efa17">&#9670;&nbsp;</a></span>Instructions</h2>
 
@@ -318,6 +329,30 @@ Properties</h2></td></tr>
 </div><div class="memdoc">
 
 <p>The instructions in the current code block being decompiled. </p>
+
+</div>
+</div>
+<a id="aede1e6508564ddb4d4f67b5142aa7479"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aede1e6508564ddb4d4f67b5142aa7479">&#9670;&nbsp;</a></span>Parent</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_hasmer_1_1_decompiler_1_1_decompiler_context.html">DecompilerContext</a> Hasmer.Decompiler.DecompilerContext.Parent</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The decompiler context of the parent function, i.e. if this function is a closure, this will be the decompiler context of the callee. A parent of null means that the function is at the root. </p>
 
 </div>
 </div>

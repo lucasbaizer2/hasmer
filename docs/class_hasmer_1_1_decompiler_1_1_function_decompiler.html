@@ -67,6 +67,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="class_hasmer_1_1_decompiler_1_1_function_decompiler-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Hasmer.Decompiler.FunctionDecompiler Class Reference</div>  </div>
@@ -84,6 +85,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aee40cb1331173a89cbebcb20f879b6cf"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_decompiler_1_1_function_decompiler.html#aee40cb1331173a89cbebcb20f879b6cf">Decompile</a> ()</td></tr>
 <tr class="memdesc:aee40cb1331173a89cbebcb20f879b6cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts the function into human-readable decompiled JavaScript.  <a href="class_hasmer_1_1_decompiler_1_1_function_decompiler.html#aee40cb1331173a89cbebcb20f879b6cf">More...</a><br /></td></tr>
 <tr class="separator:aee40cb1331173a89cbebcb20f879b6cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:ad8466fec3825ec8ccdf0b7cd15136120"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_decompiler_1_1_function_decompiler.html#ad8466fec3825ec8ccdf0b7cd15136120">WriteRemainingRegisters</a> (<a class="el" href="class_hasmer_1_1_decompiler_1_1_decompiler_context.html">DecompilerContext</a> context)</td></tr>
+<tr class="memdesc:ad8466fec3825ec8ccdf0b7cd15136120"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes all call expressions in all registers to the source tree, and then empties out the registers.  <a href="class_hasmer_1_1_decompiler_1_1_function_decompiler.html#ad8466fec3825ec8ccdf0b7cd15136120">More...</a><br /></td></tr>
+<tr class="separator:ad8466fec3825ec8ccdf0b7cd15136120"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec4b69954cd1244c9b4a774df2f6abde"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_decompiler_1_1_function_decompiler.html#aec4b69954cd1244c9b4a774df2f6abde">ObserveInstruction</a> (<a class="el" href="class_hasmer_1_1_decompiler_1_1_decompiler_context.html">DecompilerContext</a> context, int insnIndex)</td></tr>
+<tr class="memdesc:aec4b69954cd1244c9b4a774df2f6abde"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles the instruction at the given instruction index, which is an offset in the <a class="el" href="class_hasmer_1_1_decompiler_1_1_decompiler_context.html#a19413498971ad979bf4feb47b62efa17" title="The instructions in the current code block being decompiled.">DecompilerContext.Instructions</a> list. Sets the <a class="el" href="class_hasmer_1_1_decompiler_1_1_decompiler_context.html#a39e8201e6562eff7fc6b51529862f1d7" title="The index of the instruction currently being analyzed in the Instructions list.">DecompilerContext.CurrentInstructionIndex</a> equal to the passed index parameter. If the instruction that is analyzed does not jump, then the CurrentInstructionIndex is incremented by one. Otherwise, if the instruction that is analyzed does jump, then the CurrentInstructionIndex is not modified (beyond when it was initially set to be the passed <em>insnIndex</em>).  <a href="class_hasmer_1_1_decompiler_1_1_function_decompiler.html#aec4b69954cd1244c9b4a774df2f6abde">More...</a><br /></td></tr>
+<tr class="separator:aec4b69954cd1244c9b4a774df2f6abde"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents a decompiler for an entire function. </p>
@@ -151,6 +161,78 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Converts the function into human-readable decompiled JavaScript. </p>
+
+</div>
+</div>
+<a id="aec4b69954cd1244c9b4a774df2f6abde"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec4b69954cd1244c9b4a774df2f6abde">&#9670;&nbsp;</a></span>ObserveInstruction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Hasmer.Decompiler.FunctionDecompiler.ObserveInstruction </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_hasmer_1_1_decompiler_1_1_decompiler_context.html">DecompilerContext</a>&#160;</td>
+          <td class="paramname"><em>context</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>insnIndex</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Handles the instruction at the given instruction index, which is an offset in the <a class="el" href="class_hasmer_1_1_decompiler_1_1_decompiler_context.html#a19413498971ad979bf4feb47b62efa17" title="The instructions in the current code block being decompiled.">DecompilerContext.Instructions</a> list. Sets the <a class="el" href="class_hasmer_1_1_decompiler_1_1_decompiler_context.html#a39e8201e6562eff7fc6b51529862f1d7" title="The index of the instruction currently being analyzed in the Instructions list.">DecompilerContext.CurrentInstructionIndex</a> equal to the passed index parameter. If the instruction that is analyzed does not jump, then the CurrentInstructionIndex is incremented by one. Otherwise, if the instruction that is analyzed does jump, then the CurrentInstructionIndex is not modified (beyond when it was initially set to be the passed <em>insnIndex</em>). </p>
+
+</div>
+</div>
+<a id="ad8466fec3825ec8ccdf0b7cd15136120"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8466fec3825ec8ccdf0b7cd15136120">&#9670;&nbsp;</a></span>WriteRemainingRegisters()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Hasmer.Decompiler.FunctionDecompiler.WriteRemainingRegisters </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_hasmer_1_1_decompiler_1_1_decompiler_context.html">DecompilerContext</a>&#160;</td>
+          <td class="paramname"><em>context</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Writes all call expressions in all registers to the source tree, and then empties out the registers. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">context</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
