@@ -1,6 +1,6 @@
 # Download
 
-Check out the [hasmer website](https://lucasbaizer.github.io/hasmer) for downloads and documentation.
+Check out the [hasmer website](https://lucasbaizer2.github.io/hasmer) for downloads and documentation.
 
 # What is hasmer?
 
