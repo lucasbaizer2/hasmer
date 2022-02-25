@@ -36,4 +36,4 @@ This will generate a `vsix` in your current working directory, which can install
 
 The TextMate language syntax is defined in the `syntaxes` directory.
 
-Scripts used for development are definined the in `scripts` directory.
+Scripts used for development are defined the in `scripts` directory.

@@ -15,6 +15,17 @@ namespace Hasmer.Decompiler.Visitor {
         /// Copies the value of one register into another.
         /// </summary>
         [Visitor]
+        public static void CommonMov(DecompilerContext context) {
+            uint toRegister = context.Instruction.Operands[0].GetValue<uint>();
+            uint fromRegister = context.Instruction.Operands[1].GetValue<uint>();
+
+            context.State.Registers[toRegister] = context.State.Registers[fromRegister];
+        }
+
+        /// <summary>
+        /// Copies the value of one register into another.
+        /// </summary>
+        [Visitor]
         public static void Mov(DecompilerContext context) {
             byte toRegister = context.Instruction.Operands[0].GetValue<byte>();
             byte fromRegister = context.Instruction.Operands[1].GetValue<byte>();

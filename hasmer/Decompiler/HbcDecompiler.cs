@@ -40,7 +40,7 @@ namespace Hasmer.Decompiler {
         /// </summary>
         public string Decompile() {
             DataDisassembler.DisassembleData();
-            FunctionDecompiler decompiler = new FunctionDecompiler(this, Source.SmallFuncHeaders[0]);
+            FunctionDecompiler decompiler = new FunctionDecompiler(this, Source.SmallFuncHeaders[199]);
             return decompiler.Decompile();
         }
     }

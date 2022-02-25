@@ -13,33 +13,41 @@ namespace Hasmer {
     public class Program {
         [Verb("decode", HelpText = "Disassembles or decompiles a Hermes bytecode file.")]
         private class DecodeOptions {
-            [Option('i', "in", Required = true, HelpText = "The path to a Hermes bytecode file.")]
+            [Option('i', "in", Required = true, HelpText = "The path to the Hermes bytecode file.")]
             public string InputPath { get; set; }
 
-            [Option('d', "disassemble", Required = false, HelpText = "Disassembles the bytecode into a Hasm file.")]
+            [Option('h', "disassemble", Required = false, HelpText = "Disassembles the bytecode into a Hasm file.")]
             public bool Disassemble { get; set; }
 
-            [Option('c', "decompile", Required = false, HelpText = "Decompiles the bytecode into a JavaScript file.")]
+            [Option('j', "decompile", Required = false, HelpText = "Decompiles the bytecode into a JavaScript file.")]
             public bool Decompile { get; set; }
 
-            [Option('o', "out", Required = false, HelpText = "Output directory to extract files to.")]
-            public string OutputDirectory { get; set; }
-
-            [Option('a', "apk", Required = false, HelpText = "If the input file is a React Native APK containing a Hermes bytecode file internally.")]
+            [Option('a', "apk", Required = false, HelpText = "Interpret the input file as a React Native APK and extract the Hermes bytecode file from it.")]
             public bool IsApk { get; set; }
+        }
 
-            [Option('y', "yes", Required = false, HelpText = "Automatically answers 'yes' to the prompt asking whether or not to overwrite an existing output directory.")]
-            public bool ShouldOverwrite { get; set; }
+        [Verb("assemble", HelpText = "Assembles a Hasm file into a Hermes bytecode file.")]
+        private class AssembleOptions {
+            [Option('i', "in", Required = true, HelpText = "The path to the Hasm assembly file.")]
+            public string InputPath { get; set; }
+
+            [Option('p', "patch", Required = false, HelpText = "The path to a React Native APK to patch the bytecode file into.")]
+            public string PatchApk { get; set; }
         }
 
         static void Main(string[] args) {
-            Parser.Default.ParseArguments<DecodeOptions>(args)
-                .WithParsed(Decode);
+            Parser.Default.ParseArguments<DecodeOptions, AssembleOptions>(args)
+                .WithParsed<DecodeOptions>(Decode)
+                .WithParsed<AssembleOptions>(Assemble);
         }
 
-        static void Decode(DecodeOptions options) {
+        private static void Assemble(AssembleOptions options) {
+
+        }
+
+        private static void Decode(DecodeOptions options) {
             if (!options.Disassemble && !options.Decompile) {
-                Console.WriteLine("You must pick whether to diassemble or decompile the file (or both). Run 'hasmer --help' for help.");
+                Console.WriteLine("You must specify whether to diassemble and/or decompile the input. Run 'hasmer decode --help' for help.");
                 return;
             }
 
@@ -50,27 +58,9 @@ namespace Hasmer {
 
             string fileName = Path.GetFileName(options.InputPath);
             if (fileName.Contains(".")) {
-                fileName = fileName.Substring(0, fileName.LastIndexOf('.'));
+                fileName = fileName.Substring(0, fileName.IndexOf('.'));
             }
-            string outputDirectory;
-            if (options.OutputDirectory != null) {
-                outputDirectory = options.OutputDirectory;
-            } else {
-                outputDirectory = Path.Combine(Path.GetDirectoryName(options.InputPath), fileName);
-                if (!options.ShouldOverwrite) {
-                    if (Directory.Exists(outputDirectory)) {
-                        Console.Write("Output directory \"" + outputDirectory + "\" already exists. Do you want to overwrite? (y/n): ");
-                        if (Console.ReadLine().ToLower() != "y") {
-                            return;
-                        }
-                    }
-                }
-            }
-
-            if (!Directory.Exists(outputDirectory)) {
-                Directory.CreateDirectory(outputDirectory);
-            }
-
+            string outputDirectory = Path.GetDirectoryName(options.InputPath);
             byte[] hermesBytecode;
             if (options.IsApk) {
                 ZipFile zip = ZipFile.Read(options.InputPath);
@@ -90,12 +80,18 @@ namespace Hasmer {
             if (options.Disassemble) {
                 HbcDisassembler disassembler = new HbcDisassembler(file);
                 string disassembly = disassembler.Disassemble();
-                File.WriteAllText(Path.Combine(outputDirectory, "output.hasm"), disassembly);
+                string hasmPath = Path.Combine(outputDirectory, $"{fileName}.hasm");
+                File.WriteAllText(hasmPath, disassembly);
+
+                Console.WriteLine($"Succesfully disassembled! Wrote Hasm file to: {hasmPath}");
             }
             if (options.Decompile) {
                 HbcDecompiler decompiler = new HbcDecompiler(file, DecompilerOptions.Default);
                 string decompiled = decompiler.Decompile();
-                File.WriteAllText(Path.Combine(outputDirectory, "output.js"), decompiled);
+                string jsPath = Path.Combine(outputDirectory, $"{fileName}.js");
+                File.WriteAllText(jsPath, decompiled);
+
+                Console.WriteLine($"Successfully decompiled! Wrote JavaScript file to: {jsPath}");
             }
         }
     }

@@ -1,7 +1,3 @@
-# Download
-
-Check out the [hasmer website](https://lucasbaizer2.github.io/hasmer) for downloads and documentation.
-
 # What is hasmer?
 
 hasmer is a utility for working with [Hermes](https://github.com/facebook/hermes) bytecode.
@@ -14,20 +10,14 @@ hasmer also has a very WIP decompiler, which decompiles Hermes bytecode into Jav
 
 You can find detailed documentation and other various information regarding usage of hasmer on the [hasmer website](https://lucasbaizer2.github.io/hasmer).
 
-# Directory Structure
+# Downloads and Usage
 
-The `bytecode-format-generator` directory contains a Node.js script, used for scraping the Hermes git repository for modifications to Hermes bytecode, and parsing the changes made.
-This is used for generating definition files for prior versions, as well as new ones.
+You can find downloads and documentation on the [hasmer website](https://lucasbaizer2.github.io/hasmer).
 
-The `hasmer` directory contains the Visual Studio C# project for the actual code of the application.
+# Contributing
 
-The `hasm-vscode` directory contains the source for the Visual Studio Code extension for working with Hasm assembly.
-
-See each subproject's README for more detailed information:
-* [bytecode-format-generator](./bytecode-format-generator/README.md)
-* [hasmer](./hasmer/README.md)
-* [hasm-vscode](./hasm-vscode/README.md)
+Check out the [contributing document](./CONTRIBUTING.md) for information on how to contribute to hasmer.
 
 # License
 
-See the [LICENSE](LICENSE) file.
+hasmer is licensed under the [MIT License](./LICENSE).
