@@ -40,19 +40,8 @@ namespace Hasmer.Decompiler {
         /// </summary>
         public string Decompile() {
             DataDisassembler.DisassembleData();
-
-            StringBuilder builder = new StringBuilder();
-
-            foreach (HbcSmallFuncHeader func in Source.SmallFuncHeaders) {
-                if (func.FunctionId == 170) {
-                    FunctionDecompiler decompiler = new FunctionDecompiler(this, func.GetAssemblerHeader());
-                    string decompiled = decompiler.Decompile();
-                    builder.AppendLine(decompiled);
-                    builder.AppendLine();
-                }
-            }
-
-            return builder.ToString();
+            FunctionDecompiler decompiler = new FunctionDecompiler(this, Source.SmallFuncHeaders[0]);
+            return decompiler.Decompile();
         }
     }
 }

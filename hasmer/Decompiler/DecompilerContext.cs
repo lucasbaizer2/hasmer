@@ -50,7 +50,12 @@ namespace Hasmer.Decompiler {
         /// i.e. if this function is a closure, this will be the decompiler context of the callee.
         /// A parent of null means that the function is at the root.
         /// </summary>
-        public DecompilerContext Parent;
+        public DecompilerContext Parent { get; set; }
+
+        /// <summary>
+        /// The header of the function that is being decompiled.
+        /// </summary>
+        public HbcFuncHeader Function { get; set; }
 
         /// <summary>
         /// Gets the parent context at the given depth.
@@ -84,7 +89,8 @@ namespace Hasmer.Decompiler {
                 Instructions = new List<HbcInstruction>(Instructions),
                 Block = Block,
                 CurrentInstructionIndex = CurrentInstructionIndex,
-                Parent = Parent
+                Parent = Parent,
+                Function = Function
             };
             copy.State = new FunctionState(copy, (uint)State.Registers.Length);
 

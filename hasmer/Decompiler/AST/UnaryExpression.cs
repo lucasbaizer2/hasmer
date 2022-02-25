@@ -11,7 +11,9 @@ namespace Hasmer.Decompiler.AST {
 
         public void Write(SourceCodeBuilder builder) {
             builder.Write(Operator);
-            builder.Write(" ");
+            if (Operator != "!") {
+                builder.Write(" ");
+            }
             Argument.Write(builder);
         }
     }
