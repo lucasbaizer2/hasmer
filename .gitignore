@@ -351,4 +351,3 @@ MigrationBackup/
 
 # custom hasmer ignore
 **/launchSettings.json
-/docs

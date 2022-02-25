@@ -2,16 +2,6 @@
 
 This directory contains the C# source code for `hasmer`, using the .NET 5.0 platform.
 
-# Documentation
-
-The latest auto-generated docs can be found online [here](https://lucasbaizer2.github.io/hasmer/docs/annotated.html).
-
-You can generate your own docs locally using [Doxygen](https://www.doxygen.nl/index.html). Run in the parent of this directory (i.e. root of the git repository):
-```
-doxygen doxygen.cfg
-```
-The output docs can be found at `docs/html` (relative to the root directory).
-
 # Setup
 
 You will need the .NET 5 SDK to compile this project. See the [.NET SDK download page](https://dotnet.microsoft.com/en-us/download) for information on how to download the .NET SDK for your operating system.
@@ -34,6 +24,16 @@ dotnet build -c Release
 # Testing
 
 You can download a sample Hermes bytecode file [here](https://lucasbaizer2.github.io/hasmer/downloads/index.android.bundle). It's a React Native bytecode file extracted from an APK, used as a challenge in [InsomniHack](https://insomnihack.ch)'s 2022 CTF Teaser. It uses Hermes bytecode version 84.
+
+# Documentation
+
+The latest auto-generated docs can be found online [here](https://lucasbaizer2.github.io/hasmer/docs/annotated.html).
+
+You can generate your own docs locally using [Doxygen](https://www.doxygen.nl/index.html). Run in this directory:
+```
+doxygen Doxyfile
+```
+The output docs can be found at `./docs/html`.
 
 ### Example Usage
 ```
