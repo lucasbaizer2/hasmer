@@ -75,6 +75,9 @@ $(function() {
 
 
 <h3><a id="index_b"></a>- b -</h3><ul>
+<li>Block
+: <a class="el" href="class_hbc_util_1_1_decompiler_1_1_decompiler_context.html#ab2e95640b47045d17614c7e1436e5234">HbcUtil.Decompiler.DecompilerContext</a>
+</li>
 <li>Body
 : <a class="el" href="class_hbc_util_1_1_assembler_1_1_parser_1_1_hasm_function_token.html#a58aa19deac90bdb1b75f7a410687f839">HbcUtil.Assembler.Parser.HasmFunctionToken</a>
 </li>
@@ -95,12 +98,18 @@ $(function() {
 <li>Column
 : <a class="el" href="class_hbc_util_1_1_assembler_1_1_parser_1_1_hasm_token.html#aafafd2f74cb3b41a230cebaa4d6d46ed">HbcUtil.Assembler.Parser.HasmToken</a>
 </li>
+<li>Context
+: <a class="el" href="class_hbc_util_1_1_decompiler_1_1_function_state.html#ad73cf2717830051da4503851821728e4">HbcUtil.Decompiler.FunctionState</a>
+</li>
 <li>CurrentColumn
 : <a class="el" href="class_hbc_util_1_1_assembler_1_1_parser_1_1_hasm_string_stream.html#a4687b73c7ad06352c399b43a458b9464">HbcUtil.Assembler.Parser.HasmStringStream</a>
 , <a class="el" href="struct_hbc_util_1_1_assembler_1_1_parser_1_1_hasm_string_stream_state.html#a17051ec79f1ef1d103c86d248cbb0c51">HbcUtil.Assembler.Parser.HasmStringStreamState</a>
 </li>
 <li>CurrentFunction
 : <a class="el" href="class_hbc_util_1_1_assembler_1_1_parser_1_1_hasm_reader_state.html#a670c58e6750c227a67ce8a9e0779e2e3">HbcUtil.Assembler.Parser.HasmReaderState</a>
+</li>
+<li>CurrentInstructionIndex
+: <a class="el" href="class_hbc_util_1_1_decompiler_1_1_decompiler_context.html#a79e083d5a3dca255cc619519637c2be2">HbcUtil.Decompiler.DecompilerContext</a>
 </li>
 <li>CurrentLine
 : <a class="el" href="class_hbc_util_1_1_assembler_1_1_parser_1_1_hasm_string_stream.html#a6bdcd48ae6d24a5b82ccf1997975af46">HbcUtil.Assembler.Parser.HasmStringStream</a>
@@ -115,6 +124,7 @@ $(function() {
 </li>
 <li>DataDisassembler
 : <a class="el" href="class_hbc_util_1_1_assembler_1_1_hbc_disassembler.html#ab3b2df10a60285b7dc55dce5fb04536e">HbcUtil.Assembler.HbcDisassembler</a>
+, <a class="el" href="class_hbc_util_1_1_decompiler_1_1_hbc_decompiler.html#aa4611ad40ee7ba90201a629b58a8b1d0">HbcUtil.Decompiler.HbcDecompiler</a>
 </li>
 <li>DataType
 : <a class="el" href="class_hbc_util_1_1_assembler_1_1_parser_1_1_hasm_data_declaration_token.html#a5a6becc7827787a3dba07b1cbaccddc5">HbcUtil.Assembler.Parser.HasmDataDeclarationToken</a>
@@ -125,12 +135,14 @@ $(function() {
 <li>DeclaredOffset
 : <a class="el" href="class_hbc_util_1_1_assembler_1_1_parser_1_1_hasm_label_token.html#a8a2af2dab8288c18f2b11857dc40b8ee">HbcUtil.Assembler.Parser.HasmLabelToken</a>
 </li>
+<li>Decompiler
+: <a class="el" href="class_hbc_util_1_1_decompiler_1_1_decompiler_context.html#ab30ef324e75605d67bb88a60c65261db">HbcUtil.Decompiler.DecompilerContext</a>
+</li>
 <li>Definitions
 : <a class="el" href="class_hbc_util_1_1_hbc_bytecode_format.html#a132c561b9cf33c65cf343212e795a92f">HbcUtil.HbcBytecodeFormat</a>
 </li>
 <li>Disassembler
-: <a class="el" href="class_hbc_util_1_1_assembler_1_1_data_disassembler.html#a8e017794438ad4b5f95f1211e6764013">HbcUtil.Assembler.DataDisassembler</a>
-, <a class="el" href="class_hbc_util_1_1_assembler_1_1_function_disassembler.html#ad1a879c9095871f3dad245794306ef51">HbcUtil.Assembler.FunctionDisassembler</a>
+: <a class="el" href="class_hbc_util_1_1_assembler_1_1_function_disassembler.html#ad1a879c9095871f3dad245794306ef51">HbcUtil.Assembler.FunctionDisassembler</a>
 </li>
 </ul>
 
@@ -193,10 +205,14 @@ $(function() {
 : <a class="el" href="class_hbc_util_1_1_hbc_file.html#ad3998e1f3b377792861d925cd8d45660">HbcUtil.HbcFile</a>
 </li>
 <li>Instructions
-: <a class="el" href="class_hbc_util_1_1_hbc_file.html#a00119727143faeccc43f65d0a2b4db88">HbcUtil.HbcFile</a>
+: <a class="el" href="class_hbc_util_1_1_decompiler_1_1_decompiler_context.html#ad440b9c5c3720b878717728b62a159cd">HbcUtil.Decompiler.DecompilerContext</a>
+, <a class="el" href="class_hbc_util_1_1_hbc_file.html#a00119727143faeccc43f65d0a2b4db88">HbcUtil.HbcFile</a>
 </li>
 <li>IsJump
 : <a class="el" href="class_hbc_util_1_1_hbc_instruction_definition.html#a60bd9830dc22160838c7bbeeef6c91af">HbcUtil.HbcInstructionDefinition</a>
+</li>
+<li>IsRedundant
+: <a class="el" href="class_hbc_util_1_1_decompiler_1_1_a_s_t_1_1_identifier.html#a7b67563619fca29338d4ff8bf71e9e6a">HbcUtil.Decompiler.AST.Identifier</a>
 </li>
 <li>Items
 : <a class="el" href="class_hbc_util_1_1_hbc_data_buffer_items.html#a4b42ea1c326ea0a0feca448af6c065e9">HbcUtil.HbcDataBufferItems</a>
@@ -243,7 +259,8 @@ $(function() {
 
 <h3><a id="index_n"></a>- n -</h3><ul>
 <li>Name
-: <a class="el" href="class_hbc_util_1_1_hbc_instruction_definition.html#ad13ddf166ca0c5238948758a10c66a4c">HbcUtil.HbcInstructionDefinition</a>
+: <a class="el" href="class_hbc_util_1_1_decompiler_1_1_a_s_t_1_1_identifier.html#a243e3c2a03e3ed968875f348faaa1ecd">HbcUtil.Decompiler.AST.Identifier</a>
+, <a class="el" href="class_hbc_util_1_1_hbc_instruction_definition.html#ad13ddf166ca0c5238948758a10c66a4c">HbcUtil.HbcInstructionDefinition</a>
 </li>
 </ul>
 
@@ -266,6 +283,15 @@ $(function() {
 , <a class="el" href="class_hbc_util_1_1_hbc_func_header.html#a3b47ba2d0deec52269cbfdb451dc6ed2">HbcUtil.HbcFuncHeader</a>
 , <a class="el" href="class_hbc_util_1_1_hbc_instruction.html#a5ea8b450efeac8a9f301a9b390256992">HbcUtil.HbcInstruction</a>
 </li>
+<li>OmitExplicitGlobal
+: <a class="el" href="struct_hbc_util_1_1_decompiler_1_1_decompiler_options.html#a34500db49f29c2efa9e4dc682c00799d">HbcUtil.Decompiler.DecompilerOptions</a>
+</li>
+<li>OmitPrototypeFromConstructorInvocation
+: <a class="el" href="struct_hbc_util_1_1_decompiler_1_1_decompiler_options.html#afb4bc5442ef81d9c3229168cc0937d35">HbcUtil.Decompiler.DecompilerOptions</a>
+</li>
+<li>OmitThisFromFunctionInvocation
+: <a class="el" href="struct_hbc_util_1_1_decompiler_1_1_decompiler_options.html#a0ecaa05557b0e3d0a10304ed4cbe0f6f">HbcUtil.Decompiler.DecompilerOptions</a>
+</li>
 <li>Opcode
 : <a class="el" href="class_hbc_util_1_1_hbc_instruction.html#adfccf4e6f11dac825c1dfc2b3f9b20f8">HbcUtil.HbcInstruction</a>
 , <a class="el" href="class_hbc_util_1_1_hbc_instruction_definition.html#a47599e2acbc269fc31ebdb3142badf90">HbcUtil.HbcInstructionDefinition</a>
@@ -279,6 +305,9 @@ $(function() {
 </li>
 <li>OperandTypes
 : <a class="el" href="class_hbc_util_1_1_hbc_instruction_definition.html#aa79d767ec09049a947653195927a2b23">HbcUtil.HbcInstructionDefinition</a>
+</li>
+<li>Options
+: <a class="el" href="class_hbc_util_1_1_decompiler_1_1_hbc_decompiler.html#a7e96e8ab929a1262f0c682b5cb073f50">HbcUtil.Decompiler.HbcDecompiler</a>
 </li>
 <li>OverflowStringCount
 : <a class="el" href="class_hbc_util_1_1_hbc_header.html#a675d5673541fe94577615e4ea8da12e4">HbcUtil.HbcHeader</a>
@@ -307,7 +336,7 @@ $(function() {
 : <a class="el" href="class_hbc_util_1_1_assembler_1_1_parser_1_1_hasm_function_token.html#a800e07f69bd57d783ba9b023628bcc5e">HbcUtil.Assembler.Parser.HasmFunctionToken</a>
 </li>
 <li>Registers
-: <a class="el" href="class_hbc_util_1_1_decompiler_1_1_function_state.html#a72c10575a9cc04013ce11461da2e3ad0">HbcUtil.Decompiler.FunctionState</a>
+: <a class="el" href="class_hbc_util_1_1_decompiler_1_1_function_state.html#abec1aabd26a052785576c6b324131e55">HbcUtil.Decompiler.FunctionState</a>
 </li>
 </ul>
 
@@ -317,13 +346,19 @@ $(function() {
 : <a class="el" href="class_hbc_util_1_1_hbc_file.html#af5b636507352daa80e86e3228f42c382">HbcUtil.HbcFile</a>
 </li>
 <li>Source
-: <a class="el" href="class_hbc_util_1_1_assembler_1_1_hbc_disassembler.html#a0b50dcc2a4bbf05e9ee0f024f87f856e">HbcUtil.Assembler.HbcDisassembler</a>
+: <a class="el" href="class_hbc_util_1_1_assembler_1_1_data_disassembler.html#aab930d6d521650d77120b84743c53ab4">HbcUtil.Assembler.DataDisassembler</a>
+, <a class="el" href="class_hbc_util_1_1_assembler_1_1_hbc_disassembler.html#a0b50dcc2a4bbf05e9ee0f024f87f856e">HbcUtil.Assembler.HbcDisassembler</a>
+, <a class="el" href="class_hbc_util_1_1_decompiler_1_1_hbc_decompiler.html#a76cf462e401277b1304b0b69fbf9aacb">HbcUtil.Decompiler.HbcDecompiler</a>
 </li>
 <li>SourceHash
 : <a class="el" href="class_hbc_util_1_1_hbc_header.html#a191b4e0b42ce6b93be3482b3d5aad8b5">HbcUtil.HbcHeader</a>
 </li>
 <li>State
 : <a class="el" href="class_hbc_util_1_1_assembler_1_1_parser_1_1_hasm_token_stream.html#a88f312a5d4eb5e41758eb8d9d8515942">HbcUtil.Assembler.Parser.HasmTokenStream</a>
+, <a class="el" href="class_hbc_util_1_1_decompiler_1_1_decompiler_context.html#a56c047edea56992867af7a9e4fe964d1">HbcUtil.Decompiler.DecompilerContext</a>
+</li>
+<li>Storage
+: <a class="el" href="class_hbc_util_1_1_decompiler_1_1_register_tracker.html#acc7c428028219b63a91cf7a55d26efb4">HbcUtil.Decompiler.RegisterTracker</a>
 </li>
 <li>Stream
 : <a class="el" href="class_hbc_util_1_1_assembler_1_1_parser_1_1_hasm_reader_state.html#aa9999190b6e953fdef367f142ba33e2c">HbcUtil.Assembler.Parser.HasmReaderState</a>
@@ -352,6 +387,9 @@ $(function() {
 </li>
 <li>Target
 : <a class="el" href="class_hbc_util_1_1_assembler_1_1_parser_1_1_hasm_simple_parser.html#a45c56210c79215cd7c56247787e29236">HbcUtil.Assembler.Parser.HasmSimpleParser</a>
+</li>
+<li>this[uint index]
+: <a class="el" href="class_hbc_util_1_1_decompiler_1_1_register_tracker.html#a333aacfb4631df20f5d93cb2451a04c1">HbcUtil.Decompiler.RegisterTracker</a>
 </li>
 <li>Type
 : <a class="el" href="class_hbc_util_1_1_hbc_instruction_operand.html#a7fe2ca35a8a1755a17a5803eaa5d92c2">HbcUtil.HbcInstructionOperand</a>

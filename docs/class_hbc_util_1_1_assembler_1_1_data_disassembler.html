@@ -67,7 +67,6 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#properties">Properties</a> &#124;
 <a href="class_hbc_util_1_1_assembler_1_1_data_disassembler-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -80,27 +79,24 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a3c6d27f83cf41542230808ee0a1159d9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hbc_util_1_1_assembler_1_1_data_disassembler.html#a3c6d27f83cf41542230808ee0a1159d9">DataDisassembler</a> (<a class="el" href="class_hbc_util_1_1_assembler_1_1_hbc_disassembler.html">HbcDisassembler</a> disassembler)</td></tr>
-<tr class="memdesc:a3c6d27f83cf41542230808ee0a1159d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new <a class="el" href="class_hbc_util_1_1_assembler_1_1_data_disassembler.html" title="Used for diassembling the data section of a Hermes bytecode file.">DataDisassembler</a> for a given Hermes bytecode file.  <a href="class_hbc_util_1_1_assembler_1_1_data_disassembler.html#a3c6d27f83cf41542230808ee0a1159d9">More...</a><br /></td></tr>
-<tr class="separator:a3c6d27f83cf41542230808ee0a1159d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3560d973e3b43e000f4875f2350fb968"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hbc_util_1_1_assembler_1_1_data_disassembler.html#a3560d973e3b43e000f4875f2350fb968">DataDisassembler</a> (<a class="el" href="class_hbc_util_1_1_hbc_file.html">HbcFile</a> source)</td></tr>
+<tr class="memdesc:a3560d973e3b43e000f4875f2350fb968"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new <a class="el" href="class_hbc_util_1_1_assembler_1_1_data_disassembler.html" title="Used for diassembling the data section of a Hermes bytecode file.">DataDisassembler</a> for a given Hermes bytecode file.  <a href="class_hbc_util_1_1_assembler_1_1_data_disassembler.html#a3560d973e3b43e000f4875f2350fb968">More...</a><br /></td></tr>
+<tr class="separator:a3560d973e3b43e000f4875f2350fb968"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a94d2abd9004f4c4ed4906b89e912b41e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_hbc_util_1_1_primitive_value.html">PrimitiveValue</a>[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hbc_util_1_1_assembler_1_1_data_disassembler.html#a94d2abd9004f4c4ed4906b89e912b41e">GetElementSeries</a> (List&lt; <a class="el" href="class_hbc_util_1_1_hbc_data_buffer_items.html">HbcDataBufferItems</a> &gt; buffer, uint offset, uint length)</td></tr>
 <tr class="memdesc:a94d2abd9004f4c4ed4906b89e912b41e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns an array containing <em>length</em> items starting at buffer offset <em>offset</em> in the given buffer. If <em>length</em> extends over multiple entries in the array buffer (i.e. multiple data declarations), the elements from all entries are returned in order. This enables reading over multiple entries at once.  <a href="class_hbc_util_1_1_assembler_1_1_data_disassembler.html#a94d2abd9004f4c4ed4906b89e912b41e">More...</a><br /></td></tr>
 <tr class="separator:a94d2abd9004f4c4ed4906b89e912b41e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af410f627a1432eed316e25ead4d188e7"><td class="memItemLeft" align="right" valign="top"><a id="af410f627a1432eed316e25ead4d188e7"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>DisassembleData</b> ()</td></tr>
+<tr class="separator:af410f627a1432eed316e25ead4d188e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afa5e728fa918ae926e80ccf0e5ba515d"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hbc_util_1_1_assembler_1_1_data_disassembler.html#afa5e728fa918ae926e80ccf0e5ba515d">Disassemble</a> ()</td></tr>
 <tr class="memdesc:afa5e728fa918ae926e80ccf0e5ba515d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disassembles the Hermes bytecode data buffers and returns a string representing the disassembly.  <a href="class_hbc_util_1_1_assembler_1_1_data_disassembler.html#afa5e728fa918ae926e80ccf0e5ba515d">More...</a><br /></td></tr>
 <tr class="separator:afa5e728fa918ae926e80ccf0e5ba515d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:aab930d6d521650d77120b84743c53ab4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_hbc_util_1_1_hbc_file.html">HbcFile</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hbc_util_1_1_assembler_1_1_data_disassembler.html#aab930d6d521650d77120b84743c53ab4">Source</a> =&gt; Disassembler.Source</td></tr>
-<tr class="memdesc:aab930d6d521650d77120b84743c53ab4"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Hermes bytecode file being disassembled.  <a href="class_hbc_util_1_1_assembler_1_1_data_disassembler.html#aab930d6d521650d77120b84743c53ab4">More...</a><br /></td></tr>
-<tr class="separator:aab930d6d521650d77120b84743c53ab4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
 Properties</h2></td></tr>
-<tr class="memitem:a8e017794438ad4b5f95f1211e6764013"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_hbc_util_1_1_assembler_1_1_hbc_disassembler.html">HbcDisassembler</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hbc_util_1_1_assembler_1_1_data_disassembler.html#a8e017794438ad4b5f95f1211e6764013">Disassembler</a><code> [get, set]</code></td></tr>
-<tr class="memdesc:a8e017794438ad4b5f95f1211e6764013"><td class="mdescLeft">&#160;</td><td class="mdescRight">The parent disassembler.  <a href="class_hbc_util_1_1_assembler_1_1_data_disassembler.html#a8e017794438ad4b5f95f1211e6764013">More...</a><br /></td></tr>
-<tr class="separator:a8e017794438ad4b5f95f1211e6764013"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab930d6d521650d77120b84743c53ab4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_hbc_util_1_1_hbc_file.html">HbcFile</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hbc_util_1_1_assembler_1_1_data_disassembler.html#aab930d6d521650d77120b84743c53ab4">Source</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:aab930d6d521650d77120b84743c53ab4"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Hermes bytecode file being disassembled.  <a href="class_hbc_util_1_1_assembler_1_1_data_disassembler.html#aab930d6d521650d77120b84743c53ab4">More...</a><br /></td></tr>
+<tr class="separator:aab930d6d521650d77120b84743c53ab4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5521ea83d7c6d5716dbf2766aec7b65b"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="class_hbc_util_1_1_hbc_data_buffer_items.html">HbcDataBufferItems</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hbc_util_1_1_assembler_1_1_data_disassembler.html#a5521ea83d7c6d5716dbf2766aec7b65b">ArrayBuffer</a><code> [get, set]</code></td></tr>
 <tr class="memdesc:a5521ea83d7c6d5716dbf2766aec7b65b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The decoded Array Buffer.  <a href="class_hbc_util_1_1_assembler_1_1_data_disassembler.html#a5521ea83d7c6d5716dbf2766aec7b65b">More...</a><br /></td></tr>
 <tr class="separator:a5521ea83d7c6d5716dbf2766aec7b65b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -114,8 +110,8 @@ Properties</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Used for diassembling the data section of a Hermes bytecode file. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a3c6d27f83cf41542230808ee0a1159d9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3c6d27f83cf41542230808ee0a1159d9">&#9670;&nbsp;</a></span>DataDisassembler()</h2>
+<a id="a3560d973e3b43e000f4875f2350fb968"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3560d973e3b43e000f4875f2350fb968">&#9670;&nbsp;</a></span>DataDisassembler()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -126,8 +122,8 @@ Properties</h2></td></tr>
         <tr>
           <td class="memname">HbcUtil.Assembler.DataDisassembler.DataDisassembler </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_hbc_util_1_1_assembler_1_1_hbc_disassembler.html">HbcDisassembler</a>&#160;</td>
-          <td class="paramname"><em>disassembler</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_hbc_util_1_1_hbc_file.html">HbcFile</a>&#160;</td>
+          <td class="paramname"><em>source</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -214,23 +210,6 @@ Properties</h2></td></tr>
 
 </div>
 </div>
-<h2 class="groupheader">Member Data Documentation</h2>
-<a id="aab930d6d521650d77120b84743c53ab4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aab930d6d521650d77120b84743c53ab4">&#9670;&nbsp;</a></span>Source</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_hbc_util_1_1_hbc_file.html">HbcFile</a> HbcUtil.Assembler.DataDisassembler.Source =&gt; Disassembler.Source</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>The Hermes bytecode file being disassembled. </p>
-
-</div>
-</div>
 <h2 class="groupheader">Property Documentation</h2>
 <a id="a5521ea83d7c6d5716dbf2766aec7b65b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5521ea83d7c6d5716dbf2766aec7b65b">&#9670;&nbsp;</a></span>ArrayBuffer</h2>
@@ -256,30 +235,6 @@ Properties</h2></td></tr>
 
 </div>
 </div>
-<a id="a8e017794438ad4b5f95f1211e6764013"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8e017794438ad4b5f95f1211e6764013">&#9670;&nbsp;</a></span>Disassembler</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_hbc_util_1_1_assembler_1_1_hbc_disassembler.html">HbcDisassembler</a> HbcUtil.Assembler.DataDisassembler.Disassembler</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>The parent disassembler. </p>
-
-</div>
-</div>
 <a id="ac0fe30fa3ea748eb6d038b54484f824c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac0fe30fa3ea748eb6d038b54484f824c">&#9670;&nbsp;</a></span>KeyBuffer</h2>
 
@@ -301,6 +256,30 @@ Properties</h2></td></tr>
 </div><div class="memdoc">
 
 <p>The decoded Object Key Buffer. </p>
+
+</div>
+</div>
+<a id="aab930d6d521650d77120b84743c53ab4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab930d6d521650d77120b84743c53ab4">&#9670;&nbsp;</a></span>Source</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_hbc_util_1_1_hbc_file.html">HbcFile</a> HbcUtil.Assembler.DataDisassembler.Source</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The Hermes bytecode file being disassembled. </p>
 
 </div>
 </div>

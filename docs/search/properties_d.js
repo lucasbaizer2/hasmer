@@ -1,13 +1,17 @@
 var searchData=
 [
-  ['objectkeybuffer_423',['ObjectKeyBuffer',['../class_hbc_util_1_1_hbc_file.html#aba3e64e5f1c394ddd8902fc10424f5b9',1,'HbcUtil::HbcFile']]],
-  ['objectvaluebuffer_424',['ObjectValueBuffer',['../class_hbc_util_1_1_hbc_file.html#a60ce7d86456192295a99cc919babd2bb',1,'HbcUtil::HbcFile']]],
-  ['objkeybuffersize_425',['ObjKeyBufferSize',['../class_hbc_util_1_1_hbc_header.html#a9d5c4334d5dcbe9b30cf5ee51ceaf37d',1,'HbcUtil::HbcHeader']]],
-  ['objvaluebuffersize_426',['ObjValueBufferSize',['../class_hbc_util_1_1_hbc_header.html#aedfb071d89702d6dce3fda3ec3112695',1,'HbcUtil::HbcHeader']]],
-  ['offset_427',['Offset',['../class_hbc_util_1_1_hbc_data_buffer_items.html#a4578e8008c2a549dc094d8aa5d34ba9a',1,'HbcUtil.HbcDataBufferItems.Offset()'],['../class_hbc_util_1_1_hbc_func_header.html#a3b47ba2d0deec52269cbfdb451dc6ed2',1,'HbcUtil.HbcFuncHeader.Offset()'],['../class_hbc_util_1_1_hbc_instruction.html#a5ea8b450efeac8a9f301a9b390256992',1,'HbcUtil.HbcInstruction.Offset()']]],
-  ['opcode_428',['Opcode',['../class_hbc_util_1_1_hbc_instruction_definition.html#a47599e2acbc269fc31ebdb3142badf90',1,'HbcUtil.HbcInstructionDefinition.Opcode()'],['../class_hbc_util_1_1_hbc_instruction.html#adfccf4e6f11dac825c1dfc2b3f9b20f8',1,'HbcUtil.HbcInstruction.Opcode()']]],
-  ['operands_429',['Operands',['../class_hbc_util_1_1_assembler_1_1_parser_1_1_hasm_instruction_token.html#a0d41139d78b0892b8306aad0f1302998',1,'HbcUtil.Assembler.Parser.HasmInstructionToken.Operands()'],['../class_hbc_util_1_1_hbc_instruction.html#a85b9011c2159321cb391c2871ad81e92',1,'HbcUtil.HbcInstruction.Operands()']]],
-  ['operandtype_430',['OperandType',['../class_hbc_util_1_1_assembler_1_1_parser_1_1_hasm_operand_token.html#aa518bcb963e5a63899866aeb456851e7',1,'HbcUtil::Assembler::Parser::HasmOperandToken']]],
-  ['operandtypes_431',['OperandTypes',['../class_hbc_util_1_1_hbc_instruction_definition.html#aa79d767ec09049a947653195927a2b23',1,'HbcUtil::HbcInstructionDefinition']]],
-  ['overflowstringcount_432',['OverflowStringCount',['../class_hbc_util_1_1_hbc_header.html#a675d5673541fe94577615e4ea8da12e4',1,'HbcUtil::HbcHeader']]]
+  ['objectkeybuffer_461',['ObjectKeyBuffer',['../class_hbc_util_1_1_hbc_file.html#aba3e64e5f1c394ddd8902fc10424f5b9',1,'HbcUtil::HbcFile']]],
+  ['objectvaluebuffer_462',['ObjectValueBuffer',['../class_hbc_util_1_1_hbc_file.html#a60ce7d86456192295a99cc919babd2bb',1,'HbcUtil::HbcFile']]],
+  ['objkeybuffersize_463',['ObjKeyBufferSize',['../class_hbc_util_1_1_hbc_header.html#a9d5c4334d5dcbe9b30cf5ee51ceaf37d',1,'HbcUtil::HbcHeader']]],
+  ['objvaluebuffersize_464',['ObjValueBufferSize',['../class_hbc_util_1_1_hbc_header.html#aedfb071d89702d6dce3fda3ec3112695',1,'HbcUtil::HbcHeader']]],
+  ['offset_465',['Offset',['../class_hbc_util_1_1_hbc_data_buffer_items.html#a4578e8008c2a549dc094d8aa5d34ba9a',1,'HbcUtil.HbcDataBufferItems.Offset()'],['../class_hbc_util_1_1_hbc_func_header.html#a3b47ba2d0deec52269cbfdb451dc6ed2',1,'HbcUtil.HbcFuncHeader.Offset()'],['../class_hbc_util_1_1_hbc_instruction.html#a5ea8b450efeac8a9f301a9b390256992',1,'HbcUtil.HbcInstruction.Offset()']]],
+  ['omitexplicitglobal_466',['OmitExplicitGlobal',['../struct_hbc_util_1_1_decompiler_1_1_decompiler_options.html#a34500db49f29c2efa9e4dc682c00799d',1,'HbcUtil::Decompiler::DecompilerOptions']]],
+  ['omitprototypefromconstructorinvocation_467',['OmitPrototypeFromConstructorInvocation',['../struct_hbc_util_1_1_decompiler_1_1_decompiler_options.html#afb4bc5442ef81d9c3229168cc0937d35',1,'HbcUtil::Decompiler::DecompilerOptions']]],
+  ['omitthisfromfunctioninvocation_468',['OmitThisFromFunctionInvocation',['../struct_hbc_util_1_1_decompiler_1_1_decompiler_options.html#a0ecaa05557b0e3d0a10304ed4cbe0f6f',1,'HbcUtil::Decompiler::DecompilerOptions']]],
+  ['opcode_469',['Opcode',['../class_hbc_util_1_1_hbc_instruction_definition.html#a47599e2acbc269fc31ebdb3142badf90',1,'HbcUtil.HbcInstructionDefinition.Opcode()'],['../class_hbc_util_1_1_hbc_instruction.html#adfccf4e6f11dac825c1dfc2b3f9b20f8',1,'HbcUtil.HbcInstruction.Opcode()']]],
+  ['operands_470',['Operands',['../class_hbc_util_1_1_assembler_1_1_parser_1_1_hasm_instruction_token.html#a0d41139d78b0892b8306aad0f1302998',1,'HbcUtil.Assembler.Parser.HasmInstructionToken.Operands()'],['../class_hbc_util_1_1_hbc_instruction.html#a85b9011c2159321cb391c2871ad81e92',1,'HbcUtil.HbcInstruction.Operands()']]],
+  ['operandtype_471',['OperandType',['../class_hbc_util_1_1_assembler_1_1_parser_1_1_hasm_operand_token.html#aa518bcb963e5a63899866aeb456851e7',1,'HbcUtil::Assembler::Parser::HasmOperandToken']]],
+  ['operandtypes_472',['OperandTypes',['../class_hbc_util_1_1_hbc_instruction_definition.html#aa79d767ec09049a947653195927a2b23',1,'HbcUtil::HbcInstructionDefinition']]],
+  ['options_473',['Options',['../class_hbc_util_1_1_decompiler_1_1_hbc_decompiler.html#a7e96e8ab929a1262f0c682b5cb073f50',1,'HbcUtil::Decompiler::HbcDecompiler']]],
+  ['overflowstringcount_474',['OverflowStringCount',['../class_hbc_util_1_1_hbc_header.html#a675d5673541fe94577615e4ea8da12e4',1,'HbcUtil::HbcHeader']]]
 ];

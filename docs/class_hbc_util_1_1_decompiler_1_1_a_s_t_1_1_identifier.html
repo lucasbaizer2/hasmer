@@ -73,6 +73,9 @@ $(function() {
 <div class="title">HbcUtil.Decompiler.AST.Identifier Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Represents a JavaScript identifier, such as a field name, class name, etc.  
+ <a href="class_hbc_util_1_1_decompiler_1_1_a_s_t_1_1_identifier.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for HbcUtil.Decompiler.AST.Identifier:</div>
 <div class="dyncontent">
@@ -85,8 +88,8 @@ Inheritance diagram for HbcUtil.Decompiler.AST.Identifier:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aaf67b71ee7e26a1a35423b698a5e6703"><td class="memItemLeft" align="right" valign="top"><a id="aaf67b71ee7e26a1a35423b698a5e6703"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Identifier</b> (string name)</td></tr>
+<tr class="memitem:aaf67b71ee7e26a1a35423b698a5e6703"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hbc_util_1_1_decompiler_1_1_a_s_t_1_1_identifier.html#aaf67b71ee7e26a1a35423b698a5e6703">Identifier</a> (string name)</td></tr>
+<tr class="memdesc:aaf67b71ee7e26a1a35423b698a5e6703"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new <a class="el" href="class_hbc_util_1_1_decompiler_1_1_a_s_t_1_1_identifier.html" title="Represents a JavaScript identifier, such as a field name, class name, etc.">Identifier</a>, given its name.  <a href="class_hbc_util_1_1_decompiler_1_1_a_s_t_1_1_identifier.html#aaf67b71ee7e26a1a35423b698a5e6703">More...</a><br /></td></tr>
 <tr class="separator:aaf67b71ee7e26a1a35423b698a5e6703"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a24bc16186b9532e8ec65ad1788d7118a"><td class="memItemLeft" align="right" valign="top"><a id="a24bc16186b9532e8ec65ad1788d7118a"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>Write</b> (<a class="el" href="class_hbc_util_1_1_source_code_builder.html">SourceCodeBuilder</a> builder)</td></tr>
@@ -94,10 +97,93 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>Write</b> (<a class="
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
 Properties</h2></td></tr>
-<tr class="memitem:a243e3c2a03e3ed968875f348faaa1ecd"><td class="memItemLeft" align="right" valign="top"><a id="a243e3c2a03e3ed968875f348faaa1ecd"></a>
-string&#160;</td><td class="memItemRight" valign="bottom"><b>Name</b><code> [get, set]</code></td></tr>
+<tr class="memitem:a243e3c2a03e3ed968875f348faaa1ecd"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hbc_util_1_1_decompiler_1_1_a_s_t_1_1_identifier.html#a243e3c2a03e3ed968875f348faaa1ecd">Name</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:a243e3c2a03e3ed968875f348faaa1ecd"><td class="mdescLeft">&#160;</td><td class="mdescRight">The name of the identifier.  <a href="class_hbc_util_1_1_decompiler_1_1_a_s_t_1_1_identifier.html#a243e3c2a03e3ed968875f348faaa1ecd">More...</a><br /></td></tr>
 <tr class="separator:a243e3c2a03e3ed968875f348faaa1ecd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b67563619fca29338d4ff8bf71e9e6a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hbc_util_1_1_decompiler_1_1_a_s_t_1_1_identifier.html#a7b67563619fca29338d4ff8bf71e9e6a">IsRedundant</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:a7b67563619fca29338d4ff8bf71e9e6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents whether the identifier is redudant and should not be written to the source tree. See <a class="el" href="struct_hbc_util_1_1_decompiler_1_1_decompiler_options.html#a34500db49f29c2efa9e4dc682c00799d" title="True if the &quot;global&quot; identifier should be omitted as a prefix to global field references....">DecompilerOptions.OmitExplicitGlobal</a>.  <a href="class_hbc_util_1_1_decompiler_1_1_a_s_t_1_1_identifier.html#a7b67563619fca29338d4ff8bf71e9e6a">More...</a><br /></td></tr>
+<tr class="separator:a7b67563619fca29338d4ff8bf71e9e6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Represents a JavaScript identifier, such as a field name, class name, etc. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="aaf67b71ee7e26a1a35423b698a5e6703"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf67b71ee7e26a1a35423b698a5e6703">&#9670;&nbsp;</a></span>Identifier()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">HbcUtil.Decompiler.AST.Identifier.Identifier </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates a new <a class="el" href="class_hbc_util_1_1_decompiler_1_1_a_s_t_1_1_identifier.html" title="Represents a JavaScript identifier, such as a field name, class name, etc.">Identifier</a>, given its name. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Property Documentation</h2>
+<a id="a7b67563619fca29338d4ff8bf71e9e6a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b67563619fca29338d4ff8bf71e9e6a">&#9670;&nbsp;</a></span>IsRedundant</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool HbcUtil.Decompiler.AST.Identifier.IsRedundant</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Represents whether the identifier is redudant and should not be written to the source tree. See <a class="el" href="struct_hbc_util_1_1_decompiler_1_1_decompiler_options.html#a34500db49f29c2efa9e4dc682c00799d" title="True if the &quot;global&quot; identifier should be omitted as a prefix to global field references....">DecompilerOptions.OmitExplicitGlobal</a>. </p>
+
+</div>
+</div>
+<a id="a243e3c2a03e3ed968875f348faaa1ecd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a243e3c2a03e3ed968875f348faaa1ecd">&#9670;&nbsp;</a></span>Name</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">string HbcUtil.Decompiler.AST.Identifier.Name</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The name of the identifier. </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>Decompiler/AST/Identifier.cs</li>
 </ul>

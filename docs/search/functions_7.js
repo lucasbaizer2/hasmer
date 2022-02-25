@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['loadjsonobject_333',['LoadJsonObject',['../class_hbc_util_1_1_resource_manager.html#aebe4da080a3f8571b44c14e31573d058',1,'HbcUtil::ResourceManager']]],
-  ['loadstate_334',['LoadState',['../class_hbc_util_1_1_assembler_1_1_parser_1_1_hasm_string_stream.html#ae69e86a73d072d8258ba47b449564c17',1,'HbcUtil::Assembler::Parser::HasmStringStream']]]
+  ['identifier_359',['Identifier',['../class_hbc_util_1_1_decompiler_1_1_a_s_t_1_1_identifier.html#aaf67b71ee7e26a1a35423b698a5e6703',1,'HbcUtil::Decompiler::AST::Identifier']]]
 ];
