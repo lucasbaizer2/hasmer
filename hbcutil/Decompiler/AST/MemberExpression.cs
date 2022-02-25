@@ -29,6 +29,12 @@ namespace HbcUtil.Decompiler.AST {
                     IsComputed = !IdentifierRegex.IsMatch(ident.Name);
                 }
             }
+            
+            if (Object is Identifier red && red.IsRedundant) {
+                // if the object is a redundant identifier, just write the property
+                Property.Write(builder);
+                return;
+            }
 
             Object.Write(builder);
             if (IsComputed) {

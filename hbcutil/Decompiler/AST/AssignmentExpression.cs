@@ -5,12 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace HbcUtil.Decompiler.AST {
-    public class BinaryExpression : ISyntax {
+    public class AssignmentExpression : ISyntax {
+        public string DeclarationKind { get; set; }
         public ISyntax Left { get; set; }
         public ISyntax Right { get; set; }
         public string Operator { get; set; }
 
         public void Write(SourceCodeBuilder builder) {
+            if (DeclarationKind != null) {
+                builder.Write(DeclarationKind);
+                builder.Write(" ");
+            }
+
             Left.Write(builder);
             builder.Write(" ");
             builder.Write(Operator);

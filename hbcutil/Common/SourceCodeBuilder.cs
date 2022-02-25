@@ -57,6 +57,13 @@ namespace HbcUtil {
             IndentationLevel += amount;
         }
 
+        /// <summary>
+        /// Deletes 1 level of indentation from the current line.
+        /// </summary>
+        public void RemoveLastIndent() {
+            Builder.Remove(Builder.Length - IndentationCharacter.Length, IndentationCharacter.Length);
+        }
+
         public override string ToString() {
             return Builder.ToString();
         }

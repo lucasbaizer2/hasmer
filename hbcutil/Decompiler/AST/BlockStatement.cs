@@ -22,8 +22,8 @@ namespace HbcUtil.Decompiler.AST {
                 builder.NewLine();
             }
 
+            builder.RemoveLastIndent();
             builder.AddIndent(-1);
-            builder.NewLine();
             builder.Write("}");
         }
     }

@@ -46,7 +46,7 @@ namespace HbcUtil.Decompiler.AST {
                 builder.NewLine();
             }
 
-            builder.Builder.Remove(builder.Builder.Length - 4, 4);
+            builder.RemoveLastIndent();
             builder.AddIndent(-1);
             builder.Write("}");
         }

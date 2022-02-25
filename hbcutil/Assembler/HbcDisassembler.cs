@@ -24,7 +24,7 @@ namespace HbcUtil.Assembler {
         /// <param name="source">The bytecode file to disassemble.</param>
         public HbcDisassembler(HbcFile source) {
             Source = source;
-            DataDisassembler = new DataDisassembler(this);
+            DataDisassembler = new DataDisassembler(source);
         }
 
         /// <summary>

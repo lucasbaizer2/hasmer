@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace HbcUtil.Decompiler.AST {
-    public class AssignmentExpression : ISyntax {
+    public class BinaryExpression : ISyntax {
         public ISyntax Left { get; set; }
         public ISyntax Right { get; set; }
         public string Operator { get; set; }

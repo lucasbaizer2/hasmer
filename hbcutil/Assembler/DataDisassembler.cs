@@ -8,15 +8,11 @@ namespace HbcUtil.Assembler {
     /// <summary>
     /// Used for diassembling the data section of a Hermes bytecode file.
     /// </summary>
-    public class DataDisassembler {
-        /// <summary>
-        /// The parent disassembler.
-        /// </summary>
-        public HbcDisassembler Disassembler { get; set; }
+    public class DataDisassembler { 
         /// <summary>
         /// The Hermes bytecode file being disassembled.
         /// </summary>
-        public HbcFile Source => Disassembler.Source;
+        public HbcFile Source { get; set; }
 
         /// <summary>
         /// The decoded Array Buffer.
@@ -34,8 +30,8 @@ namespace HbcUtil.Assembler {
         /// <summary>
         /// Creates a new DataDisassembler for a given Hermes bytecode file.
         /// </summary>
-        public DataDisassembler(HbcDisassembler disassembler) {
-            Disassembler = disassembler;
+        public DataDisassembler(HbcFile source) {
+            Source = source;
         }
 
         /// <summary>
@@ -83,17 +79,21 @@ namespace HbcUtil.Assembler {
             builder.AppendLine();
         }
 
+        public void DisassembleData() {
+            ArrayBuffer = Source.ArrayBuffer.ReadAll(Source);
+            KeyBuffer = Source.ObjectKeyBuffer.ReadAll(Source);
+            ValueBuffer = Source.ObjectValueBuffer.ReadAll(Source);
+        }
+
         /// <summary>
         /// Disassembles the Hermes bytecode data buffers and returns a string representing the disassembly.
         /// </summary>
         public string Disassemble() {
             StringBuilder builder = new StringBuilder();
 
-            ArrayBuffer = Source.ArrayBuffer.ReadAll(Source);
+            DisassembleData();
             AppendDisassembly(builder, ArrayBuffer, 'A');
-            KeyBuffer = Source.ObjectKeyBuffer.ReadAll(Source);
             AppendDisassembly(builder, KeyBuffer, 'K');
-            ValueBuffer = Source.ObjectValueBuffer.ReadAll(Source);
             AppendDisassembly(builder, ValueBuffer, 'V');
 
             return builder.ToString();

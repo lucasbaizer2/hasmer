@@ -12,11 +12,14 @@ using CommandLine;
 namespace HbcUtil {
     public class Program {
         [Verb("decode", HelpText = "Disassembles or decompiles a Hermes bytecode file.")]
-        public class DecodeOptions {
+        private class DecodeOptions {
             [Option('i', "in", Required = true, HelpText = "The path to a Hermes bytecode file.")]
             public string InputPath { get; set; }
 
-            [Option('d', "decompile", Required = false, HelpText = "Decompiles the file as well as disassembling it.")]
+            [Option('d', "disassemble", Required = false, HelpText = "Disassembles the bytecode into a Hasm file.")]
+            public bool Disassemble { get; set; }
+
+            [Option('c', "decompile", Required = false, HelpText = "Decompiles the bytecode into a JavaScript file.")]
             public bool Decompile { get; set; }
 
             [Option('o', "out", Required = false, HelpText = "Output directory to extract files to.")]
@@ -24,6 +27,9 @@ namespace HbcUtil {
 
             [Option('a', "apk", Required = false, HelpText = "If the input file is a React Native APK containing a Hermes bytecode file internally.")]
             public bool IsApk { get; set; }
+
+            [Option('y', "yes", Required = false, HelpText = "Automatically answers 'yes' to the prompt asking whether or not to overwrite an existing output directory.")]
+            public bool ShouldOverwrite { get; set; }
         }
 
         static void Main(string[] args) {
@@ -32,6 +38,11 @@ namespace HbcUtil {
         }
 
         static void Decode(DecodeOptions options) {
+            if (!options.Disassemble && !options.Decompile) {
+                Console.WriteLine("You must pick whether to diassemble or decompile the file (or both). Run 'hbcutil --help' for help.");
+                return;
+            }
+
             if (!File.Exists(options.InputPath)) {
                 Console.WriteLine("Invalid file (does not exist): " + options.InputPath);
                 return;
@@ -46,10 +57,12 @@ namespace HbcUtil {
                 outputDirectory = options.OutputDirectory;
             } else {
                 outputDirectory = Path.Combine(Path.GetDirectoryName(options.InputPath), fileName);
-                if (Directory.Exists(outputDirectory)) {
-                    Console.Write("Output directory \"" + outputDirectory + "\" already exists. Do you want to overwrite? (y/n): ");
-                    if (Console.ReadLine().ToLower() != "y") {
-                        return;
+                if (!options.ShouldOverwrite) {
+                    if (Directory.Exists(outputDirectory)) {
+                        Console.Write("Output directory \"" + outputDirectory + "\" already exists. Do you want to overwrite? (y/n): ");
+                        if (Console.ReadLine().ToLower() != "y") {
+                            return;
+                        }
                     }
                 }
             }
@@ -74,12 +87,13 @@ namespace HbcUtil {
             HbcReader reader = new HbcReader(ms);
             HbcFile file = new HbcFile(reader);
 
-            HbcDisassembler disassembler = new HbcDisassembler(file);
-            string disassembly = disassembler.Disassemble();
-            File.WriteAllText(Path.Combine(outputDirectory, "output.hasm"), disassembly);
-
+            if (options.Disassemble) {
+                HbcDisassembler disassembler = new HbcDisassembler(file);
+                string disassembly = disassembler.Disassemble();
+                File.WriteAllText(Path.Combine(outputDirectory, "output.hasm"), disassembly);
+            }
             if (options.Decompile) {
-                HbcDecompiler decompiler = new HbcDecompiler(file);
+                HbcDecompiler decompiler = new HbcDecompiler(file, DecompilerOptions.Default);
                 string decompiled = decompiler.Decompile();
                 File.WriteAllText(Path.Combine(outputDirectory, "output.js"), decompiled);
             }
