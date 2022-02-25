@@ -67,22 +67,22 @@ $(function() {
 <div class="contents">
 <div class="textblock"><p>This directory contains the C# source code for <code>hasmer</code>, using the .NET 5.0 platform.</p>
 <h1><a class="anchor" id="autotoc_md1"></a>
-Documentation</h1>
-<p>The latest auto-generated docs can be found online <a href="https://lucasbaizer2.github.io/hasmer/docs/annotated.html">here</a>.</p>
-<p>You can generate your own docs locally using <a href="https://www.doxygen.nl/index.html">Doxygen</a>. Run in the parent of this directory (i.e. root of the git repository): </p><div class="fragment"><div class="line">doxygen doxygen.cfg</div>
-</div><!-- fragment --><p>The output docs can be found at <code>docs/html</code> (relative to the root directory).</p>
-<h1><a class="anchor" id="autotoc_md2"></a>
 Setup</h1>
 <p>You will need the .NET 5 SDK to compile this project. See the <a href="https://dotnet.microsoft.com/en-us/download">.NET SDK download page</a> for information on how to download the .NET SDK for your operating system.</p>
 <p>If running on a non-Windows OS, or you just really hate Visual Studio, you can use the cross-platform .NET SDK CLI to build the project.</p>
-<h1><a class="anchor" id="autotoc_md3"></a>
+<h1><a class="anchor" id="autotoc_md2"></a>
 Building</h1>
 <p>You can either open the solution file (see <code>hasmer.sln</code> in parent directory) in Visual Studio and build from there, or you can build from the command line using the .NET SDK CLI: </p><div class="fragment"><div class="line">dotnet build</div>
 </div><!-- fragment --><p>Ensure you run the above command with the current working directory as being the directory that contains the <code>hasmer.csproj</code> file (which is also the directrory this README is in).</p>
 <p>Building with the .NET SDK CLI will generate the executable in the <code>bin\Debug\net5.0</code> directory. You can make a release build using: </p><div class="fragment"><div class="line">dotnet build -c Release</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md4"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md3"></a>
 Testing</h1>
 <p>You can download a sample Hermes bytecode file <a href="https://lucasbaizer2.github.io/hasmer/downloads/index.android.bundle">here</a>. It's a React Native bytecode file extracted from an APK, used as a challenge in <a href="https://insomnihack.ch">InsomniHack</a>'s 2022 CTF Teaser. It uses Hermes bytecode version 84.</p>
+<h1><a class="anchor" id="autotoc_md4"></a>
+Documentation</h1>
+<p>The latest auto-generated docs can be found online <a href="https://lucasbaizer2.github.io/hasmer/docs/annotated.html">here</a>.</p>
+<p>You can generate your own docs locally using <a href="https://www.doxygen.nl/index.html">Doxygen</a>. Run in this directory: </p><div class="fragment"><div class="line">doxygen Doxyfile</div>
+</div><!-- fragment --><p>The output docs can be found at <code>./docs/html</code>.</p>
 <h3><a class="anchor" id="autotoc_md5"></a>
 Example Usage</h3>
 <div class="fragment"><div class="line">hasmer decode -i index.android.bundle -d</div>
