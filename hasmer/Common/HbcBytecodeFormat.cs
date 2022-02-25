@@ -88,6 +88,39 @@ namespace Hasmer {
         /// </summary>
         [JsonProperty]
         public bool IsJump { get; set; }
+        /// <summary>
+        /// The index in the abstract definition table of the abstract form of the instruction, or null if the instruction does not have an abstract form.
+        /// </summary>
+        [JsonProperty]
+        public int? AbstractDefinition { get; set; }
+    }
+
+    /// <summary>
+    /// Represents the abstract form of variant instructions.
+    /// Variant instructions are instructions which perform the same action, but can have differently sized operands.
+    /// By abstracting these instructions to all have one name, the assembler can optimize the size of the operands.
+    /// Thus, programmers do not have to figure out the proper sizes when they write Hasm code.
+    /// <br /> <br />
+    /// Passing the "--exact" flag to the hasmer disassmbler will ignore abstract definitions,
+    /// and instead emit the exact instruction.
+    /// </summary>
+    public class HbcAbstractInstructionDefinition {
+        /// <summary>
+        /// The abstract name that can be used to represent any of the <see cref="Variants"/>.
+        /// <br />
+        /// For example, the instructions "JStrictNotEqual" and "JStrictNotEqualLong"
+        /// will have an abstract name of simply "JStrictNotEqual".
+        /// <br />
+        /// The assembler will decide which to use based on the operands at assemble time.
+        /// </summary>
+        [JsonProperty]
+        public string Name { get; set; }
+
+        /// <summary>
+        /// The opcodes of each variant that can be defined by this abstract definition.
+        /// </summary>
+        [JsonProperty]
+        public List<uint> Variants { get; set; }
     }
 
     /// <summary>
@@ -104,7 +137,7 @@ namespace Hasmer {
         /// The Hermes bytecode version this format is relevant to.
         /// </summary>
         [JsonProperty]
-        public int Version { get; set; }
+        public uint Version { get; set; }
 
         /// <summary>
         /// The definitions of all opcodes available for the bytecode version.
@@ -112,5 +145,11 @@ namespace Hasmer {
         /// </summary>
         [JsonProperty]
         public List<HbcInstructionDefinition> Definitions { get; set; }
+
+        /// <summary>
+        /// The definitions of all abstractions for instructions that can take different length operands.
+        /// See <see cref="HbcAbstractInstructionDefinition"/> for more information.
+        /// </summary>
+        public List<HbcAbstractInstructionDefinition> AbstractDefinitions { get; set; }
     }
 }

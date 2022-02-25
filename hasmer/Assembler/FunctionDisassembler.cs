@@ -255,7 +255,11 @@ namespace Hasmer.Assembler {
             foreach (HbcInstruction insn in Instructions) {
                 int startLength = builder.Builder.Length;
 
-                string name = Source.BytecodeFormat.Definitions[insn.Opcode].Name;
+                HbcInstructionDefinition def = Source.BytecodeFormat.Definitions[insn.Opcode];
+                string name = def.Name;
+                if (def.AbstractDefinition.HasValue && !Disassembler.IsExact) {
+                    name = Source.BytecodeFormat.AbstractDefinitions[def.AbstractDefinition.Value].Name;
+                }
                 builder.Write(name);
 
                 int padding = OpcodePadding - name.Length;

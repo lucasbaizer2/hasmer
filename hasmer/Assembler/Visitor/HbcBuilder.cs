@@ -13,7 +13,10 @@ namespace Hasmer.Assembler.Visitor {
         private HasmTokenStream TokenStream;
         private IEnumerable<HasmToken> Tokens;
 
-        private HbcBytecodeFormat Format;
+        /// <summary>
+        /// The bytecode file that is being built.
+        /// </summary>
+        public HbcFileBuilder File { get; set; }
 
         /// <summary>
         /// Creates a new HbcBuilder given the tokens representing the Hasm file being assembled.
@@ -27,17 +30,21 @@ namespace Hasmer.Assembler.Visitor {
         /// Parses the Hasm tokens and writes a Hermes bytecode file, serialized to a byte array.
         /// </summary>
         public byte[] Write() {
+            HbcBytecodeFormat format = null;
             IEnumerator<HasmToken> enumerator = Tokens.GetEnumerator();
             while (enumerator.MoveNext()) {
                 if (TokenStream.State.BytecodeFormat != null) {
-                    Format = TokenStream.State.BytecodeFormat;
+                    format = TokenStream.State.BytecodeFormat;
                     break;
                 }
             }
 
+            if (format == null) {
+                throw new Exception("empty Hasm file");
+            }
 
-
-            return new byte[0];
+            File = new HbcFileBuilder(format);
+            return File.Build().Write();
         }
     }
 }

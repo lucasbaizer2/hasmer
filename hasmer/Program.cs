@@ -24,6 +24,9 @@ namespace Hasmer {
 
             [Option('a', "apk", Required = false, HelpText = "Interpret the input file as a React Native APK and extract the Hermes bytecode file from it.")]
             public bool IsApk { get; set; }
+
+            [Option("exact", Required = false, HelpText = "Disassembles the exact instructions instead of optimizing them at assemble time.")]
+            public bool IsExact { get; set; }
         }
 
         [Verb("assemble", HelpText = "Assembles a Hasm file into a Hermes bytecode file.")]
@@ -42,7 +45,26 @@ namespace Hasmer {
         }
 
         private static void Assemble(AssembleOptions options) {
+            if (options.PatchApk != null) {
+                throw new NotImplementedException("--patch not yet implemented");
+            }
+            if (!File.Exists(options.InputPath)) {
+                Console.WriteLine("Invalid file (does not exist): " + options.InputPath);
+                return;
+            }
+            string fileName = Path.GetFileName(options.InputPath);
+            if (fileName.Contains(".")) {
+                fileName = fileName.Substring(0, fileName.IndexOf('.'));
+            }
+            string outputDirectory = Path.GetDirectoryName(options.InputPath);
 
+            string hasm = File.ReadAllText(options.InputPath);
+            HbcAssembler assembler = new HbcAssembler(hasm);
+            byte[] bytecode = assembler.Assemble();
+            string hbcPath = Path.Combine(outputDirectory, $"{fileName}.hbc");
+            File.WriteAllBytes(hbcPath, bytecode);
+
+            Console.WriteLine($"Succesfully assembled! Wrote Hermes bytecode file to: {hbcPath}");
         }
 
         private static void Decode(DecodeOptions options) {
@@ -78,7 +100,7 @@ namespace Hasmer {
             HbcFile file = new HbcFile(reader);
 
             if (options.Disassemble) {
-                HbcDisassembler disassembler = new HbcDisassembler(file);
+                HbcDisassembler disassembler = new HbcDisassembler(file, options.IsExact);
                 string disassembly = disassembler.Disassemble();
                 string hasmPath = Path.Combine(outputDirectory, $"{fileName}.hasm");
                 File.WriteAllText(hasmPath, disassembly);

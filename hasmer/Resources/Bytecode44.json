@@ -11,7 +11,8 @@
 				"UInt16",
 				"UInt16"
 			],
-			"IsJump": false
+			"IsJump": false,
+			"AbstractDefinition": 0
 		},
 		{
 			"Opcode": 1,
@@ -23,7 +24,8 @@
 				"UInt32",
 				"UInt32"
 			],
-			"IsJump": false
+			"IsJump": false,
+			"AbstractDefinition": 0
 		},
 		{
 			"Opcode": 2,
@@ -42,7 +44,8 @@
 				"UInt16",
 				"UInt16"
 			],
-			"IsJump": false
+			"IsJump": false,
+			"AbstractDefinition": 1
 		},
 		{
 			"Opcode": 4,
@@ -53,7 +56,8 @@
 				"UInt16",
 				"UInt32"
 			],
-			"IsJump": false
+			"IsJump": false,
+			"AbstractDefinition": 1
 		},
 		{
 			"Opcode": 5,
@@ -71,7 +75,8 @@
 				"Reg8",
 				"Reg8"
 			],
-			"IsJump": false
+			"IsJump": false,
+			"AbstractDefinition": 2
 		},
 		{
 			"Opcode": 7,
@@ -80,7 +85,8 @@
 				"Reg32",
 				"Reg32"
 			],
-			"IsJump": false
+			"IsJump": false,
+			"AbstractDefinition": 2
 		},
 		{
 			"Opcode": 8,
@@ -385,7 +391,8 @@
 				"UInt8",
 				"Reg8"
 			],
-			"IsJump": false
+			"IsJump": false,
+			"AbstractDefinition": 3
 		},
 		{
 			"Opcode": 39,
@@ -395,7 +402,8 @@
 				"UInt16",
 				"Reg8"
 			],
-			"IsJump": false
+			"IsJump": false,
+			"AbstractDefinition": 3
 		},
 		{
 			"Opcode": 40,
@@ -405,7 +413,8 @@
 				"UInt8",
 				"Reg8"
 			],
-			"IsJump": false
+			"IsJump": false,
+			"AbstractDefinition": 4
 		},
 		{
 			"Opcode": 41,
@@ -415,7 +424,8 @@
 				"UInt16",
 				"Reg8"
 			],
-			"IsJump": false
+			"IsJump": false,
+			"AbstractDefinition": 4
 		},
 		{
 			"Opcode": 42,
@@ -425,7 +435,8 @@
 				"Reg8",
 				"UInt8"
 			],
-			"IsJump": false
+			"IsJump": false,
+			"AbstractDefinition": 5
 		},
 		{
 			"Opcode": 43,
@@ -435,7 +446,8 @@
 				"Reg8",
 				"UInt16"
 			],
-			"IsJump": false
+			"IsJump": false,
+			"AbstractDefinition": 5
 		},
 		{
 			"Opcode": 44,
@@ -478,7 +490,8 @@
 				"UInt8",
 				"UInt8S"
 			],
-			"IsJump": false
+			"IsJump": false,
+			"AbstractDefinition": 6
 		},
 		{
 			"Opcode": 49,
@@ -489,7 +502,8 @@
 				"UInt8",
 				"UInt16S"
 			],
-			"IsJump": false
+			"IsJump": false,
+			"AbstractDefinition": 6
 		},
 		{
 			"Opcode": 50,
@@ -500,7 +514,8 @@
 				"UInt8",
 				"UInt32S"
 			],
-			"IsJump": false
+			"IsJump": false,
+			"AbstractDefinition": 6
 		},
 		{
 			"Opcode": 51,
@@ -511,7 +526,8 @@
 				"UInt8",
 				"UInt16S"
 			],
-			"IsJump": false
+			"IsJump": false,
+			"AbstractDefinition": 7
 		},
 		{
 			"Opcode": 52,
@@ -522,7 +538,8 @@
 				"UInt8",
 				"UInt32S"
 			],
-			"IsJump": false
+			"IsJump": false,
+			"AbstractDefinition": 7
 		},
 		{
 			"Opcode": 53,
@@ -533,7 +550,8 @@
 				"UInt8",
 				"UInt16S"
 			],
-			"IsJump": false
+			"IsJump": false,
+			"AbstractDefinition": 8
 		},
 		{
 			"Opcode": 54,
@@ -544,7 +562,8 @@
 				"UInt8",
 				"UInt32S"
 			],
-			"IsJump": false
+			"IsJump": false,
+			"AbstractDefinition": 8
 		},
 		{
 			"Opcode": 55,
@@ -555,7 +574,8 @@
 				"UInt8",
 				"UInt16S"
 			],
-			"IsJump": false
+			"IsJump": false,
+			"AbstractDefinition": 9
 		},
 		{
 			"Opcode": 56,
@@ -566,7 +586,8 @@
 				"UInt8",
 				"UInt32S"
 			],
-			"IsJump": false
+			"IsJump": false,
+			"AbstractDefinition": 9
 		},
 		{
 			"Opcode": 57,
@@ -576,7 +597,8 @@
 				"Reg8",
 				"UInt8S"
 			],
-			"IsJump": false
+			"IsJump": false,
+			"AbstractDefinition": 10
 		},
 		{
 			"Opcode": 58,
@@ -586,7 +608,8 @@
 				"Reg8",
 				"UInt16S"
 			],
-			"IsJump": false
+			"IsJump": false,
+			"AbstractDefinition": 10
 		},
 		{
 			"Opcode": 59,
@@ -596,7 +619,8 @@
 				"Reg8",
 				"UInt32S"
 			],
-			"IsJump": false
+			"IsJump": false,
+			"AbstractDefinition": 10
 		},
 		{
 			"Opcode": 60,
@@ -606,7 +630,8 @@
 				"Reg8",
 				"UInt8"
 			],
-			"IsJump": false
+			"IsJump": false,
+			"AbstractDefinition": 11
 		},
 		{
 			"Opcode": 61,
@@ -616,7 +641,8 @@
 				"Reg8",
 				"UInt32"
 			],
-			"IsJump": false
+			"IsJump": false,
+			"AbstractDefinition": 11
 		},
 		{
 			"Opcode": 62,
@@ -626,7 +652,8 @@
 				"Reg8",
 				"UInt16S"
 			],
-			"IsJump": false
+			"IsJump": false,
+			"AbstractDefinition": 12
 		},
 		{
 			"Opcode": 63,
@@ -636,7 +663,8 @@
 				"Reg8",
 				"UInt32S"
 			],
-			"IsJump": false
+			"IsJump": false,
+			"AbstractDefinition": 12
 		},
 		{
 			"Opcode": 64,
@@ -710,7 +738,8 @@
 				"Reg8",
 				"UInt8"
 			],
-			"IsJump": false
+			"IsJump": false,
+			"AbstractDefinition": 13
 		},
 		{
 			"Opcode": 71,
@@ -720,7 +749,8 @@
 				"Reg8",
 				"UInt8"
 			],
-			"IsJump": false
+			"IsJump": false,
+			"AbstractDefinition": 14
 		},
 		{
 			"Opcode": 72,
@@ -740,7 +770,8 @@
 				"UInt8",
 				"UInt16"
 			],
-			"IsJump": false
+			"IsJump": false,
+			"AbstractDefinition": 15
 		},
 		{
 			"Opcode": 74,
@@ -786,7 +817,8 @@
 				"Reg8",
 				"UInt32"
 			],
-			"IsJump": false
+			"IsJump": false,
+			"AbstractDefinition": 13
 		},
 		{
 			"Opcode": 78,
@@ -796,7 +828,8 @@
 				"Reg8",
 				"UInt32"
 			],
-			"IsJump": false
+			"IsJump": false,
+			"AbstractDefinition": 14
 		},
 		{
 			"Opcode": 79,
@@ -806,7 +839,8 @@
 				"UInt8",
 				"UInt32"
 			],
-			"IsJump": false
+			"IsJump": false,
+			"AbstractDefinition": 15
 		},
 		{
 			"Opcode": 80,
@@ -885,7 +919,8 @@
 				"Reg8",
 				"UInt16"
 			],
-			"IsJump": false
+			"IsJump": false,
+			"AbstractDefinition": 16
 		},
 		{
 			"Opcode": 90,
@@ -895,7 +930,8 @@
 				"Reg8",
 				"UInt32"
 			],
-			"IsJump": false
+			"IsJump": false,
+			"AbstractDefinition": 16
 		},
 		{
 			"Opcode": 91,
@@ -924,7 +960,8 @@
 				"Reg8",
 				"UInt8"
 			],
-			"IsJump": false
+			"IsJump": false,
+			"AbstractDefinition": 17
 		},
 		{
 			"Opcode": 94,
@@ -933,7 +970,8 @@
 				"Reg8",
 				"UInt32"
 			],
-			"IsJump": false
+			"IsJump": false,
+			"AbstractDefinition": 17
 		},
 		{
 			"Opcode": 95,
@@ -969,7 +1007,8 @@
 				"Reg8",
 				"UInt16S"
 			],
-			"IsJump": false
+			"IsJump": false,
+			"AbstractDefinition": 18
 		},
 		{
 			"Opcode": 99,
@@ -978,7 +1017,8 @@
 				"Reg8",
 				"UInt32S"
 			],
-			"IsJump": false
+			"IsJump": false,
+			"AbstractDefinition": 18
 		},
 		{
 			"Opcode": 100,
@@ -1120,7 +1160,8 @@
 			"OperandTypes": [
 				"Addr8"
 			],
-			"IsJump": true
+			"IsJump": true,
+			"AbstractDefinition": 19
 		},
 		{
 			"Opcode": 116,
@@ -1128,7 +1169,8 @@
 			"OperandTypes": [
 				"Addr32"
 			],
-			"IsJump": true
+			"IsJump": true,
+			"AbstractDefinition": 19
 		},
 		{
 			"Opcode": 117,
@@ -1137,7 +1179,8 @@
 				"Addr8",
 				"Reg8"
 			],
-			"IsJump": true
+			"IsJump": true,
+			"AbstractDefinition": 20
 		},
 		{
 			"Opcode": 118,
@@ -1146,7 +1189,8 @@
 				"Addr32",
 				"Reg8"
 			],
-			"IsJump": true
+			"IsJump": true,
+			"AbstractDefinition": 20
 		},
 		{
 			"Opcode": 119,
@@ -1155,7 +1199,8 @@
 				"Addr8",
 				"Reg8"
 			],
-			"IsJump": true
+			"IsJump": true,
+			"AbstractDefinition": 21
 		},
 		{
 			"Opcode": 120,
@@ -1164,7 +1209,8 @@
 				"Addr32",
 				"Reg8"
 			],
-			"IsJump": true
+			"IsJump": true,
+			"AbstractDefinition": 21
 		},
 		{
 			"Opcode": 121,
@@ -1173,7 +1219,8 @@
 				"Addr8",
 				"Reg8"
 			],
-			"IsJump": true
+			"IsJump": true,
+			"AbstractDefinition": 22
 		},
 		{
 			"Opcode": 122,
@@ -1182,7 +1229,8 @@
 				"Addr32",
 				"Reg8"
 			],
-			"IsJump": true
+			"IsJump": true,
+			"AbstractDefinition": 22
 		},
 		{
 			"Opcode": 123,
@@ -1192,7 +1240,8 @@
 				"Reg8",
 				"Reg8"
 			],
-			"IsJump": true
+			"IsJump": true,
+			"AbstractDefinition": 23
 		},
 		{
 			"Opcode": 124,
@@ -1202,7 +1251,8 @@
 				"Reg8",
 				"Reg8"
 			],
-			"IsJump": true
+			"IsJump": true,
+			"AbstractDefinition": 23
 		},
 		{
 			"Opcode": 125,
@@ -1212,7 +1262,8 @@
 				"Reg8",
 				"Reg8"
 			],
-			"IsJump": true
+			"IsJump": true,
+			"AbstractDefinition": 24
 		},
 		{
 			"Opcode": 126,
@@ -1222,7 +1273,8 @@
 				"Reg8",
 				"Reg8"
 			],
-			"IsJump": true
+			"IsJump": true,
+			"AbstractDefinition": 24
 		},
 		{
 			"Opcode": 127,
@@ -1232,7 +1284,8 @@
 				"Reg8",
 				"Reg8"
 			],
-			"IsJump": true
+			"IsJump": true,
+			"AbstractDefinition": 25
 		},
 		{
 			"Opcode": 128,
@@ -1242,7 +1295,8 @@
 				"Reg8",
 				"Reg8"
 			],
-			"IsJump": true
+			"IsJump": true,
+			"AbstractDefinition": 25
 		},
 		{
 			"Opcode": 129,
@@ -1252,7 +1306,8 @@
 				"Reg8",
 				"Reg8"
 			],
-			"IsJump": true
+			"IsJump": true,
+			"AbstractDefinition": 26
 		},
 		{
 			"Opcode": 130,
@@ -1262,7 +1317,8 @@
 				"Reg8",
 				"Reg8"
 			],
-			"IsJump": true
+			"IsJump": true,
+			"AbstractDefinition": 26
 		},
 		{
 			"Opcode": 131,
@@ -1272,7 +1328,8 @@
 				"Reg8",
 				"Reg8"
 			],
-			"IsJump": true
+			"IsJump": true,
+			"AbstractDefinition": 27
 		},
 		{
 			"Opcode": 132,
@@ -1282,7 +1339,8 @@
 				"Reg8",
 				"Reg8"
 			],
-			"IsJump": true
+			"IsJump": true,
+			"AbstractDefinition": 27
 		},
 		{
 			"Opcode": 133,
@@ -1292,7 +1350,8 @@
 				"Reg8",
 				"Reg8"
 			],
-			"IsJump": true
+			"IsJump": true,
+			"AbstractDefinition": 28
 		},
 		{
 			"Opcode": 134,
@@ -1302,7 +1361,8 @@
 				"Reg8",
 				"Reg8"
 			],
-			"IsJump": true
+			"IsJump": true,
+			"AbstractDefinition": 28
 		},
 		{
 			"Opcode": 135,
@@ -1312,7 +1372,8 @@
 				"Reg8",
 				"Reg8"
 			],
-			"IsJump": true
+			"IsJump": true,
+			"AbstractDefinition": 29
 		},
 		{
 			"Opcode": 136,
@@ -1322,7 +1383,8 @@
 				"Reg8",
 				"Reg8"
 			],
-			"IsJump": true
+			"IsJump": true,
+			"AbstractDefinition": 29
 		},
 		{
 			"Opcode": 137,
@@ -1332,7 +1394,8 @@
 				"Reg8",
 				"Reg8"
 			],
-			"IsJump": true
+			"IsJump": true,
+			"AbstractDefinition": 30
 		},
 		{
 			"Opcode": 138,
@@ -1342,7 +1405,8 @@
 				"Reg8",
 				"Reg8"
 			],
-			"IsJump": true
+			"IsJump": true,
+			"AbstractDefinition": 30
 		},
 		{
 			"Opcode": 139,
@@ -1352,7 +1416,8 @@
 				"Reg8",
 				"Reg8"
 			],
-			"IsJump": true
+			"IsJump": true,
+			"AbstractDefinition": 31
 		},
 		{
 			"Opcode": 140,
@@ -1362,7 +1427,8 @@
 				"Reg8",
 				"Reg8"
 			],
-			"IsJump": true
+			"IsJump": true,
+			"AbstractDefinition": 31
 		},
 		{
 			"Opcode": 141,
@@ -1372,7 +1438,8 @@
 				"Reg8",
 				"Reg8"
 			],
-			"IsJump": true
+			"IsJump": true,
+			"AbstractDefinition": 32
 		},
 		{
 			"Opcode": 142,
@@ -1382,7 +1449,8 @@
 				"Reg8",
 				"Reg8"
 			],
-			"IsJump": true
+			"IsJump": true,
+			"AbstractDefinition": 32
 		},
 		{
 			"Opcode": 143,
@@ -1392,7 +1460,8 @@
 				"Reg8",
 				"Reg8"
 			],
-			"IsJump": true
+			"IsJump": true,
+			"AbstractDefinition": 33
 		},
 		{
 			"Opcode": 144,
@@ -1402,7 +1471,8 @@
 				"Reg8",
 				"Reg8"
 			],
-			"IsJump": true
+			"IsJump": true,
+			"AbstractDefinition": 33
 		},
 		{
 			"Opcode": 145,
@@ -1412,7 +1482,8 @@
 				"Reg8",
 				"Reg8"
 			],
-			"IsJump": true
+			"IsJump": true,
+			"AbstractDefinition": 34
 		},
 		{
 			"Opcode": 146,
@@ -1422,7 +1493,8 @@
 				"Reg8",
 				"Reg8"
 			],
-			"IsJump": true
+			"IsJump": true,
+			"AbstractDefinition": 34
 		},
 		{
 			"Opcode": 147,
@@ -1432,7 +1504,8 @@
 				"Reg8",
 				"Reg8"
 			],
-			"IsJump": true
+			"IsJump": true,
+			"AbstractDefinition": 35
 		},
 		{
 			"Opcode": 148,
@@ -1442,7 +1515,8 @@
 				"Reg8",
 				"Reg8"
 			],
-			"IsJump": true
+			"IsJump": true,
+			"AbstractDefinition": 35
 		},
 		{
 			"Opcode": 149,
@@ -1452,7 +1526,8 @@
 				"Reg8",
 				"Reg8"
 			],
-			"IsJump": true
+			"IsJump": true,
+			"AbstractDefinition": 36
 		},
 		{
 			"Opcode": 150,
@@ -1462,7 +1537,8 @@
 				"Reg8",
 				"Reg8"
 			],
-			"IsJump": true
+			"IsJump": true,
+			"AbstractDefinition": 36
 		},
 		{
 			"Opcode": 151,
@@ -1472,7 +1548,8 @@
 				"Reg8",
 				"Reg8"
 			],
-			"IsJump": true
+			"IsJump": true,
+			"AbstractDefinition": 37
 		},
 		{
 			"Opcode": 152,
@@ -1482,7 +1559,8 @@
 				"Reg8",
 				"Reg8"
 			],
-			"IsJump": true
+			"IsJump": true,
+			"AbstractDefinition": 37
 		},
 		{
 			"Opcode": 153,
@@ -1492,7 +1570,8 @@
 				"Reg8",
 				"Reg8"
 			],
-			"IsJump": true
+			"IsJump": true,
+			"AbstractDefinition": 38
 		},
 		{
 			"Opcode": 154,
@@ -1502,7 +1581,8 @@
 				"Reg8",
 				"Reg8"
 			],
-			"IsJump": true
+			"IsJump": true,
+			"AbstractDefinition": 38
 		},
 		{
 			"Opcode": 155,
@@ -1512,7 +1592,8 @@
 				"Reg8",
 				"Reg8"
 			],
-			"IsJump": true
+			"IsJump": true,
+			"AbstractDefinition": 39
 		},
 		{
 			"Opcode": 156,
@@ -1522,7 +1603,8 @@
 				"Reg8",
 				"Reg8"
 			],
-			"IsJump": true
+			"IsJump": true,
+			"AbstractDefinition": 39
 		},
 		{
 			"Opcode": 157,
@@ -1532,7 +1614,8 @@
 				"Reg8",
 				"Reg8"
 			],
-			"IsJump": true
+			"IsJump": true,
+			"AbstractDefinition": 40
 		},
 		{
 			"Opcode": 158,
@@ -1542,7 +1625,8 @@
 				"Reg8",
 				"Reg8"
 			],
-			"IsJump": true
+			"IsJump": true,
+			"AbstractDefinition": 40
 		},
 		{
 			"Opcode": 159,
@@ -1552,7 +1636,8 @@
 				"Reg8",
 				"Reg8"
 			],
-			"IsJump": true
+			"IsJump": true,
+			"AbstractDefinition": 41
 		},
 		{
 			"Opcode": 160,
@@ -1562,7 +1647,8 @@
 				"Reg8",
 				"Reg8"
 			],
-			"IsJump": true
+			"IsJump": true,
+			"AbstractDefinition": 41
 		},
 		{
 			"Opcode": 161,
@@ -1572,7 +1658,8 @@
 				"Reg8",
 				"Reg8"
 			],
-			"IsJump": true
+			"IsJump": true,
+			"AbstractDefinition": 42
 		},
 		{
 			"Opcode": 162,
@@ -1582,7 +1669,313 @@
 				"Reg8",
 				"Reg8"
 			],
-			"IsJump": true
+			"IsJump": true,
+			"AbstractDefinition": 42
+		}
+	],
+	"AbstractDefinitions": [
+		{
+			"Name": "NewObjectWithBuffer",
+			"VariantOpcodes": [
+				0,
+				1
+			]
+		},
+		{
+			"Name": "NewArrayWithBuffer",
+			"VariantOpcodes": [
+				3,
+				4
+			]
+		},
+		{
+			"Name": "Mov",
+			"VariantOpcodes": [
+				6,
+				7
+			]
+		},
+		{
+			"Name": "StoreToEnvironment",
+			"VariantOpcodes": [
+				38,
+				39
+			]
+		},
+		{
+			"Name": "StoreNPToEnvironment",
+			"VariantOpcodes": [
+				40,
+				41
+			]
+		},
+		{
+			"Name": "LoadFromEnvironment",
+			"VariantOpcodes": [
+				42,
+				43
+			]
+		},
+		{
+			"Name": "GetById",
+			"VariantOpcodes": [
+				49,
+				48,
+				50
+			]
+		},
+		{
+			"Name": "TryGetById",
+			"VariantOpcodes": [
+				51,
+				52
+			]
+		},
+		{
+			"Name": "PutById",
+			"VariantOpcodes": [
+				53,
+				54
+			]
+		},
+		{
+			"Name": "TryPutById",
+			"VariantOpcodes": [
+				55,
+				56
+			]
+		},
+		{
+			"Name": "PutOwnById",
+			"VariantOpcodes": [
+				58,
+				57,
+				59
+			]
+		},
+		{
+			"Name": "PutOwnByIndex",
+			"VariantOpcodes": [
+				60,
+				61
+			]
+		},
+		{
+			"Name": "DelById",
+			"VariantOpcodes": [
+				62,
+				63
+			]
+		},
+		{
+			"Name": "Call",
+			"VariantOpcodes": [
+				70,
+				77
+			]
+		},
+		{
+			"Name": "Construct",
+			"VariantOpcodes": [
+				71,
+				78
+			]
+		},
+		{
+			"Name": "CallDirect",
+			"VariantOpcodes": [
+				73,
+				79
+			]
+		},
+		{
+			"Name": "CreateClosure",
+			"VariantOpcodes": [
+				89,
+				90
+			]
+		},
+		{
+			"Name": "LoadParam",
+			"VariantOpcodes": [
+				93,
+				94
+			]
+		},
+		{
+			"Name": "LoadConstString",
+			"VariantOpcodes": [
+				98,
+				99
+			]
+		},
+		{
+			"Name": "Jmp",
+			"VariantOpcodes": [
+				115,
+				116
+			]
+		},
+		{
+			"Name": "JmpTrue",
+			"VariantOpcodes": [
+				117,
+				118
+			]
+		},
+		{
+			"Name": "JmpFalse",
+			"VariantOpcodes": [
+				119,
+				120
+			]
+		},
+		{
+			"Name": "JmpUndefined",
+			"VariantOpcodes": [
+				121,
+				122
+			]
+		},
+		{
+			"Name": "JLess",
+			"VariantOpcodes": [
+				123,
+				124
+			]
+		},
+		{
+			"Name": "JNotLess",
+			"VariantOpcodes": [
+				125,
+				126
+			]
+		},
+		{
+			"Name": "JLessN",
+			"VariantOpcodes": [
+				127,
+				128
+			]
+		},
+		{
+			"Name": "JNotLessN",
+			"VariantOpcodes": [
+				129,
+				130
+			]
+		},
+		{
+			"Name": "JLessEqual",
+			"VariantOpcodes": [
+				131,
+				132
+			]
+		},
+		{
+			"Name": "JNotLessEqual",
+			"VariantOpcodes": [
+				133,
+				134
+			]
+		},
+		{
+			"Name": "JLessEqualN",
+			"VariantOpcodes": [
+				135,
+				136
+			]
+		},
+		{
+			"Name": "JNotLessEqualN",
+			"VariantOpcodes": [
+				137,
+				138
+			]
+		},
+		{
+			"Name": "JGreater",
+			"VariantOpcodes": [
+				139,
+				140
+			]
+		},
+		{
+			"Name": "JNotGreater",
+			"VariantOpcodes": [
+				141,
+				142
+			]
+		},
+		{
+			"Name": "JGreaterN",
+			"VariantOpcodes": [
+				143,
+				144
+			]
+		},
+		{
+			"Name": "JNotGreaterN",
+			"VariantOpcodes": [
+				145,
+				146
+			]
+		},
+		{
+			"Name": "JGreaterEqual",
+			"VariantOpcodes": [
+				147,
+				148
+			]
+		},
+		{
+			"Name": "JNotGreaterEqual",
+			"VariantOpcodes": [
+				149,
+				150
+			]
+		},
+		{
+			"Name": "JGreaterEqualN",
+			"VariantOpcodes": [
+				151,
+				152
+			]
+		},
+		{
+			"Name": "JNotGreaterEqualN",
+			"VariantOpcodes": [
+				153,
+				154
+			]
+		},
+		{
+			"Name": "JEqual",
+			"VariantOpcodes": [
+				155,
+				156
+			]
+		},
+		{
+			"Name": "JNotEqual",
+			"VariantOpcodes": [
+				157,
+				158
+			]
+		},
+		{
+			"Name": "JStrictEqual",
+			"VariantOpcodes": [
+				159,
+				160
+			]
+		},
+		{
+			"Name": "JStrictNotEqual",
+			"VariantOpcodes": [
+				161,
+				162
+			]
 		}
 	]
 }

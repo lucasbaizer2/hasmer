@@ -14,10 +14,36 @@ namespace Hasmer {
         /// The type of operand that is represented by the object.
         /// </summary>
         public HbcInstructionOperandType Type { get; set; }
+
         /// <summary>
         /// The raw value of the object, represented as a PrimitiveValue to preserve type information.
+        /// <br />
+        /// Is is highly recommended to use <see cref="GetValue{T}"/> and <see cref="GetResolvedValue{T}(HbcFile)"/>
+        /// instead of accessing this property directly.
+        /// Use with caution.
         /// </summary>
-        public PrimitiveValue Value { private get; set; }
+        public PrimitiveValue Value { get; set; }
+
+        /// <summary>
+        /// Writes the operand to a stream of binary data.
+        /// </summary>
+        public void ToWriter(BinaryWriter writer) {
+            switch (Type) {
+                case HbcInstructionOperandType.Reg8: writer.Write(GetValue<byte>()); break;
+                case HbcInstructionOperandType.Reg32: writer.Write(GetValue<uint>()); break;
+                case HbcInstructionOperandType.UInt8: writer.Write(GetValue<byte>()); break;
+                case HbcInstructionOperandType.UInt16: writer.Write(GetValue<ushort>()); break;
+                case HbcInstructionOperandType.UInt32: writer.Write(GetValue<uint>()); break;
+                case HbcInstructionOperandType.Addr8: writer.Write(GetValue<sbyte>()); break;
+                case HbcInstructionOperandType.Addr32: writer.Write(GetValue<int>()); break;
+                case HbcInstructionOperandType.Imm32: writer.Write(GetValue<uint>()); break;
+                case HbcInstructionOperandType.Double: writer.Write(GetValue<double>()); break;
+                case HbcInstructionOperandType.UInt8S: writer.Write(GetValue<byte>()); break;
+                case HbcInstructionOperandType.UInt16S: writer.Write(GetValue<ushort>()); break;
+                case HbcInstructionOperandType.UInt32S: writer.Write(GetValue<uint>()); break;
+                default: throw new InvalidOperationException("invalid operand type");
+            }
+        }
 
         /// <summary>
         /// Reads the operand from a stream of binary data.
@@ -34,7 +60,7 @@ namespace Hasmer {
                 HbcInstructionOperandType.Imm32 => reader.ReadUInt32(),
                 HbcInstructionOperandType.Double => reader.ReadDouble(),
                 HbcInstructionOperandType.UInt8S => reader.ReadByte(),
-                HbcInstructionOperandType.UInt16S => reader.ReadInt16(),
+                HbcInstructionOperandType.UInt16S => reader.ReadUInt16(),
                 HbcInstructionOperandType.UInt32S => reader.ReadUInt32(),
                 _ => throw new InvalidOperationException("invalid operand type"),
             };

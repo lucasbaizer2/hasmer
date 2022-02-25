@@ -26,7 +26,7 @@ namespace Hasmer {
                 case "UInt64":
                     return typeof(ulong);
                 default:
-                    throw new Exception("bad type: " + name);
+                    throw new InvalidDataException("bad type: " + name);
             }
         }
 
@@ -43,7 +43,7 @@ namespace Hasmer {
             } else if (type == "UInt64") {
                 return reader.ReadUInt64();
             } else {
-                throw new Exception("bad type: " + type);
+                throw new InvalidDataException("bad type: " + type);
             }
         }
 
@@ -60,7 +60,7 @@ namespace Hasmer {
             } else if (type == "UInt64") {
                 writer.Write((ulong)value);
             } else {
-                throw new Exception("bad type: " + type);
+                throw new InvalidDataException("bad type: " + type);
             }
         }
 
@@ -69,7 +69,28 @@ namespace Hasmer {
         /// </summary>
         public static void WriteFromDefinition(HbcWriter writer, JToken def, object value) {
             if (def.Type == JTokenType.Array) {
+                JArray tuple = (JArray)def;
+                string type = (string)tuple[0];
 
+                if (tuple[1].Type == JTokenType.Integer) {
+                    int toWrite = (int)tuple[1];
+                    if (type == "Bit") {
+                        writer.WriteBits((uint)value, toWrite);
+                    } else {
+                        Array array = (Array)value;
+                        if (array.Length != toWrite) {
+                            throw new InvalidDataException("array is wrong length");
+                        }
+                        for (int i = 0; i < toWrite; i++) {
+                            WriteType(writer, type, array.GetValue(i));
+                        }
+                    }
+                } else if (tuple[1].Type == JTokenType.String) {
+                    // TODO
+                    throw new NotImplementedException();
+                } else {
+                    throw new InvalidDataException("bad tuple definition");
+                }
             } else {
                 string type = (string)def;
                 WriteType(writer, type, value);
@@ -99,7 +120,7 @@ namespace Hasmer {
                     // TODO
                     throw new NotImplementedException();
                 } else {
-                    throw new Exception("bad tuple definition");
+                    throw new InvalidDataException("bad tuple definition");
                 }
             } else {
                 string type = (string)def;
@@ -110,7 +131,7 @@ namespace Hasmer {
         }
 
         /// <summary>
-        /// Reads a complex value given its definition.
+        /// Reads a complex value from a stream given its definition.
         /// </summary>
         public static T Decode<T>(HbcReader reader, JObject obj) where T : HbcEncodedItem, new() {
             T decoded = new T();
@@ -125,7 +146,7 @@ namespace Hasmer {
         }
 
         /// <summary>
-        /// Encodes a complex value given its definition.
+        /// Encodes a complex value to a stream given its definition.
         /// </summary>
         public static void Encode<T>(HbcWriter writer, JObject obj, T item) where T : HbcEncodedItem {
             foreach (JProperty property in obj.Properties()) {

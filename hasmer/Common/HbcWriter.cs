@@ -17,7 +17,7 @@ namespace Hasmer {
 
         public void Align() {
             while (BaseStream.Position % 4 != 0) {
-                BaseStream.Position++;
+                Write((byte)0);
             }
         }
 
@@ -25,7 +25,7 @@ namespace Hasmer {
             throw new NotImplementedException();
         }
 
-        public void WriteBits(uint bits) {
+        public void WriteBits(uint value, int bitsToWrite) {
             throw new NotImplementedException();
         }
     }

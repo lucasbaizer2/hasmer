@@ -13,6 +13,16 @@ namespace Hasmer.Assembler {
         /// The source bytecode file for disassembly.
         /// </summary>
         public HbcFile Source { get; }
+
+        /// <summary>
+        /// If true, preserve the original instructions and do not abstract out variant instructions.
+        /// <br />
+        /// If false, instructions will be converted to their variants.
+        /// <br />
+        /// See <see cref="HbcAbstractInstructionDefinition"/> for more information about variant instructions and abstraction.
+        /// </summary>
+        public bool IsExact { get; }
+
         /// <summary>
         /// The disassembler for data. Data is disassembled separately from code, and this property is the disassembler object.
         /// </summary>
@@ -22,8 +32,9 @@ namespace Hasmer.Assembler {
         /// Created a new disassembler given a bytecode file.
         /// </summary>
         /// <param name="source">The bytecode file to disassemble.</param>
-        public HbcDisassembler(HbcFile source) {
+        public HbcDisassembler(HbcFile source, bool isExact) {
             Source = source;
+            IsExact = isExact;
             DataDisassembler = new DataDisassembler(source);
         }
 

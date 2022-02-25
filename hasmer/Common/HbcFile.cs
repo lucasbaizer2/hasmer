@@ -14,33 +14,43 @@ namespace Hasmer {
         /// The header of the file.
         /// </summary>
         public HbcHeader Header { get; set; }
+
         /// <summary>
         /// The bytecode format definition found, given the version of the Hermes bytecode in the file.
         /// </summary>
         public HbcBytecodeFormat BytecodeFormat { get; set; }
+
         /// <summary>
         /// The headers of all functions in the binary.
         /// </summary>
         public HbcSmallFuncHeader[] SmallFuncHeaders { get; set; }
+
         public HbcRegExpTableEntry[] RegExpTable { get; set; }
+
         public HbcCjsModuleTableEntry[] CjsModuleTable { get; set; }
+
         /// <summary>
         /// The Array Buffer, which contains all constant array data.
         /// </summary>
         public HbcDataBuffer ArrayBuffer { get; set; }
+
         /// <summary>
         /// The Object Key Buffer, which contains the keys of all constant objects.
         /// </summary>
         public HbcDataBuffer ObjectKeyBuffer { get; set; }
+
         /// <summary>
         /// The Object Value Buffer, which contains the values of all constant objects.
         /// </summary>
         public HbcDataBuffer ObjectValueBuffer { get; set; }
+
         public byte[] RegExpStorage { get; set; }
+
         /// <summary>
         /// Contains all function instructions. Use the function headers (SmallFuncHeaders) to find which function correlates to which instructions.
         /// </summary>
         public byte[] Instructions { get; set; }
+
         /// <summary>
         /// The offset of the Instructions table in the binary.
         /// </summary>
@@ -63,7 +73,7 @@ namespace Hasmer {
             JObject def = ResourceManager.LoadJsonObject("BytecodeFileFormat");
             Header = HbcEncodedItem.Decode<HbcHeader>(reader, (JObject)def["Header"]);
 
-            if (Header.Magic != 0x1F1903C103BC1FC6) {
+            if (Header.Magic != HbcHeader.HBC_MAGIC_HEADER) {
                 throw new Exception("invalid magic header: not a Hermes bytecode file");
             }
 
@@ -107,20 +117,16 @@ namespace Hasmer {
 
             reader.Align();
 
-            def["StringStorage"][1] = Header.StringStorageSize;
-            byte[] stringStorage = (byte[])HbcEncodedItem.ReadFromDefinition(reader, def["StringStorage"]);
+            byte[] stringStorage = reader.ReadBytes((int)Header.StringStorageSize);
             reader.Align();
 
-            def["ArrayBuffer"][1] = Header.ArrayBufferSize;
-            ArrayBuffer = new HbcDataBuffer((byte[])HbcEncodedItem.ReadFromDefinition(reader, def["ArrayBuffer"]));
+            ArrayBuffer = new HbcDataBuffer(reader.ReadBytes((int)Header.ArrayBufferSize));
             reader.Align();
 
-            def["ObjectKeyBuffer"][1] = Header.ObjKeyBufferSize;
-            ObjectKeyBuffer = new HbcDataBuffer((byte[])HbcEncodedItem.ReadFromDefinition(reader, def["ObjectKeyBuffer"]));
+            ObjectKeyBuffer = new HbcDataBuffer(reader.ReadBytes((int)Header.ObjKeyBufferSize));
             reader.Align();
 
-            def["ObjectValueBuffer"][1] = Header.ObjValueBufferSize;
-            ObjectValueBuffer = new HbcDataBuffer((byte[])HbcEncodedItem.ReadFromDefinition(reader, def["ObjectValueBuffer"]));
+            ObjectValueBuffer = new HbcDataBuffer(reader.ReadBytes((int)Header.ObjValueBufferSize));
             reader.Align();
 
             RegExpTable = new HbcRegExpTableEntry[Header.RegExpCount];
@@ -131,8 +137,7 @@ namespace Hasmer {
 
             reader.Align();
 
-            def["RegExpStorage"][1] = Header.RegExpStorageSize;
-            RegExpStorage = (byte[])HbcEncodedItem.ReadFromDefinition(reader, def["RegExpStorage"]);
+            RegExpStorage = reader.ReadBytes((int)Header.RegExpStorageSize);
             reader.Align();
 
             CjsModuleTable = new HbcCjsModuleTableEntry[Header.RegExpCount];
@@ -156,10 +161,29 @@ namespace Hasmer {
         /// Writes the Hermes bytecode file and serializes it to a byte array.
         /// </summary>
         public byte[] Write() {
-            using MemoryStream ms = new MemoryStream();
-            using BinaryWriter writer = new BinaryWriter(ms);
+            JObject def = ResourceManager.LoadJsonObject("BytecodeFileFormat");
 
-            return new byte[0];
+            using MemoryStream ms = new MemoryStream();
+            using HbcWriter writer = new HbcWriter(ms);
+
+            // write the initial header -- some of these values get overwritten when we rewrite the header as the last step
+            HbcEncodedItem.Encode(writer, (JObject)def["Header"], Header);
+            writer.Align();
+            for (uint i = 0; i < Header.FunctionCount; i++) {
+                HbcEncodedItem.Encode(writer, (JObject)def["SmallFuncHeader"], SmallFuncHeaders[i]);
+                // TODO: large functions
+            }
+            writer.Align();
+
+            // encode everything
+
+            // re-write the header with the final values after writing the rest of the stream
+            Header.FileLength = (uint)ms.Position;
+            ms.Position = 0;
+            HbcEncodedItem.Encode(writer, (JObject)def["Header"], Header);
+
+            ms.Position = Header.FileLength;
+            return ms.ToArray();
         }
 
         /// <summary>

@@ -59,6 +59,9 @@ namespace Hasmer {
         public uint EnvironmentSize { get; set; }
         public uint HighestReadCacheIndex { get; set; }
         public uint HighestWriteCacheIndex { get; set; }
+        /// <summary>
+        /// The flags of the function.
+        /// </summary>
         public HbcFuncHeaderFlags Flags { get; set; }
         [JsonIgnore]
         public HbcFile DeclarationFile { get; set; }
