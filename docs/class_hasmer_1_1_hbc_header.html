@@ -66,6 +66,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="#properties">Properties</a> &#124;
 <a href="class_hasmer_1_1_hbc_header-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -85,19 +86,25 @@ Inheritance diagram for Hasmer.HbcHeader:</div>
   </map>
 </div></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:a69519dbe881460ba1d86aaaf624d92a6"><td class="memItemLeft" align="right" valign="top">const ulong&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_hbc_header.html#a69519dbe881460ba1d86aaaf624d92a6">HBC_MAGIC_HEADER</a> = 0x1F1903C103BC1FC6</td></tr>
+<tr class="memdesc:a69519dbe881460ba1d86aaaf624d92a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">The constant magic header that is present at the start of all Hermes bytecode files.  <a href="class_hasmer_1_1_hbc_header.html#a69519dbe881460ba1d86aaaf624d92a6">More...</a><br /></td></tr>
+<tr class="separator:a69519dbe881460ba1d86aaaf624d92a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
 Properties</h2></td></tr>
 <tr class="memitem:ab849137fcbc9d55e3197a4d07998b67a"><td class="memItemLeft" align="right" valign="top">ulong&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_hbc_header.html#ab849137fcbc9d55e3197a4d07998b67a">Magic</a><code> [get, set]</code></td></tr>
-<tr class="memdesc:ab849137fcbc9d55e3197a4d07998b67a"><td class="mdescLeft">&#160;</td><td class="mdescRight">The magic header of the file. This is always equal to 0x1F1903C103BC1FC6.  <a href="class_hasmer_1_1_hbc_header.html#ab849137fcbc9d55e3197a4d07998b67a">More...</a><br /></td></tr>
+<tr class="memdesc:ab849137fcbc9d55e3197a4d07998b67a"><td class="mdescLeft">&#160;</td><td class="mdescRight">The magic header of the file. This should be equal to <a class="el" href="class_hasmer_1_1_hbc_header.html#a69519dbe881460ba1d86aaaf624d92a6" title="The constant magic header that is present at the start of all Hermes bytecode files.">HBC_MAGIC_HEADER</a>.  <a href="class_hasmer_1_1_hbc_header.html#ab849137fcbc9d55e3197a4d07998b67a">More...</a><br /></td></tr>
 <tr class="separator:ab849137fcbc9d55e3197a4d07998b67a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa095d674dfe7cc5245c185e597a57dd0"><td class="memItemLeft" align="right" valign="top">uint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_hbc_header.html#aa095d674dfe7cc5245c185e597a57dd0">Version</a><code> [get, set]</code></td></tr>
 <tr class="memdesc:aa095d674dfe7cc5245c185e597a57dd0"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Hermes bytecode version of the file.  <a href="class_hasmer_1_1_hbc_header.html#aa095d674dfe7cc5245c185e597a57dd0">More...</a><br /></td></tr>
 <tr class="separator:aa095d674dfe7cc5245c185e597a57dd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9fe3b56904196b28b2f36bcc093afd23"><td class="memItemLeft" align="right" valign="top">byte[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_hbc_header.html#a9fe3b56904196b28b2f36bcc093afd23">SourceHash</a><code> [get, set]</code></td></tr>
-<tr class="memdesc:a9fe3b56904196b28b2f36bcc093afd23"><td class="mdescLeft">&#160;</td><td class="mdescRight">The hex string representing the SHA1 hash of the file.  <a href="class_hasmer_1_1_hbc_header.html#a9fe3b56904196b28b2f36bcc093afd23">More...</a><br /></td></tr>
+<tr class="memdesc:a9fe3b56904196b28b2f36bcc093afd23"><td class="mdescLeft">&#160;</td><td class="mdescRight">A hex string representing the SHA1 hash of the original JavaScript source code that was compiled into Hermes bytecode.  <a href="class_hasmer_1_1_hbc_header.html#a9fe3b56904196b28b2f36bcc093afd23">More...</a><br /></td></tr>
 <tr class="separator:a9fe3b56904196b28b2f36bcc093afd23"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6048f3b1252bbadafa6f4ee153371c68"><td class="memItemLeft" align="right" valign="top">uint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_hbc_header.html#a6048f3b1252bbadafa6f4ee153371c68">FileLength</a><code> [get, set]</code></td></tr>
-<tr class="memdesc:a6048f3b1252bbadafa6f4ee153371c68"><td class="mdescLeft">&#160;</td><td class="mdescRight">The total length in bytes of the file.  <a href="class_hasmer_1_1_hbc_header.html#a6048f3b1252bbadafa6f4ee153371c68">More...</a><br /></td></tr>
+<tr class="memdesc:a6048f3b1252bbadafa6f4ee153371c68"><td class="mdescLeft">&#160;</td><td class="mdescRight">The total length in bytes of the bytecode file.  <a href="class_hasmer_1_1_hbc_header.html#a6048f3b1252bbadafa6f4ee153371c68">More...</a><br /></td></tr>
 <tr class="separator:a6048f3b1252bbadafa6f4ee153371c68"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a31d8886ccc7a7a4c33f428c9754a934a"><td class="memItemLeft" align="right" valign="top">uint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_hbc_header.html#a31d8886ccc7a7a4c33f428c9754a934a">GlobalCodeIndex</a><code> [get, set]</code></td></tr>
 <tr class="memdesc:a31d8886ccc7a7a4c33f428c9754a934a"><td class="mdescLeft">&#160;</td><td class="mdescRight">The index in the functions table of the global function.  <a href="class_hasmer_1_1_hbc_header.html#a31d8886ccc7a7a4c33f428c9754a934a">More...</a><br /></td></tr>
@@ -112,7 +119,7 @@ uint&#160;</td><td class="memItemRight" valign="bottom"><b>StringKindCount</b><c
 uint&#160;</td><td class="memItemRight" valign="bottom"><b>IdentifierCount</b><code> [get, set]</code></td></tr>
 <tr class="separator:a7ce717f01aa3559f136fcd2544f4468f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4881a2fd17f10bdc8002d11da5d79c3d"><td class="memItemLeft" align="right" valign="top">uint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_hbc_header.html#a4881a2fd17f10bdc8002d11da5d79c3d">StringCount</a><code> [get, set]</code></td></tr>
-<tr class="memdesc:a4881a2fd17f10bdc8002d11da5d79c3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The amount of strings declared.  <a href="class_hasmer_1_1_hbc_header.html#a4881a2fd17f10bdc8002d11da5d79c3d">More...</a><br /></td></tr>
+<tr class="memdesc:a4881a2fd17f10bdc8002d11da5d79c3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The amount of strings defined in the strings table.  <a href="class_hasmer_1_1_hbc_header.html#a4881a2fd17f10bdc8002d11da5d79c3d">More...</a><br /></td></tr>
 <tr class="separator:a4881a2fd17f10bdc8002d11da5d79c3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1fe19e0c1060d56ed8dca165f6fe712d"><td class="memItemLeft" align="right" valign="top">uint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_hbc_header.html#a1fe19e0c1060d56ed8dca165f6fe712d">OverflowStringCount</a><code> [get, set]</code></td></tr>
 <tr class="memdesc:a1fe19e0c1060d56ed8dca165f6fe712d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The amount of strings who have overflows (i.e. too long to be treated normally).  <a href="class_hasmer_1_1_hbc_header.html#a1fe19e0c1060d56ed8dca165f6fe712d">More...</a><br /></td></tr>
@@ -144,11 +151,11 @@ uint&#160;</td><td class="memItemRight" valign="bottom"><b>CjsModuleCount</b><co
 <tr class="memitem:adbaed3b3adb938b48c5c7503fd48b35b"><td class="memItemLeft" align="right" valign="top">uint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_hbc_header.html#adbaed3b3adb938b48c5c7503fd48b35b">DebugInfoOffset</a><code> [get, set]</code></td></tr>
 <tr class="memdesc:adbaed3b3adb938b48c5c7503fd48b35b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The offset in the binary of debug information, if present.  <a href="class_hasmer_1_1_hbc_header.html#adbaed3b3adb938b48c5c7503fd48b35b">More...</a><br /></td></tr>
 <tr class="separator:adbaed3b3adb938b48c5c7503fd48b35b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8cf03e29b2582969b621da0dc0940fee"><td class="memItemLeft" align="right" valign="top"><a id="a8cf03e29b2582969b621da0dc0940fee"></a>
-byte&#160;</td><td class="memItemRight" valign="bottom"><b>Option</b><code> [get, set]</code></td></tr>
-<tr class="separator:a8cf03e29b2582969b621da0dc0940fee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9ac772e03f065368cfd98a46098013a0"><td class="memItemLeft" align="right" valign="top"><a id="a9ac772e03f065368cfd98a46098013a0"></a>
-byte[]&#160;</td><td class="memItemRight" valign="bottom"><b>Padding</b><code> [get, set]</code></td></tr>
+<tr class="memitem:a2fe7572f344771f1f2916cda24bbef88"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_hasmer.html#a5efc0670744cd2e16b72b7bb24f56fa9">HbcBytecodeOptions</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_hbc_header.html#a2fe7572f344771f1f2916cda24bbef88">Options</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:a2fe7572f344771f1f2916cda24bbef88"><td class="mdescLeft">&#160;</td><td class="mdescRight">The global options of the bytecode file, which are used by the Hermes runtime.  <a href="class_hasmer_1_1_hbc_header.html#a2fe7572f344771f1f2916cda24bbef88">More...</a><br /></td></tr>
+<tr class="separator:a2fe7572f344771f1f2916cda24bbef88"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ac772e03f065368cfd98a46098013a0"><td class="memItemLeft" align="right" valign="top">byte[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_hbc_header.html#a9ac772e03f065368cfd98a46098013a0">Padding</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:a9ac772e03f065368cfd98a46098013a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">31 bytes of arbitrary padding.  <a href="class_hasmer_1_1_hbc_header.html#a9ac772e03f065368cfd98a46098013a0">More...</a><br /></td></tr>
 <tr class="separator:a9ac772e03f065368cfd98a46098013a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
@@ -161,15 +168,40 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memdesc:a6179ba47733c635ecb4bc96889a9720b inherit pub_static_methods_class_hasmer_1_1_hbc_encoded_item"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads a simple value given its definition.  <a href="class_hasmer_1_1_hbc_encoded_item.html#a6179ba47733c635ecb4bc96889a9720b">More...</a><br /></td></tr>
 <tr class="separator:a6179ba47733c635ecb4bc96889a9720b inherit pub_static_methods_class_hasmer_1_1_hbc_encoded_item"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a270dc1f8ae906c58cf8d24cd2386def0 inherit pub_static_methods_class_hasmer_1_1_hbc_encoded_item"><td class="memItemLeft" align="right" valign="top">static T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_hbc_encoded_item.html#a270dc1f8ae906c58cf8d24cd2386def0">Decode&lt; T &gt;</a> (<a class="el" href="class_hasmer_1_1_hbc_reader.html">HbcReader</a> reader, JObject obj)</td></tr>
-<tr class="memdesc:a270dc1f8ae906c58cf8d24cd2386def0 inherit pub_static_methods_class_hasmer_1_1_hbc_encoded_item"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads a complex value given its definition.  <a href="class_hasmer_1_1_hbc_encoded_item.html#a270dc1f8ae906c58cf8d24cd2386def0">More...</a><br /></td></tr>
+<tr class="memdesc:a270dc1f8ae906c58cf8d24cd2386def0 inherit pub_static_methods_class_hasmer_1_1_hbc_encoded_item"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads a complex value from a stream given its definition.  <a href="class_hasmer_1_1_hbc_encoded_item.html#a270dc1f8ae906c58cf8d24cd2386def0">More...</a><br /></td></tr>
 <tr class="separator:a270dc1f8ae906c58cf8d24cd2386def0 inherit pub_static_methods_class_hasmer_1_1_hbc_encoded_item"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abb34c3baab4b8883080ed171b7f0b20b inherit pub_static_methods_class_hasmer_1_1_hbc_encoded_item"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_hbc_encoded_item.html#abb34c3baab4b8883080ed171b7f0b20b">Encode&lt; T &gt;</a> (<a class="el" href="class_hasmer_1_1_hbc_writer.html">HbcWriter</a> writer, JObject obj, T item)</td></tr>
-<tr class="memdesc:abb34c3baab4b8883080ed171b7f0b20b inherit pub_static_methods_class_hasmer_1_1_hbc_encoded_item"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encodes a complex value given its definition.  <a href="class_hasmer_1_1_hbc_encoded_item.html#abb34c3baab4b8883080ed171b7f0b20b">More...</a><br /></td></tr>
+<tr class="memdesc:abb34c3baab4b8883080ed171b7f0b20b inherit pub_static_methods_class_hasmer_1_1_hbc_encoded_item"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encodes a complex value to a stream given its definition.  <a href="class_hasmer_1_1_hbc_encoded_item.html#abb34c3baab4b8883080ed171b7f0b20b">More...</a><br /></td></tr>
 <tr class="separator:abb34c3baab4b8883080ed171b7f0b20b inherit pub_static_methods_class_hasmer_1_1_hbc_encoded_item"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents the header of a Hermes bytecode file. </p>
-</div><h2 class="groupheader">Property Documentation</h2>
+</div><h2 class="groupheader">Member Data Documentation</h2>
+<a id="a69519dbe881460ba1d86aaaf624d92a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69519dbe881460ba1d86aaaf624d92a6">&#9670;&nbsp;</a></span>HBC_MAGIC_HEADER</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const ulong Hasmer.HbcHeader.HBC_MAGIC_HEADER = 0x1F1903C103BC1FC6</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The constant magic header that is present at the start of all Hermes bytecode files. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Property Documentation</h2>
 <a id="a0514de04573b28198331df5895f6ca1d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0514de04573b28198331df5895f6ca1d">&#9670;&nbsp;</a></span>ArrayBufferSize</h2>
 
@@ -238,7 +270,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>The total length in bytes of the file. </p>
+<p>The total length in bytes of the bytecode file. </p>
 
 </div>
 </div>
@@ -310,7 +342,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>The magic header of the file. This is always equal to 0x1F1903C103BC1FC6. </p>
+<p>The magic header of the file. This should be equal to <a class="el" href="class_hasmer_1_1_hbc_header.html#a69519dbe881460ba1d86aaaf624d92a6" title="The constant magic header that is present at the start of all Hermes bytecode files.">HBC_MAGIC_HEADER</a>. </p>
 
 </div>
 </div>
@@ -362,6 +394,30 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
+<a id="a2fe7572f344771f1f2916cda24bbef88"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2fe7572f344771f1f2916cda24bbef88">&#9670;&nbsp;</a></span>Options</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespace_hasmer.html#a5efc0670744cd2e16b72b7bb24f56fa9">HbcBytecodeOptions</a> Hasmer.HbcHeader.Options</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The global options of the bytecode file, which are used by the Hermes runtime. </p>
+
+</div>
+</div>
 <a id="a1fe19e0c1060d56ed8dca165f6fe712d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1fe19e0c1060d56ed8dca165f6fe712d">&#9670;&nbsp;</a></span>OverflowStringCount</h2>
 
@@ -386,6 +442,30 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
+<a id="a9ac772e03f065368cfd98a46098013a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ac772e03f065368cfd98a46098013a0">&#9670;&nbsp;</a></span>Padding</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">byte [] Hasmer.HbcHeader.Padding</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>31 bytes of arbitrary padding. </p>
+
+</div>
+</div>
 <a id="a9fe3b56904196b28b2f36bcc093afd23"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9fe3b56904196b28b2f36bcc093afd23">&#9670;&nbsp;</a></span>SourceHash</h2>
 
@@ -406,7 +486,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>The hex string representing the SHA1 hash of the file. </p>
+<p>A hex string representing the SHA1 hash of the original JavaScript source code that was compiled into Hermes bytecode. </p>
 
 </div>
 </div>
@@ -430,7 +510,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>The amount of strings declared. </p>
+<p>The amount of strings defined in the strings table. </p>
 
 </div>
 </div>

@@ -72,6 +72,11 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_hbc_abstract_instruction_definition.html">HbcAbstractInstructionDefinition</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents the abstract form of variant instructions. Variant instructions are instructions which perform the same action, but can have differently sized operands. By abstracting these instructions to all have one name, the assembler can optimize the size of the operands. Thus, programmers do not have to figure out the proper sizes when they write Hasm code. <br  />
+ <br  />
+ Passing the "--exact" flag to the hasmer disassmbler will ignore abstract definitions, and instead emit the exact instruction.  <a href="class_hasmer_1_1_hbc_abstract_instruction_definition.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_hbc_bytecode_format.html">HbcBytecodeFormat</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a definition of the bytecode operations for a given Hermes version. <br  />
  This is generally used by deserializing a JSON object, specifically the "Bytecode*.json" file in the Resources directory that corresponds to the desired Hermes version. <br  />
@@ -191,8 +196,38 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:afa050aed0984e4b03d020d33a680ab43"><td class="mdescLeft">&#160;</td><td class="mdescRight">The flags a function can have. Note that the Prohibit* flags cannot be used in conjunction with Enum.HasFlag because ProhibitCall is 0.  <a href="namespace_hasmer.html#afa050aed0984e4b03d020d33a680ab43">More...</a><br /></td></tr>
 <tr class="separator:afa050aed0984e4b03d020d33a680ab43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5efc0670744cd2e16b72b7bb24f56fa9"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_hasmer.html#a5efc0670744cd2e16b72b7bb24f56fa9">HbcBytecodeOptions</a> : byte { <b>StaticBuiltins</b> = 0x1, 
+<b>CjsModulesStaticallyResolved</b> = 0x2, 
+<b>HasAsync</b> = 0x4
+ }</td></tr>
+<tr class="memdesc:a5efc0670744cd2e16b72b7bb24f56fa9"><td class="mdescLeft">&#160;</td><td class="mdescRight">The global options of the bytecode file, which are used by the Hermes runtime.  <a href="namespace_hasmer.html#a5efc0670744cd2e16b72b7bb24f56fa9">More...</a><br /></td></tr>
+<tr class="separator:a5efc0670744cd2e16b72b7bb24f56fa9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="a5efc0670744cd2e16b72b7bb24f56fa9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5efc0670744cd2e16b72b7bb24f56fa9">&#9670;&nbsp;</a></span>HbcBytecodeOptions</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="namespace_hasmer.html#a5efc0670744cd2e16b72b7bb24f56fa9">Hasmer.HbcBytecodeOptions</a> : byte</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The global options of the bytecode file, which are used by the Hermes runtime. </p>
+
+</div>
+</div>
 <a id="a45f3587a21d9c284934cc2411fa258a7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a45f3587a21d9c284934cc2411fa258a7">&#9670;&nbsp;</a></span>HbcDataBufferTagType</h2>
 

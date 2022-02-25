@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['instruction_480',['Instruction',['../class_hasmer_1_1_decompiler_1_1_decompiler_context.html#a6f6379b85a4714f51e767fc20945b39e',1,'Hasmer::Decompiler::DecompilerContext']]],
-  ['isfinished_481',['IsFinished',['../class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_string_stream.html#a3af747b0aa9e19bd3e8bfa58915e378c',1,'Hasmer::Assembler::Parser::HasmStringStream']]]
+  ['hbc_5fmagic_5fheader_497',['HBC_MAGIC_HEADER',['../class_hasmer_1_1_hbc_header.html#a69519dbe881460ba1d86aaaf624d92a6',1,'Hasmer::HbcHeader']]]
 ];

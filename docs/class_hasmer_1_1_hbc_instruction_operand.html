@@ -80,6 +80,9 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:ad87385f511e9da420cb7e134591276fb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_hbc_instruction_operand.html#ad87385f511e9da420cb7e134591276fb">ToWriter</a> (BinaryWriter writer)</td></tr>
+<tr class="memdesc:ad87385f511e9da420cb7e134591276fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes the operand to a stream of binary data.  <a href="class_hasmer_1_1_hbc_instruction_operand.html#ad87385f511e9da420cb7e134591276fb">More...</a><br /></td></tr>
+<tr class="separator:ad87385f511e9da420cb7e134591276fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac39a214c498cf86e4e1efd9d3580eef6"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_hbc_instruction_operand.html#ac39a214c498cf86e4e1efd9d3580eef6">GetValue&lt; T &gt;</a> ()</td></tr>
 <tr class="memdesc:ac39a214c498cf86e4e1efd9d3580eef6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the value as the given type.  <a href="class_hasmer_1_1_hbc_instruction_operand.html#ac39a214c498cf86e4e1efd9d3580eef6">More...</a><br /></td></tr>
 <tr class="separator:ac39a214c498cf86e4e1efd9d3580eef6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -101,8 +104,9 @@ Properties</h2></td></tr>
 <tr class="memitem:a5ffaadd8bdd935d9ca0798c168a41467"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_hasmer.html#a57209db7d32f23259d1558d7363b3a1e">HbcInstructionOperandType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_hbc_instruction_operand.html#a5ffaadd8bdd935d9ca0798c168a41467">Type</a><code> [get, set]</code></td></tr>
 <tr class="memdesc:a5ffaadd8bdd935d9ca0798c168a41467"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of operand that is represented by the object.  <a href="class_hasmer_1_1_hbc_instruction_operand.html#a5ffaadd8bdd935d9ca0798c168a41467">More...</a><br /></td></tr>
 <tr class="separator:a5ffaadd8bdd935d9ca0798c168a41467"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abca19a35766ec60e45220b943061d5d7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_hasmer_1_1_primitive_value.html">PrimitiveValue</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_hbc_instruction_operand.html#abca19a35766ec60e45220b943061d5d7">Value</a><code> [set]</code></td></tr>
-<tr class="memdesc:abca19a35766ec60e45220b943061d5d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">The raw value of the object, represented as a <a class="el" href="class_hasmer_1_1_primitive_value.html" title="A wrapper type for any other given type, which keeps track of the original type that was passed....">PrimitiveValue</a> to preserve type information.  <a href="class_hasmer_1_1_hbc_instruction_operand.html#abca19a35766ec60e45220b943061d5d7">More...</a><br /></td></tr>
+<tr class="memitem:abca19a35766ec60e45220b943061d5d7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_hasmer_1_1_primitive_value.html">PrimitiveValue</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_hbc_instruction_operand.html#abca19a35766ec60e45220b943061d5d7">Value</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:abca19a35766ec60e45220b943061d5d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">The raw value of the object, represented as a <a class="el" href="class_hasmer_1_1_primitive_value.html" title="A wrapper type for any other given type, which keeps track of the original type that was passed....">PrimitiveValue</a> to preserve type information. <br  />
+ Is is highly recommended to use <a class="el" href="class_hasmer_1_1_hbc_instruction_operand.html#ac39a214c498cf86e4e1efd9d3580eef6" title="Returns the value as the given type.">GetValue&lt;T&gt;</a> and <a class="el" href="class_hasmer_1_1_hbc_instruction_operand.html#a1a1423cec84b03593328f60a6a84c928" title="Returns the value, or is the value is a string, the string the value points to.">GetResolvedValue&lt;T&gt;(HbcFile)</a> instead of accessing this property directly. Use with caution.  <a href="class_hasmer_1_1_hbc_instruction_operand.html#abca19a35766ec60e45220b943061d5d7">More...</a><br /></td></tr>
 <tr class="separator:abca19a35766ec60e45220b943061d5d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -229,6 +233,34 @@ Properties</h2></td></tr>
 
 </div>
 </div>
+<a id="ad87385f511e9da420cb7e134591276fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad87385f511e9da420cb7e134591276fb">&#9670;&nbsp;</a></span>ToWriter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Hasmer.HbcInstructionOperand.ToWriter </td>
+          <td>(</td>
+          <td class="paramtype">BinaryWriter&#160;</td>
+          <td class="paramname"><em>writer</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Writes the operand to a stream of binary data. </p>
+
+</div>
+</div>
 <h2 class="groupheader">Property Documentation</h2>
 <a id="a5ffaadd8bdd935d9ca0798c168a41467"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5ffaadd8bdd935d9ca0798c168a41467">&#9670;&nbsp;</a></span>Type</h2>
@@ -269,12 +301,13 @@ Properties</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">set</span></span>  </td>
+<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>The raw value of the object, represented as a <a class="el" href="class_hasmer_1_1_primitive_value.html" title="A wrapper type for any other given type, which keeps track of the original type that was passed....">PrimitiveValue</a> to preserve type information. </p>
+<p>The raw value of the object, represented as a <a class="el" href="class_hasmer_1_1_primitive_value.html" title="A wrapper type for any other given type, which keeps track of the original type that was passed....">PrimitiveValue</a> to preserve type information. <br  />
+ Is is highly recommended to use <a class="el" href="class_hasmer_1_1_hbc_instruction_operand.html#ac39a214c498cf86e4e1efd9d3580eef6" title="Returns the value as the given type.">GetValue&lt;T&gt;</a> and <a class="el" href="class_hasmer_1_1_hbc_instruction_operand.html#a1a1423cec84b03593328f60a6a84c928" title="Returns the value, or is the value is a string, the string the value points to.">GetResolvedValue&lt;T&gt;(HbcFile)</a> instead of accessing this property directly. Use with caution. </p>
 
 </div>
 </div>
