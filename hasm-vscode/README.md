@@ -4,7 +4,7 @@ This extension provides syntax highlighting in Visual Studio Code for the Hasm a
 
 # Contributing
 
-See the [contributing document](https://github.com/lucasbaizer2/hasmer/blob/master/hasm-vscode/CONTRIBING.md) for information on how to contribute/build the extension from source.
+See the [contributing document](https://github.com/lucasbaizer2/hasmer/blob/master/hasm-vscode/CONTRIBUTING.md) for information on how to contribute/build the extension from source.
 
 # License
 

@@ -68,6 +68,7 @@ namespace Hasmer.Assembler.Visitor {
 
             foreach (HbcFunctionBuilder builder in Functions) {
                 FunctionOffsets[builder.FunctionId] = (uint)ms.Position;
+                /*
                 foreach (HbcInstruction insn in builder.Instructions) {
                     writer.Write(insn.Opcode);
                     foreach (HbcInstructionOperand operand in insn.Operands) {
@@ -78,6 +79,7 @@ namespace Hasmer.Assembler.Visitor {
                         operand.ToWriter(writer);
                     }
                 }
+                */
             }
         }
 

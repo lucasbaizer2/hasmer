@@ -14,6 +14,12 @@ namespace Hasmer.Assembler.Parser {
         /// </summary>
         public HasmIntegerToken Version { get; set; }
 
+        /// <summary>
+        /// True if the version declaration specified that the instructions should be interpretered literally,
+        /// and not as abstracted forms. See <see cref="HbcDisassembler.IsExact"/> for more information.
+        /// </summary>
+        public bool IsExact { get; set; }
+
         public HasmVersionDeclarationToken(HasmStringStreamState state) : base(state) { }
     }
 
@@ -75,8 +81,15 @@ namespace Hasmer.Assembler.Parser {
             asm.Stream.AdvanceOperator(); // skip "." before declaration
             string word = asm.Stream.AdvanceWord();
             if (word == "hasm") {
+                HasmIntegerToken version = (HasmIntegerToken)IHasmTokenParser.IntegerParser.Parse(asm);
+                bool isExact = false;
+                if (asm.Stream.PeekWord() == "exact") {
+                    isExact = true;
+                    asm.Stream.AdvanceWord();
+                }
                 return new HasmVersionDeclarationToken(state) {
-                    Version = (HasmIntegerToken)IHasmTokenParser.IntegerParser.Parse(asm)
+                    Version = version,
+                    IsExact = isExact
                 };
             } else if (word == "data") {
                 HasmLabelToken label = (HasmLabelToken)IHasmTokenParser.LabelParser.Parse(asm);

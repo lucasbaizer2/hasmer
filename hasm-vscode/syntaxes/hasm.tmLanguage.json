@@ -1,100 +1,117 @@
 {
-	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-	"name": "Hasm",
-	"patterns": [
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "Hasm",
+    "patterns": [
 		{
-			"include": "#declaration"
-		},
-		{
-			"include": "#comments"
-		},
-		{
-			"include": "#type"
-		},
-		{
-			"include": "#label"
-		},
-		{
-			"include": "#register"
-		},
-		{
-			"include": "#instruction"
-		},
-		{
-			"include": "#numbers"
-		},
-		{
-			"include": "#strings"
-		},
-		{
-			"include": "#function-declaration"
-		}
-	],
-	"repository": {
-		"declaration": {
-			"name": "keyword",
-			"match": "\\B(\\.[a-z]+)\\b"
-		},
-		"comments": {
-			"name": "comment",
-			"begin": "#",
-			"end": "$"
-		},
-		"type": {
-			"name": "entity.name.class",
-			"match": "\\b(Integer|String|Number|True|False|Null)\\b"
-		},
-		"label": {
-			"name": "entity.name.function",
-			"match": "\\b([AVKL][0-9]+([+-][0-9]+)?)\\b"
-		},
-		"register": {
-			"name": "variable",
-			"match": "\\b(r[0-9]+)\\b"
-		},
-		"instruction": {
-			"name": "entity.name.type",
-			"match": "\\b(NewObjectWithBuffer|NewObjectWithBufferLong|NewObject|NewArrayWithBuffer|NewArrayWithBufferLong|NewArray|Mov|MovLong|Negate|Not|BitNot|TypeOf|Eq|StrictEq|Neq|StrictNeq|Less|LessEq|Greater|GreaterEq|Add|AddN|Mul|MulN|Div|DivN|Mod|Sub|SubN|LShift|RShift|URshift|BitAnd|BitXor|BitOr|InstanceOf|IsIn|GetEnvironment|StoreToEnvironment|StoreToEnvironmentL|StoreNPToEnvironment|StoreNPToEnvironmentL|LoadFromEnvironment|LoadFromEnvironmentL|GetGlobalObject|CreateEnvironment|DeclareGlobalVar|GetByIdShort|GetById|GetByIdLong|TryGetById|TryGetByIdLong|PutById|PutByIdLong|TryPutById|TryPutByIdLong|PutOwnByIdShort|PutOwnById|PutOwnByIdLong|PutOwnByIndex|PutOwnByIndexL|DelById|DelByIdLong|GetByVal|PutByVal|DelByVal|PutGetterSetter|GetPNameList|GetNextPName|Call|Construct|CallDirect|CallLong|ConstructLong|CallDirectLongIndex|CallBuiltin|Ret|Catch|DirectEval|Throw|Debugger|DebuggerCheckBreak|ProfilePoint|Unreachable|CreateClosure|CreateClosureLongIndex|CreateThis|SelectObject|LoadParam|LoadParamLong|LoadConstUInt8|LoadConstInt|LoadConstDouble|LoadConstString|LoadConstStringLongIndex|LoadConstUndefined|LoadConstNull|LoadConstTrue|LoadConstFalse|LoadConstZero|CoerceThisNS|LoadThisNS|ToNumber|ToInt32|AddEmptyString|GetArgumentsPropByVal|GetArgumentsLength|ReifyArguments|CreateRegExp|SwitchImm|Jmp|JmpLong|JmpTrue|JmpTrueLong|JmpFalse|JmpFalseLong|JmpUndefined|JmpUndefinedLong|JLess|JLessLong|JNotLess|JNotLessLong|JLessN|JLessNLong|JNotLessN|JNotLessNLong|JLessEqual|JLessEqualLong|JNotLessEqual|JNotLessEqualLong|JLessEqualN|JLessEqualNLong|JNotLessEqualN|JNotLessEqualNLong|JGreater|JGreaterLong|JNotGreater|JNotGreaterLong|JGreaterN|JGreaterNLong|JNotGreaterN|JNotGreaterNLong|JGreaterEqual|JGreaterEqualLong|JNotGreaterEqual|JNotGreaterEqualLong|JGreaterEqualN|JGreaterEqualNLong|JNotGreaterEqualN|JNotGreaterEqualNLong|JEqual|JEqualLong|JNotEqual|JNotEqualLong|JStrictEqual|JStrictEqualLong|JStrictNotEqual|JStrictNotEqualLong|Call1|Call2|Call3|Call4|GetNewTarget|PutNewOwnByIdShort|PutNewOwnById|PutNewOwnByIdLong|PutNewOwnNEById|PutNewOwnNEByIdLong|PutOwnByVal|PutOwnGetterSetterByVal|NewObjectWithParent|CreateGeneratorClosure|CreateGeneratorClosureLongIndex|StartGenerator|ResumeGenerator|CompleteGenerator|CreateGenerator|CreateGeneratorLongIndex|SaveGenerator|SaveGeneratorLong|ThrowIfUndefinedInst|AsyncBreakCheck|IteratorBegin|IteratorNext|IteratorClose|CallBuiltinLong|GetBuiltinClosure|ThrowIfEmpty|CreateAsyncClosure|CreateAsyncClosureLongIndex|LoadConstEmpty|Add32|Sub32|Mul32|Divi32|Divu32|Loadi8|Loadu8|Loadi16|Loadu16|Loadi32|Loadu32|Store8|Store16|Store32)\\b"
-		},
-		"numbers": {
-			"patterns": [
-				{
-					"name": "constant.numeric",
-					"match": "\\b([0-9]+\\.[0-9]+)\\b"
+            "include": "#special"
+        },
+        {
+            "include": "#declaration"
+        },
+        {
+            "include": "#comments"
+        },
+        {
+            "include": "#type"
+        },
+        {
+            "include": "#label"
+        },
+        {
+            "include": "#register"
+        },
+        {
+            "include": "#instruction"
+        },
+        {
+            "include": "#numbers"
+        },
+        {
+            "include": "#strings"
+        },
+        {
+            "include": "#function-declaration"
+        }
+    ],
+    "repository": {
+		"special": {
+            "match": "(\\.hasm)\\s+([0-9]+?)\\s+(exact)\\b",
+            "captures": {
+				"1": {
+					"name": "constant.language"
 				},
-				{
-					"name": "constant.numeric",
-					"match": "\\b([0-9]+)\\b"
-				}
-			]
-		},
-		"strings": {
-			"name": "string",
-			"begin": "\"",
-			"end": "\"",
-			"patterns": [
-				{
-					"name": "constant.character.escape",
-					"match": "\\\\."
-				}
-			]
-		},
-		"function-declaration": {
-			"patterns": [
-				{
-					"name": "entity.name.class",
-					"match": "\\b(Function|Constructor|NCFunction)\\b"
+				"2": {
+					"name": "constant.numeric"
 				},
-				{
-					"name": "entity.name.function",
-					"match": "\\B<(.+?)>\\B"
-				},
-				{
-					"name": "variable",
-					"match": "\\(((.+?)[,]?)+\\)"
-				}
-			]
-		}
-	},
-	"scopeName": "source.hasm"
+                "3": {
+                    "name": "constant.language"
+                }
+            }
+        },
+        "declaration": {
+            "name": "constant.language",
+            "match": "\\B(\\.[a-z]+)\\b"
+        },
+        "comments": {
+            "name": "comment",
+            "begin": "#",
+            "end": "$"
+        },
+        "type": {
+            "name": "entity.name.class",
+            "match": "\\b(Integer|String|Number|True|False|Null)\\b"
+        },
+        "label": {
+            "name": "entity.name.function",
+            "match": "\\b([AVKL][0-9]+([+-][0-9]+)?)\\b"
+        },
+        "register": {
+            "name": "variable",
+            "match": "\\b(r[0-9]+)\\b"
+        },
+        "instruction": {
+            "name": "entity.name.type",
+            "match": "\\b(NewObjectWithBuffer|NewObjectWithBufferLong|NewObject|NewArrayWithBuffer|NewArrayWithBufferLong|NewArray|Mov|MovLong|Negate|Not|BitNot|TypeOf|Eq|StrictEq|Neq|StrictNeq|Less|LessEq|Greater|GreaterEq|Add|AddN|Mul|MulN|Div|DivN|Mod|Sub|SubN|LShift|RShift|URshift|BitAnd|BitXor|BitOr|InstanceOf|IsIn|GetEnvironment|StoreToEnvironment|StoreToEnvironmentL|StoreNPToEnvironment|StoreNPToEnvironmentL|LoadFromEnvironment|LoadFromEnvironmentL|GetGlobalObject|CreateEnvironment|DeclareGlobalVar|GetByIdShort|GetById|GetByIdLong|TryGetById|TryGetByIdLong|PutById|PutByIdLong|TryPutById|TryPutByIdLong|PutOwnByIdShort|PutOwnById|PutOwnByIdLong|PutOwnByIndex|PutOwnByIndexL|DelById|DelByIdLong|GetByVal|PutByVal|DelByVal|PutGetterSetter|GetPNameList|GetNextPName|Call|Construct|CallDirect|CallLong|ConstructLong|CallDirectLongIndex|CallBuiltin|Ret|Catch|DirectEval|Throw|Debugger|DebuggerCheckBreak|ProfilePoint|Unreachable|CreateClosure|CreateClosureLongIndex|CreateThis|SelectObject|LoadParam|LoadParamLong|LoadConstUInt8|LoadConstInt|LoadConstDouble|LoadConstString|LoadConstStringLongIndex|LoadConstUndefined|LoadConstNull|LoadConstTrue|LoadConstFalse|LoadConstZero|CoerceThisNS|LoadThisNS|ToNumber|ToInt32|AddEmptyString|GetArgumentsPropByVal|GetArgumentsLength|ReifyArguments|CreateRegExp|SwitchImm|Jmp|JmpLong|JmpTrue|JmpTrueLong|JmpFalse|JmpFalseLong|JmpUndefined|JmpUndefinedLong|JLess|JLessLong|JNotLess|JNotLessLong|JLessN|JLessNLong|JNotLessN|JNotLessNLong|JLessEqual|JLessEqualLong|JNotLessEqual|JNotLessEqualLong|JLessEqualN|JLessEqualNLong|JNotLessEqualN|JNotLessEqualNLong|JGreater|JGreaterLong|JNotGreater|JNotGreaterLong|JGreaterN|JGreaterNLong|JNotGreaterN|JNotGreaterNLong|JGreaterEqual|JGreaterEqualLong|JNotGreaterEqual|JNotGreaterEqualLong|JGreaterEqualN|JGreaterEqualNLong|JNotGreaterEqualN|JNotGreaterEqualNLong|JEqual|JEqualLong|JNotEqual|JNotEqualLong|JStrictEqual|JStrictEqualLong|JStrictNotEqual|JStrictNotEqualLong|Call1|Call2|Call3|Call4|GetNewTarget|PutNewOwnByIdShort|PutNewOwnById|PutNewOwnByIdLong|PutNewOwnNEById|PutNewOwnNEByIdLong|PutOwnByVal|PutOwnGetterSetterByVal|NewObjectWithParent|CreateGeneratorClosure|CreateGeneratorClosureLongIndex|StartGenerator|ResumeGenerator|CompleteGenerator|CreateGenerator|CreateGeneratorLongIndex|SaveGenerator|SaveGeneratorLong|ThrowIfUndefinedInst|AsyncBreakCheck|IteratorBegin|IteratorNext|IteratorClose|CallBuiltinLong|GetBuiltinClosure|ThrowIfEmpty|CreateAsyncClosure|CreateAsyncClosureLongIndex|LoadConstEmpty|Add32|Sub32|Mul32|Divi32|Divu32|Loadi8|Loadu8|Loadi16|Loadu16|Loadi32|Loadu32|Store8|Store16|Store32)\\b"
+        },
+        "numbers": {
+            "patterns": [
+                {
+                    "name": "constant.numeric",
+                    "match": "\\b([0-9]+\\.[0-9]+)\\b"
+                },
+                {
+                    "name": "constant.numeric",
+                    "match": "\\b([0-9]+)\\b"
+                }
+            ]
+        },
+        "strings": {
+            "name": "string",
+            "begin": "\"",
+            "end": "\"",
+            "patterns": [
+                {
+                    "name": "constant.character.escape",
+                    "match": "\\\\."
+                }
+            ]
+        },
+        "function-declaration": {
+            "patterns": [
+                {
+                    "name": "entity.name.class",
+                    "match": "\\b(Function|Constructor|NCFunction)\\b"
+                },
+                {
+                    "name": "entity.name.function",
+                    "match": "\\B<(.+?)>\\B"
+                },
+                {
+                    "name": "variable",
+                    "match": "\\(((.+?)[,]?)+\\)"
+                }
+            ]
+        }
+    },
+    "scopeName": "source.hasm"
 }

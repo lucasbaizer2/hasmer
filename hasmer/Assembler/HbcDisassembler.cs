@@ -16,9 +16,11 @@ namespace Hasmer.Assembler {
 
         /// <summary>
         /// If true, preserve the original instructions and do not abstract out variant instructions.
+        /// Additionally, instructions which refer to identifier hashes will have the hash operand omitted.
         /// <br />
         /// If false, instructions will be converted to their variants.
         /// <br />
+        /// The default value for this is false.
         /// See <see cref="HbcAbstractInstructionDefinition"/> for more information about variant instructions and abstraction.
         /// </summary>
         public bool IsExact { get; }
@@ -45,7 +47,11 @@ namespace Hasmer.Assembler {
         public string Disassemble() {
             StringBuilder builder = new StringBuilder();
             builder.Append(".hasm ");
-            builder.AppendLine(Source.Header.Version.ToString());
+            builder.Append(Source.Header.Version.ToString());
+            if (IsExact) {
+                builder.Append(" exact");
+            }
+
             builder.AppendLine();
             builder.AppendLine(DataDisassembler.Disassemble());
 

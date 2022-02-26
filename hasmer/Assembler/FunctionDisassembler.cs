@@ -266,6 +266,15 @@ namespace Hasmer.Assembler {
                 builder.Write(new string(' ', padding));
 
                 for (int i = 0; i < insn.Operands.Count; i++) {
+                    if (!Disassembler.IsExact) {
+                        // omit indentifier cache operands if not in exact mode
+                        if (name == "TryGetById" || name == "GetById" || name == "TryPutById" || name == "PutById") {
+                            if (i == 2) { // the third operand (i.e. insn.Operands[2]) is the identifier cache
+                                continue; // just skip the operand; don't write it to the disassembly
+                            }
+                        }
+                    }
+
                     HbcInstructionOperand operand = insn.Operands[i];
                     string readable = operand.Type switch {
                         HbcInstructionOperandType.Addr8 or HbcInstructionOperandType.Addr32 => LabelTable[GetJumpInstructionTarget(insn, operand)],

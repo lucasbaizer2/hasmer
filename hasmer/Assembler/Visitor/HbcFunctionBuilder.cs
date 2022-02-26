@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Hasmer.Assembler.Parser;
 
 namespace Hasmer.Assembler.Visitor {
     /// <summary>
@@ -40,8 +41,8 @@ namespace Hasmer.Assembler.Visitor {
         public HbcFuncHeaderFlags Flags { get; set; }
 
         /// <summary>
-        /// The instructions contained in the body of the function.
+        /// The tokens of the instructions contained in the body of the function.
         /// </summary>
-        public List<HbcInstruction> Instructions { get; set; }
+        public List<HasmInstructionToken> Instructions { get; set; }
     }
 }
