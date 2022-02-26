@@ -104,6 +104,9 @@ Properties</h2></td></tr>
 <tr class="memitem:a7a809513595624679ff07b13b7b5ef59"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_integer_token.html">HasmIntegerToken</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_version_declaration_token.html#a7a809513595624679ff07b13b7b5ef59">Version</a><code> [get, set]</code></td></tr>
 <tr class="memdesc:a7a809513595624679ff07b13b7b5ef59"><td class="mdescLeft">&#160;</td><td class="mdescRight">The token which declares the version of the Hasm bytecode.  <a href="class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_version_declaration_token.html#a7a809513595624679ff07b13b7b5ef59">More...</a><br /></td></tr>
 <tr class="separator:a7a809513595624679ff07b13b7b5ef59"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18d7e379863b4d71c3fb2a038eee591f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_version_declaration_token.html#a18d7e379863b4d71c3fb2a038eee591f">IsExact</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:a18d7e379863b4d71c3fb2a038eee591f"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if the version declaration specified that the instructions should be interpretered literally, and not as abstracted forms. See <a class="el" href="class_hasmer_1_1_assembler_1_1_hbc_disassembler.html#adaad5ea5eedd52a7e757e2470fca7e40" title="If true, preserve the original instructions and do not abstract out variant instructions....">HbcDisassembler.IsExact</a> for more information.  <a href="class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_version_declaration_token.html#a18d7e379863b4d71c3fb2a038eee591f">More...</a><br /></td></tr>
+<tr class="separator:a18d7e379863b4d71c3fb2a038eee591f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header properties_class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_token"><td colspan="2" onclick="javascript:toggleInherit('properties_class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_token')"><img src="closed.png" alt="-"/>&#160;Properties inherited from <a class="el" href="class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_token.html">Hasmer.Assembler.Parser.HasmToken</a></td></tr>
 <tr class="memitem:a71a31cb22c6c8d496ad2f3aa2585a25b inherit properties_class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_token"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_token.html#a71a31cb22c6c8d496ad2f3aa2585a25b">Line</a><code> [get, set]</code></td></tr>
 <tr class="memdesc:a71a31cb22c6c8d496ad2f3aa2585a25b inherit properties_class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_token"><td class="mdescLeft">&#160;</td><td class="mdescRight">The line of the file that the token is on. This is zero-indexed, i.e. the first line (Line = 0), the second line (Line = 1), etc.  <a href="class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_token.html#a71a31cb22c6c8d496ad2f3aa2585a25b">More...</a><br /></td></tr>
@@ -115,6 +118,30 @@ Properties</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents a ".hasm" version declaration. </p>
 </div><h2 class="groupheader">Property Documentation</h2>
+<a id="a18d7e379863b4d71c3fb2a038eee591f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a18d7e379863b4d71c3fb2a038eee591f">&#9670;&nbsp;</a></span>IsExact</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Hasmer.Assembler.Parser.HasmVersionDeclarationToken.IsExact</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>True if the version declaration specified that the instructions should be interpretered literally, and not as abstracted forms. See <a class="el" href="class_hasmer_1_1_assembler_1_1_hbc_disassembler.html#adaad5ea5eedd52a7e757e2470fca7e40" title="If true, preserve the original instructions and do not abstract out variant instructions....">HbcDisassembler.IsExact</a> for more information. </p>
+
+</div>
+</div>
 <a id="a7a809513595624679ff07b13b7b5ef59"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7a809513595624679ff07b13b7b5ef59">&#9670;&nbsp;</a></span>Version</h2>
 

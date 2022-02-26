@@ -91,7 +91,7 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses a Hasm instruction.  <a href="class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_instruction_parser.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_instruction_token.html">HasmInstructionToken</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a Hasm instruction.  <a href="class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_instruction_token.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a Hasm instruction and its operands.  <a href="class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_instruction_token.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_integer_parser.html">HasmIntegerParser</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses an integer.  <a href="class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_integer_parser.html#details">More...</a><br /></td></tr>
@@ -171,6 +171,17 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:af10d57f23e862276a83f7490a3a33030"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of data being declared in a ".data" declaration.  <a href="namespace_hasmer_1_1_assembler_1_1_parser.html#af10d57f23e862276a83f7490a3a33030">More...</a><br /></td></tr>
 <tr class="separator:af10d57f23e862276a83f7490a3a33030"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aebc640be0120f6da52f5489a6fece067"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_hasmer_1_1_assembler_1_1_parser.html#aebc640be0120f6da52f5489a6fece067">HasmOperandTokenType</a> { <br />
+&#160;&#160;<a class="el" href="namespace_hasmer_1_1_assembler_1_1_parser.html#aebc640be0120f6da52f5489a6fece067a0ba7583639a274c434bbe6ef797115a4">HasmOperandTokenType.Register</a>, 
+<a class="el" href="namespace_hasmer_1_1_assembler_1_1_parser.html#aebc640be0120f6da52f5489a6fece067ab021df6aac4654c454f46c77646e745f">HasmOperandTokenType.Label</a>, 
+<a class="el" href="namespace_hasmer_1_1_assembler_1_1_parser.html#aebc640be0120f6da52f5489a6fece067a0b1291eded63143ac04709711274785a">HasmOperandTokenType.UInt</a>, 
+<a class="el" href="namespace_hasmer_1_1_assembler_1_1_parser.html#aebc640be0120f6da52f5489a6fece067a27118326006d3829667a400ad23d5d98">HasmOperandTokenType.String</a>, 
+<br />
+&#160;&#160;<a class="el" href="namespace_hasmer_1_1_assembler_1_1_parser.html#aebc640be0120f6da52f5489a6fece067ad909d38d705ce75386dd86e611a82f5b">HasmOperandTokenType.Double</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:aebc640be0120f6da52f5489a6fece067"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the operand.  <a href="namespace_hasmer_1_1_assembler_1_1_parser.html#aebc640be0120f6da52f5489a6fece067">More...</a><br /></td></tr>
+<tr class="separator:aebc640be0120f6da52f5489a6fece067"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a575c55ae51120ff3a96e76e50ae30aec"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_hasmer_1_1_assembler_1_1_parser.html#a575c55ae51120ff3a96e76e50ae30aec">LabelType</a> { <a class="el" href="namespace_hasmer_1_1_assembler_1_1_parser.html#a575c55ae51120ff3a96e76e50ae30aecaa2ba314746bfdbdd8161b87ab77914be">LabelType.ArrayBuffer</a> = 'A', 
 <a class="el" href="namespace_hasmer_1_1_assembler_1_1_parser.html#a575c55ae51120ff3a96e76e50ae30aeca9d461924cd5459f22b0872c38490128f">LabelType.KeyBuffer</a> = 'K', 
 <a class="el" href="namespace_hasmer_1_1_assembler_1_1_parser.html#a575c55ae51120ff3a96e76e50ae30aecaf81016b848cfa4263c5cb32b73eec5e8">LabelType.ValueBuffer</a> = 'V', 
@@ -206,6 +217,42 @@ Enumerations</h2></td></tr>
 </div><div class="memdoc">
 
 <p>The type of data being declared in a ".data" declaration. </p>
+
+</div>
+</div>
+<a id="aebc640be0120f6da52f5489a6fece067"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aebc640be0120f6da52f5489a6fece067">&#9670;&nbsp;</a></span>HasmOperandTokenType</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="namespace_hasmer_1_1_assembler_1_1_parser.html#aebc640be0120f6da52f5489a6fece067">Hasmer.Assembler.Parser.HasmOperandTokenType</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The type of the operand. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aebc640be0120f6da52f5489a6fece067a0ba7583639a274c434bbe6ef797115a4"></a>Register&#160;</td><td class="fielddoc"><p>The operand is a register reference. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="aebc640be0120f6da52f5489a6fece067ab021df6aac4654c454f46c77646e745f"></a>Label&#160;</td><td class="fielddoc"><p>The operand is a code label reference. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="aebc640be0120f6da52f5489a6fece067a0b1291eded63143ac04709711274785a"></a>UInt&#160;</td><td class="fielddoc"><p>The operand is an unsigned integer. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="aebc640be0120f6da52f5489a6fece067a27118326006d3829667a400ad23d5d98"></a>String&#160;</td><td class="fielddoc"><p>The operand is a string. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="aebc640be0120f6da52f5489a6fece067ad909d38d705ce75386dd86e611a82f5b"></a>Double&#160;</td><td class="fielddoc"><p>The operand is an eight-byte IEEE754 float-point number. </p>
+</td></tr>
+</table>
 
 </div>
 </div>

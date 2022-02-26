@@ -92,9 +92,9 @@ Properties</h2></td></tr>
 <tr class="memdesc:aa2f169029f91dfdc555330d09bbf11f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">The source bytecode file for disassembly.  <a href="class_hasmer_1_1_assembler_1_1_hbc_disassembler.html#aa2f169029f91dfdc555330d09bbf11f1">More...</a><br /></td></tr>
 <tr class="separator:aa2f169029f91dfdc555330d09bbf11f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adaad5ea5eedd52a7e757e2470fca7e40"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_assembler_1_1_hbc_disassembler.html#adaad5ea5eedd52a7e757e2470fca7e40">IsExact</a><code> [get]</code></td></tr>
-<tr class="memdesc:adaad5ea5eedd52a7e757e2470fca7e40"><td class="mdescLeft">&#160;</td><td class="mdescRight">If true, preserve the original instructions and do not abstract out variant instructions. <br  />
+<tr class="memdesc:adaad5ea5eedd52a7e757e2470fca7e40"><td class="mdescLeft">&#160;</td><td class="mdescRight">If true, preserve the original instructions and do not abstract out variant instructions. Additionally, instructions which refer to identifier hashes will have the hash operand omitted. <br  />
  If false, instructions will be converted to their variants. <br  />
- See <a class="el" href="class_hasmer_1_1_hbc_abstract_instruction_definition.html" title="Represents the abstract form of variant instructions. Variant instructions are instructions which per...">HbcAbstractInstructionDefinition</a> for more information about variant instructions and abstraction.  <a href="class_hasmer_1_1_assembler_1_1_hbc_disassembler.html#adaad5ea5eedd52a7e757e2470fca7e40">More...</a><br /></td></tr>
+ The default value for this is false. See <a class="el" href="class_hasmer_1_1_hbc_abstract_instruction_definition.html" title="Represents the abstract form of variant instructions. Variant instructions are instructions which per...">HbcAbstractInstructionDefinition</a> for more information about variant instructions and abstraction.  <a href="class_hasmer_1_1_assembler_1_1_hbc_disassembler.html#adaad5ea5eedd52a7e757e2470fca7e40">More...</a><br /></td></tr>
 <tr class="separator:adaad5ea5eedd52a7e757e2470fca7e40"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7ec22f136a73a95d2880d0b4e9c182f9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_hasmer_1_1_assembler_1_1_data_disassembler.html">DataDisassembler</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_assembler_1_1_hbc_disassembler.html#a7ec22f136a73a95d2880d0b4e9c182f9">DataDisassembler</a><code> [get]</code></td></tr>
 <tr class="memdesc:a7ec22f136a73a95d2880d0b4e9c182f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">The disassembler for data. Data is disassembled separately from code, and this property is the disassembler object.  <a href="class_hasmer_1_1_assembler_1_1_hbc_disassembler.html#a7ec22f136a73a95d2880d0b4e9c182f9">More...</a><br /></td></tr>
@@ -221,9 +221,9 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>If true, preserve the original instructions and do not abstract out variant instructions. <br  />
+<p>If true, preserve the original instructions and do not abstract out variant instructions. Additionally, instructions which refer to identifier hashes will have the hash operand omitted. <br  />
  If false, instructions will be converted to their variants. <br  />
- See <a class="el" href="class_hasmer_1_1_hbc_abstract_instruction_definition.html" title="Represents the abstract form of variant instructions. Variant instructions are instructions which per...">HbcAbstractInstructionDefinition</a> for more information about variant instructions and abstraction. </p>
+ The default value for this is false. See <a class="el" href="class_hasmer_1_1_hbc_abstract_instruction_definition.html" title="Represents the abstract form of variant instructions. Variant instructions are instructions which per...">HbcAbstractInstructionDefinition</a> for more information about variant instructions and abstraction. </p>
 
 </div>
 </div>
