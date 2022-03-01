@@ -21,6 +21,10 @@
     "categories": [
         "Programming Languages"
     ],
+    "main": "./client/out/extension",
+    "activationEvents": [
+        "onLanguage:hasm"
+    ],
     "contributes": {
         "languages": [
             {
@@ -32,7 +36,11 @@
                 "extensions": [
                     ".hasm"
                 ],
-                "configuration": "./language-configuration.json"
+                "configuration": "./language-configuration.json",
+                "icon": {
+                    "light": "./images/hasm-light.png",
+                    "dark": "./images/hasm-dark.png"
+                }
             }
         ],
         "grammars": [
@@ -41,11 +49,20 @@
                 "scopeName": "source.hasm",
                 "path": "./syntaxes/hasm.tmLanguage.json"
             }
-        ]
+        ],
+        "snippets": [
+			{
+				"language": "hasm",
+				"path": "./snippets/snippets.json"
+			}
+		]
     },
     "scripts": {
-        "all": "tsc && node scripts-build/copy-instructions.js"
-    },
+		"vscode:prepublish": "yarn compile",
+		"compile": "tsc -b && node scripts/out/copy-instructions.js",
+		"watch": "tsc -b -w",
+		"postinstall": "cd scripts && yarn install && cd ../client && yarn install && cd ../server && yarn install && cd .."
+	},
     "devDependencies": {
         "@types/node": "^17.0.21",
         "typescript": "^4.5.5"

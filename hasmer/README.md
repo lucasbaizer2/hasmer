@@ -8,15 +8,15 @@ You will need the .NET 5 SDK to compile this project. See the [.NET SDK download
 
 # Building
 
-You can open the solution file (see `hasmer.sln` in parent directory) in Visual Studio and build and run from Visual Studio.
+You can open the solution file (see `hasmer.sln`) in Visual Studio and build and run from Visual Studio.
 
 You can also build from the command line using the .NET SDK CLI:
 ```
 dotnet build
 ```
-Ensure you run the above command with the current working directory as being the directory that contains the `hasmer.csproj` file (which is also the directrory this README is in).
+Ensure you run the above command with the current working directory being the one containing the `hasmer.sln` file.
 
-Building with the .NET SDK CLI will generate the executable in the `./bin/Debug/net5.0` directory. You can make a release build using:
+Building with the .NET SDK CLI will generate the executable in the `.hasmer-cli/bin/Debug/net5.0` directory. You can make a release build using:
 ```
 dotnet build -c Release
 ```

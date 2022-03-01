@@ -1,0 +1,19 @@
+{
+	"new function": {
+		"prefix": "new function",
+		"body": [
+			".start Function <${1:name}>(this)",
+			"    .id ${2:0}",
+			"    .params 1",
+			"    .registers 1",
+			"    .symbols 0",
+			"",
+			"    $3",
+			"",
+			"    LoadConstUndefined r0",
+			"    Ret r0",
+			".end"
+		],
+		"description": "Creates a new function"
+	}
+}

@@ -1,2 +1,4 @@
 *.vsix
-/scripts-build
+/client/out
+/scripts/out
+/server/out
