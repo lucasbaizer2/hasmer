@@ -29,42 +29,58 @@ namespace Hasmer {
         /// The sequential ID of the function.
         /// </summary>
         public uint FunctionId { get; set; }
+
         /// <summary>
         /// The offset in the HbcFile of the function.
         /// </summary>
         public uint Offset { get; set; }
+
         /// <summary>
         /// The amount of parameters that the function takes.
         /// </summary>
         public uint ParamCount { get; set; }
+
         /// <summary>
         /// The amount of bytes that the function's bytecode takes up.
         /// </summary>
         public uint BytecodeSizeInBytes { get; set; }
+
         /// <summary>
         /// The index in the string table of the function's name (i.e. HbcFile.StringTable[FunctionName]).
         /// </summary>
         public uint FunctionName { get; set; }
+
         /// <summary>
         /// The offset in the HbcFile of additional (i.e. debug) information about the function.
         /// </summary>
         public uint InfoOffset { get; set; }
+
         /// <summary>
         /// The amount of registers that the function has.
         /// </summary>
         public uint FrameSize { get; set; }
+
         /// <summary>
         /// The amount of symbols that the function has.
         /// </summary>
         public uint EnvironmentSize { get; set; }
+
         public uint HighestReadCacheIndex { get; set; }
+
         public uint HighestWriteCacheIndex { get; set; }
+
         /// <summary>
         /// The flags of the function.
         /// </summary>
         public HbcFuncHeaderFlags Flags { get; set; }
+
         [JsonIgnore]
         public HbcFile DeclarationFile { get; set; }
+
+        /// <summary>
+        /// The disassembled instructions of the function cached by a call to <see cref="HbcFuncHeader.Disassemble"/>.
+        /// </summary>
+        private List<HbcInstruction> CachedInstructions { get; set; }
 
         /// <summary>
         /// Gets the header that should be used for disassembly and decompilation, i.e. the header that contains instructions.
@@ -88,10 +104,23 @@ namespace Hasmer {
         }
 
         /// <summary>
-        /// Disassembles the function, parsing the bytecode into an <see cref="HbcInstruction">HbcInstruction</see> object for each instruction.
+        /// Clears the instructions cache so that a future call to <see cref="Disassemble"/> will disassemble and re-cache the data from scratch.
         /// </summary>
-        /// <returns>An enumerator that yields each instruction in the function.</returns>
-        public IEnumerable<HbcInstruction> Disassemble() {
+        public void ClearInstructionCache() {
+            CachedInstructions = null;
+        }
+
+        /// <summary>
+        /// Disassembles the function, parsing the bytecode into an <see cref="HbcInstruction">HbcInstruction</see> object for each instruction.
+        /// <br />
+        /// The instructions will be cached. To clear the cache and have this function re-parse the instructions, see <see cref="ClearInstructionCache"/>.
+        /// </summary>
+        public List<HbcInstruction> Disassemble() {
+            if (CachedInstructions != null) {
+                return CachedInstructions;
+            }
+
+            CachedInstructions = new List<HbcInstruction>();
             uint offset = GetAssemblerHeader().Offset - DeclarationFile.InstructionOffset;
 
             using MemoryStream ms = new MemoryStream(DeclarationFile.Instructions);
@@ -109,13 +138,15 @@ namespace Hasmer {
                 }
 
                 long endPos = ms.Position;
-                yield return new HbcInstruction {
+                CachedInstructions.Add(new HbcInstruction {
                     Opcode = opcodeValue,
                     Operands = operands,
                     Offset = (uint)ms.Position - offset,
                     Length = (uint)(endPos - startPos)
-                };
+                });
             }
+
+            return CachedInstructions;
         }
     }
 }

@@ -5,16 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Hasmer.Decompiler.AST {
-    public class CallExpression : ISyntax {
-        public ISyntax Callee { get; set; }
-        public List<ISyntax> Arguments { get; set; }
+    public class CallExpression : SyntaxNode {
+        public SyntaxNode Callee { get; set; }
+        public List<SyntaxNode> Arguments { get; set; }
         public bool IsCalleeConstructor { get; set; }
 
         public CallExpression() {
-            Arguments = new List<ISyntax>();
+            Arguments = new List<SyntaxNode>();
         }
 
-        public void Write(SourceCodeBuilder builder) {
+        public override void Write(SourceCodeBuilder builder) {
             if (IsCalleeConstructor) {
                 builder.Write("new ");
             }

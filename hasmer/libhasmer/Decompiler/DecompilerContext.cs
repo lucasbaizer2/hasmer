@@ -80,8 +80,8 @@ namespace Hasmer.Decompiler {
         }
 
         /// <summary>
-        /// Creates a semi-deep copy of the current decompiler context,
-        /// copying the function state and instructions so that the original context's state is not modified by the copy.
+        /// Creates a "semi-deep" copy of the current decompiler context,
+        /// copying the context so that the original context's state is not affected by changes to the copy.
         /// </summary>
         public DecompilerContext DeepCopy() {
             DecompilerContext copy = new DecompilerContext {
@@ -90,11 +90,12 @@ namespace Hasmer.Decompiler {
                 Block = Block,
                 CurrentInstructionIndex = CurrentInstructionIndex,
                 Parent = Parent,
-                Function = Function
+                Function = Function,
             };
             copy.State = new FunctionState(copy, (uint)State.Registers.Length);
 
             Array.Copy(State.Registers.Storage, copy.State.Registers.Storage, State.Registers.Length);
+            Array.Copy(State.Registers.RegisterUsages, copy.State.Registers.RegisterUsages, State.Registers.RegisterUsages.Length);
             Array.Copy(State.Variables, copy.State.Variables, State.Variables.Length);
             Array.Copy(State.CallExpressions, copy.State.CallExpressions, State.CallExpressions.Length);
 

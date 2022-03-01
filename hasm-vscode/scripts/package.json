@@ -5,6 +5,10 @@
 		"vscode": "^1.64.0"
 	},
 	"devDependencies": {
+		"@types/fs-extra": "^9.0.13",
 		"@types/vscode": "^1.52.0"
+	},
+	"dependencies": {
+		"fs-extra": "^10.0.1"
 	}
 }

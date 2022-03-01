@@ -30,10 +30,9 @@ namespace Hasmer.Assembler.Visitor {
         public List<HbcFunctionBuilder> Functions { get; set; }
 
         /// <summary>
-        /// Represents the mappings between each function ID (key)
-        /// and their offset in the instructions buffer (value).
+        /// The file being built.
         /// </summary>
-        private Dictionary<uint, uint> FunctionOffsets;
+        private HbcFile File { get; set; }
 
         /// <summary>
         /// Represents the string table.
@@ -90,21 +89,20 @@ namespace Hasmer.Assembler.Visitor {
         /// Serializes the instructions of every function to a buffer sequentially.
         /// </summary>
         private void BuildBytecode() {
-            FunctionOffsets = new Dictionary<uint, uint>(Functions.Count);
-
             using MemoryStream ms = new MemoryStream();
             using BinaryWriter writer = new BinaryWriter(ms);
 
             foreach (HbcFunctionBuilder builder in Functions) {
-                FunctionOffsets[builder.FunctionId] = (uint)ms.Position;
+                File.SmallFuncHeaders[builder.FunctionId].Offset = (uint)ms.Position;
                 foreach (HasmInstructionToken insn in builder.Instructions) {
                     WriteInstruction(writer, insn);
                 }
+                File.SmallFuncHeaders[builder.FunctionId].BytecodeSizeInBytes = (uint)ms.Position - File.SmallFuncHeaders[builder.FunctionId].Offset;
             }
         }
 
         public HbcFile Build() {
-            HbcHeader header = new HbcHeader {
+            File.Header = new HbcHeader {
                 GlobalCodeIndex = 0,
                 Magic = HbcHeader.HBC_MAGIC_HEADER,
                 Version = Format.Version,
@@ -115,10 +113,9 @@ namespace Hasmer.Assembler.Visitor {
 
             BuildBytecode();
 
-            HbcFile file = new HbcFile();
-            file.BytecodeFormat = Format;
+            // TODO
 
-            return file;
+            return File;
         }
     }
 }

@@ -5,16 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Hasmer.Decompiler.AST {
-    public class UnaryExpression : ISyntax {
+    public class UnaryExpression : SyntaxNode {
         public string Operator { get; set; }
-        public ISyntax Argument { get; set; }
+        public SyntaxNode Argument { get; set; }
 
-        public void Write(SourceCodeBuilder builder) {
+        public override void Write(SourceCodeBuilder builder) {
             builder.Write(Operator);
             if (Operator != "!") {
                 builder.Write(" ");
             }
+            builder.Write("(");
             Argument.Write(builder);
+            builder.Write(")");
         }
     }
 }

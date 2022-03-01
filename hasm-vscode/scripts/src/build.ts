@@ -3,6 +3,8 @@
 
 import * as fs from 'fs/promises';
 import * as path from 'path';
+import * as child_process from 'child_process';
+import * as fs_extra from 'fs-extra';
 
 interface BytecodeDefinitionFile {
     Version: number;
@@ -15,10 +17,40 @@ interface BytecodeDefinitionFile {
 }
 
 (async () => {
+    const lspDir = path.join(process.cwd(), '..', 'hasmer', 'hasmer-lsp');
+    child_process.execFileSync('dotnet', ['clean'], {
+        cwd: lspDir,
+        stdio: 'inherit',
+    });
+    child_process.execFileSync('dotnet', ['build'], {
+        cwd: lspDir,
+        stdio: 'inherit',
+    });
+
+    const fileExists = async (path: string) => !!(await fs.stat(path).catch((_) => false));
+
+    const outputDirectory = path.join(lspDir, 'bin', 'debug', 'net5.0');
+    const destDirectory = path.join(process.cwd(), 'client', 'out', 'lsp');
+    if (!fileExists(destDirectory)) {
+        fs.mkdir(destDirectory, {
+            recursive: true,
+        });
+    }
+
+    try {
+        fs_extra.copySync(outputDirectory, destDirectory, {
+            recursive: true,
+            overwrite: true,
+        });
+    } catch {
+        console.log('Could not overwrite hasmer-lsp executable. Make sure you aren\'t debugging the extension while building.');
+        process.exit(1);
+    }
+
     const syntaxFilePath = path.join(process.cwd(), 'syntaxes', 'hasm.tmLanguage.json');
     const syntaxJson = JSON.parse(await fs.readFile(syntaxFilePath, 'utf8'));
 
-    const bytecodeDirectory = path.join(process.cwd(), '..', 'hasmer', 'Resources');
+    const bytecodeDirectory = path.join(process.cwd(), '..', 'hasmer', 'libhasmer', 'Resources');
     const files = await fs.readdir(bytecodeDirectory);
 
     const definitionFileNameRegex = /^Bytecode[0-9]+\.json$/;
@@ -39,4 +71,6 @@ interface BytecodeDefinitionFile {
     syntaxJson.repository.instruction.match = `\\b(${instructionsList})\\b`;
 
     await fs.writeFile(syntaxFilePath, JSON.stringify(syntaxJson, null, '\t'), 'utf8');
+
+    console.log('Build script executed successfully.');
 })();

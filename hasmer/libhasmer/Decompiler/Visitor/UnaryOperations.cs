@@ -19,6 +19,8 @@ namespace Hasmer.Decompiler.Visitor {
             byte resultRegister = context.Instruction.Operands[0].GetValue<byte>();
             byte sourceRegister = context.Instruction.Operands[1].GetValue<byte>();
 
+            context.State.Registers.MarkUsage(sourceRegister);
+
             context.State.Registers[resultRegister] = new UnaryExpression {
                 Operator = "typeof",
                 Argument = context.State.Registers[sourceRegister]

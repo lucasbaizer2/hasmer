@@ -41,7 +41,7 @@ namespace Hasmer.Decompiler.Visitor {
         /// since the if statement is executed if the expression is equal,
         /// and the jump is performed if the expression is not equal.
         /// </summary>
-        private static void ConditionalJump(DecompilerContext context, ISyntax expr) {
+        private static void ConditionalJump(DecompilerContext context, SyntaxNode expr) {
             int jump = context.Instruction.Operands[0].GetValue<int>();
 
             IfStatement block = new IfStatement {
@@ -58,8 +58,8 @@ namespace Hasmer.Decompiler.Visitor {
 
                 int toIndex = context.Instructions.FindIndex(insn => insn.Offset == to);
                 HbcInstruction endInstruction = context.Instructions[toIndex];
-                string endInstructionName = context.Source.BytecodeFormat.Definitions[endInstruction.Opcode].Name;
-                if (endInstructionName == "Jmp") { // unconditional jump means else statement
+                HbcInstructionDefinition endInstructionDef = context.Source.BytecodeFormat.Definitions[endInstruction.Opcode];
+                if (endInstructionDef.Name == "Jmp") { // unconditional jump means else statement
                     block.Consequent = DecompileConditionalBlock(consequentContext, start, to - endInstruction.Length); // remove the Jmp from the consequent block
 
                     DecompilerContext alternateContext = context.DeepCopy();
@@ -70,8 +70,10 @@ namespace Hasmer.Decompiler.Visitor {
                     toIndex = context.Instructions.FindIndex(insn => insn.Offset == to);
 
                     FunctionDecompiler.WriteRemainingRegisters(alternateContext);
+                } else if (endInstructionDef.IsJump) { // conditional jump means if-else statement
+                    throw new NotImplementedException("if-else");
                 } else {
-                    block.Consequent = DecompileConditionalBlock(consequentContext, start, to);
+                    block.Consequent = DecompileConditionalBlock(consequentContext, start, to); // no jump means end of the if chain
                 }
 
                 FunctionDecompiler.WriteRemainingRegisters(consequentContext);
@@ -81,15 +83,24 @@ namespace Hasmer.Decompiler.Visitor {
             context.Block.Body.Add(block);
         }
 
-        private static void JumpBinaryExpression(DecompilerContext context, string op) =>
+        private static void JumpBinaryExpression(DecompilerContext context, string op) {
+            byte left = context.Instruction.Operands[1].GetValue<byte>();
+            byte right = context.Instruction.Operands[2].GetValue<byte>();
+
+            context.State.Registers.MarkUsages(left, right);
+
             ConditionalJump(context, new BinaryExpression {
-                Left = context.State.Registers[context.Instruction.Operands[1].GetValue<byte>()],
-                Right = context.State.Registers[context.Instruction.Operands[2].GetValue<byte>()],
+                Left = context.State.Registers[left],
+                Right = context.State.Registers[right],
                 Operator = op
             });
+        }
 
         [Visitor]
-        public static void JEqual(DecompilerContext context) => JumpBinaryExpression(context, "!=");
+        public static void Jmp(DecompilerContext _) {
+            // unconditional jumps are basically ignored by the compiler, they are interpreted through analysis
+            // the decompiler should ignore when an unconditional jump is explicitly visited
+        }
 
         [Visitor]
         public static void JNotEqual(DecompilerContext context) => JumpBinaryExpression(context, "==");
@@ -107,24 +118,41 @@ namespace Hasmer.Decompiler.Visitor {
         public static void JNotLess(DecompilerContext context) => JumpBinaryExpression(context, "<");
 
         [Visitor]
+        public static void JNotLessEqual(DecompilerContext context) => JumpBinaryExpression(context, "<=");
+
+        [Visitor]
+        public static void JGreater(DecompilerContext context) => JumpBinaryExpression(context, "<=");
+
+        [Visitor]
+        public static void JGreaterEqual(DecompilerContext context) => JumpBinaryExpression(context, "<");
+
+        [Visitor]
         public static void JLess(DecompilerContext context) => JumpBinaryExpression(context, ">=");
 
         [Visitor]
+        public static void JLessEqual(DecompilerContext context) => JumpBinaryExpression(context, ">");
+
+        [Visitor]
+        public static void JEqual(DecompilerContext context) => JumpBinaryExpression(context, "!=");
+
+        [Visitor]
         public static void JmpTrue(DecompilerContext context) {
+            byte arg = context.Instruction.Operands[1].GetValue<byte>();
+            context.State.Registers.MarkUsage(arg);
             ConditionalJump(context, new UnaryExpression {
                 Operator = "!",
-                Argument = context.State.Registers[context.Instruction.Operands[1].GetValue<byte>()]
+                Argument = context.State.Registers[arg]
             });
         }
 
         [Visitor]
         public static void JmpFalse(DecompilerContext context) {
-            ConditionalJump(context, context.State.Registers[context.Instruction.Operands[1].GetValue<byte>()]);
+            uint arg = context.Instruction.Operands[1].GetValue<uint>();
+            context.State.Registers.MarkUsage(arg);
+            ConditionalJump(context, context.State.Registers[arg]);
         }
 
         [Visitor]
-        public static void JmpFalseLong(DecompilerContext context) {
-            ConditionalJump(context, context.State.Registers[context.Instruction.Operands[1].GetValue<uint>()]);
-        }
+        public static void JmpFalseLong(DecompilerContext context) => JmpFalse(context);
     }
 }

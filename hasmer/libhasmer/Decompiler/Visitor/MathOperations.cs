@@ -12,12 +12,18 @@ namespace Hasmer.Decompiler.Visitor {
     [VisitorCollection]
     public class MathOperations {
         private static void DecompileBinaryOperation(DecompilerContext context, string op) {
+            byte result = context.Instruction.Operands[0].GetValue<byte>();
+            byte left = context.Instruction.Operands[1].GetValue<byte>();
+            byte right = context.Instruction.Operands[2].GetValue<byte>();
+
+            context.State.Registers.MarkUsages(left, right);
+
             BinaryExpression expr = new BinaryExpression {
-                Left = context.State.Registers[context.Instruction.Operands[1].GetValue<byte>()],
-                Right = context.State.Registers[context.Instruction.Operands[2].GetValue<byte>()],
+                Left = context.State.Registers[left],
+                Right = context.State.Registers[right],
                 Operator = op
             };
-            context.State.Registers[context.Instruction.Operands[0].GetValue<byte>()] = expr;
+            context.State.Registers[result] = expr;
         }
 
         [Visitor]
@@ -31,5 +37,11 @@ namespace Hasmer.Decompiler.Visitor {
 
         [Visitor]
         public static void SubN(DecompilerContext context) => DecompileBinaryOperation(context, "-");
+
+        [Visitor]
+        public static void Mul(DecompilerContext context) => DecompileBinaryOperation(context, "*");
+
+        [Visitor]
+        public static void MulN(DecompilerContext context) => DecompileBinaryOperation(context, "*");
     }
 }

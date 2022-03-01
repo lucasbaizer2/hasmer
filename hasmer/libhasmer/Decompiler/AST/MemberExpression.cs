@@ -6,11 +6,11 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Hasmer.Decompiler.AST {
-    public class MemberExpression : ISyntax {
+    public class MemberExpression : SyntaxNode {
         private static readonly Regex IdentifierRegex = new Regex(@"^([A-Za-z]|_|\$)([A-Za-z]|_|\$|[0-9])+$", RegexOptions.Compiled);
 
-        public ISyntax Object { get; set; }
-        public ISyntax Property { get; set; }
+        public SyntaxNode Object { get; set; }
+        public SyntaxNode Property { get; set; }
         public bool IsComputed { get; set; }
 
         private bool AutoCompute;
@@ -21,7 +21,7 @@ namespace Hasmer.Decompiler.AST {
             AutoCompute = autoCompute;
         }
 
-        public void Write(SourceCodeBuilder builder) {
+        public override void Write(SourceCodeBuilder builder) {
             if (AutoCompute) {
                 if (Property is not Identifier ident) {
                     IsComputed = true;

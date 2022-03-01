@@ -5,14 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Hasmer.Decompiler.AST {
-    public class ArrayExpression : ISyntax {
-        public List<ISyntax> Elements { get; set; }
+    public class ArrayExpression : SyntaxNode {
+        public List<SyntaxNode> Elements { get; set; }
 
         public ArrayExpression() {
-            Elements = new List<ISyntax>();
+            Elements = new List<SyntaxNode>();
         }
 
-        public void Write(SourceCodeBuilder builder) {
+        public override void Write(SourceCodeBuilder builder) {
             builder.Write("[");
             for (int i = 0; i < Elements.Count; i++) {
                 Elements[i].Write(builder);

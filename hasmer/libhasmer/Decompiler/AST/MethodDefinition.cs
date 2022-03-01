@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Hasmer.Decompiler.AST {
-    public class MethodDefinition : ISyntax {
-        public ISyntax Key { get; set; }
+    public class MethodDefinition : SyntaxNode {
+        public SyntaxNode Key { get; set; }
         public FunctionDeclaration Value { get; set; }
         public bool IsStatic { get; set; }
         public bool IsComputed { get; set; }
 
-        public void Write(SourceCodeBuilder builder) {
+        public override void Write(SourceCodeBuilder builder) {
             Value.Name = null;
             Value.IsExpression = true;
 

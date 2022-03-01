@@ -5,12 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Hasmer.Decompiler.AST {
-    public class ObjectExpressionProperty : ISyntax {
-        public ISyntax Key { get; set; }
-        public ISyntax Value { get; set; }
+    public class ObjectExpressionProperty : SyntaxNode {
+        public SyntaxNode Key { get; set; }
+        public SyntaxNode Value { get; set; }
         public bool IsComputed { get; set; }
 
-        public void Write(SourceCodeBuilder builder) {
+        public override void Write(SourceCodeBuilder builder) {
             if (IsComputed) {
                 builder.Write("[");
             }
@@ -23,14 +23,14 @@ namespace Hasmer.Decompiler.AST {
         }
     }
 
-    public class ObjectExpression : ISyntax {
+    public class ObjectExpression : SyntaxNode {
         public List<ObjectExpressionProperty> Properties { get; set; }
 
         public ObjectExpression() {
             Properties = new List<ObjectExpressionProperty>();
         }
 
-        public void Write(SourceCodeBuilder builder) {
+        public override void Write(SourceCodeBuilder builder) {
             if (Properties.Count == 0) {
                 builder.Write("{}");
                 return;

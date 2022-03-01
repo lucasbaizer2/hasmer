@@ -8,7 +8,7 @@ namespace Hasmer.Assembler {
     /// <summary>
     /// Used for diassembling the data section of a Hermes bytecode file.
     /// </summary>
-    public class DataDisassembler { 
+    public class DataDisassembler {
         /// <summary>
         /// The Hermes bytecode file being disassembled.
         /// </summary>
@@ -18,10 +18,12 @@ namespace Hasmer.Assembler {
         /// The decoded Array Buffer.
         /// </summary>
         public List<HbcDataBufferItems> ArrayBuffer { get; set; }
+
         /// <summary>
         /// The decoded Object Key Buffer.
         /// </summary>
         public List<HbcDataBufferItems> KeyBuffer { get; set; }
+
         /// <summary>
         /// The decoded Object Value Buffer.
         /// </summary>
@@ -41,8 +43,6 @@ namespace Hasmer.Assembler {
         /// This enables reading over multiple entries at once.
         /// </summary>
         public PrimitiveValue[] GetElementSeries(List<HbcDataBufferItems> buffer, uint offset, uint length) {
-            // TODO
-
             PrimitiveValue[] series = new PrimitiveValue[length];
             int currentIndex = 0;
             for (int i = 0; i < length; i++) {
@@ -76,7 +76,9 @@ namespace Hasmer.Assembler {
                 string joined = string.Join(", ", mapped);
                 builder.AppendLine($".data {prefix}{i} {tagType}[{joined}] # offset = {items.Offset}");
             }
-            builder.AppendLine();
+            if (buffer.Count > 0) {
+                builder.AppendLine();
+            }
         }
 
         public void DisassembleData() {

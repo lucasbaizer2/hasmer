@@ -7,6 +7,25 @@ using Hasmer.Decompiler.AST;
 
 namespace Hasmer.Decompiler.Visitor {
     /// <summary>
+    /// Represents an internal identifier referring to an environment context.
+    /// </summary>
+    public class EnvironmentIdentifier : SyntaxNode {
+        /// <summary>
+        /// The decompiler context of the environment.
+        /// </summary>
+        public DecompilerContext EnvironmentContext { get; set; }
+
+        /// <summary>
+        /// The name of the function which defined the environment.
+        /// </summary>
+        public string EnvironmentName => EnvironmentContext.Source.StringTable[EnvironmentContext.Function.FunctionName];
+
+        public override void Write(SourceCodeBuilder builder) {
+            throw new Exception();
+        }
+    }
+
+    /// <summary>
     /// Visitors for instructions that deal with function environments.
     /// </summary>
     [VisitorCollection]
@@ -19,7 +38,10 @@ namespace Hasmer.Decompiler.Visitor {
             byte register = context.Instruction.Operands[0].GetValue<byte>();
             byte environment = context.Instruction.Operands[1].GetValue<byte>();
 
-            context.State.Registers[register] = new Identifier($"__ENVIRONMENT_{environment}");
+            DecompilerContext envContext = context.GetDeepParent(environment + 1);
+            context.State.Registers[register] = new EnvironmentIdentifier {
+                EnvironmentContext = envContext
+            };
         }
 
         /// <summary>
@@ -29,7 +51,9 @@ namespace Hasmer.Decompiler.Visitor {
         public static void CreateEnvironment(DecompilerContext context) {
             byte register = context.Instruction.Operands[0].GetValue<byte>();
 
-            context.State.Registers[register] = new Identifier($"__ENVIRONMENT_0");
+            context.State.Registers[register] = new EnvironmentIdentifier {
+                EnvironmentContext = context
+            };
         }
 
         /// <summary>
@@ -41,11 +65,8 @@ namespace Hasmer.Decompiler.Visitor {
             byte environment = context.Instruction.Operands[1].GetValue<byte>();
             ushort slot = context.Instruction.Operands[2].GetValue<ushort>();
 
-            context.State.Registers[destination] = new MemberExpression {
-                Object = context.State.Registers[environment],
-                Property = new Literal(new PrimitiveValue(slot)),
-                IsComputed = true
-            };
+            EnvironmentIdentifier env = (EnvironmentIdentifier)context.State.Registers[environment];
+            context.State.Registers[destination] = new Identifier($"{env.EnvironmentName}${slot}");
         }
 
         /// <summary>
@@ -58,15 +79,33 @@ namespace Hasmer.Decompiler.Visitor {
             ushort slot = context.Instruction.Operands[1].GetValue<ushort>();
             byte valueRegister = context.Instruction.Operands[2].GetValue<byte>();
 
+            context.State.Registers.MarkUsage(valueRegister);
+
+            EnvironmentIdentifier env = (EnvironmentIdentifier)context.State.Registers[environment];
             context.Block.Body.Add(new AssignmentExpression {
-                Left = new MemberExpression {
-                    Object = context.State.Registers[environment],
-                    Property = new Literal(new PrimitiveValue(slot)),
-                },
+                Left = new Identifier($"{env.EnvironmentName}${slot}"),
                 Right = context.State.Registers[valueRegister],
                 Operator = "="
             });
-            // context.State.Registers[valueRegister] = null;
         }
+
+        /// <summary>
+        /// Stores the value of NewTarget into the given register.
+        /// </summary>
+        [Visitor]
+        public static void GetNewTarget(DecompilerContext context) {
+            byte register = context.Instruction.Operands[0].GetValue<byte>();
+
+            context.State.Registers[register] = new Identifier("NewTarget");
+        }
+
+        [Visitor]
+        public static void StoreToEnvironmentL(DecompilerContext context) => StoreToEnvironment(context);
+
+        [Visitor]
+        public static void StoreNPToEnvironment(DecompilerContext context) => StoreToEnvironment(context);
+
+        [Visitor]
+        public static void StoreNPToEnvironmentL(DecompilerContext context) => StoreToEnvironment(context);
     }
 }

@@ -69,7 +69,7 @@ namespace Hasmer.Decompiler {
         public FunctionDecompiler(HbcDecompiler decompiler, HbcFuncHeader header) {
             Decompiler = decompiler;
             Header = header;
-            Instructions = header.Disassemble().ToList();
+            Instructions = header.Disassemble();
         }
 
         /// <summary>
@@ -100,6 +100,7 @@ namespace Hasmer.Decompiler {
             string opcodeName = context.Source.BytecodeFormat.Definitions[insn.Opcode].Name;
 
             if (InstructionHandlers.ContainsKey(opcodeName)) {
+                Console.WriteLine("Observing instruction: " + insn.ToDisassembly(context.Source));
                 InstructionHandler handler = InstructionHandlers[opcodeName];
                 handler(context);
             } else {
@@ -114,7 +115,7 @@ namespace Hasmer.Decompiler {
         /// <summary>
         /// Decompiles this function into an AST structure.
         /// </summary>
-        public ISyntax CreateAST(DecompilerContext parent) {
+        public SyntaxNode CreateAST(DecompilerContext parent) {
             BlockStatement block = new BlockStatement();
             FunctionDeclaration func = new FunctionDeclaration {
                 Name = new Identifier(Source.SmallFuncHeaders[Header.FunctionId].GetFunctionName(Source)),

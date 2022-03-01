@@ -30,6 +30,8 @@ namespace Hasmer.Decompiler.Visitor {
             byte toRegister = context.Instruction.Operands[0].GetValue<byte>();
             byte fromRegister = context.Instruction.Operands[1].GetValue<byte>();
 
+            // TODO: context.State.Registers.MarkUsage here?
+
             context.State.Registers[toRegister] = context.State.Registers[fromRegister];
         }
 
@@ -68,6 +70,8 @@ namespace Hasmer.Decompiler.Visitor {
             byte register = context.Instruction.Operands[0].GetValue<byte>();
             byte index = context.Instruction.Operands[1].GetValue<byte>();
 
+            context.State.Registers.MarkUsage(index);
+
             context.State.Registers[register] = new MemberExpression {
                 Object = new Identifier("arguments"),
                 Property = context.State.Registers[index]
@@ -80,6 +84,9 @@ namespace Hasmer.Decompiler.Visitor {
         [Visitor]
         public static void Ret(DecompilerContext context) {
             byte register = context.Instruction.Operands[0].GetValue<byte>();
+
+            // TODO: context.State.Registers.MarkUsage ?
+
             ReturnStatement ret = new ReturnStatement {
                 // functions sometimes return an empty register
                 // in that case, just coerce empty into undefined

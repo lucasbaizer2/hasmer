@@ -41,13 +41,41 @@ namespace Hasmer.Decompiler {
         /// </summary>
         public string Decompile(bool preserveAst) {
             DataDisassembler.DisassembleData();
-            FunctionDecompiler decompiler = new FunctionDecompiler(this, Source.SmallFuncHeaders[197]);
-            ISyntax ast = decompiler.CreateAST(null);
+
+            ProgramDefinition root = new ProgramDefinition {
+                Tokens = new List<SyntaxNode>(Source.SmallFuncHeaders.Length)
+            };
+
+            // create a list containing the IDs of all functions
+            List<uint> rootFunctions = new List<uint>();
+            for (uint i = 0; i < Source.SmallFuncHeaders.Length; i++) {
+                rootFunctions.Add(i);
+            }
+
+            foreach (HbcSmallFuncHeader header in Source.SmallFuncHeaders) {
+                List<HbcInstruction> insns = header.Disassemble();
+                foreach (HbcInstruction insn in insns) {
+                    HbcInstructionDefinition def = Source.BytecodeFormat.Definitions[insn.Opcode];
+                    if (def.Name == "CreateClosure") {
+                        uint closureId = insn.Operands[2].GetValue<uint>();
+                        rootFunctions.Remove(closureId); // remove functions defined as closures from the root functions list
+                    }
+                }
+            }
+
+            // decompile each non-closure function at the root
+            // closures will be expanded recursively through each function that creates the closure
+            foreach (uint funcId in rootFunctions) {
+                FunctionDecompiler decompiler = new FunctionDecompiler(this, Source.SmallFuncHeaders[funcId]);
+                SyntaxNode ast = decompiler.CreateAST(null);
+                root.Tokens.Add(ast);
+            }
+
             if (preserveAst) {
-                return JsonConvert.SerializeObject(ast, Formatting.Indented);
+                return JsonConvert.SerializeObject(root, Formatting.Indented);
             } else {
                 SourceCodeBuilder builder = new SourceCodeBuilder("    ");
-                ast.Write(builder);
+                root.Write(builder);
                 return builder.ToString();
             }
         }

@@ -99,5 +99,13 @@ namespace Hasmer.Decompiler.Visitor {
         public static void LoadConstInt(DecompilerContext context) {
             LoadConstNumerical<uint>(context);
         }
+
+        /// <summary>
+        /// Loads a constant 8-byte IEE754 floating point number into the specified register.
+        /// </summary>
+        [Visitor]
+        public static void LoadConstDouble(DecompilerContext context) {
+            LoadConstNumerical<double>(context);
+        }
     }
 }

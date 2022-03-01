@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Hasmer.Decompiler.AST {
-    public class ReturnStatement : ISyntax {
-        public ISyntax Argument { get; set; }
+    public class ReturnStatement : SyntaxNode {
+        public SyntaxNode Argument { get; set; }
 
-        public void Write(SourceCodeBuilder builder) {
+        public override void Write(SourceCodeBuilder builder) {
             builder.Write("return ");
             Argument.Write(builder);
         }

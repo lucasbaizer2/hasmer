@@ -9,8 +9,8 @@ namespace Hasmer.Decompiler.AST {
     /// Represents an empty token in the syntax tree.
     /// This is commonly used a placeholder during decompilation.
     /// </summary>
-    public class EmptyExpression : ISyntax {
-        public void Write(SourceCodeBuilder builder) {
+    public class EmptyExpression : SyntaxNode {
+        public override void Write(SourceCodeBuilder builder) {
             // no-op
         }
     }

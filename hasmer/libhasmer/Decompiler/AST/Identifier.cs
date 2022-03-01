@@ -8,7 +8,7 @@ namespace Hasmer.Decompiler.AST {
     /// <summary>
     /// Represents a JavaScript identifier, such as a field name, class name, etc.
     /// </summary>
-    public class Identifier : ISyntax {
+    public class Identifier : SyntaxNode {
         /// <summary>
         /// The name of the identifier.
         /// </summary>
@@ -27,7 +27,7 @@ namespace Hasmer.Decompiler.AST {
             Name = name;
         }
 
-        public void Write(SourceCodeBuilder builder) {
+        public override void Write(SourceCodeBuilder builder) {
             if (IsRedundant) {
                 throw new Exception("cannot write redunant identifier");
             }

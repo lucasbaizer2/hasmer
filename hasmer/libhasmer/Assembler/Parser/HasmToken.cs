@@ -27,14 +27,14 @@ namespace Hasmer.Assembler.Parser {
         /// Gets the type of the token (the class name of the implementation) as information when JSON serializing the token (used for debug).
         /// </summary>
         [JsonProperty("TokenType")]
-
         private string JsonTokenType => GetType().Name;
+
         /// <summary>
         /// Gets the line of the token (except 1-indexed) as information when JSON serializing the token (used for debug).
         /// </summary>
         [JsonProperty("Line")]
-
         private int JsonLine => Line + 1;
+
         /// <summary>
         /// Gets the column of the token (except 1-indexed) as information when JSON serializing the token (used for debug).
         /// </summary>

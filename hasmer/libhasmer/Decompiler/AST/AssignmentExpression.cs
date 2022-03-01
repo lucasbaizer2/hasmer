@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Hasmer.Decompiler.AST {
-    public class AssignmentExpression : ISyntax {
+    public class AssignmentExpression : SyntaxNode {
         public string DeclarationKind { get; set; }
-        public ISyntax Left { get; set; }
-        public ISyntax Right { get; set; }
+        public SyntaxNode Left { get; set; }
+        public SyntaxNode Right { get; set; }
         public string Operator { get; set; }
 
-        public void Write(SourceCodeBuilder builder) {
+        public override void Write(SourceCodeBuilder builder) {
             if (DeclarationKind != null) {
                 builder.Write(DeclarationKind);
                 builder.Write(" ");

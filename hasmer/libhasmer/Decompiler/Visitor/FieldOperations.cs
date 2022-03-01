@@ -21,6 +21,8 @@ namespace Hasmer.Decompiler.Visitor {
             byte resultRegister = context.Instruction.Operands[0].GetValue<byte>();
             byte constructorResultRegister = context.Instruction.Operands[2].GetValue<byte>();
 
+            context.State.Registers.MarkUsage(constructorResultRegister);
+
             context.State.Registers[resultRegister] = context.State.Registers[constructorResultRegister];
         }
 
@@ -101,11 +103,11 @@ namespace Hasmer.Decompiler.Visitor {
         /// <summary>
         /// Sets the value of a field reference by name (i.e. by identifier).
         /// </summary>
-        private static void CommonPutById(DecompilerContext context, ISyntax property) {
+        private static void CommonPutById(DecompilerContext context, SyntaxNode property) {
             byte resultRegister = context.Instruction.Operands[0].GetValue<byte>();
             byte sourceRegister = context.Instruction.Operands[1].GetValue<byte>();
 
-            ISyntax obj;
+            SyntaxNode obj;
             if (context.State.Variables[resultRegister] != null) {
                 obj = new Identifier(context.State.Variables[resultRegister]);
             } else {
@@ -129,13 +131,23 @@ namespace Hasmer.Decompiler.Visitor {
         public static void PutByVal(DecompilerContext context) {
             byte resultRegister = context.Instruction.Operands[0].GetValue<byte>();
             byte valRegister = context.Instruction.Operands[1].GetValue<byte>();
-            byte sourceRegister = context.Instruction.Operands[1].GetValue<byte>();
+            byte sourceRegister = context.Instruction.Operands[2].GetValue<byte>();
+
+            context.State.Registers.MarkUsage(sourceRegister);
+
+            SyntaxNode obj;
+            if (context.State.Variables[resultRegister] != null) {
+                obj = new Identifier(context.State.Variables[resultRegister]);
+            } else {
+                obj = context.State.Registers[resultRegister];
+            }
 
             context.Block.Body.Add(new AssignmentExpression {
                 Operator = "=",
-                Left = new MemberExpression {
-                    Object = context.State.Registers[resultRegister],
-                    Property = context.State.Registers[valRegister]
+                Left = new MemberExpression(false) {
+                    Object = obj,
+                    Property = context.State.Registers[valRegister],
+                    IsComputed = true
                 },
                 Right = context.State.Registers[sourceRegister]
             });
@@ -169,10 +181,52 @@ namespace Hasmer.Decompiler.Visitor {
             byte sourceRegister = context.Instruction.Operands[1].GetValue<byte>();
             uint identifierRegister = context.Instruction.Operands[2].GetValue<uint>();
 
+            context.State.Registers.MarkUsage(identifierRegister);
+
             context.State.Registers[resultRegister] = new MemberExpression(false) {
                 Object = context.State.Registers[sourceRegister],
                 Property = context.State.Registers[identifierRegister],
                 IsComputed = true
+            };
+        }
+
+        /// <summary>
+        /// Deletes a field from an object, with the field indicated by a value in a register.
+        /// </summary>
+        [Visitor]
+        public static void DelByVal(DecompilerContext context) {
+            byte resultRegister = context.Instruction.Operands[0].GetValue<byte>();
+            byte sourceRegister = context.Instruction.Operands[1].GetValue<byte>();
+            uint identifierRegister = context.Instruction.Operands[2].GetValue<uint>();
+
+            context.State.Registers.MarkUsage(identifierRegister);
+
+            context.Block.Body.Add(new UnaryExpression {
+                Operator = "delete",
+                Argument = new MemberExpression(false) {
+                    Object = context.State.Registers[sourceRegister],
+                    Property = context.State.Registers[identifierRegister],
+                    IsComputed = true
+                }
+            });
+            context.State.Registers[resultRegister] = new Literal(new PrimitiveValue(true)); // for the purposes of decompilation, the delete operator always returns true
+        }
+
+        /// <summary>
+        /// Coerces a given register into a number value and places the number into the given register.
+        /// </summary>
+        [Visitor]
+        public static void ToNumber(DecompilerContext context) {
+            byte resultRegister = context.Instruction.Operands[0].GetValue<byte>();
+            byte sourceRegister = context.Instruction.Operands[1].GetValue<byte>();
+
+            context.State.Registers.MarkUsage(sourceRegister);
+
+            context.State.Registers[resultRegister] = new CallExpression {
+                Callee = new Identifier("Number"),
+                Arguments = new List<SyntaxNode> {
+                    context.State.Registers[sourceRegister]
+                }
             };
         }
     }

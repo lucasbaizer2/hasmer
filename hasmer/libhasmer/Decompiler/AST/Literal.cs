@@ -5,14 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Hasmer.Decompiler.AST {
-    public class Literal : ISyntax {
+    public class Literal : SyntaxNode {
         public PrimitiveValue Value { get; set; }
 
         public Literal(PrimitiveValue value) {
             Value = value;
         }
 
-        public void Write(SourceCodeBuilder builder) {
+        public override void Write(SourceCodeBuilder builder) {
             if (Value.TypeCode == TypeCode.String) {
                 builder.Write("'");
                 builder.Write(Value.ToString());

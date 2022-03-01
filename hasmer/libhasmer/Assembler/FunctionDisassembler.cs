@@ -43,7 +43,7 @@ namespace Hasmer.Assembler {
         public FunctionDisassembler(HbcDisassembler disassembler, HbcFuncHeader func) {
             Disassembler = disassembler;
             Func = func;
-            Instructions = func.Disassemble().ToList();
+            Instructions = func.Disassemble();
         }
 
         /// <summary>

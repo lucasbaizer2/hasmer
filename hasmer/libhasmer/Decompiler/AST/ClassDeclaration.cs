@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Hasmer.Decompiler.AST {
-    public class ClassDeclaration : ISyntax {
+    public class ClassDeclaration : SyntaxNode {
         public Identifier Name { get; set; }
         public Identifier SuperClass { get; set; }
         public List<MethodDefinition> Body { get; set; }
@@ -14,7 +14,7 @@ namespace Hasmer.Decompiler.AST {
             Body = new List<MethodDefinition>();
         }
 
-        public void Write(SourceCodeBuilder builder) {
+        public override void Write(SourceCodeBuilder builder) {
             builder.Write("class ");
             Name.Write(builder);
 

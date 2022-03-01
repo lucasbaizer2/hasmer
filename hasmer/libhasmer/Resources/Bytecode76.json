@@ -2167,5 +2167,7 @@
 				179
 			]
 		}
-	]
+	],
+	"GitTag": "v0.11.0",
+	"GitCommitHash": "df60b4768ac071dd6ccc6dd08717ece1949c156f"
 }

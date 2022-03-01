@@ -46,7 +46,7 @@ namespace Hasmer.Decompiler.Visitor {
                         },
                         Property = new Identifier("Array")
                     },
-                    Arguments = new List<ISyntax>() {
+                    Arguments = new List<SyntaxNode>() {
                         new Literal(new PrimitiveValue(arrayLength))
                     },
                     IsCalleeConstructor = true
@@ -69,7 +69,7 @@ namespace Hasmer.Decompiler.Visitor {
             context.State.Registers[resultRegister] = new Identifier(context.State.Variables[resultRegister]);
 
             PrimitiveValue[] items = context.Decompiler.DataDisassembler.GetElementSeries(context.Decompiler.DataDisassembler.ArrayBuffer, arrayBufferIndex, itemsCount);
-            arr.Elements = items.Select(item => new Literal(item)).Cast<ISyntax>().ToList();
+            arr.Elements = items.Select(item => new Literal(item)).Cast<SyntaxNode>().ToList();
 
             context.Block.Body.Add(new AssignmentExpression {
                 Left = context.State.Registers[resultRegister],
@@ -88,7 +88,7 @@ namespace Hasmer.Decompiler.Visitor {
             uint closureId = context.Instruction.Operands[2].GetValue<uint>();
 
             FunctionDecompiler closureDecompiler = new FunctionDecompiler(context.Decompiler, context.Source.SmallFuncHeaders[closureId].GetAssemblerHeader());
-            ISyntax closureAST = closureDecompiler.CreateAST(context);
+            SyntaxNode closureAST = closureDecompiler.CreateAST(context);
 
             context.State.Registers[resultRegister] = closureAST;
             // context.State.Registers[resultRegister] = new Identifier($"$closure${closureId}");

@@ -5,7 +5,7 @@
         "name": "Lucas Baizer"
     },
     "publisher": "lucasbaizer",
-    "description": "Tools for hasmer's Hermes assembly",
+    "description": "Syntax highlighting and language server for Hasm assembly",
     "repository": {
         "type": "git",
         "url": "https://github.com/LucasBaizer2/hasmer"
@@ -13,6 +13,7 @@
     "bugs": {
         "url": "https://github.com/LucasBaizer2/hasmer/issues"
     },
+    "icon": "images/logo.png",
     "license": "MIT",
     "version": "1.0.0",
     "engines": {
@@ -59,9 +60,9 @@
     },
     "scripts": {
 		"vscode:prepublish": "yarn compile",
-		"compile": "tsc -b && node scripts/out/copy-instructions.js",
+		"compile": "tsc -b && node scripts/out/build.js",
 		"watch": "tsc -b -w",
-		"postinstall": "cd scripts && yarn install && cd ../client && yarn install && cd ../server && yarn install && cd .."
+		"postinstall": "cd scripts && yarn install && cd ../client && yarn install && cd .."
 	},
     "devDependencies": {
         "@types/node": "^17.0.21",

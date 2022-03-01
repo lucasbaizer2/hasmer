@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Hasmer.Decompiler.AST {
-    public class FunctionDeclaration : ISyntax {
+    public class FunctionDeclaration : SyntaxNode {
         public Identifier Name { get; set; }
         public bool IsGenerator { get; set; }
         public bool IsAsync { get; set; }
@@ -17,7 +17,7 @@ namespace Hasmer.Decompiler.AST {
             Parameters = new List<Identifier>();
         }
 
-        public void Write(SourceCodeBuilder builder) {
+        public override void Write(SourceCodeBuilder builder) {
             if (IsAsync) {
                 builder.Write("async ");
             }
