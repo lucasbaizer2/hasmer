@@ -1,12 +1,21 @@
 # Hasmer Bytecode Format Generator
 
-This is a Node.js script finds every version of Hermes bytecode and creates a definitions file for it, which is used internally by hasmer. A definitions file describes the all instructions and their operands for a Hermes bytecode version.
+This subproject contains Node.js scripts that interact with the Hermes source repository, providing tooling for each version of Hermes bytecode.
+
+There are two scripts:
+
+* `generate-bytecode-definitions`: This script finds every version of Hermes bytecode and creates a definitions file for it, which is used internally by hasmer. A definitions file describes the all instructions and their operands for a Hermes bytecode version.
+* `compile-hermes-cli`: This script compiles the Hermes CLI executables for every Hermes bytecode version (which are found by `generate-bytecode-definitions`). The Hermes CLI provides tools for compiling JavaScript into Hermes bytecode, as well as executing Hermes bytecode files.
 
 # Why do I need this?
 
-You probably don't need to use this. It's primarily meant for maintains of the project to update new versions, or recreate bytecode definition files if the format of the files changes at some point in the future.
+You probably don't need to use this yourself. It's primarily meant for maintenance of the project to update new versions.
 
-Some day, this might run automatically with CI, ensuring you always have the latest bytecode files (hopefully).
+Some day, this might run automatically with CI, ensuring releases always have the latest bytecode files available.
+
+The latest bytecode definition files (created by `generate-bytecode-definitions`) can be found in the [Resources directory of libhasmer](../hasmer/libhasmer/Resources).
+
+The Hermes CLI files (created by `compile-hermes-cli`) can be downloaded for any Hermes bytecode version for Windows and Linux on the [hasmer website](https://lucasbaizer2.github.com/hasmer/hermes-cli).
 
 # Setup
 
@@ -18,29 +27,23 @@ Install the dependencies:
 ```
 yarn install
 ```
-Compile and execute the script:
+Compile the scripts:
 ```
-yarn all
+yarn compile
 ```
-
-The script is entirely self-contained and will do all the work involved in cloning the repository, etc. No other user interaction is required.
 
 # Usage
 
-After doing the above setup and finally executing the script:
+Note that these processes can take several minutes to complete. Make sure you have stable internet -- these scripts are not currently not very robust, and if it crashes (e.g. due to internet cutting out) it cannot resume where it left off and you'll have to start it all over again.
+
+### Using `generate-bytecode-definitions`
 ```
-yarn all
+yarn generate-bytecode-definitions
 ```
 Wait for it to complete, then copy all the JSON definition files from `./definitions` to `../hasmer/Resources`. Ensure every JSON file is included as an embedded resource (declared in `hasmer.csproj`). You can either select all the files to be Embedded Resources in Visual Studio, or if using the .NET SDK CLI you can add the XML entries manually in `hasmer.csproj`.
 
-# How it Works
-
-First, the entire [Hermes repository](https://github.com/facebook/hermes) is cloned locally (to the `./hermes` directory).
-
-Then, it switches to each and every commit of each tag where the bytecode definitions file was modified.
-
-The bytecode definitions file in the Hermes repository is parsed and a JSON definitions file is created.
-
-Once the absolute newest version of the given bytecode version is found (i.e. the commit that makes the final change to that bytecode version), the bytecode file is written to disk (found within the `./definitions` directory).
-
-Note that this process can take several minutes to complete. Make sure you have stable internet -- the script is currently not very robust, and if it crashes (e.g. due to internet cutting out) it cannot resume where it left off and you'll have to start it all over again.
+### Using `compile-hermes-cli`
+```
+yarn generate-bytecode-definitions
+```
+This can take several hours to complete if you are compiling every single version. As each version is compiled the executable files are written to `cli-versions/{version}/{platform}` (e.g. `cli-versions/84/win32` for bytecode version 84 being compiled on Windows).

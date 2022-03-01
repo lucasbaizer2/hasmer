@@ -1,4 +1,5 @@
-build
-hermes
-definitions
-node_modules
+/build
+/hermes
+/definitions
+/cli-versions
+/node_modules
