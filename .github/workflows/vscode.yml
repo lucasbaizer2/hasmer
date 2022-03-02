@@ -13,6 +13,11 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: '14'
+
+    - name: Setup dotnet
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
       
     - name: Insall Global Dependencies
       run: npm install -g yarn vsce
@@ -21,8 +26,8 @@ jobs:
       run: yarn install
       working-directory: hasm-vscode
 
-    - name: Compile and Execute Scripts
-      run: yarn all
+    - name: Compile and Execute Build Scripts
+      run: yarn compile
       working-directory: hasm-vscode
 
     - run: mkdir extension-build
@@ -33,7 +38,7 @@ jobs:
       run: vsce package -o extension-build/hasm.vsix --yarn
       working-directory: hasm-vscode
       
-    - name: Create .nojekyll (ensures pages with underscores work on gh pages)
+    - name: Create .nojekyll
       run: touch extension-build/.nojekyll
       shell: bash
       working-directory: hasm-vscode
