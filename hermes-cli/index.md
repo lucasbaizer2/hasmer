@@ -1,3 +1,51 @@
 # Hermes CLI Downloads
 
-
+| Hermes Bytecode Version | Windows Download | MacOS Download | Linux Download |
+|---|---|---|---|---|
+| 86 | [hermes-cli-86-win32.zip](https://hasmer.s3.us-west-2.amazonaws.com/hermes-cli/86/win32/hermes-cli-86-win32.zip) | Unavailable | Unavailable |
+| 85 | [hermes-cli-85-win32.zip](https://hasmer.s3.us-west-2.amazonaws.com/hermes-cli/85/win32/hermes-cli-85-win32.zip) | Unavailable | Unavailable |
+| 84 | [hermes-cli-84-win32.zip](https://hasmer.s3.us-west-2.amazonaws.com/hermes-cli/84/win32/hermes-cli-84-win32.zip) | Unavailable | Unavailable |
+| 83 | [hermes-cli-83-win32.zip](https://hasmer.s3.us-west-2.amazonaws.com/hermes-cli/83/win32/hermes-cli-83-win32.zip) | Unavailable | Unavailable |
+| 82 | [hermes-cli-82-win32.zip](https://hasmer.s3.us-west-2.amazonaws.com/hermes-cli/82/win32/hermes-cli-82-win32.zip) | Unavailable | Unavailable |
+| 81 | [hermes-cli-81-win32.zip](https://hasmer.s3.us-west-2.amazonaws.com/hermes-cli/81/win32/hermes-cli-81-win32.zip) | Unavailable | Unavailable |
+| 80 | [hermes-cli-80-win32.zip](https://hasmer.s3.us-west-2.amazonaws.com/hermes-cli/80/win32/hermes-cli-80-win32.zip) | Unavailable | Unavailable |
+| 79 | [hermes-cli-79-win32.zip](https://hasmer.s3.us-west-2.amazonaws.com/hermes-cli/79/win32/hermes-cli-79-win32.zip) | Unavailable | Unavailable |
+| 78 | [hermes-cli-78-win32.zip](https://hasmer.s3.us-west-2.amazonaws.com/hermes-cli/78/win32/hermes-cli-78-win32.zip) | Unavailable | Unavailable |
+| 77 | [hermes-cli-77-win32.zip](https://hasmer.s3.us-west-2.amazonaws.com/hermes-cli/77/win32/hermes-cli-77-win32.zip) | Unavailable | Unavailable |
+| 76 | [hermes-cli-76-win32.zip](https://hasmer.s3.us-west-2.amazonaws.com/hermes-cli/76/win32/hermes-cli-76-win32.zip) | Unavailable | Unavailable |
+| 75 | [hermes-cli-75-win32.zip](https://hasmer.s3.us-west-2.amazonaws.com/hermes-cli/75/win32/hermes-cli-75-win32.zip) | Unavailable | Unavailable |
+| 74 | [hermes-cli-74-win32.zip](https://hasmer.s3.us-west-2.amazonaws.com/hermes-cli/74/win32/hermes-cli-74-win32.zip) | Unavailable | Unavailable |
+| 73 | [hermes-cli-73-win32.zip](https://hasmer.s3.us-west-2.amazonaws.com/hermes-cli/73/win32/hermes-cli-73-win32.zip) | Unavailable | Unavailable |
+| 72 | [hermes-cli-72-win32.zip](https://hasmer.s3.us-west-2.amazonaws.com/hermes-cli/72/win32/hermes-cli-72-win32.zip) | Unavailable | Unavailable |
+| 71 | [hermes-cli-71-win32.zip](https://hasmer.s3.us-west-2.amazonaws.com/hermes-cli/71/win32/hermes-cli-71-win32.zip) | Unavailable | Unavailable |
+| 70 | [hermes-cli-70-win32.zip](https://hasmer.s3.us-west-2.amazonaws.com/hermes-cli/70/win32/hermes-cli-70-win32.zip) | Unavailable | Unavailable |
+| 69 | [hermes-cli-69-win32.zip](https://hasmer.s3.us-west-2.amazonaws.com/hermes-cli/69/win32/hermes-cli-69-win32.zip) | Unavailable | Unavailable |
+| 68 | [hermes-cli-68-win32.zip](https://hasmer.s3.us-west-2.amazonaws.com/hermes-cli/68/win32/hermes-cli-68-win32.zip) | Unavailable | Unavailable |
+| 67 | [hermes-cli-67-win32.zip](https://hasmer.s3.us-west-2.amazonaws.com/hermes-cli/67/win32/hermes-cli-67-win32.zip) | Unavailable | Unavailable |
+| 66 | [hermes-cli-66-win32.zip](https://hasmer.s3.us-west-2.amazonaws.com/hermes-cli/66/win32/hermes-cli-66-win32.zip) | Unavailable | Unavailable |
+| 65 | [hermes-cli-65-win32.zip](https://hasmer.s3.us-west-2.amazonaws.com/hermes-cli/65/win32/hermes-cli-65-win32.zip) | Unavailable | Unavailable |
+| 64 | [hermes-cli-64-win32.zip](https://hasmer.s3.us-west-2.amazonaws.com/hermes-cli/64/win32/hermes-cli-64-win32.zip) | Unavailable | Unavailable |
+| 63 | [hermes-cli-63-win32.zip](https://hasmer.s3.us-west-2.amazonaws.com/hermes-cli/63/win32/hermes-cli-63-win32.zip) | Unavailable | Unavailable |
+| 62 | [hermes-cli-62-win32.zip](https://hasmer.s3.us-west-2.amazonaws.com/hermes-cli/62/win32/hermes-cli-62-win32.zip) | Unavailable | Unavailable |
+| 61 | [hermes-cli-61-win32.zip](https://hasmer.s3.us-west-2.amazonaws.com/hermes-cli/61/win32/hermes-cli-61-win32.zip) | Unavailable | Unavailable |
+| 60 | [hermes-cli-60-win32.zip](https://hasmer.s3.us-west-2.amazonaws.com/hermes-cli/60/win32/hermes-cli-60-win32.zip) | Unavailable | Unavailable |
+| 59 | [hermes-cli-59-win32.zip](https://hasmer.s3.us-west-2.amazonaws.com/hermes-cli/59/win32/hermes-cli-59-win32.zip) | Unavailable | Unavailable |
+| 58 | [hermes-cli-58-win32.zip](https://hasmer.s3.us-west-2.amazonaws.com/hermes-cli/58/win32/hermes-cli-58-win32.zip) | Unavailable | Unavailable |
+| 57 | [hermes-cli-57-win32.zip](https://hasmer.s3.us-west-2.amazonaws.com/hermes-cli/57/win32/hermes-cli-57-win32.zip) | Unavailable | Unavailable |
+| 56 | [hermes-cli-56-win32.zip](https://hasmer.s3.us-west-2.amazonaws.com/hermes-cli/56/win32/hermes-cli-56-win32.zip) | Unavailable | Unavailable |
+| 55 | [hermes-cli-55-win32.zip](https://hasmer.s3.us-west-2.amazonaws.com/hermes-cli/55/win32/hermes-cli-55-win32.zip) | Unavailable | Unavailable |
+| 54 | [hermes-cli-54-win32.zip](https://hasmer.s3.us-west-2.amazonaws.com/hermes-cli/54/win32/hermes-cli-54-win32.zip) | Unavailable | Unavailable |
+| 53 | [hermes-cli-53-win32.zip](https://hasmer.s3.us-west-2.amazonaws.com/hermes-cli/53/win32/hermes-cli-53-win32.zip) | Unavailable | Unavailable |
+| 52 | [hermes-cli-52-win32.zip](https://hasmer.s3.us-west-2.amazonaws.com/hermes-cli/52/win32/hermes-cli-52-win32.zip) | Unavailable | Unavailable |
+| 51 | [hermes-cli-51-win32.zip](https://hasmer.s3.us-west-2.amazonaws.com/hermes-cli/51/win32/hermes-cli-51-win32.zip) | Unavailable | Unavailable |
+| 50 | [hermes-cli-50-win32.zip](https://hasmer.s3.us-west-2.amazonaws.com/hermes-cli/50/win32/hermes-cli-50-win32.zip) | Unavailable | Unavailable |
+| 49 | [hermes-cli-49-win32.zip](https://hasmer.s3.us-west-2.amazonaws.com/hermes-cli/49/win32/hermes-cli-49-win32.zip) | Unavailable | Unavailable |
+| 48 | [hermes-cli-48-win32.zip](https://hasmer.s3.us-west-2.amazonaws.com/hermes-cli/48/win32/hermes-cli-48-win32.zip) | Unavailable | Unavailable |
+| 47 | [hermes-cli-47-win32.zip](https://hasmer.s3.us-west-2.amazonaws.com/hermes-cli/47/win32/hermes-cli-47-win32.zip) | Unavailable | Unavailable |
+| 46 | [hermes-cli-46-win32.zip](https://hasmer.s3.us-west-2.amazonaws.com/hermes-cli/46/win32/hermes-cli-46-win32.zip) | Unavailable | Unavailable |
+| 45 | [hermes-cli-45-win32.zip](https://hasmer.s3.us-west-2.amazonaws.com/hermes-cli/45/win32/hermes-cli-45-win32.zip) | Unavailable | Unavailable |
+| 44 | [hermes-cli-44-win32.zip](https://hasmer.s3.us-west-2.amazonaws.com/hermes-cli/44/win32/hermes-cli-44-win32.zip) | Unavailable | Unavailable |
+| 43 | [hermes-cli-43-win32.zip](https://hasmer.s3.us-west-2.amazonaws.com/hermes-cli/43/win32/hermes-cli-43-win32.zip) | Unavailable | Unavailable |
+| 42 | [hermes-cli-42-win32.zip](https://hasmer.s3.us-west-2.amazonaws.com/hermes-cli/42/win32/hermes-cli-42-win32.zip) | Unavailable | Unavailable |
+| 41 | [hermes-cli-41-win32.zip](https://hasmer.s3.us-west-2.amazonaws.com/hermes-cli/41/win32/hermes-cli-41-win32.zip) | Unavailable | Unavailable |
+| 40 | [hermes-cli-40-win32.zip](https://hasmer.s3.us-west-2.amazonaws.com/hermes-cli/40/win32/hermes-cli-40-win32.zip) | Unavailable | Unavailable |
