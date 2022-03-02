@@ -83,24 +83,35 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a1c02c20b47fa283c64eaca69811c9c45"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_decompiler_1_1_register_tracker.html#a1c02c20b47fa283c64eaca69811c9c45">RegisterTracker</a> (<a class="el" href="class_hasmer_1_1_decompiler_1_1_function_state.html">FunctionState</a> state, uint registers)</td></tr>
 <tr class="memdesc:a1c02c20b47fa283c64eaca69811c9c45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new <a class="el" href="class_hasmer_1_1_decompiler_1_1_register_tracker.html" title="Represents the registers of a function, and keeps track of the operations being performed on them.">RegisterTracker</a> given an amount of registers to store and keep track of.  <a href="class_hasmer_1_1_decompiler_1_1_register_tracker.html#a1c02c20b47fa283c64eaca69811c9c45">More...</a><br /></td></tr>
 <tr class="separator:a1c02c20b47fa283c64eaca69811c9c45"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa95fecb4a71e1ade9de6abbf2e8268e6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_decompiler_1_1_register_tracker.html#aa95fecb4a71e1ade9de6abbf2e8268e6">MarkUsage</a> (uint register)</td></tr>
+<tr class="memdesc:aa95fecb4a71e1ade9de6abbf2e8268e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Marks a usage of a register. Each time a register is used as a value in an operand, this method should be invoked with the operand as the parameter. <br  />
+ See <a class="el" href="class_hasmer_1_1_decompiler_1_1_register_tracker.html#a41cdd0f5b5a81b4a9ae626e7d4467f61" title="Represents the amount of times the value of each register has been referenced while the register reta...">RegisterUsages</a>.  <a href="class_hasmer_1_1_decompiler_1_1_register_tracker.html#aa95fecb4a71e1ade9de6abbf2e8268e6">More...</a><br /></td></tr>
+<tr class="separator:aa95fecb4a71e1ade9de6abbf2e8268e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab63374423f3e9754cd731210793a1477"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_decompiler_1_1_register_tracker.html#ab63374423f3e9754cd731210793a1477">MarkUsages</a> (params uint[] registers)</td></tr>
+<tr class="memdesc:ab63374423f3e9754cd731210793a1477"><td class="mdescLeft">&#160;</td><td class="mdescRight">Marks a usage of multiple registers. See <a class="el" href="class_hasmer_1_1_decompiler_1_1_register_tracker.html#aa95fecb4a71e1ade9de6abbf2e8268e6" title="Marks a usage of a register. Each time a register is used as a value in an operand,...">MarkUsage(uint)</a>.  <a href="class_hasmer_1_1_decompiler_1_1_register_tracker.html#ab63374423f3e9754cd731210793a1477">More...</a><br /></td></tr>
+<tr class="separator:ab63374423f3e9754cd731210793a1477"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a5181577b45e8086431963306a179618d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_decompiler_1_1_register_tracker.html#a5181577b45e8086431963306a179618d">Length</a> =&gt; Storage.Length</td></tr>
-<tr class="memdesc:a5181577b45e8086431963306a179618d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The amount of registers contained in the <a class="el" href="class_hasmer_1_1_decompiler_1_1_register_tracker.html#a70248796f05a49be374a448baa078fd6" title="Represents the contents of each register as a JavaScript syntax object.">Storage</a> array.  <a href="class_hasmer_1_1_decompiler_1_1_register_tracker.html#a5181577b45e8086431963306a179618d">More...</a><br /></td></tr>
+<tr class="memdesc:a5181577b45e8086431963306a179618d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The amount of registers contained in the <a class="el" href="class_hasmer_1_1_decompiler_1_1_register_tracker.html#a77f4f34758b40ce04b70a1dbe852f85d" title="Represents the contents of each register as a JavaScript syntax object.">Storage</a> array.  <a href="class_hasmer_1_1_decompiler_1_1_register_tracker.html#a5181577b45e8086431963306a179618d">More...</a><br /></td></tr>
 <tr class="separator:a5181577b45e8086431963306a179618d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
 Properties</h2></td></tr>
-<tr class="memitem:a70248796f05a49be374a448baa078fd6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="interface_hasmer_1_1_decompiler_1_1_a_s_t_1_1_i_syntax.html">ISyntax</a>[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_decompiler_1_1_register_tracker.html#a70248796f05a49be374a448baa078fd6">Storage</a><code> [get, set]</code></td></tr>
-<tr class="memdesc:a70248796f05a49be374a448baa078fd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents the contents of each register as a JavaScript syntax object.  <a href="class_hasmer_1_1_decompiler_1_1_register_tracker.html#a70248796f05a49be374a448baa078fd6">More...</a><br /></td></tr>
-<tr class="separator:a70248796f05a49be374a448baa078fd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5003d2c1cedf0bd1ad52724a4dfaeddd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="interface_hasmer_1_1_decompiler_1_1_a_s_t_1_1_i_syntax.html">ISyntax</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_decompiler_1_1_register_tracker.html#a5003d2c1cedf0bd1ad52724a4dfaeddd">this[uint index]</a><code> [get, set]</code></td></tr>
-<tr class="memdesc:a5003d2c1cedf0bd1ad52724a4dfaeddd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the syntax located at the given register. If a call expression is located at a register which is being overriden with a new value, the call expression is immediately added to the source tree, and then the register is replaced with the argument.  <a href="class_hasmer_1_1_decompiler_1_1_register_tracker.html#a5003d2c1cedf0bd1ad52724a4dfaeddd">More...</a><br /></td></tr>
-<tr class="separator:a5003d2c1cedf0bd1ad52724a4dfaeddd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae0f6b36b2aa3e930f1279bb25a66d028"><td class="memItemLeft" align="right" valign="top"><a id="ae0f6b36b2aa3e930f1279bb25a66d028"></a>
-<a class="el" href="interface_hasmer_1_1_decompiler_1_1_a_s_t_1_1_i_syntax.html">ISyntax</a>&#160;</td><td class="memItemRight" valign="bottom"><b>this[int index]</b><code> [get, set]</code></td></tr>
-<tr class="separator:ae0f6b36b2aa3e930f1279bb25a66d028"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77f4f34758b40ce04b70a1dbe852f85d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_syntax_node.html">SyntaxNode</a>[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_decompiler_1_1_register_tracker.html#a77f4f34758b40ce04b70a1dbe852f85d">Storage</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:a77f4f34758b40ce04b70a1dbe852f85d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents the contents of each register as a JavaScript syntax object.  <a href="class_hasmer_1_1_decompiler_1_1_register_tracker.html#a77f4f34758b40ce04b70a1dbe852f85d">More...</a><br /></td></tr>
+<tr class="separator:a77f4f34758b40ce04b70a1dbe852f85d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41cdd0f5b5a81b4a9ae626e7d4467f61"><td class="memItemLeft" align="right" valign="top">int[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_decompiler_1_1_register_tracker.html#a41cdd0f5b5a81b4a9ae626e7d4467f61">RegisterUsages</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:a41cdd0f5b5a81b4a9ae626e7d4467f61"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents the amount of times the value of each register has been referenced while the register retains that value. <br  />
+ Each time a register is referenced in an operand, the instruction visitor calls <a class="el" href="class_hasmer_1_1_decompiler_1_1_register_tracker.html#aa95fecb4a71e1ade9de6abbf2e8268e6" title="Marks a usage of a register. Each time a register is used as a value in an operand,...">MarkUsage(uint)</a>. When the value of the register is changed, the usage is reset to 0.  <a href="class_hasmer_1_1_decompiler_1_1_register_tracker.html#a41cdd0f5b5a81b4a9ae626e7d4467f61">More...</a><br /></td></tr>
+<tr class="separator:a41cdd0f5b5a81b4a9ae626e7d4467f61"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7b07dbc212b0a2b6d3030135e268619"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_syntax_node.html">SyntaxNode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_decompiler_1_1_register_tracker.html#ab7b07dbc212b0a2b6d3030135e268619">this[uint register]</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:ab7b07dbc212b0a2b6d3030135e268619"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the syntax located at the given register. If a call expression is located at a register which is being overriden with a new value, the call expression is immediately added to the source tree, and then the register is replaced with the argument.  <a href="class_hasmer_1_1_decompiler_1_1_register_tracker.html#ab7b07dbc212b0a2b6d3030135e268619">More...</a><br /></td></tr>
+<tr class="separator:ab7b07dbc212b0a2b6d3030135e268619"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fec376e5c90204e9c1a7622d9e1db0d"><td class="memItemLeft" align="right" valign="top"><a id="a2fec376e5c90204e9c1a7622d9e1db0d"></a>
+<a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_syntax_node.html">SyntaxNode</a>&#160;</td><td class="memItemRight" valign="bottom"><b>this[int index]</b><code> [get, set]</code></td></tr>
+<tr class="separator:a2fec376e5c90204e9c1a7622d9e1db0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents the registers of a function, and keeps track of the operations being performed on them. </p>
@@ -143,6 +154,64 @@ Properties</h2></td></tr>
 
 </div>
 </div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="aa95fecb4a71e1ade9de6abbf2e8268e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa95fecb4a71e1ade9de6abbf2e8268e6">&#9670;&nbsp;</a></span>MarkUsage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Hasmer.Decompiler.RegisterTracker.MarkUsage </td>
+          <td>(</td>
+          <td class="paramtype">uint&#160;</td>
+          <td class="paramname"><em>register</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Marks a usage of a register. Each time a register is used as a value in an operand, this method should be invoked with the operand as the parameter. <br  />
+ See <a class="el" href="class_hasmer_1_1_decompiler_1_1_register_tracker.html#a41cdd0f5b5a81b4a9ae626e7d4467f61" title="Represents the amount of times the value of each register has been referenced while the register reta...">RegisterUsages</a>. </p>
+
+</div>
+</div>
+<a id="ab63374423f3e9754cd731210793a1477"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab63374423f3e9754cd731210793a1477">&#9670;&nbsp;</a></span>MarkUsages()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Hasmer.Decompiler.RegisterTracker.MarkUsages </td>
+          <td>(</td>
+          <td class="paramtype">params uint[]&#160;</td>
+          <td class="paramname"><em>registers</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Marks a usage of multiple registers. See <a class="el" href="class_hasmer_1_1_decompiler_1_1_register_tracker.html#aa95fecb4a71e1ade9de6abbf2e8268e6" title="Marks a usage of a register. Each time a register is used as a value in an operand,...">MarkUsage(uint)</a>. </p>
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
 <a id="a5181577b45e8086431963306a179618d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5181577b45e8086431963306a179618d">&#9670;&nbsp;</a></span>Length</h2>
@@ -156,13 +225,13 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>The amount of registers contained in the <a class="el" href="class_hasmer_1_1_decompiler_1_1_register_tracker.html#a70248796f05a49be374a448baa078fd6" title="Represents the contents of each register as a JavaScript syntax object.">Storage</a> array. </p>
+<p>The amount of registers contained in the <a class="el" href="class_hasmer_1_1_decompiler_1_1_register_tracker.html#a77f4f34758b40ce04b70a1dbe852f85d" title="Represents the contents of each register as a JavaScript syntax object.">Storage</a> array. </p>
 
 </div>
 </div>
 <h2 class="groupheader">Property Documentation</h2>
-<a id="a70248796f05a49be374a448baa078fd6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a70248796f05a49be374a448baa078fd6">&#9670;&nbsp;</a></span>Storage</h2>
+<a id="a41cdd0f5b5a81b4a9ae626e7d4467f61"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a41cdd0f5b5a81b4a9ae626e7d4467f61">&#9670;&nbsp;</a></span>RegisterUsages</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -171,7 +240,32 @@ Properties</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="interface_hasmer_1_1_decompiler_1_1_a_s_t_1_1_i_syntax.html">ISyntax</a> [] Hasmer.Decompiler.RegisterTracker.Storage</td>
+          <td class="memname">int [] Hasmer.Decompiler.RegisterTracker.RegisterUsages</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Represents the amount of times the value of each register has been referenced while the register retains that value. <br  />
+ Each time a register is referenced in an operand, the instruction visitor calls <a class="el" href="class_hasmer_1_1_decompiler_1_1_register_tracker.html#aa95fecb4a71e1ade9de6abbf2e8268e6" title="Marks a usage of a register. Each time a register is used as a value in an operand,...">MarkUsage(uint)</a>. When the value of the register is changed, the usage is reset to 0. </p>
+
+</div>
+</div>
+<a id="a77f4f34758b40ce04b70a1dbe852f85d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77f4f34758b40ce04b70a1dbe852f85d">&#9670;&nbsp;</a></span>Storage</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_syntax_node.html">SyntaxNode</a> [] Hasmer.Decompiler.RegisterTracker.Storage</td>
         </tr>
       </table>
   </td>
@@ -185,8 +279,8 @@ Properties</h2></td></tr>
 
 </div>
 </div>
-<a id="a5003d2c1cedf0bd1ad52724a4dfaeddd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5003d2c1cedf0bd1ad52724a4dfaeddd">&#9670;&nbsp;</a></span>this[uint index]</h2>
+<a id="ab7b07dbc212b0a2b6d3030135e268619"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7b07dbc212b0a2b6d3030135e268619">&#9670;&nbsp;</a></span>this[uint register]</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -195,7 +289,7 @@ Properties</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="interface_hasmer_1_1_decompiler_1_1_a_s_t_1_1_i_syntax.html">ISyntax</a> Hasmer.Decompiler.RegisterTracker.this[uint index]</td>
+          <td class="memname"><a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_syntax_node.html">SyntaxNode</a> Hasmer.Decompiler.RegisterTracker.this[uint register]</td>
         </tr>
       </table>
   </td>
@@ -210,7 +304,7 @@ Properties</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>Decompiler/FunctionState.cs</li>
+<li>libhasmer/Decompiler/RegisterTracker.cs</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

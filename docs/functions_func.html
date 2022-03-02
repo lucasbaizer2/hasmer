@@ -113,6 +113,9 @@ $(function() {
 , <a class="el" href="class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_string_parser.html#afa52dd4cac43f66a3d0d9e0342a546f1">Hasmer.Assembler.Parser.HasmStringParser</a>
 , <a class="el" href="interface_hasmer_1_1_assembler_1_1_parser_1_1_i_hasm_token_parser.html#ad7c86f355a68b3babc67304a3dde9f8e">Hasmer.Assembler.Parser.IHasmTokenParser</a>
 </li>
+<li>ClearInstructionCache()
+: <a class="el" href="class_hasmer_1_1_hbc_func_header.html#a95419fe188f32ec6456921c9079692c7">Hasmer.HbcFuncHeader</a>
+</li>
 <li>CommonGetById()
 : <a class="el" href="class_hasmer_1_1_decompiler_1_1_visitor_1_1_field_operations.html#ab41414218e027b16b33019654f2d5472">Hasmer.Decompiler.Visitor.FieldOperations</a>
 </li>
@@ -121,6 +124,9 @@ $(function() {
 </li>
 <li>Construct()
 : <a class="el" href="class_hasmer_1_1_decompiler_1_1_visitor_1_1_invoke_operations.html#aef523ef03c626596ee91ec8565e1635b">Hasmer.Decompiler.Visitor.InvokeOperations</a>
+</li>
+<li>CreateAST()
+: <a class="el" href="class_hasmer_1_1_decompiler_1_1_function_decompiler.html#aab0b63201e317fec45aed2b9158e0b23">Hasmer.Decompiler.FunctionDecompiler</a>
 </li>
 <li>CreateClosure()
 : <a class="el" href="class_hasmer_1_1_decompiler_1_1_visitor_1_1_creation_operations.html#a04a51f99ed19e9ce725b0d58eb2df672">Hasmer.Decompiler.Visitor.CreationOperations</a>
@@ -145,17 +151,19 @@ $(function() {
 : <a class="el" href="class_hasmer_1_1_hbc_encoded_item.html#a270dc1f8ae906c58cf8d24cd2386def0">Hasmer.HbcEncodedItem</a>
 </li>
 <li>Decompile()
-: <a class="el" href="class_hasmer_1_1_decompiler_1_1_function_decompiler.html#aee40cb1331173a89cbebcb20f879b6cf">Hasmer.Decompiler.FunctionDecompiler</a>
-, <a class="el" href="class_hasmer_1_1_decompiler_1_1_hbc_decompiler.html#ae844c061e2deaec346b3a57b5f1e9b2f">Hasmer.Decompiler.HbcDecompiler</a>
+: <a class="el" href="class_hasmer_1_1_decompiler_1_1_hbc_decompiler.html#a1bf86f52559481378c090a7e7b2ca30c">Hasmer.Decompiler.HbcDecompiler</a>
 </li>
 <li>DeepCopy()
 : <a class="el" href="class_hasmer_1_1_decompiler_1_1_decompiler_context.html#a7394230d430ab98924e646f59af61f9f">Hasmer.Decompiler.DecompilerContext</a>
+</li>
+<li>DelByVal()
+: <a class="el" href="class_hasmer_1_1_decompiler_1_1_visitor_1_1_field_operations.html#a947c105d9a05ae740a4207fce65ecb19">Hasmer.Decompiler.Visitor.FieldOperations</a>
 </li>
 <li>Disassemble()
 : <a class="el" href="class_hasmer_1_1_assembler_1_1_data_disassembler.html#aaa1a75fb2d4424883c7103646ecf2e93">Hasmer.Assembler.DataDisassembler</a>
 , <a class="el" href="class_hasmer_1_1_assembler_1_1_function_disassembler.html#a729c38fd3551f16c5b43a7b0a1fdaa8a">Hasmer.Assembler.FunctionDisassembler</a>
 , <a class="el" href="class_hasmer_1_1_assembler_1_1_hbc_disassembler.html#a720f5a58306fce2c9cce92ede0a6d753">Hasmer.Assembler.HbcDisassembler</a>
-, <a class="el" href="class_hasmer_1_1_hbc_func_header.html#a68801dd399c5bbeb98c358aa47d8a19e">Hasmer.HbcFuncHeader</a>
+, <a class="el" href="class_hasmer_1_1_hbc_func_header.html#aad62ea46ec3681562335200093c5d5c5">Hasmer.HbcFuncHeader</a>
 </li>
 </ul>
 
@@ -187,6 +195,12 @@ $(function() {
 
 
 <h3><a id="index_g"></a>- g -</h3><ul>
+<li>GetArgumentsLength()
+: <a class="el" href="class_hasmer_1_1_decompiler_1_1_visitor_1_1_function_operations.html#a975a269bc3b2db5078a2e9b560be7f53">Hasmer.Decompiler.Visitor.FunctionOperations</a>
+</li>
+<li>GetArgumentsPropByVal()
+: <a class="el" href="class_hasmer_1_1_decompiler_1_1_visitor_1_1_function_operations.html#a4e919de9b368b78c511daeb690d665fb">Hasmer.Decompiler.Visitor.FunctionOperations</a>
+</li>
 <li>GetAssemblerHeader()
 : <a class="el" href="class_hasmer_1_1_hbc_func_header.html#ae1e9b942bfe1abe422cb6feaa9c5059e">Hasmer.HbcFuncHeader</a>
 , <a class="el" href="class_hasmer_1_1_hbc_small_func_header.html#a34445ae5f8e8ac4be4d159e07f5dabba">Hasmer.HbcSmallFuncHeader</a>
@@ -208,6 +222,9 @@ $(function() {
 </li>
 <li>GetGlobalObject()
 : <a class="el" href="class_hasmer_1_1_decompiler_1_1_visitor_1_1_field_operations.html#afce0a6eaf9f91a6b8e6a521ee0bd0939">Hasmer.Decompiler.Visitor.FieldOperations</a>
+</li>
+<li>GetNewTarget()
+: <a class="el" href="class_hasmer_1_1_decompiler_1_1_visitor_1_1_environment_operations.html#a9a1616621e2d13489c186318f5b99edf">Hasmer.Decompiler.Visitor.EnvironmentOperations</a>
 </li>
 <li>GetResolvedValue&lt; T &gt;()
 : <a class="el" href="class_hasmer_1_1_hbc_instruction_operand.html#a1a1423cec84b03593328f60a6a84c928">Hasmer.HbcInstructionOperand</a>
@@ -260,7 +277,7 @@ $(function() {
 : <a class="el" href="class_hasmer_1_1_hbc_file.html#a1b8e5fd2be02b23b4dc790f8c2002139">Hasmer.HbcFile</a>
 </li>
 <li>HbcFileBuilder()
-: <a class="el" href="class_hasmer_1_1_assembler_1_1_visitor_1_1_hbc_file_builder.html#acf1c75d088297ca53fbc2476a392baac">Hasmer.Assembler.Visitor.HbcFileBuilder</a>
+: <a class="el" href="class_hasmer_1_1_assembler_1_1_visitor_1_1_hbc_file_builder.html#a03507b8a81e54b3e90f4d1306f0a17ea">Hasmer.Assembler.Visitor.HbcFileBuilder</a>
 </li>
 </ul>
 
@@ -273,6 +290,9 @@ $(function() {
 
 
 <h3><a id="index_l"></a>- l -</h3><ul>
+<li>LoadConstDouble()
+: <a class="el" href="class_hasmer_1_1_decompiler_1_1_visitor_1_1_load_constant_operations.html#ac483e00b727f801de49aa9c3e02cce16">Hasmer.Decompiler.Visitor.LoadConstantOperations</a>
+</li>
 <li>LoadConstEmpty()
 : <a class="el" href="class_hasmer_1_1_decompiler_1_1_visitor_1_1_load_constant_operations.html#a8969b164af52dc1284f699ba532ec087">Hasmer.Decompiler.Visitor.LoadConstantOperations</a>
 </li>
@@ -319,6 +339,12 @@ $(function() {
 
 
 <h3><a id="index_m"></a>- m -</h3><ul>
+<li>MarkUsage()
+: <a class="el" href="class_hasmer_1_1_decompiler_1_1_register_tracker.html#aa95fecb4a71e1ade9de6abbf2e8268e6">Hasmer.Decompiler.RegisterTracker</a>
+</li>
+<li>MarkUsages()
+: <a class="el" href="class_hasmer_1_1_decompiler_1_1_register_tracker.html#ab63374423f3e9754cd731210793a1477">Hasmer.Decompiler.RegisterTracker</a>
+</li>
 <li>Mov()
 : <a class="el" href="class_hasmer_1_1_decompiler_1_1_visitor_1_1_function_operations.html#a250bf432e4b3dc651827219b9d17233d">Hasmer.Decompiler.Visitor.FunctionOperations</a>
 </li>
@@ -372,6 +398,9 @@ $(function() {
 </li>
 <li>PrimitiveValue()
 : <a class="el" href="class_hasmer_1_1_primitive_value.html#a20292ff423bfccf5b63c14c0793e3996">Hasmer.PrimitiveValue</a>
+</li>
+<li>PutByVal()
+: <a class="el" href="class_hasmer_1_1_decompiler_1_1_visitor_1_1_field_operations.html#af40b213d184cf8a1a41db7f636914781">Hasmer.Decompiler.Visitor.FieldOperations</a>
 </li>
 </ul>
 
@@ -434,6 +463,9 @@ $(function() {
 : <a class="el" href="class_hasmer_1_1_hbc_instruction.html#a204877a87e652ac3e2c7ab58906dd387">Hasmer.HbcInstruction</a>
 , <a class="el" href="class_hasmer_1_1_hbc_instruction_operand.html#acaab8eda95377488bd781b395a9e183f">Hasmer.HbcInstructionOperand</a>
 </li>
+<li>ToNumber()
+: <a class="el" href="class_hasmer_1_1_decompiler_1_1_visitor_1_1_field_operations.html#a7e06da8836b18ddba0170e4f8a231f92">Hasmer.Decompiler.Visitor.FieldOperations</a>
+</li>
 <li>ToWriter()
 : <a class="el" href="class_hasmer_1_1_hbc_instruction_operand.html#ad87385f511e9da420cb7e134591276fb">Hasmer.HbcInstructionOperand</a>
 </li>
@@ -454,6 +486,26 @@ $(function() {
 <li>Write()
 : <a class="el" href="class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_token.html#a37654a0ebe1c7a3d1b0d35453c1daec4">Hasmer.Assembler.Parser.HasmToken</a>
 , <a class="el" href="class_hasmer_1_1_assembler_1_1_visitor_1_1_hbc_builder.html#a6ab03468f49622b090ab4f53279e5e3c">Hasmer.Assembler.Visitor.HbcBuilder</a>
+, <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_array_expression.html#a892186ae0fbd6f93938957f54c963dc0">Hasmer.Decompiler.AST.ArrayExpression</a>
+, <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_assignment_expression.html#aaae1dfaaf75276bb8d676c56ab9c6076">Hasmer.Decompiler.AST.AssignmentExpression</a>
+, <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_binary_expression.html#ab2a812f3f33a36086b237ffd8a776623">Hasmer.Decompiler.AST.BinaryExpression</a>
+, <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_block_statement.html#a14587b9a8982a55948e3568ea9214a56">Hasmer.Decompiler.AST.BlockStatement</a>
+, <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_call_expression.html#a7cfda7f80ddeb5b41143e7e9330b5468">Hasmer.Decompiler.AST.CallExpression</a>
+, <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_class_declaration.html#aaa964898da27cf40b1de853fe4fad9f2">Hasmer.Decompiler.AST.ClassDeclaration</a>
+, <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_empty_expression.html#aa788818fdb6dc3ada34c5cad77460dd8">Hasmer.Decompiler.AST.EmptyExpression</a>
+, <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_function_declaration.html#a6a561f7f245900b1c7d551c837308e9b">Hasmer.Decompiler.AST.FunctionDeclaration</a>
+, <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_identifier.html#a9fc393c4091f20420e3575a7fad3afd5">Hasmer.Decompiler.AST.Identifier</a>
+, <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_if_statement.html#a5fc50add44ab4d3f317a8e120ac70cf2">Hasmer.Decompiler.AST.IfStatement</a>
+, <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_literal.html#a07bc9d620606557adddd7cc4a73fff3d">Hasmer.Decompiler.AST.Literal</a>
+, <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_member_expression.html#aac6ae39944cba8fdfc297cc8566ddad6">Hasmer.Decompiler.AST.MemberExpression</a>
+, <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_method_definition.html#a78cc9952508f01c524fbc4e15b6022e3">Hasmer.Decompiler.AST.MethodDefinition</a>
+, <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_object_expression.html#a6f2b14715ea5eae8221fa5b6819475b6">Hasmer.Decompiler.AST.ObjectExpression</a>
+, <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_object_expression_property.html#aefb6cdebad2029f4a7e70575546dc99b">Hasmer.Decompiler.AST.ObjectExpressionProperty</a>
+, <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_program_definition.html#a98893ae1cb1e755374509704c5ac350f">Hasmer.Decompiler.AST.ProgramDefinition</a>
+, <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_return_statement.html#aa093c32c32095b14a8f196ef046ca90c">Hasmer.Decompiler.AST.ReturnStatement</a>
+, <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_syntax_node.html#ae7ea4f3f3373cd958f443ec826a395aa">Hasmer.Decompiler.AST.SyntaxNode</a>
+, <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_unary_expression.html#a45999bf08d62f26e6619745eecfbbe12">Hasmer.Decompiler.AST.UnaryExpression</a>
+, <a class="el" href="class_hasmer_1_1_decompiler_1_1_visitor_1_1_environment_identifier.html#aa073c8c08563fbe0e040533a9d339ff5">Hasmer.Decompiler.Visitor.EnvironmentIdentifier</a>
 , <a class="el" href="class_hasmer_1_1_hbc_file.html#a23d91c729bd6c45d47d5b9df4d13e35d">Hasmer.HbcFile</a>
 , <a class="el" href="class_hasmer_1_1_source_code_builder.html#a929ee90c75e5a79f35b435077194721b">Hasmer.SourceCodeBuilder</a>
 </li>

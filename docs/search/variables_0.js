@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['default_500',['Default',['../struct_hasmer_1_1_decompiler_1_1_decompiler_options.html#aee80a25fe0110bc8697a9b4ecdc2a990',1,'Hasmer::Decompiler::DecompilerOptions']]]
+  ['environmentname_553',['EnvironmentName',['../class_hasmer_1_1_decompiler_1_1_visitor_1_1_environment_identifier.html#a90bdd41d975e2747ef64cfa4524f06ea',1,'Hasmer::Decompiler::Visitor::EnvironmentIdentifier']]]
 ];

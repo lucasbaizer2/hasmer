@@ -84,7 +84,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a454fc34eefcd4f4f5311db913c64a387"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the parent context at the given depth. The current context is depth 0, the parent context is depth 1, etc. If the parent at the given depth is beyond that of a root function (i.e. a function whose parent is null), then an exception is thrown. Thus, this method can never return null.  <a href="class_hasmer_1_1_decompiler_1_1_decompiler_context.html#a454fc34eefcd4f4f5311db913c64a387">More...</a><br /></td></tr>
 <tr class="separator:a454fc34eefcd4f4f5311db913c64a387"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7394230d430ab98924e646f59af61f9f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_hasmer_1_1_decompiler_1_1_decompiler_context.html">DecompilerContext</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_decompiler_1_1_decompiler_context.html#a7394230d430ab98924e646f59af61f9f">DeepCopy</a> ()</td></tr>
-<tr class="memdesc:a7394230d430ab98924e646f59af61f9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a semi-deep copy of the current decompiler context, copying the function state and instructions so that the original context's state is not modified by the copy.  <a href="class_hasmer_1_1_decompiler_1_1_decompiler_context.html#a7394230d430ab98924e646f59af61f9f">More...</a><br /></td></tr>
+<tr class="memdesc:a7394230d430ab98924e646f59af61f9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a "semi-deep" copy of the current decompiler context, copying the context so that the original context's state is not affected by changes to the copy.  <a href="class_hasmer_1_1_decompiler_1_1_decompiler_context.html#a7394230d430ab98924e646f59af61f9f">More...</a><br /></td></tr>
 <tr class="separator:a7394230d430ab98924e646f59af61f9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
@@ -146,7 +146,7 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Creates a semi-deep copy of the current decompiler context, copying the function state and instructions so that the original context's state is not modified by the copy. </p>
+<p>Creates a "semi-deep" copy of the current decompiler context, copying the context so that the original context's state is not affected by changes to the copy. </p>
 
 </div>
 </div>
@@ -381,7 +381,7 @@ Properties</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>Decompiler/DecompilerContext.cs</li>
+<li>libhasmer/Decompiler/DecompilerContext.cs</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

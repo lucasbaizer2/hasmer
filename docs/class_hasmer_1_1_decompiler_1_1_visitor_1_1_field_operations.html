@@ -90,10 +90,6 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:afce0a6eaf9f91a6b8e6a521ee0bd0939"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_decompiler_1_1_visitor_1_1_field_operations.html#afce0a6eaf9f91a6b8e6a521ee0bd0939">GetGlobalObject</a> (<a class="el" href="class_hasmer_1_1_decompiler_1_1_decompiler_context.html">DecompilerContext</a> context)</td></tr>
 <tr class="memdesc:afce0a6eaf9f91a6b8e6a521ee0bd0939"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns an identifier representing the global object.  <a href="class_hasmer_1_1_decompiler_1_1_visitor_1_1_field_operations.html#afce0a6eaf9f91a6b8e6a521ee0bd0939">More...</a><br /></td></tr>
 <tr class="separator:afce0a6eaf9f91a6b8e6a521ee0bd0939"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac5cf7e4e9be475cad4c7c6f8949704cf"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_decompiler_1_1_visitor_1_1_field_operations.html#ac5cf7e4e9be475cad4c7c6f8949704cf">GetByVal</a> (<a class="el" href="class_hasmer_1_1_decompiler_1_1_decompiler_context.html">DecompilerContext</a> context)</td></tr>
-<tr class="memdesc:ac5cf7e4e9be475cad4c7c6f8949704cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a field reference by value (i.e. the value contained within an identifier). <br  />
- In comparison to GetById(DecompilerContext), GetByVal represents "obj[x]" whereas GetById represents "obj.x".  <a href="class_hasmer_1_1_decompiler_1_1_visitor_1_1_field_operations.html#ac5cf7e4e9be475cad4c7c6f8949704cf">More...</a><br /></td></tr>
-<tr class="separator:ac5cf7e4e9be475cad4c7c6f8949704cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab41414218e027b16b33019654f2d5472"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_decompiler_1_1_visitor_1_1_field_operations.html#ab41414218e027b16b33019654f2d5472">CommonGetById</a> (<a class="el" href="class_hasmer_1_1_decompiler_1_1_decompiler_context.html">DecompilerContext</a> context)</td></tr>
 <tr class="memdesc:ab41414218e027b16b33019654f2d5472"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a field reference by its name (i.e. by identifier).  <a href="class_hasmer_1_1_decompiler_1_1_visitor_1_1_field_operations.html#ab41414218e027b16b33019654f2d5472">More...</a><br /></td></tr>
 <tr class="separator:ab41414218e027b16b33019654f2d5472"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -112,15 +108,31 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>TryGetById</b>
 <tr class="memitem:a4bddc492cfe73bd6150f3409d82a8fb8"><td class="memItemLeft" align="right" valign="top"><a id="a4bddc492cfe73bd6150f3409d82a8fb8"></a>
 static void&#160;</td><td class="memItemRight" valign="bottom"><b>TryGetByIdLong</b> (<a class="el" href="class_hasmer_1_1_decompiler_1_1_decompiler_context.html">DecompilerContext</a> context)</td></tr>
 <tr class="separator:a4bddc492cfe73bd6150f3409d82a8fb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af40b213d184cf8a1a41db7f636914781"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_decompiler_1_1_visitor_1_1_field_operations.html#af40b213d184cf8a1a41db7f636914781">PutByVal</a> (<a class="el" href="class_hasmer_1_1_decompiler_1_1_decompiler_context.html">DecompilerContext</a> context)</td></tr>
+<tr class="memdesc:af40b213d184cf8a1a41db7f636914781"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the value of a field reference by value.  <a href="class_hasmer_1_1_decompiler_1_1_visitor_1_1_field_operations.html#af40b213d184cf8a1a41db7f636914781">More...</a><br /></td></tr>
+<tr class="separator:af40b213d184cf8a1a41db7f636914781"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab1413e0afea6a18b48902a6ddab32e36"><td class="memItemLeft" align="right" valign="top"><a id="ab1413e0afea6a18b48902a6ddab32e36"></a>
 static void&#160;</td><td class="memItemRight" valign="bottom"><b>PutById</b> (<a class="el" href="class_hasmer_1_1_decompiler_1_1_decompiler_context.html">DecompilerContext</a> context)</td></tr>
 <tr class="separator:ab1413e0afea6a18b48902a6ddab32e36"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a59be3b953fa889ab811e903522979e3c"><td class="memItemLeft" align="right" valign="top"><a id="a59be3b953fa889ab811e903522979e3c"></a>
 static void&#160;</td><td class="memItemRight" valign="bottom"><b>PutNewOwnById</b> (<a class="el" href="class_hasmer_1_1_decompiler_1_1_decompiler_context.html">DecompilerContext</a> context)</td></tr>
 <tr class="separator:a59be3b953fa889ab811e903522979e3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1dc4df7f88d530fe00fef5eec9f2039f"><td class="memItemLeft" align="right" valign="top"><a id="a1dc4df7f88d530fe00fef5eec9f2039f"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>PutNewOwnByIdShort</b> (<a class="el" href="class_hasmer_1_1_decompiler_1_1_decompiler_context.html">DecompilerContext</a> context)</td></tr>
+<tr class="separator:a1dc4df7f88d530fe00fef5eec9f2039f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1262c876f353390583bbc0dba18f4ab4"><td class="memItemLeft" align="right" valign="top"><a id="a1262c876f353390583bbc0dba18f4ab4"></a>
 static void&#160;</td><td class="memItemRight" valign="bottom"><b>PutOwnByIndex</b> (<a class="el" href="class_hasmer_1_1_decompiler_1_1_decompiler_context.html">DecompilerContext</a> context)</td></tr>
 <tr class="separator:a1262c876f353390583bbc0dba18f4ab4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5cf7e4e9be475cad4c7c6f8949704cf"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_decompiler_1_1_visitor_1_1_field_operations.html#ac5cf7e4e9be475cad4c7c6f8949704cf">GetByVal</a> (<a class="el" href="class_hasmer_1_1_decompiler_1_1_decompiler_context.html">DecompilerContext</a> context)</td></tr>
+<tr class="memdesc:ac5cf7e4e9be475cad4c7c6f8949704cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a field reference by value (i.e. the value contained within an identifier). <br  />
+ In comparison to GetById(DecompilerContext), GetByVal represents "obj[x]" whereas GetById represents "obj.x".  <a href="class_hasmer_1_1_decompiler_1_1_visitor_1_1_field_operations.html#ac5cf7e4e9be475cad4c7c6f8949704cf">More...</a><br /></td></tr>
+<tr class="separator:ac5cf7e4e9be475cad4c7c6f8949704cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a947c105d9a05ae740a4207fce65ecb19"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_decompiler_1_1_visitor_1_1_field_operations.html#a947c105d9a05ae740a4207fce65ecb19">DelByVal</a> (<a class="el" href="class_hasmer_1_1_decompiler_1_1_decompiler_context.html">DecompilerContext</a> context)</td></tr>
+<tr class="memdesc:a947c105d9a05ae740a4207fce65ecb19"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deletes a field from an object, with the field indicated by a value in a register.  <a href="class_hasmer_1_1_decompiler_1_1_visitor_1_1_field_operations.html#a947c105d9a05ae740a4207fce65ecb19">More...</a><br /></td></tr>
+<tr class="separator:a947c105d9a05ae740a4207fce65ecb19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e06da8836b18ddba0170e4f8a231f92"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_decompiler_1_1_visitor_1_1_field_operations.html#a7e06da8836b18ddba0170e4f8a231f92">ToNumber</a> (<a class="el" href="class_hasmer_1_1_decompiler_1_1_decompiler_context.html">DecompilerContext</a> context)</td></tr>
+<tr class="memdesc:a7e06da8836b18ddba0170e4f8a231f92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Coerces a given register into a number value and places the number into the given register.  <a href="class_hasmer_1_1_decompiler_1_1_visitor_1_1_field_operations.html#a7e06da8836b18ddba0170e4f8a231f92">More...</a><br /></td></tr>
+<tr class="separator:a7e06da8836b18ddba0170e4f8a231f92"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Visits instructions that gets/sets fields in an object. </p>
@@ -178,6 +190,34 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>PutOwnByIndex<
 </div><div class="memdoc">
 
 <p>Declares a global variable and initializes it to "undefined". This ignores the <a class="el" href="struct_hasmer_1_1_decompiler_1_1_decompiler_options.html#aa377c6736468de54444d67d5806b7b71" title="True if the &quot;global&quot; identifier should be omitted as a prefix to global field references....">DecompilerOptions.OmitExplicitGlobal</a> option, as it always explictly references the "global" field. This is to show that the variable is not local, and is rather explicitly global. </p>
+
+</div>
+</div>
+<a id="a947c105d9a05ae740a4207fce65ecb19"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a947c105d9a05ae740a4207fce65ecb19">&#9670;&nbsp;</a></span>DelByVal()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Hasmer.Decompiler.Visitor.FieldOperations.DelByVal </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_hasmer_1_1_decompiler_1_1_decompiler_context.html">DecompilerContext</a>&#160;</td>
+          <td class="paramname"><em>context</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Deletes a field from an object, with the field indicated by a value in a register. </p>
 
 </div>
 </div>
@@ -266,6 +306,34 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>PutOwnByIndex<
 
 </div>
 </div>
+<a id="af40b213d184cf8a1a41db7f636914781"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af40b213d184cf8a1a41db7f636914781">&#9670;&nbsp;</a></span>PutByVal()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Hasmer.Decompiler.Visitor.FieldOperations.PutByVal </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_hasmer_1_1_decompiler_1_1_decompiler_context.html">DecompilerContext</a>&#160;</td>
+          <td class="paramname"><em>context</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets the value of a field reference by value. </p>
+
+</div>
+</div>
 <a id="a6fbd90a60ee561fa955f0cddfba695f4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6fbd90a60ee561fa955f0cddfba695f4">&#9670;&nbsp;</a></span>SelectObject()</h2>
 
@@ -294,8 +362,36 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>PutOwnByIndex<
 
 </div>
 </div>
+<a id="a7e06da8836b18ddba0170e4f8a231f92"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e06da8836b18ddba0170e4f8a231f92">&#9670;&nbsp;</a></span>ToNumber()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Hasmer.Decompiler.Visitor.FieldOperations.ToNumber </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_hasmer_1_1_decompiler_1_1_decompiler_context.html">DecompilerContext</a>&#160;</td>
+          <td class="paramname"><em>context</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Coerces a given register into a number value and places the number into the given register. </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>Decompiler/Visitor/FieldOperations.cs</li>
+<li>libhasmer/Decompiler/Visitor/FieldOperations.cs</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

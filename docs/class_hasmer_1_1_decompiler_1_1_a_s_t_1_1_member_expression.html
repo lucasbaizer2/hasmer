@@ -79,7 +79,7 @@ Inheritance diagram for Hasmer.Decompiler.AST.MemberExpression:</div>
  <div class="center">
   <img src="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_member_expression.png" usemap="#Hasmer.Decompiler.AST.MemberExpression_map" alt=""/>
   <map id="Hasmer.Decompiler.AST.MemberExpression_map" name="Hasmer.Decompiler.AST.MemberExpression_map">
-<area href="interface_hasmer_1_1_decompiler_1_1_a_s_t_1_1_i_syntax.html" alt="Hasmer.Decompiler.AST.ISyntax" shape="rect" coords="0,0,263,24"/>
+<area href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_syntax_node.html" title="Represents a token in the JavaScript syntax tree." alt="Hasmer.Decompiler.AST.SyntaxNode" shape="rect" coords="0,0,263,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -88,24 +88,55 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab1050508011288947686898500fc44ba"><td class="memItemLeft" align="right" valign="top"><a id="ab1050508011288947686898500fc44ba"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>MemberExpression</b> (bool autoCompute)</td></tr>
 <tr class="separator:ab1050508011288947686898500fc44ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a75fa7b9cc4157d4c527429602e3a3c13"><td class="memItemLeft" align="right" valign="top"><a id="a75fa7b9cc4157d4c527429602e3a3c13"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>Write</b> (<a class="el" href="class_hasmer_1_1_source_code_builder.html">SourceCodeBuilder</a> builder)</td></tr>
-<tr class="separator:a75fa7b9cc4157d4c527429602e3a3c13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac6ae39944cba8fdfc297cc8566ddad6"><td class="memItemLeft" align="right" valign="top">override void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_member_expression.html#aac6ae39944cba8fdfc297cc8566ddad6">Write</a> (<a class="el" href="class_hasmer_1_1_source_code_builder.html">SourceCodeBuilder</a> builder)</td></tr>
+<tr class="memdesc:aac6ae39944cba8fdfc297cc8566ddad6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes the token as a string to the given <a class="el" href="class_hasmer_1_1_source_code_builder.html" title="Represents source code. Used for maintaining indentation and other source code syntax.">SourceCodeBuilder</a>.  <a href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_member_expression.html#aac6ae39944cba8fdfc297cc8566ddad6">More...</a><br /></td></tr>
+<tr class="separator:aac6ae39944cba8fdfc297cc8566ddad6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
 Properties</h2></td></tr>
-<tr class="memitem:abf22eae6e509f791c78ff8323177336e"><td class="memItemLeft" align="right" valign="top"><a id="abf22eae6e509f791c78ff8323177336e"></a>
-<a class="el" href="interface_hasmer_1_1_decompiler_1_1_a_s_t_1_1_i_syntax.html">ISyntax</a>&#160;</td><td class="memItemRight" valign="bottom"><b>Object</b><code> [get, set]</code></td></tr>
-<tr class="separator:abf22eae6e509f791c78ff8323177336e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af2521d907abb74f8102b4e68162782df"><td class="memItemLeft" align="right" valign="top"><a id="af2521d907abb74f8102b4e68162782df"></a>
-<a class="el" href="interface_hasmer_1_1_decompiler_1_1_a_s_t_1_1_i_syntax.html">ISyntax</a>&#160;</td><td class="memItemRight" valign="bottom"><b>Property</b><code> [get, set]</code></td></tr>
-<tr class="separator:af2521d907abb74f8102b4e68162782df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d4d239a924e1807fa07d86dddfd0831"><td class="memItemLeft" align="right" valign="top"><a id="a2d4d239a924e1807fa07d86dddfd0831"></a>
+<a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_syntax_node.html">SyntaxNode</a>&#160;</td><td class="memItemRight" valign="bottom"><b>Object</b><code> [get, set]</code></td></tr>
+<tr class="separator:a2d4d239a924e1807fa07d86dddfd0831"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0a6b4bdfc5dd96cde482ceb8bc4f0da"><td class="memItemLeft" align="right" valign="top"><a id="af0a6b4bdfc5dd96cde482ceb8bc4f0da"></a>
+<a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_syntax_node.html">SyntaxNode</a>&#160;</td><td class="memItemRight" valign="bottom"><b>Property</b><code> [get, set]</code></td></tr>
+<tr class="separator:af0a6b4bdfc5dd96cde482ceb8bc4f0da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a36af3bebde62479d82046cb50b650105"><td class="memItemLeft" align="right" valign="top"><a id="a36af3bebde62479d82046cb50b650105"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>IsComputed</b><code> [get, set]</code></td></tr>
 <tr class="separator:a36af3bebde62479d82046cb50b650105"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="aac6ae39944cba8fdfc297cc8566ddad6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac6ae39944cba8fdfc297cc8566ddad6">&#9670;&nbsp;</a></span>Write()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">override void Hasmer.Decompiler.AST.MemberExpression.Write </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_hasmer_1_1_source_code_builder.html">SourceCodeBuilder</a>&#160;</td>
+          <td class="paramname"><em>builder</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Writes the token as a string to the given <a class="el" href="class_hasmer_1_1_source_code_builder.html" title="Represents source code. Used for maintaining indentation and other source code syntax.">SourceCodeBuilder</a>. </p>
+
+<p>Implements <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_syntax_node.html#ae7ea4f3f3373cd958f443ec826a395aa">Hasmer.Decompiler.AST.SyntaxNode</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>Decompiler/AST/MemberExpression.cs</li>
+<li>libhasmer/Decompiler/AST/MemberExpression.cs</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

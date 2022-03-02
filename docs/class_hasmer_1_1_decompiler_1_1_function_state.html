@@ -97,6 +97,10 @@ Properties</h2></td></tr>
 <tr class="memitem:a6a4fe7eb9273e100f8eedac5f188991f"><td class="memItemLeft" align="right" valign="top">string[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_decompiler_1_1_function_state.html#a6a4fe7eb9273e100f8eedac5f188991f">Variables</a><code> [get, set]</code></td></tr>
 <tr class="memdesc:a6a4fe7eb9273e100f8eedac5f188991f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents the current local variables as an array. Index = register, Value = variable name.  <a href="class_hasmer_1_1_decompiler_1_1_function_state.html#a6a4fe7eb9273e100f8eedac5f188991f">More...</a><br /></td></tr>
 <tr class="separator:a6a4fe7eb9273e100f8eedac5f188991f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17cc183d832001f70af06aa39f8279ea"><td class="memItemLeft" align="right" valign="top">int[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_decompiler_1_1_function_state.html#a17cc183d832001f70af06aa39f8279ea">CallExpressions</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:a17cc183d832001f70af06aa39f8279ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents mappings between registers and the call expression whose result was stored into that register. <br  />
+ The index of the array represents the register that the call expression was written into. The value at a given index of the array represents the index of the call expression token in the current <a class="el" href="class_hasmer_1_1_decompiler_1_1_decompiler_context.html#a4c3a3ddd8e5004c87faf616b3985680a" title="The current source tree code block that is being analyzed.">DecompilerContext.Block</a>.  <a href="class_hasmer_1_1_decompiler_1_1_function_state.html#a17cc183d832001f70af06aa39f8279ea">More...</a><br /></td></tr>
+<tr class="separator:a17cc183d832001f70af06aa39f8279ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents the state of a function as it is decompiled. </p>
@@ -140,6 +144,31 @@ Properties</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Property Documentation</h2>
+<a id="a17cc183d832001f70af06aa39f8279ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17cc183d832001f70af06aa39f8279ea">&#9670;&nbsp;</a></span>CallExpressions</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int [] Hasmer.Decompiler.FunctionState.CallExpressions</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Represents mappings between registers and the call expression whose result was stored into that register. <br  />
+ The index of the array represents the register that the call expression was written into. The value at a given index of the array represents the index of the call expression token in the current <a class="el" href="class_hasmer_1_1_decompiler_1_1_decompiler_context.html#a4c3a3ddd8e5004c87faf616b3985680a" title="The current source tree code block that is being analyzed.">DecompilerContext.Block</a>. </p>
+
+</div>
+</div>
 <a id="a439e6841d193333d3266d9eeedb81cea"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a439e6841d193333d3266d9eeedb81cea">&#9670;&nbsp;</a></span>Context</h2>
 
@@ -213,7 +242,7 @@ Properties</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>Decompiler/FunctionState.cs</li>
+<li>libhasmer/Decompiler/FunctionState.cs</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
