@@ -42,7 +42,8 @@ interface BytecodeDefinitionFile {
             recursive: true,
             overwrite: true,
         });
-    } catch {
+    } catch (e) {
+        console.log(e);
         console.log('Could not overwrite hasmer-lsp executable. Make sure you aren\'t debugging the extension while building.');
         process.exit(1);
     }
