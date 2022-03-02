@@ -29,7 +29,7 @@ interface BytecodeDefinitionFile {
 
     const fileExists = async (path: string) => !!(await fs.stat(path).catch((_) => false));
 
-    const outputDirectory = path.join(lspDir, 'bin', 'debug', 'net5.0');
+    const outputDirectory = path.join(lspDir, 'bin', 'Debug', 'net5.0');
     const destDirectory = path.join(process.cwd(), 'client', 'out', 'lsp');
     if (!fileExists(destDirectory)) {
         fs.mkdir(destDirectory, {
