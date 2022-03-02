@@ -90,6 +90,18 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a63a26340be9040f254a9a16ae57177f8"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_decompiler_1_1_visitor_1_1_environment_operations.html#a63a26340be9040f254a9a16ae57177f8">StoreToEnvironment</a> (<a class="el" href="class_hasmer_1_1_decompiler_1_1_decompiler_context.html">DecompilerContext</a> context)</td></tr>
 <tr class="memdesc:a63a26340be9040f254a9a16ae57177f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores the specified value into the specified slot in a given environment, likely retrieved from <a class="el" href="class_hasmer_1_1_decompiler_1_1_visitor_1_1_environment_operations.html#a5564a54d629777a34d050a6801610c5a" title="Gets the environment at a given stack depth and stores the result. 0 = the current environment,...">GetEnvironment(DecompilerContext)</a> or <a class="el" href="class_hasmer_1_1_decompiler_1_1_visitor_1_1_environment_operations.html#ae76f98bb2fc073bbbb64663b1552ab75" title="Creates a new environment for the current call stack frame and stores the result.">CreateEnvironment(DecompilerContext)</a>.  <a href="class_hasmer_1_1_decompiler_1_1_visitor_1_1_environment_operations.html#a63a26340be9040f254a9a16ae57177f8">More...</a><br /></td></tr>
 <tr class="separator:a63a26340be9040f254a9a16ae57177f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a1616621e2d13489c186318f5b99edf"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_decompiler_1_1_visitor_1_1_environment_operations.html#a9a1616621e2d13489c186318f5b99edf">GetNewTarget</a> (<a class="el" href="class_hasmer_1_1_decompiler_1_1_decompiler_context.html">DecompilerContext</a> context)</td></tr>
+<tr class="memdesc:a9a1616621e2d13489c186318f5b99edf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores the value of NewTarget into the given register.  <a href="class_hasmer_1_1_decompiler_1_1_visitor_1_1_environment_operations.html#a9a1616621e2d13489c186318f5b99edf">More...</a><br /></td></tr>
+<tr class="separator:a9a1616621e2d13489c186318f5b99edf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aefb627306020b6aac03b3c8a8fab4015"><td class="memItemLeft" align="right" valign="top"><a id="aefb627306020b6aac03b3c8a8fab4015"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>StoreToEnvironmentL</b> (<a class="el" href="class_hasmer_1_1_decompiler_1_1_decompiler_context.html">DecompilerContext</a> context)</td></tr>
+<tr class="separator:aefb627306020b6aac03b3c8a8fab4015"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2debfe3cb3a525e4dca0157a0d86707"><td class="memItemLeft" align="right" valign="top"><a id="ab2debfe3cb3a525e4dca0157a0d86707"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>StoreNPToEnvironment</b> (<a class="el" href="class_hasmer_1_1_decompiler_1_1_decompiler_context.html">DecompilerContext</a> context)</td></tr>
+<tr class="separator:ab2debfe3cb3a525e4dca0157a0d86707"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5034956c4712747c738714a6ea70a29a"><td class="memItemLeft" align="right" valign="top"><a id="a5034956c4712747c738714a6ea70a29a"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>StoreNPToEnvironmentL</b> (<a class="el" href="class_hasmer_1_1_decompiler_1_1_decompiler_context.html">DecompilerContext</a> context)</td></tr>
+<tr class="separator:a5034956c4712747c738714a6ea70a29a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Visitors for instructions that deal with function environments. </p>
@@ -150,6 +162,34 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a9a1616621e2d13489c186318f5b99edf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a1616621e2d13489c186318f5b99edf">&#9670;&nbsp;</a></span>GetNewTarget()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Hasmer.Decompiler.Visitor.EnvironmentOperations.GetNewTarget </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_hasmer_1_1_decompiler_1_1_decompiler_context.html">DecompilerContext</a>&#160;</td>
+          <td class="paramname"><em>context</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Stores the value of NewTarget into the given register. </p>
+
+</div>
+</div>
 <a id="afa01bddfa503af867e9a7f1e95e8a495"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afa01bddfa503af867e9a7f1e95e8a495">&#9670;&nbsp;</a></span>LoadFromEnvironment()</h2>
 
@@ -207,7 +247,7 @@ Static Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>Decompiler/Visitor/EnvironmentOperations.cs</li>
+<li>libhasmer/Decompiler/Visitor/EnvironmentOperations.cs</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

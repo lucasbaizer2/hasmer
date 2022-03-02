@@ -80,9 +80,9 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:acf1c75d088297ca53fbc2476a392baac"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_assembler_1_1_visitor_1_1_hbc_file_builder.html#acf1c75d088297ca53fbc2476a392baac">HbcFileBuilder</a> (<a class="el" href="class_hasmer_1_1_hbc_bytecode_format.html">HbcBytecodeFormat</a> format)</td></tr>
-<tr class="memdesc:acf1c75d088297ca53fbc2476a392baac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="class_hasmer_1_1_assembler_1_1_visitor_1_1_hbc_file_builder.html" title="Represents data for a HbcFile that is progressively created by the assembler.   Once all the data has...">HbcFileBuilder</a> given the bytecode format  <a href="class_hasmer_1_1_assembler_1_1_visitor_1_1_hbc_file_builder.html#acf1c75d088297ca53fbc2476a392baac">More...</a><br /></td></tr>
-<tr class="separator:acf1c75d088297ca53fbc2476a392baac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03507b8a81e54b3e90f4d1306f0a17ea"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_assembler_1_1_visitor_1_1_hbc_file_builder.html#a03507b8a81e54b3e90f4d1306f0a17ea">HbcFileBuilder</a> (<a class="el" href="class_hasmer_1_1_hbc_bytecode_format.html">HbcBytecodeFormat</a> format, bool isExact)</td></tr>
+<tr class="memdesc:a03507b8a81e54b3e90f4d1306f0a17ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="class_hasmer_1_1_assembler_1_1_visitor_1_1_hbc_file_builder.html" title="Represents data for a HbcFile that is progressively created by the assembler.   Once all the data has...">HbcFileBuilder</a> given the bytecode format  <a href="class_hasmer_1_1_assembler_1_1_visitor_1_1_hbc_file_builder.html#a03507b8a81e54b3e90f4d1306f0a17ea">More...</a><br /></td></tr>
+<tr class="separator:a03507b8a81e54b3e90f4d1306f0a17ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a234985cc7e1f0e8e17d69641d4b1e5de"><td class="memItemLeft" align="right" valign="top"><a id="a234985cc7e1f0e8e17d69641d4b1e5de"></a>
 <a class="el" href="class_hasmer_1_1_hbc_file.html">HbcFile</a>&#160;</td><td class="memItemRight" valign="bottom"><b>Build</b> ()</td></tr>
 <tr class="separator:a234985cc7e1f0e8e17d69641d4b1e5de"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -92,6 +92,9 @@ Properties</h2></td></tr>
 <tr class="memitem:ab3b7bf714ad1fc658d25160071f3a31b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_hasmer_1_1_hbc_bytecode_format.html">HbcBytecodeFormat</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_assembler_1_1_visitor_1_1_hbc_file_builder.html#ab3b7bf714ad1fc658d25160071f3a31b">Format</a><code> [get, set]</code></td></tr>
 <tr class="memdesc:ab3b7bf714ad1fc658d25160071f3a31b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The bytecode format being used for the file.  <a href="class_hasmer_1_1_assembler_1_1_visitor_1_1_hbc_file_builder.html#ab3b7bf714ad1fc658d25160071f3a31b">More...</a><br /></td></tr>
 <tr class="separator:ab3b7bf714ad1fc658d25160071f3a31b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab76f5a27c9b512e698709a32fdba3e0f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_assembler_1_1_visitor_1_1_hbc_file_builder.html#ab76f5a27c9b512e698709a32fdba3e0f">IsExact</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:ab76f5a27c9b512e698709a32fdba3e0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if the bytecode is being written as-is (i.e. literally), false if the bytecode should be optimized into variants. See <a class="el" href="class_hasmer_1_1_assembler_1_1_hbc_disassembler.html#adaad5ea5eedd52a7e757e2470fca7e40" title="If true, preserve the original instructions and do not abstract out variant instructions....">HbcDisassembler.IsExact</a> for more information  <a href="class_hasmer_1_1_assembler_1_1_visitor_1_1_hbc_file_builder.html#ab76f5a27c9b512e698709a32fdba3e0f">More...</a><br /></td></tr>
+<tr class="separator:ab76f5a27c9b512e698709a32fdba3e0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa24c2b8251724e09c0bb9e4b4cf2a9d4"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="class_hasmer_1_1_assembler_1_1_visitor_1_1_hbc_function_builder.html">HbcFunctionBuilder</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_assembler_1_1_visitor_1_1_hbc_file_builder.html#aa24c2b8251724e09c0bb9e4b4cf2a9d4">Functions</a><code> [get, set]</code></td></tr>
 <tr class="memdesc:aa24c2b8251724e09c0bb9e4b4cf2a9d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">The functions that are declared in the file.  <a href="class_hasmer_1_1_assembler_1_1_visitor_1_1_hbc_file_builder.html#aa24c2b8251724e09c0bb9e4b4cf2a9d4">More...</a><br /></td></tr>
 <tr class="separator:aa24c2b8251724e09c0bb9e4b4cf2a9d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -100,8 +103,8 @@ Properties</h2></td></tr>
 <div class="textblock"><p>Represents data for a <a class="el" href="class_hasmer_1_1_hbc_file.html" title="Represents a parsed Hermes bytecode file.">HbcFile</a> that is progressively created by the assembler. <br  />
  Once all the data has been added, an <a class="el" href="class_hasmer_1_1_hbc_file.html" title="Represents a parsed Hermes bytecode file.">HbcFile</a> can be built using the Build method. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="acf1c75d088297ca53fbc2476a392baac"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acf1c75d088297ca53fbc2476a392baac">&#9670;&nbsp;</a></span>HbcFileBuilder()</h2>
+<a id="a03507b8a81e54b3e90f4d1306f0a17ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a03507b8a81e54b3e90f4d1306f0a17ea">&#9670;&nbsp;</a></span>HbcFileBuilder()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -113,8 +116,18 @@ Properties</h2></td></tr>
           <td class="memname">Hasmer.Assembler.Visitor.HbcFileBuilder.HbcFileBuilder </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_hasmer_1_1_hbc_bytecode_format.html">HbcBytecodeFormat</a>&#160;</td>
-          <td class="paramname"><em>format</em></td><td>)</td>
+          <td class="paramname"><em>format</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>isExact</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -177,8 +190,32 @@ Properties</h2></td></tr>
 
 </div>
 </div>
+<a id="ab76f5a27c9b512e698709a32fdba3e0f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab76f5a27c9b512e698709a32fdba3e0f">&#9670;&nbsp;</a></span>IsExact</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Hasmer.Assembler.Visitor.HbcFileBuilder.IsExact</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>True if the bytecode is being written as-is (i.e. literally), false if the bytecode should be optimized into variants. See <a class="el" href="class_hasmer_1_1_assembler_1_1_hbc_disassembler.html#adaad5ea5eedd52a7e757e2470fca7e40" title="If true, preserve the original instructions and do not abstract out variant instructions....">HbcDisassembler.IsExact</a> for more information </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>Assembler/Visitor/HbcFileBuilder.cs</li>
+<li>libhasmer/Assembler/Visitor/HbcFileBuilder.cs</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

@@ -82,9 +82,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a64f57c8bf341a388a372cc40eab23fc4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_decompiler_1_1_function_decompiler.html#a64f57c8bf341a388a372cc40eab23fc4">FunctionDecompiler</a> (<a class="el" href="class_hasmer_1_1_decompiler_1_1_hbc_decompiler.html">HbcDecompiler</a> decompiler, <a class="el" href="class_hasmer_1_1_hbc_func_header.html">HbcFuncHeader</a> header)</td></tr>
 <tr class="memdesc:a64f57c8bf341a388a372cc40eab23fc4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new <a class="el" href="class_hasmer_1_1_decompiler_1_1_function_decompiler.html" title="Represents a decompiler for an entire function.">FunctionDecompiler</a> given the parent <a class="el" href="class_hasmer_1_1_decompiler_1_1_hbc_decompiler.html" title="Represents a decompiler of a Hermes bytecode file, used for approximating the original JavaScript sou...">HbcDecompiler</a> and the parsed header of the function in the binary.  <a href="class_hasmer_1_1_decompiler_1_1_function_decompiler.html#a64f57c8bf341a388a372cc40eab23fc4">More...</a><br /></td></tr>
 <tr class="separator:a64f57c8bf341a388a372cc40eab23fc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aee40cb1331173a89cbebcb20f879b6cf"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_decompiler_1_1_function_decompiler.html#aee40cb1331173a89cbebcb20f879b6cf">Decompile</a> ()</td></tr>
-<tr class="memdesc:aee40cb1331173a89cbebcb20f879b6cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts the function into human-readable decompiled JavaScript.  <a href="class_hasmer_1_1_decompiler_1_1_function_decompiler.html#aee40cb1331173a89cbebcb20f879b6cf">More...</a><br /></td></tr>
-<tr class="separator:aee40cb1331173a89cbebcb20f879b6cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab0b63201e317fec45aed2b9158e0b23"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_syntax_node.html">SyntaxNode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_decompiler_1_1_function_decompiler.html#aab0b63201e317fec45aed2b9158e0b23">CreateAST</a> (<a class="el" href="class_hasmer_1_1_decompiler_1_1_decompiler_context.html">DecompilerContext</a> parent)</td></tr>
+<tr class="memdesc:aab0b63201e317fec45aed2b9158e0b23"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decompiles this function into an <a class="el" href="namespace_hasmer_1_1_decompiler_1_1_a_s_t.html">AST</a> structure.  <a href="class_hasmer_1_1_decompiler_1_1_function_decompiler.html#aab0b63201e317fec45aed2b9158e0b23">More...</a><br /></td></tr>
+<tr class="separator:aab0b63201e317fec45aed2b9158e0b23"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -137,8 +137,8 @@ Static Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="aee40cb1331173a89cbebcb20f879b6cf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aee40cb1331173a89cbebcb20f879b6cf">&#9670;&nbsp;</a></span>Decompile()</h2>
+<a id="aab0b63201e317fec45aed2b9158e0b23"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab0b63201e317fec45aed2b9158e0b23">&#9670;&nbsp;</a></span>CreateAST()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -147,9 +147,10 @@ Static Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">string Hasmer.Decompiler.FunctionDecompiler.Decompile </td>
+          <td class="memname"><a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_syntax_node.html">SyntaxNode</a> Hasmer.Decompiler.FunctionDecompiler.CreateAST </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_hasmer_1_1_decompiler_1_1_decompiler_context.html">DecompilerContext</a>&#160;</td>
+          <td class="paramname"><em>parent</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -160,7 +161,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Converts the function into human-readable decompiled JavaScript. </p>
+<p>Decompiles this function into an <a class="el" href="namespace_hasmer_1_1_decompiler_1_1_a_s_t.html">AST</a> structure. </p>
 
 </div>
 </div>
@@ -237,7 +238,7 @@ Static Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>Decompiler/FunctionDecompiler.cs</li>
+<li>libhasmer/Decompiler/FunctionDecompiler.cs</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

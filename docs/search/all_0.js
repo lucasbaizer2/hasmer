@@ -13,6 +13,7 @@ var searchData=
   ['arraybuffersize_10',['ArrayBufferSize',['../class_hasmer_1_1_hbc_header.html#a0514de04573b28198331df5895f6ca1d',1,'Hasmer::HbcHeader']]],
   ['arrayexpression_11',['ArrayExpression',['../class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_array_expression.html',1,'Hasmer::Decompiler::AST']]],
   ['assemble_12',['Assemble',['../class_hasmer_1_1_assembler_1_1_hbc_assembler.html#a06b755e3ddabc912d81ec128cfe65ace',1,'Hasmer::Assembler::HbcAssembler']]],
-  ['assemblercontext_13',['AssemblerContext',['../class_hasmer_1_1_assembler_1_1_visitor_1_1_assembler_context.html',1,'Hasmer::Assembler::Visitor']]],
-  ['assignmentexpression_14',['AssignmentExpression',['../class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_assignment_expression.html',1,'Hasmer::Decompiler::AST']]]
+  ['assembleoptions_13',['AssembleOptions',['../class_hasmer_1_1_c_l_i_1_1_program_1_1_assemble_options.html',1,'Hasmer::CLI::Program']]],
+  ['assemblercontext_14',['AssemblerContext',['../class_hasmer_1_1_assembler_1_1_visitor_1_1_assembler_context.html',1,'Hasmer::Assembler::Visitor']]],
+  ['assignmentexpression_15',['AssignmentExpression',['../class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_assignment_expression.html',1,'Hasmer::Decompiler::AST']]]
 ];

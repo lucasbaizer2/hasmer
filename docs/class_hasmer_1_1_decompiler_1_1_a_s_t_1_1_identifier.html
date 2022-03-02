@@ -82,7 +82,7 @@ Inheritance diagram for Hasmer.Decompiler.AST.Identifier:</div>
  <div class="center">
   <img src="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_identifier.png" usemap="#Hasmer.Decompiler.AST.Identifier_map" alt=""/>
   <map id="Hasmer.Decompiler.AST.Identifier_map" name="Hasmer.Decompiler.AST.Identifier_map">
-<area href="interface_hasmer_1_1_decompiler_1_1_a_s_t_1_1_i_syntax.html" alt="Hasmer.Decompiler.AST.ISyntax" shape="rect" coords="0,0,204,24"/>
+<area href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_syntax_node.html" title="Represents a token in the JavaScript syntax tree." alt="Hasmer.Decompiler.AST.SyntaxNode" shape="rect" coords="0,0,223,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -91,9 +91,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a09c84558bde61e1512d70491ba0796db"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_identifier.html#a09c84558bde61e1512d70491ba0796db">Identifier</a> (string name)</td></tr>
 <tr class="memdesc:a09c84558bde61e1512d70491ba0796db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_identifier.html" title="Represents a JavaScript identifier, such as a field name, class name, etc.">Identifier</a>, given its name.  <a href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_identifier.html#a09c84558bde61e1512d70491ba0796db">More...</a><br /></td></tr>
 <tr class="separator:a09c84558bde61e1512d70491ba0796db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3b4079aa5836d9ada12439a434b6f101"><td class="memItemLeft" align="right" valign="top"><a id="a3b4079aa5836d9ada12439a434b6f101"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>Write</b> (<a class="el" href="class_hasmer_1_1_source_code_builder.html">SourceCodeBuilder</a> builder)</td></tr>
-<tr class="separator:a3b4079aa5836d9ada12439a434b6f101"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9fc393c4091f20420e3575a7fad3afd5"><td class="memItemLeft" align="right" valign="top">override void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_identifier.html#a9fc393c4091f20420e3575a7fad3afd5">Write</a> (<a class="el" href="class_hasmer_1_1_source_code_builder.html">SourceCodeBuilder</a> builder)</td></tr>
+<tr class="memdesc:a9fc393c4091f20420e3575a7fad3afd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes the token as a string to the given <a class="el" href="class_hasmer_1_1_source_code_builder.html" title="Represents source code. Used for maintaining indentation and other source code syntax.">SourceCodeBuilder</a>.  <a href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_identifier.html#a9fc393c4091f20420e3575a7fad3afd5">More...</a><br /></td></tr>
+<tr class="separator:a9fc393c4091f20420e3575a7fad3afd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
 Properties</h2></td></tr>
@@ -132,6 +132,37 @@ Properties</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Creates a new <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_identifier.html" title="Represents a JavaScript identifier, such as a field name, class name, etc.">Identifier</a>, given its name. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a9fc393c4091f20420e3575a7fad3afd5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9fc393c4091f20420e3575a7fad3afd5">&#9670;&nbsp;</a></span>Write()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">override void Hasmer.Decompiler.AST.Identifier.Write </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_hasmer_1_1_source_code_builder.html">SourceCodeBuilder</a>&#160;</td>
+          <td class="paramname"><em>builder</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Writes the token as a string to the given <a class="el" href="class_hasmer_1_1_source_code_builder.html" title="Represents source code. Used for maintaining indentation and other source code syntax.">SourceCodeBuilder</a>. </p>
+
+<p>Implements <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_syntax_node.html#ae7ea4f3f3373cd958f443ec826a395aa">Hasmer.Decompiler.AST.SyntaxNode</a>.</p>
 
 </div>
 </div>
@@ -185,7 +216,7 @@ Properties</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>Decompiler/AST/Identifier.cs</li>
+<li>libhasmer/Decompiler/AST/Identifier.cs</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
