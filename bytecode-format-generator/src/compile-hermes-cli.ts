@@ -15,7 +15,38 @@ function getPlatformBuildSystem(): string {
     throw new Error('Unsupported build platform: ' + os.platform());
 }
 
+function patchLlvmConfiguration() {
+    const llvmPath = 'hermes/utils/build/build_llvm.py';
+    let config = fs.readFileSync(llvmPath, 'utf8');
+    config = config.replace('2018-10-08', '2018-10-07'); // in some commits, the git revision date is incorrect
+
+    fs.writeFileSync(llvmPath, config, 'utf8');
+}
+
 async function main() {
+    let versionsFilter: number[] | null = null;
+    if (process.argv.length > 3 && process.argv[2] === '--versions') {
+        const versionStr = process.argv[3];
+        if (!versionStr.includes('-')) {
+            versionsFilter = [parseInt(versionStr)];
+        } else {
+            const split = versionStr.split('-', 2);
+            let start = parseInt(split[0]);
+            let end = parseInt(split[1]);
+
+            if (end < start) {
+                const tmp = end;
+                end = start;
+                start = tmp;
+            }
+
+            versionsFilter = [];
+            for (let i = start; i <= end; i++) {
+                versionsFilter.push(i);
+            }
+        }
+    }
+
     if (os.platform() === 'win32' && !process.env.VSCMD_VER) {
         console.log('You must run `compile-hermes-cli` from the x86_64 Cross Tools Command Prompt for VS.');
         return;
@@ -44,25 +75,59 @@ async function main() {
         const fileRaw = fs.readFileSync(path.join('definitions', definitionFile), 'utf8');
         const parsedFile: DefinitionFile = JSON.parse(fileRaw);
 
+        if (versionsFilter !== null && !versionsFilter.includes(parsedFile.Version)) {
+            continue;
+        }
+
         console.log('Checking out commit for HBC version: ' + parsedFile.Version);
         await git.checkout(parsedFile.GitCommitHash, ['--force']);
 
         const buildSystem = getPlatformBuildSystem();
-        const configureProc = child_process.spawnSync(
-            'python',
-            ['utils\\build\\configure.py', '--build-system', buildSystem, '--distribute'],
-            {
-                cwd: 'hermes',
-                stdio: 'inherit',
-            }
-        );
 
-        if ((configureProc.error as any)?.code === 'ENOENT') {
-            console.log('Python executable could not be found. Make sure Python 3 is installed and in your PATH.');
+        let useLlvm = fs.existsSync('hermes/utils/build/build_llvm.py');
+        if (useLlvm) {
+            patchLlvmConfiguration();
+
+            const configureProc = child_process.spawnSync(
+                'python',
+                ['utils/build/build_llvm.py', '--build-system', buildSystem, '--distribute'],
+                {
+                    cwd: 'hermes',
+                    stdio: 'inherit',
+                }
+            );
+
+            if ((configureProc.error as any)?.code === 'ENOENT') {
+                console.log('Python executable could not be found. Make sure Python 3 is installed and in your PATH.');
+            }
+            if (configureProc.error || !fs.existsSync('hermes/llvm_build_release')) {
+                console.log('LLVM build configuration returned an error, exiting.');
+                return;
+            }
         }
-        if (configureProc.error || !fs.existsSync('hermes/build_release')) {
-            console.log('Configuration returned an error, exiting.');
-            return;
+
+        {
+            const extraArgs = [];
+            if (os.platform() === 'win32' && useLlvm) {
+                extraArgs.push('--cmake-flags=-DLLVM_ENABLE_LTO=OFF');
+            }
+            console.log(['utils/build/configure.py', '--build-system', buildSystem, ...extraArgs, '--distribute']);
+            const configureProc = child_process.spawnSync(
+                'python',
+                ['utils/build/configure.py', '--build-system', buildSystem, ...extraArgs, '--distribute'],
+                {
+                    cwd: 'hermes',
+                    stdio: 'inherit',
+                }
+            );
+
+            if ((configureProc.error as any)?.code === 'ENOENT') {
+                console.log('Python executable could not be found. Make sure Python 3 is installed and in your PATH.');
+            }
+            if (configureProc.error || !fs.existsSync('hermes/build_release')) {
+                console.log('Configuration returned an error, exiting.');
+                return;
+            }
         }
 
         let outputDirectory = '';
@@ -80,8 +145,9 @@ async function main() {
                 console.log('Building returned an error, exiting.');
                 return;
             }
-            
-            outputDirectory = 'hermes/build_release/bin/Release';
+
+            // outputDirectory = 'hermes/build_release/Release/bin';
+            throw new Error('find output directory');
         } else {
             const msBuildProc = child_process.spawnSync('MSBuild', ['ALL_BUILD.vcxproj', '/p:Configuration=Release'], {
                 cwd: 'hermes/build_release',
@@ -97,7 +163,11 @@ async function main() {
                 return;
             }
 
-            outputDirectory == 'hermes/build_release/bin/Release';
+            if (fs.existsSync('hermes/build_release/Release/bin')) {
+                outputDirectory = 'hermes/build_release/Release/bin';
+            } else {
+                outputDirectory = 'hermes/build_release/bin/Release';
+            }
         }
 
         console.log('Copying build CLI to `cli-versions` directory...');
@@ -108,6 +178,16 @@ async function main() {
         });
 
         console.log('Cleaning Hermes build files...');
+        if (fs.existsSync('hermes/llvm')) {
+            fs.rmSync('hermes/llvm', {
+                recursive: true,
+                force: true,
+            });
+            fs.rmSync('hermes/llvm_build_release', {
+                recursive: true,
+                force: true,
+            });
+        }
         fs.rmSync('hermes/build_release', {
             recursive: true,
             force: true,
