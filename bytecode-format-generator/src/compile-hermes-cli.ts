@@ -84,12 +84,13 @@ async function main() {
 
         const buildSystem = getPlatformBuildSystem();
 
-        let useLlvm = fs.existsSync('hermes/utils/build/build_llvm.py');
+        const useLlvm = fs.existsSync('hermes/utils/build/build_llvm.py');
+        const pythonExecutable = os.platform() === 'win32' ? 'python' : 'python3';
         if (useLlvm) {
             patchLlvmConfiguration();
 
             const configureProc = child_process.spawnSync(
-                'python',
+                pythonExecutable,
                 ['utils/build/build_llvm.py', '--build-system', buildSystem, '--distribute'],
                 {
                     cwd: 'hermes',
@@ -113,7 +114,7 @@ async function main() {
             }
             console.log(['utils/build/configure.py', '--build-system', buildSystem, ...extraArgs, '--distribute']);
             const configureProc = child_process.spawnSync(
-                'python',
+                pythonExecutable,
                 ['utils/build/configure.py', '--build-system', buildSystem, ...extraArgs, '--distribute'],
                 {
                     cwd: 'hermes',
@@ -146,8 +147,7 @@ async function main() {
                 return;
             }
 
-            // outputDirectory = 'hermes/build_release/Release/bin';
-            throw new Error('find output directory');
+            outputDirectory = 'hermes/build_release/bin';
         } else {
             const msBuildProc = child_process.spawnSync('MSBuild', ['ALL_BUILD.vcxproj', '/p:Configuration=Release'], {
                 cwd: 'hermes/build_release',

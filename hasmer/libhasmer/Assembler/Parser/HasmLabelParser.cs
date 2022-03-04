@@ -17,11 +17,11 @@ namespace Hasmer.Assembler.Parser {
         /// <summary>
         /// A reference or declaration in the object key buffer.
         /// </summary>
-        KeyBuffer = 'K',
+        ObjectKeyBuffer = 'K',
         /// <summary>
         /// A reference or declaration in the object value buffer.
         /// </summary>
-        ValueBuffer = 'V',
+        ObjectValueBuffer = 'V',
         /// <summary>
         /// A reference or declaration of an offset of code in a function's body, used for jump instructions.
         /// </summary>
@@ -33,11 +33,11 @@ namespace Hasmer.Assembler.Parser {
     /// </summary>
     public class HasmLabelToken : HasmToken {
         /// <summary>
-        /// The type of the label, i.e. label = "L5", LabelType = 'L'
+        /// The type of the label, e.g. label = "L5", LabelType = 'L'
         /// </summary>
         public LabelType LabelType { get; set; }
         /// <summary>
-        /// The index of the label, i.e. label = "L5", LabelIndex = 5
+        /// The index of the label, e.g. label = "L5", LabelIndex = 5
         /// </summary>
         public HasmIntegerToken LabelIndex { get; set; }
         /// <summary>

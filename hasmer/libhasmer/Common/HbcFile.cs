@@ -98,8 +98,18 @@ namespace Hasmer {
             }
 
             reader.Align();
-            reader.BaseStream.Position += Header.StringKindCount * 4;
+
+            Console.WriteLine(Header.StringCount);
+            Console.WriteLine(Header.StringKindCount);
+            Console.WriteLine(Header.IdentifierCount);
+
+            for (uint i = 0; i < Header.StringKindCount; i++) {
+                uint stringKind = reader.ReadUInt32();
+                Console.WriteLine(Convert.ToString(stringKind, 2));
+            }
+
             reader.Align();
+
             reader.BaseStream.Position += Header.IdentifierCount * 4;
             reader.Align();
 
@@ -175,7 +185,6 @@ namespace Hasmer {
             }
             writer.Align();
 
-            // encode everything
 
             // re-write the header with the final values after writing the rest of the stream
             Header.FileLength = (uint)ms.Position;

@@ -9,46 +9,46 @@ namespace Hasmer.Assembler.Visitor {
     /// <summary>
     /// Represents an object being used to build a new Hermes bytecode file.
     /// </summary>
-    public class HbcBuilder {
+    public class HasmHeaderReader {
         private HasmTokenStream TokenStream;
         private IEnumerable<HasmToken> Tokens;
 
         /// <summary>
-        /// The bytecode file that is being built.
+        /// The bytecode format being used for the file.
         /// </summary>
-        public HbcFileBuilder File { get; set; }
+        public HbcBytecodeFormat Format { get; set; }
+
+        /// <summary>
+        /// True if the bytecode is being written as-is (i.e. literally), false if the bytecode should be optimized into variants.
+        /// See <see cref="HbcDisassembler.IsExact"/> for more information
+        /// </summary>
+        public bool IsExact { get; set; }
 
         /// <summary>
         /// Creates a new HbcBuilder given the tokens representing the Hasm file being assembled.
         /// </summary>
-        public HbcBuilder(HasmTokenStream tokens) {
+        public HasmHeaderReader(HasmTokenStream tokens) {
             TokenStream = tokens;
             Tokens = tokens.ReadTokens();
         }
 
         /// <summary>
-        /// Parses the Hasm tokens and writes a Hermes bytecode file, serialized to a byte array.
+        /// Reads 
         /// </summary>
-        public byte[] Write() {
-            HbcBytecodeFormat format = null;
-            bool exact = false;
-
+        public void Read() {
             IEnumerator<HasmToken> enumerator = Tokens.GetEnumerator();
             while (enumerator.MoveNext()) {
                 if (TokenStream.State.BytecodeFormat != null) {
-                    format = TokenStream.State.BytecodeFormat;
-                    exact = TokenStream.State.IsExact;
+                    Format = TokenStream.State.BytecodeFormat;
+                    IsExact = TokenStream.State.IsExact;
 
                     break;
                 }
             }
 
-            if (format == null) {
+            if (Format == null) {
                 throw new Exception("empty Hasm file");
             }
-
-            File = new HbcFileBuilder(format, exact);
-            return File.Build().Write();
         }
     }
 }

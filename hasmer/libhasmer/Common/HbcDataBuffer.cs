@@ -59,7 +59,7 @@ namespace Hasmer {
         /// <summary>
         /// The raw binary of the buffer.
         /// </summary>
-        private byte[] Buffer;
+        public byte[] Buffer { get; set; }
 
         /// <summary>
         /// Creates a new HbcDataBuffer given the raw binary data in the buffer.
@@ -137,6 +137,7 @@ namespace Hasmer {
         private HbcDataBufferPrefix ReadTagType(BinaryReader reader) {
             const byte TAG_MASK = 0x70;
 
+            // if the length of the data is longer than 0x0F, an additional length byte is written
             byte keyTag = reader.ReadByte();
             if ((keyTag & 0x80) == 0x80) {
                 return new HbcDataBufferPrefix {

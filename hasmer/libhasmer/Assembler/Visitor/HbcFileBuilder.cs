@@ -14,106 +14,38 @@ namespace Hasmer.Assembler.Visitor {
     /// </summary>
     public class HbcFileBuilder {
         /// <summary>
-        /// The bytecode format being used for the file.
-        /// </summary>
-        public HbcBytecodeFormat Format { get; set; }
-
-        /// <summary>
-        /// True if the bytecode is being written as-is (i.e. literally), false if the bytecode should be optimized into variants.
-        /// See <see cref="HbcDisassembler.IsExact"/> for more information
-        /// </summary>
-        public bool IsExact { get; set; }
-
-        /// <summary>
-        /// The functions that are declared in the file.
-        /// </summary>
-        public List<HbcFunctionBuilder> Functions { get; set; }
-
-        /// <summary>
         /// The file being built.
         /// </summary>
-        private HbcFile File { get; set; }
+        public HbcFile File { get; set; }
 
         /// <summary>
-        /// Represents the string table.
-        /// The key is the string and the value is the ID of the string.
-        /// The ID is a sequential value, incremented for each new string.
+        /// The assembler.
         /// </summary>
-        private Dictionary<string, uint> StringTable = new Dictionary<string, uint>();
+        private HbcAssembler HbcAssembler { get; set; }
 
         /// <summary>
-        /// Constructs a new HbcFileBuilder given the bytecode format
+        /// Constructs a new HbcFileBuilder.
         /// </summary>
-        public HbcFileBuilder(HbcBytecodeFormat format, bool isExact) {
-            Format = format;
-            IsExact = isExact;
-        }
-
-        /// <summary>
-        /// Returns the ID of the given string in the <see cref="StringTable"/>.
-        /// If the string is not already present in the string table,
-        /// it is added and the ID of the newly added string is returned.
-        /// </summary>
-        private uint GetStringId(string str) {
-            if (StringTable.ContainsKey(str)) {
-                return StringTable[str];
-            }
-
-            uint newId = (uint)StringTable.Count;
-            StringTable[str] = newId;
-            return newId;
-        }
-
-        private void WriteInstruction(BinaryWriter writer, HasmInstructionToken insn) {
-            string insnName = insn.Instruction;
-            if (!IsExact) {
-            }
-
-            HbcInstructionDefinition def = Format.Definitions.Find(def => def.Name == insnName);
-            if (def == null) {
-                throw new HasmParserException(insn.Line, insn.Column, $"unknown instruction: {insnName}");
-            }
-            writer.Write((byte)def.Opcode);
-
-            for (int i = 0; i < def.OperandTypes.Count; i++) {
-                HasmOperandToken operand = insn.Operands[i];
-                HbcInstructionOperandType type = def.OperandTypes[i];
-
-                if (operand.Value.TypeCode == TypeCode.String) {
-                    operand.Value = new PrimitiveValue(); // convert string to ID
-                }
-            }
-        }
-
-        /// <summary>
-        /// Serializes the instructions of every function to a buffer sequentially.
-        /// </summary>
-        private void BuildBytecode() {
-            using MemoryStream ms = new MemoryStream();
-            using BinaryWriter writer = new BinaryWriter(ms);
-
-            foreach (HbcFunctionBuilder builder in Functions) {
-                File.SmallFuncHeaders[builder.FunctionId].Offset = (uint)ms.Position;
-                foreach (HasmInstructionToken insn in builder.Instructions) {
-                    WriteInstruction(writer, insn);
-                }
-                File.SmallFuncHeaders[builder.FunctionId].BytecodeSizeInBytes = (uint)ms.Position - File.SmallFuncHeaders[builder.FunctionId].Offset;
-            }
-        }
-
-        public HbcFile Build() {
+        public HbcFileBuilder(HbcAssembler assembler) {
+            HbcAssembler = assembler;
             File.Header = new HbcHeader {
                 GlobalCodeIndex = 0,
                 Magic = HbcHeader.HBC_MAGIC_HEADER,
-                Version = Format.Version,
+                Version = assembler.Header.Format.Version,
                 SourceHash = new byte[20],
                 Padding = new byte[31],
-                FunctionCount = (uint)Functions.Count
             };
+        }
 
-            BuildBytecode();
+        public HbcFile Build() {
+            File.Header.ArrayBufferSize = (uint)HbcAssembler.DataAssembler.ArrayBuffer.RawBuffer.Count;
+            File.Header.ObjKeyBufferSize = (uint)HbcAssembler.DataAssembler.ObjectKeyBuffer.RawBuffer.Count;
+            File.Header.ObjValueBufferSize = (uint)HbcAssembler.DataAssembler.ObjectValueBuffer.RawBuffer.Count;
+            File.Header.StringCount = (uint)HbcAssembler.DataAssembler.StringTable.Count;
 
-            // TODO
+            File.ArrayBuffer = new HbcDataBuffer(HbcAssembler.DataAssembler.ArrayBuffer.RawBuffer.ToArray());
+            File.ObjectKeyBuffer = new HbcDataBuffer(HbcAssembler.DataAssembler.ObjectKeyBuffer.RawBuffer.ToArray());
+            File.ObjectValueBuffer = new HbcDataBuffer(HbcAssembler.DataAssembler.ObjectValueBuffer.RawBuffer.ToArray());
 
             return File;
         }

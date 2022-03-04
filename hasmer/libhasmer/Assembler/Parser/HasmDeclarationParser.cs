@@ -44,16 +44,47 @@ namespace Hasmer.Assembler.Parser {
         /// The label of the data.
         /// </summary>
         public HasmLabelToken Label { get; set; }
+
         /// <summary>
         /// The type of the data.
         /// </summary>
         public HasmDataDeclarationType DataType { get; set; }
+
         /// <summary>
         /// The tokens that define the contents of the data.
         /// </summary>
         public List<HasmLiteralToken> Data { get; set; }
 
         public HasmDataDeclarationToken(HasmStringStreamState state) : base(state) { }
+    }
+
+    /// <summary>
+    /// The type of declaration for a function modifier.
+    /// </summary>
+    public enum HasmFunctionModifierType {
+        Id,
+        Params,
+        Registers,
+        Symbols,
+        Strict
+    }
+
+    /// <summary>
+    /// Represents a declaration that modifiers a function header.
+    /// </summary>
+    public class HasmFunctionModifierToken : HasmToken {
+        /// <summary>
+        /// The type of modifier.
+        /// </summary>
+        public HasmFunctionModifierType ModifierType { get; set; }
+
+        /// <summary>
+        /// The value associated with the modifier, or null if the modifier does not have a value.
+        /// </summary>
+        public uint? Value { get; set; }
+
+
+        public HasmFunctionModifierToken(HasmStringStreamState state) : base(state) { }
     }
 
     /// <summary>
@@ -72,7 +103,16 @@ namespace Hasmer.Assembler.Parser {
                 return false;
             }
 
-            return word == "hasm" || word == "data" || word == "start" || word == "end" || word == "id" || word == "params" || word == "registers" || word == "symbols" || word == "label" || word == "strict";
+            return word == "hasm" ||
+                word == "data" ||
+                word == "start" ||
+                word == "end" ||
+                word == "id" ||
+                word == "params" ||
+                word == "registers" ||
+                word == "symbols" ||
+                word == "strict" ||
+                word == "label";
         }
 
         public HasmToken Parse(HasmReaderState asm) {
@@ -190,10 +230,17 @@ namespace Hasmer.Assembler.Parser {
                 return new HasmSimpleToken(state) {
                     Value = "end"
                 };
-            } else if (word == "id" || word == "params" || word == "registers" || word == "symbols" || word == "label" || word == "strict") {
-                if (word != "strict") {
-                    asm.Stream.AdvanceWord();
+            } else if (word == "id" || word == "params" || word == "registers" || word == "symbols") {
+                if (!IHasmTokenParser.IntegerParser.CanParse(asm)) {
+                    throw new HasmParserException(asm.Stream, "expecting value after declaration");
                 }
+                string advance = asm.Stream.AdvanceWord();
+            } else if (word == "strict") {
+                return new HasmFunctionModifierToken(state) {
+                    ModifierType = HasmFunctionModifierType.Strict
+                };
+            } else if (word == "label") {
+                // TODO
                 return null;
             }
 
