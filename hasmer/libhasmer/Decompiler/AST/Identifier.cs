@@ -3,12 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace Hasmer.Decompiler.AST {
     /// <summary>
     /// Represents a JavaScript identifier, such as a field name, class name, etc.
     /// </summary>
     public class Identifier : SyntaxNode {
+        /// <summary>
+        /// A regular expression which represents a valid JavaScript identifier.
+        /// </summary>
+        public static readonly Regex NamePattern = new Regex(@"^([A-Za-z]|_|\$)([A-Za-z]|_|\$|[0-9])+$", RegexOptions.Compiled);
+
         /// <summary>
         /// The name of the identifier.
         /// </summary>

@@ -22,7 +22,9 @@ namespace Hasmer.Decompiler.Visitor {
             clone.Block = new BlockStatement();
             clone.Instructions = allInstructions;
             clone.CurrentInstructionIndex = 0;
+
             clone.State.Registers.RegisterUsages[resultRegister] = 0;
+            clone.State.Registers[resultRegister] = expr; // put the call expression into its result register 
 
             bool hasBeenReferenced = false;
             bool requiresStorage = false; // whether or not we need to 
@@ -38,12 +40,13 @@ namespace Hasmer.Decompiler.Visitor {
                         break;
                     }
                 } else if (hasBeenReferenced) { // if there was a reference made, but it was cleared with a different value, stop
-                    break;
+                    break;                                                                                                                                                                                                      
                 }
             }
 
             if (requiresStorage) {
                 context.State.Registers[resultRegister] = new Identifier($"var{resultRegister}");
+                context.State.Variables[resultRegister] = $"var{resultRegister}";
 
                 context.Block.Body.Add(new AssignmentExpression {
                     Left = new Identifier($"var{resultRegister}"),

@@ -34,5 +34,8 @@ namespace Hasmer.Decompiler.Visitor {
 
         [Visitor]
         public static void Greater(DecompilerContext context) => DecompileBooleanOperation(context, ">");
+
+        [Visitor]
+        public static void InstanceOf(DecompilerContext context) => DecompileBooleanOperation(context, "instanceof");
     }
 }

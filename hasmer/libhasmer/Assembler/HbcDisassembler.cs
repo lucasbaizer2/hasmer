@@ -15,28 +15,22 @@ namespace Hasmer.Assembler {
         public HbcFile Source { get; }
 
         /// <summary>
-        /// If true, preserve the original instructions and do not abstract out variant instructions.
-        /// Additionally, instructions which refer to identifier hashes will have the hash operand omitted.
-        /// <br />
-        /// If false, instructions will be converted to their variants.
-        /// <br />
-        /// The default value for this is false.
-        /// See <see cref="HbcAbstractInstructionDefinition"/> for more information about variant instructions and abstraction.
-        /// </summary>
-        public bool IsExact { get; }
-
-        /// <summary>
         /// The disassembler for data. Data is disassembled separately from code, and this property is the disassembler object.
         /// </summary>
         public DataDisassembler DataDisassembler { get; private set; }
 
         /// <summary>
+        /// The specified options to be used for the processing of Hermes bytecode and output of Hasm assembly.
+        /// </summary>
+        public DisassemblerOptions Options { get; }
+
+        /// <summary>
         /// Created a new disassembler given a bytecode file.
         /// </summary>
         /// <param name="source">The bytecode file to disassemble.</param>
-        public HbcDisassembler(HbcFile source, bool isExact) {
+        public HbcDisassembler(HbcFile source, DisassemblerOptions options) {
             Source = source;
-            IsExact = isExact;
+            Options = options;
             DataDisassembler = new DataDisassembler(source);
         }
 
@@ -47,7 +41,7 @@ namespace Hasmer.Assembler {
             StringBuilder builder = new StringBuilder();
             builder.Append(".hasm ");
             builder.Append(Source.Header.Version.ToString());
-            if (IsExact) {
+            if (Options.IsExact) {
                 builder.AppendLine(" exact");
             } else {
                 builder.AppendLine(" auto");

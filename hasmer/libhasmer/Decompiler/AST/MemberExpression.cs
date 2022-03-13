@@ -2,13 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Hasmer.Decompiler.AST {
     public class MemberExpression : SyntaxNode {
-        private static readonly Regex IdentifierRegex = new Regex(@"^([A-Za-z]|_|\$)([A-Za-z]|_|\$|[0-9])+$", RegexOptions.Compiled);
-
         public SyntaxNode Object { get; set; }
         public SyntaxNode Property { get; set; }
         public bool IsComputed { get; set; }
@@ -26,7 +23,7 @@ namespace Hasmer.Decompiler.AST {
                 if (Property is not Identifier ident) {
                     IsComputed = true;
                 } else {
-                    IsComputed = !IdentifierRegex.IsMatch(ident.Name);
+                    IsComputed = !Identifier.NamePattern.IsMatch(ident.Name);
                 }
             }
             

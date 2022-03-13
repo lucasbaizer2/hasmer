@@ -56,6 +56,52 @@ namespace Hasmer.Decompiler.Visitor {
         }
 
         /// <summary>
+        /// Creates a new JavaScript object (i.e. "{}") with predefined values from the object key/value buffers.
+        /// </summary>
+        [Visitor]
+        public static void NewObjectWithBuffer(DecompilerContext context) {
+            byte resultRegister = context.Instruction.Operands[0].GetValue<byte>();
+            ushort itemsCount = context.Instruction.Operands[2].GetValue<ushort>();
+            uint keyBufferIndex = context.Instruction.Operands[3].GetValue<uint>();
+            uint valueBufferIndex = context.Instruction.Operands[4].GetValue<uint>();
+
+            context.State.Variables[resultRegister] = "obj" + resultRegister;
+            context.State.Registers[resultRegister] = new Identifier(context.State.Variables[resultRegister]);
+
+            PrimitiveValue[] keys = context.Decompiler.DataDisassembler.GetElementSeries(context.Decompiler.DataDisassembler.KeyBuffer, keyBufferIndex, itemsCount);
+            PrimitiveValue[] values = context.Decompiler.DataDisassembler.GetElementSeries(context.Decompiler.DataDisassembler.ValueBuffer, valueBufferIndex, itemsCount);
+
+            ObjectExpression obj = new ObjectExpression {
+                Properties = new List<ObjectExpressionProperty>(itemsCount)
+            };
+
+            for (int i = 0; i < itemsCount; i++) {
+                string keyAsString = keys[i].TypeCode switch {
+                    TypeCode.String => keys[i].GetValue<string>(),
+                    _ => keys[i].RawValue?.ToString() ?? "null"
+                };
+
+                SyntaxNode key;
+                if (Identifier.NamePattern.IsMatch(keyAsString)) {
+                    key = new Identifier(keyAsString);
+                } else {
+                    key = new Literal(keys[i]);
+                }
+
+                obj.Properties.Add(new ObjectExpressionProperty {
+                    Key =key,
+                    Value = new Literal(values[i])
+                });
+            }
+
+            context.Block.Body.Add(new AssignmentExpression {
+                Left = context.State.Registers[resultRegister],
+                Right = obj,
+                Operator = "="
+            });
+        }
+
+        /// <summary>
         /// Creates a new JavaScript array with predefined values from the array buffer.
         /// </summary>
         [Visitor]
@@ -64,11 +110,12 @@ namespace Hasmer.Decompiler.Visitor {
             ushort itemsCount = context.Instruction.Operands[2].GetValue<ushort>();
             uint arrayBufferIndex = context.Instruction.Operands[3].GetValue<uint>();
 
-            ArrayExpression arr = new ArrayExpression();
             context.State.Variables[resultRegister] = "arr" + resultRegister;
             context.State.Registers[resultRegister] = new Identifier(context.State.Variables[resultRegister]);
 
             PrimitiveValue[] items = context.Decompiler.DataDisassembler.GetElementSeries(context.Decompiler.DataDisassembler.ArrayBuffer, arrayBufferIndex, itemsCount);
+
+            ArrayExpression arr = new ArrayExpression();
             arr.Elements = items.Select(item => new Literal(item)).Cast<SyntaxNode>().ToList();
 
             context.Block.Body.Add(new AssignmentExpression {

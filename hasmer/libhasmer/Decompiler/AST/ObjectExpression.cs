@@ -40,9 +40,13 @@ namespace Hasmer.Decompiler.AST {
             builder.AddIndent(1);
             builder.NewLine();
 
-            foreach (ObjectExpressionProperty property in Properties) {
+            for (int i = 0; i < Properties.Count; i++) {
+                ObjectExpressionProperty property = Properties[i];
+
                 property.Write(builder);
-                builder.Write(",");
+                if (i < Properties.Count - 1) {
+                    builder.Write(",");
+                }
                 builder.NewLine();
             }
 

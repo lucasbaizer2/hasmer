@@ -42,9 +42,7 @@ namespace Hasmer.Decompiler {
         public string Decompile(bool preserveAst) {
             DataDisassembler.DisassembleData();
 
-            ProgramDefinition root = new ProgramDefinition {
-                Tokens = new List<SyntaxNode>(Source.SmallFuncHeaders.Length)
-            };
+            ProgramDefinition root = new ProgramDefinition();
 
             // create a list containing the IDs of all functions
             List<uint> rootFunctions = new List<uint>();
@@ -68,7 +66,13 @@ namespace Hasmer.Decompiler {
             foreach (uint funcId in rootFunctions) {
                 FunctionDecompiler decompiler = new FunctionDecompiler(this, Source.SmallFuncHeaders[funcId]);
                 SyntaxNode ast = decompiler.CreateAST(null);
-                root.Tokens.Add(ast);
+
+                if (funcId == 0) { // write the global function as just its body withou the header
+                    FunctionDeclaration globalFunc = (FunctionDeclaration)ast;
+                    root.Tokens = root.Tokens.Concat(globalFunc.Body.Body).ToList();
+                } else {
+                    root.Tokens.Add(ast);
+                }
             }
 
             if (preserveAst) {

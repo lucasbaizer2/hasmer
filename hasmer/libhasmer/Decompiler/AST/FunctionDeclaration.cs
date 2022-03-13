@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Hasmer.Decompiler.AST {
     public class FunctionDeclaration : SyntaxNode {
@@ -12,6 +13,9 @@ namespace Hasmer.Decompiler.AST {
         public List<Identifier> Parameters { get; set; }
         public BlockStatement Body { get; set; }
         public bool IsExpression { get; set; }
+
+        [JsonIgnore]
+        public HbcFuncHeader HbcHeader { get; set; }
 
         public FunctionDeclaration() {
             Parameters = new List<Identifier>();

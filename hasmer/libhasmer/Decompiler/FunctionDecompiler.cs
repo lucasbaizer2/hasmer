@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Reflection;
 using Hasmer.Decompiler.AST;
 using Hasmer.Decompiler.Visitor;
+using Hasmer.Decompiler.Analysis;
 
 namespace Hasmer.Decompiler {
     /// <summary>
@@ -117,13 +118,6 @@ namespace Hasmer.Decompiler {
         /// </summary>
         public SyntaxNode CreateAST(DecompilerContext parent) {
             BlockStatement block = new BlockStatement();
-            FunctionDeclaration func = new FunctionDeclaration {
-                Name = new Identifier(Source.SmallFuncHeaders[Header.FunctionId].GetFunctionName(Source)),
-                Parameters = Header.ParamCount > 1
-                                    ? Enumerable.Range(0, (int)Header.ParamCount - 1).Select(x => new Identifier($"par{x}")).ToList()
-                                    : new List<Identifier>(),
-                Body = block
-            };
             DecompilerContext context = new DecompilerContext {
                 Parent = parent,
                 Function = Header,
@@ -131,13 +125,32 @@ namespace Hasmer.Decompiler {
                 Block = block,
                 CurrentInstructionIndex = 0,
                 Instructions = Instructions,
+                ControlFlowGraph = new ControlFlowGraph(Source, Instructions)
             };
+
+            if (Header.FunctionId != 0) {
+                ControlFlowGraph graph = new ControlFlowGraph(Source, Instructions);
+
+                Console.WriteLine(graph);
+            }
+
+            FunctionDeclaration func = new FunctionDeclaration {
+                Name = new Identifier(Source.SmallFuncHeaders[Header.FunctionId].GetFunctionName(Source)),
+                Parameters = Header.ParamCount > 1
+                                    ? Enumerable.Range(0, (int)Header.ParamCount - 1).Select(x => new Identifier($"par{x}")).ToList()
+                                    : new List<Identifier>(),
+                Body = block,
+                HbcHeader = Header
+            };
+
             context.State = new FunctionState(context, Header.FrameSize);
 
             while (context.CurrentInstructionIndex < context.Instructions.Count) {
                 ObserveInstruction(context, context.CurrentInstructionIndex);
             }
             WriteRemainingRegisters(context);
+
+            StaticAnalyzer.OptimizeFunction(func);
 
             return func;
         }

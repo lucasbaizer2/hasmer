@@ -18,8 +18,10 @@ namespace Hasmer.Decompiler.AST {
 
         public override void Write(SourceCodeBuilder builder) {
             foreach (SyntaxNode node in Tokens) {
+                if (node is EmptyExpression) {
+                    continue;
+                }
                 node.Write(builder);
-                builder.NewLine();
                 builder.NewLine();
             }
         }

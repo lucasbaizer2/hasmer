@@ -50,7 +50,18 @@ namespace Hasmer.Assembler {
                 series[i] = items.Items[currentIndex++];
 
                 if (currentIndex >= items.Items.Length) {
-                    offset = buffer[buffer.IndexOf(items) + 1].Offset;
+                    int nextIndex = buffer.IndexOf(items) + 1;
+                    if (nextIndex == buffer.Count) {
+                        // exit early as to not access outside the bounds of `buffer`
+                        if (i == length - 1) {
+                            return series;
+                        }
+
+                        // if we didn't read all the expected items until `length`
+                        // throw an exception
+                        throw new IndexOutOfRangeException("length");
+                    }
+                    offset = buffer[nextIndex].Offset;
                     currentIndex = 0;
                 }
             }
