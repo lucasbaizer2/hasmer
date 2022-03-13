@@ -29,7 +29,7 @@ interface BytecodeDefinitionFile {
 
     const fileExists = async (path: string) => !!(await fs.stat(path).catch((_) => false));
 
-    const outputDirectory = path.join(lspDir, 'bin', 'debug', 'net5.0');
+    const outputDirectory = path.join(lspDir, 'bin', 'Debug', 'net5.0');
     const destDirectory = path.join(process.cwd(), 'client', 'out', 'lsp');
     if (!fileExists(destDirectory)) {
         fs.mkdir(destDirectory, {
@@ -42,7 +42,8 @@ interface BytecodeDefinitionFile {
             recursive: true,
             overwrite: true,
         });
-    } catch {
+    } catch (e) {
+        console.log(e);
         console.log('Could not overwrite hasmer-lsp executable. Make sure you aren\'t debugging the extension while building.');
         process.exit(1);
     }

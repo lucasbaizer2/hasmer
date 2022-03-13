@@ -18,6 +18,10 @@ namespace Hasmer.Decompiler.AST {
             builder.NewLine();
 
             foreach (SyntaxNode syntax in Body) {
+                if (syntax is EmptyExpression) {
+                    continue;
+                }
+
                 syntax.Write(builder);
                 builder.NewLine();
             }

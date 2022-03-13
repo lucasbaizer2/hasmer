@@ -23,6 +23,9 @@ namespace Hasmer.CLI {
         public class DisassembleOptions : DecodeOptions {
             [Option("exact", Required = false, HelpText = "Disassembles the exact instructions instead of optimizing them at assemble time.")]
             public bool IsExact { get; set; }
+
+            [Option('v', "verbose", Required = false, HelpText = "Gives verbose information about each instruction and function in the form of comments.")]
+            public bool IsVerbose { get; set; }
         }
 
         [Verb("decompile", HelpText = "Decompiles the bytecode into a JavaScript file.")]
@@ -137,7 +140,10 @@ namespace Hasmer.CLI {
             if (decoder == null) {
                 return;
             }
-            HbcDisassembler disassembler = new HbcDisassembler(decoder.File, options.IsExact);
+            HbcDisassembler disassembler = new HbcDisassembler(decoder.File, new DisassemblerOptions {
+                IsExact = options.IsExact,
+                IsVerbose = options.IsVerbose
+            });
             string disassembly = disassembler.Disassemble();
             string hasmPath = Path.Combine(decoder.OutputDirectory, $"{decoder.FileName}.hasm");
             File.WriteAllText(hasmPath, disassembly);

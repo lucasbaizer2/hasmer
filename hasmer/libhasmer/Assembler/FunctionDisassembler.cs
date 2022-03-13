@@ -15,10 +15,12 @@ namespace Hasmer.Assembler {
         /// The disassembler being used.
         /// </summary>
         public HbcDisassembler Disassembler { get; set; }
+
         /// <summary>
         /// The file which declares the function being disassembled.
         /// </summary>
         public HbcFile Source => Disassembler.Source;
+
         /// <summary>
         /// The header of the function being disassembled.
         /// </summary>
@@ -28,10 +30,12 @@ namespace Hasmer.Assembler {
         /// The parsed instructions of the function.
         /// </summary>
         private List<HbcInstruction> Instructions;
+
         /// <summary>
         /// The mapping of all labels to write. Index = offset of the label in bytes (like instruction offset), Value = name of the label at that offset.
         /// </summary>
         private Dictionary<uint, string> LabelTable = new Dictionary<uint, string>();
+
         /// <summary>
         /// The maximum amount of padding to add after each instruction before the operands are written.
         /// </summary>
@@ -61,9 +65,8 @@ namespace Hasmer.Assembler {
 
         /// <summary>
         /// Gets the instruction that is jumped to by a jumping instruction and its register operand.
-        /// Note that this can be interpreted as the instruction before the one that is jumped to.
         /// <example>
-        /// As an example, let's suppose GetJumpInstructionTarget was called regarding the "Jmp L2" instruction:
+        /// As an example, suppose GetJumpInstructionTarget was called regarding the "Jmp L2" instruction:
         /// <code>
         ///     LoadParam r3, 2 <br />                        
         ///     GetEnvironment r0, 1 <br />                        
@@ -73,7 +76,7 @@ namespace Hasmer.Assembler {
         ///     JNotEqual L1, r1, r2 <br />
         ///     LoadConstUndefined r1 <br />
         ///     Call2 r1, r3, r1, r2 <br />
-        ///     Jmp L2 <br /> <br />
+        ///     Jmp L2 // &lt;--- this instruction <br /> <br />
         ///      
         ///     .label L1 <br />
         ///     LoadFromEnvironment r0, r0, 3 <br />                    
@@ -83,22 +86,20 @@ namespace Hasmer.Assembler {
         ///     Call3 r0, r1, r2, r0, r3 <br /><br />
         ///     
         ///     .label L2 <br /> 
-        ///     LoadConstUndefined r0 <br />
+        ///     LoadConstUndefined r0 // &lt;--- jumps here <br />
         ///     Ret r0
         /// </code>
-        /// The returned offset will be that of "Call3".
+        /// The returned offset will be that of "LoadConstUndefined".
         /// </example>
         /// </summary>
         private uint GetJumpInstructionTarget(HbcInstruction insn, HbcInstructionOperand operand) {
             string insnName = Source.BytecodeFormat.Definitions[insn.Opcode].Name;
             uint offset = operand.Type switch {
-                HbcInstructionOperandType.Addr8 => (uint)((int)insn.Offset + operand.GetValue<sbyte>()),
-                HbcInstructionOperandType.Addr32 => (uint)((int)insn.Offset + operand.GetValue<int>()),
+                HbcInstructionOperandType.Addr8 or HbcInstructionOperandType.Addr32 =>
+                    (uint)((int)insn.Offset + operand.GetValue<int>()),
                 _ => throw new InvalidOperationException("invalid jump operand")
             };
-            return insnName switch {
-                _ => offset - insn.Length
-            };
+            return offset;
         }
 
         /// <summary>
@@ -171,6 +172,22 @@ namespace Hasmer.Assembler {
             }
 
             return obj.ToString(Formatting.None);
+        }
+
+        /// <summary>
+        /// Adds a comment to an instruction if neccessary.
+        /// </summary>
+        private void AnnotateVerbose(SourceCodeBuilder builder, HbcInstruction insn) {
+            builder.Write("# offset = 0x");
+            builder.Write(insn.Offset.ToString("X"));
+            builder.Write(", length = ");
+            builder.Write(insn.Length.ToString());
+
+            HbcInstructionDefinition def = Source.BytecodeFormat.Definitions[insn.Opcode];
+            if (def.IsJump) {
+                builder.Write(", jump offset = 0x");
+                builder.Write(insn.Operands[0].GetValue<int>().ToString("X"));
+            }
         }
 
         /// <summary>
@@ -253,11 +270,20 @@ namespace Hasmer.Assembler {
 
             List<uint> usedLabels = new List<uint>();
             foreach (HbcInstruction insn in Instructions) {
+                if (LabelTable.ContainsKey(insn.Offset)) {
+                    builder.NewLine();
+                    builder.Write(".label ");
+                    builder.Write(LabelTable[insn.Offset]);
+                    builder.NewLine();
+
+                    usedLabels.Add(insn.Offset);
+                }
+
                 int startLength = builder.Builder.Length;
 
                 HbcInstructionDefinition def = Source.BytecodeFormat.Definitions[insn.Opcode];
                 string name = def.Name;
-                if (def.AbstractDefinition.HasValue && !Disassembler.IsExact) {
+                if (def.AbstractDefinition.HasValue && !Disassembler.Options.IsExact) {
                     name = Source.BytecodeFormat.AbstractDefinitions[def.AbstractDefinition.Value].Name;
                 }
                 builder.Write(name);
@@ -266,7 +292,7 @@ namespace Hasmer.Assembler {
                 builder.Write(new string(' ', padding));
 
                 for (int i = 0; i < insn.Operands.Count; i++) {
-                    if (!Disassembler.IsExact) {
+                    if (!Disassembler.Options.IsExact) {
                         // omit indentifier cache operands if not in exact mode
                         if (name == "TryGetById" || name == "GetById" || name == "TryPutById" || name == "PutById") {
                             if (i == 2) { // the third operand (i.e. insn.Operands[2]) is the identifier cache
@@ -291,17 +317,16 @@ namespace Hasmer.Assembler {
                 int operationLength = builder.Builder.Length - startLength;
                 int annotationPadding = Math.Max(1, ANNOTATION_OFFSET - operationLength);
                 builder.Write(new string(' ', annotationPadding));
-                AnnotateInstruction(builder, insn);
 
-                builder.NewLine();
-                if (LabelTable.ContainsKey(insn.Offset)) { // the NEXT instruction is the one that hermes executes, so we put a label for it here
-                    builder.NewLine();
-                    builder.Write(".label ");
-                    builder.Write(LabelTable[insn.Offset]);
-                    builder.NewLine();
+                if (Disassembler.Options.IsVerbose) {
+                    AnnotateVerbose(builder, insn);
 
-                    usedLabels.Add(insn.Offset);
+                    builder.NewLine();
+                    builder.Write(new string(' ', operationLength + annotationPadding));
                 }
+
+                AnnotateInstruction(builder, insn);
+                builder.NewLine();
             }
 
             builder.RemoveLastIndent();

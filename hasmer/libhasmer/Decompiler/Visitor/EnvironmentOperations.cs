@@ -66,7 +66,10 @@ namespace Hasmer.Decompiler.Visitor {
             ushort slot = context.Instruction.Operands[2].GetValue<ushort>();
 
             EnvironmentIdentifier env = (EnvironmentIdentifier)context.State.Registers[environment];
-            context.State.Registers[destination] = new Identifier($"{env.EnvironmentName}${slot}");
+            context.State.Registers[destination] = new MemberExpression {
+                Object = new Identifier(env.EnvironmentName),
+                Property = new Identifier($"env{slot}")
+            };
         }
 
         /// <summary>
@@ -83,7 +86,10 @@ namespace Hasmer.Decompiler.Visitor {
 
             EnvironmentIdentifier env = (EnvironmentIdentifier)context.State.Registers[environment];
             context.Block.Body.Add(new AssignmentExpression {
-                Left = new Identifier($"{env.EnvironmentName}${slot}"),
+                Left = new MemberExpression {
+                    Object = new Identifier(env.EnvironmentName),
+                    Property = new Identifier($"env{slot}")
+                },
                 Right = context.State.Registers[valueRegister],
                 Operator = "="
             });

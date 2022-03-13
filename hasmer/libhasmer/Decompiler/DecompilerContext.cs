@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Hasmer.Decompiler.AST;
+using Hasmer.Decompiler.Analysis;
 
 namespace Hasmer.Decompiler {
     /// <summary>
@@ -56,6 +57,11 @@ namespace Hasmer.Decompiler {
         /// The header of the function that is being decompiled.
         /// </summary>
         public HbcFuncHeader Function { get; set; }
+
+        /// <summary>
+        /// The control flow graph of the current function that is being decompiled.
+        /// </summary>
+        public ControlFlowGraph ControlFlowGraph { get; set; }
 
         /// <summary>
         /// Gets the parent context at the given depth.

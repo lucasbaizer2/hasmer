@@ -13,7 +13,7 @@ jobs:
       run: sudo apt-get install doxygen -y
       shell: bash
 
-    - run: mkdir -p bin/docs
+    - run: mkdir -p docs
       shell: bash
       working-directory: hasmer
 
@@ -23,14 +23,14 @@ jobs:
       working-directory: hasmer
       
     - name: Create .nojekyll (ensures pages with underscores work on gh pages)
-      run: touch html/.nojekyll
+      run: touch docs/html/.nojekyll
       shell: bash
-      working-directory: hasmer/bin/docs
+      working-directory: hasmer
 
     - name: Deploy to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@3.7.1
       with:
         github_token: ${{ inputs.github_token }}
         branch: gh-pages
-        folder: hasmer/bin/docs/html
+        folder: hasmer/docs/html
         target_folder: docs

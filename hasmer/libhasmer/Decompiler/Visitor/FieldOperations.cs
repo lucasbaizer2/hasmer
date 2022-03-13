@@ -79,6 +79,8 @@ namespace Hasmer.Decompiler.Visitor {
             byte sourceRegister = context.Instruction.Operands[1].GetValue<byte>();
             string identifier = context.Instruction.Operands[3].GetResolvedValue<string>(context.Source);
 
+            context.State.Registers.MarkUsage(sourceRegister);
+
             context.State.Registers[resultRegister] = new MemberExpression {
                 Object = context.State.Registers[sourceRegister],
                 Property = new Identifier(identifier)
@@ -104,21 +106,25 @@ namespace Hasmer.Decompiler.Visitor {
         /// Sets the value of a field reference by name (i.e. by identifier).
         /// </summary>
         private static void CommonPutById(DecompilerContext context, SyntaxNode property) {
-            byte resultRegister = context.Instruction.Operands[0].GetValue<byte>();
+            byte objRegister = context.Instruction.Operands[0].GetValue<byte>();
             byte sourceRegister = context.Instruction.Operands[1].GetValue<byte>();
 
             SyntaxNode obj;
-            if (context.State.Variables[resultRegister] != null) {
-                obj = new Identifier(context.State.Variables[resultRegister]);
+            if (context.State.Variables[objRegister] != null) {
+                obj = new Identifier(context.State.Variables[objRegister]);
             } else {
-                obj = context.State.Registers[resultRegister];
+                obj = context.State.Registers[objRegister];
             }
+
+            context.State.Registers.MarkUsage(objRegister);
+            context.State.Registers.MarkUsage(sourceRegister);
 
             context.Block.Body.Add(new AssignmentExpression {
                 Operator = "=",
-                Left = new MemberExpression {
+                Left = new MemberExpression(false) {
                     Object = obj,
-                    Property = property
+                    Property = property,
+                    IsComputed = false
                 },
                 Right = context.State.Registers[sourceRegister]
             });
@@ -129,18 +135,20 @@ namespace Hasmer.Decompiler.Visitor {
         /// </summary>
         [Visitor]
         public static void PutByVal(DecompilerContext context) {
-            byte resultRegister = context.Instruction.Operands[0].GetValue<byte>();
+            byte objRegister = context.Instruction.Operands[0].GetValue<byte>();
             byte valRegister = context.Instruction.Operands[1].GetValue<byte>();
             byte sourceRegister = context.Instruction.Operands[2].GetValue<byte>();
 
-            context.State.Registers.MarkUsage(sourceRegister);
-
             SyntaxNode obj;
-            if (context.State.Variables[resultRegister] != null) {
-                obj = new Identifier(context.State.Variables[resultRegister]);
+            if (context.State.Variables[objRegister] != null) {
+                obj = new Identifier(context.State.Variables[objRegister]);
             } else {
-                obj = context.State.Registers[resultRegister];
+                obj = context.State.Registers[objRegister];
             }
+
+            context.State.Registers.MarkUsage(objRegister);
+            context.State.Registers.MarkUsage(valRegister);
+            context.State.Registers.MarkUsage(sourceRegister);
 
             context.Block.Body.Add(new AssignmentExpression {
                 Operator = "=",
@@ -181,6 +189,7 @@ namespace Hasmer.Decompiler.Visitor {
             byte sourceRegister = context.Instruction.Operands[1].GetValue<byte>();
             uint identifierRegister = context.Instruction.Operands[2].GetValue<uint>();
 
+            context.State.Registers.MarkUsage(sourceRegister);
             context.State.Registers.MarkUsage(identifierRegister);
 
             context.State.Registers[resultRegister] = new MemberExpression(false) {
@@ -199,6 +208,7 @@ namespace Hasmer.Decompiler.Visitor {
             byte sourceRegister = context.Instruction.Operands[1].GetValue<byte>();
             uint identifierRegister = context.Instruction.Operands[2].GetValue<uint>();
 
+            context.State.Registers.MarkUsage(sourceRegister);
             context.State.Registers.MarkUsage(identifierRegister);
 
             context.Block.Body.Add(new UnaryExpression {

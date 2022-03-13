@@ -126,6 +126,7 @@ namespace Hasmer {
             using MemoryStream ms = new MemoryStream(DeclarationFile.Instructions);
             ms.Position = offset;
 
+            uint instructionOffset = 0;
             using BinaryReader reader = new BinaryReader(ms);
             while (ms.Position < offset + BytecodeSizeInBytes) {
                 long startPos = ms.Position;
@@ -141,9 +142,11 @@ namespace Hasmer {
                 CachedInstructions.Add(new HbcInstruction {
                     Opcode = opcodeValue,
                     Operands = operands,
-                    Offset = (uint)ms.Position - offset,
+                    Offset = instructionOffset,
                     Length = (uint)(endPos - startPos)
                 });
+
+                instructionOffset += (uint)(endPos - startPos);
             }
 
             return CachedInstructions;
