@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['labeltype_566',['LabelType',['../namespace_hasmer_1_1_assembler_1_1_parser.html#a575c55ae51120ff3a96e76e50ae30aec',1,'Hasmer::Assembler::Parser']]]
+  ['labeltype_592',['LabelType',['../namespace_hasmer_1_1_assembler_1_1_parser.html#a575c55ae51120ff3a96e76e50ae30aec',1,'Hasmer::Assembler::Parser']]]
 ];

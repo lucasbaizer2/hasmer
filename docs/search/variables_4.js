@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['source_558',['Source',['../class_hasmer_1_1_assembler_1_1_function_disassembler.html#a8236311fb1eb9a6aaca7efaa50841c80',1,'Hasmer.Assembler.FunctionDisassembler.Source()'],['../class_hasmer_1_1_decompiler_1_1_decompiler_context.html#af8e44ad2153da8a767205bd5ada86d7f',1,'Hasmer.Decompiler.DecompilerContext.Source()']]]
+  ['namepattern_583',['NamePattern',['../class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_identifier.html#a6ced2a5b32231c4e8fed89b00533e18d',1,'Hasmer::Decompiler::AST::Identifier']]]
 ];
