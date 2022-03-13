@@ -84,6 +84,9 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_declaration_parser.html">HasmDeclarationParser</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses a declaration (i.e. a token which starts with ".").  <a href="class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_declaration_parser.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_function_modifier_token.html">HasmFunctionModifierToken</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a declaration that modifiers a function header.  <a href="class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_function_modifier_token.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_function_token.html">HasmFunctionToken</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a function definition token.  <a href="class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_function_token.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -171,6 +174,17 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:af10d57f23e862276a83f7490a3a33030"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of data being declared in a ".data" declaration.  <a href="namespace_hasmer_1_1_assembler_1_1_parser.html#af10d57f23e862276a83f7490a3a33030">More...</a><br /></td></tr>
 <tr class="separator:af10d57f23e862276a83f7490a3a33030"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c859d5431d3c3dca2e956faa237697d"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_hasmer_1_1_assembler_1_1_parser.html#a4c859d5431d3c3dca2e956faa237697d">HasmFunctionModifierType</a> { <br />
+&#160;&#160;<b>Id</b>, 
+<b>Params</b>, 
+<b>Registers</b>, 
+<b>Symbols</b>, 
+<br />
+&#160;&#160;<b>Strict</b>
+<br />
+ }</td></tr>
+<tr class="memdesc:a4c859d5431d3c3dca2e956faa237697d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of declaration for a function modifier.  <a href="namespace_hasmer_1_1_assembler_1_1_parser.html#a4c859d5431d3c3dca2e956faa237697d">More...</a><br /></td></tr>
+<tr class="separator:a4c859d5431d3c3dca2e956faa237697d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aebc640be0120f6da52f5489a6fece067"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_hasmer_1_1_assembler_1_1_parser.html#aebc640be0120f6da52f5489a6fece067">HasmOperandTokenType</a> { <br />
 &#160;&#160;<a class="el" href="namespace_hasmer_1_1_assembler_1_1_parser.html#aebc640be0120f6da52f5489a6fece067a0ba7583639a274c434bbe6ef797115a4">HasmOperandTokenType.Register</a>, 
 <a class="el" href="namespace_hasmer_1_1_assembler_1_1_parser.html#aebc640be0120f6da52f5489a6fece067ab021df6aac4654c454f46c77646e745f">HasmOperandTokenType.Label</a>, 
@@ -183,8 +197,8 @@ Enumerations</h2></td></tr>
 <tr class="memdesc:aebc640be0120f6da52f5489a6fece067"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the operand.  <a href="namespace_hasmer_1_1_assembler_1_1_parser.html#aebc640be0120f6da52f5489a6fece067">More...</a><br /></td></tr>
 <tr class="separator:aebc640be0120f6da52f5489a6fece067"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a575c55ae51120ff3a96e76e50ae30aec"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_hasmer_1_1_assembler_1_1_parser.html#a575c55ae51120ff3a96e76e50ae30aec">LabelType</a> { <a class="el" href="namespace_hasmer_1_1_assembler_1_1_parser.html#a575c55ae51120ff3a96e76e50ae30aecaa2ba314746bfdbdd8161b87ab77914be">LabelType.ArrayBuffer</a> = 'A', 
-<a class="el" href="namespace_hasmer_1_1_assembler_1_1_parser.html#a575c55ae51120ff3a96e76e50ae30aeca9d461924cd5459f22b0872c38490128f">LabelType.KeyBuffer</a> = 'K', 
-<a class="el" href="namespace_hasmer_1_1_assembler_1_1_parser.html#a575c55ae51120ff3a96e76e50ae30aecaf81016b848cfa4263c5cb32b73eec5e8">LabelType.ValueBuffer</a> = 'V', 
+<a class="el" href="namespace_hasmer_1_1_assembler_1_1_parser.html#a575c55ae51120ff3a96e76e50ae30aeca653b8534e1636b2f1bfe6986cb4f16a8">LabelType.ObjectKeyBuffer</a> = 'K', 
+<a class="el" href="namespace_hasmer_1_1_assembler_1_1_parser.html#a575c55ae51120ff3a96e76e50ae30aeca1f209914c511cbc8e1bc6724dfb15e6d">LabelType.ObjectValueBuffer</a> = 'V', 
 <a class="el" href="namespace_hasmer_1_1_assembler_1_1_parser.html#a575c55ae51120ff3a96e76e50ae30aeca95b95a3f5cc435867332a215f8c1120c">LabelType.CodeLabel</a> = 'L'
  }</td></tr>
 <tr class="memdesc:a575c55ae51120ff3a96e76e50ae30aec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents the type of a Hasm label.  <a href="namespace_hasmer_1_1_assembler_1_1_parser.html#a575c55ae51120ff3a96e76e50ae30aec">More...</a><br /></td></tr>
@@ -217,6 +231,30 @@ Enumerations</h2></td></tr>
 </div><div class="memdoc">
 
 <p>The type of data being declared in a ".data" declaration. </p>
+
+</div>
+</div>
+<a id="a4c859d5431d3c3dca2e956faa237697d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c859d5431d3c3dca2e956faa237697d">&#9670;&nbsp;</a></span>HasmFunctionModifierType</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="namespace_hasmer_1_1_assembler_1_1_parser.html#a4c859d5431d3c3dca2e956faa237697d">Hasmer.Assembler.Parser.HasmFunctionModifierType</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The type of declaration for a function modifier. </p>
 
 </div>
 </div>
@@ -310,9 +348,9 @@ Enumerations</h2></td></tr>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a575c55ae51120ff3a96e76e50ae30aecaa2ba314746bfdbdd8161b87ab77914be"></a>ArrayBuffer&#160;</td><td class="fielddoc"><p>A reference or declaration in the array buffer. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a575c55ae51120ff3a96e76e50ae30aeca9d461924cd5459f22b0872c38490128f"></a>KeyBuffer&#160;</td><td class="fielddoc"><p>A reference or declaration in the object key buffer. </p>
+<tr><td class="fieldname"><a id="a575c55ae51120ff3a96e76e50ae30aeca653b8534e1636b2f1bfe6986cb4f16a8"></a>ObjectKeyBuffer&#160;</td><td class="fielddoc"><p>A reference or declaration in the object key buffer. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a575c55ae51120ff3a96e76e50ae30aecaf81016b848cfa4263c5cb32b73eec5e8"></a>ValueBuffer&#160;</td><td class="fielddoc"><p>A reference or declaration in the object value buffer. </p>
+<tr><td class="fieldname"><a id="a575c55ae51120ff3a96e76e50ae30aeca1f209914c511cbc8e1bc6724dfb15e6d"></a>ObjectValueBuffer&#160;</td><td class="fielddoc"><p>A reference or declaration in the object value buffer. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="a575c55ae51120ff3a96e76e50ae30aeca95b95a3f5cc435867332a215f8c1120c"></a>CodeLabel&#160;</td><td class="fielddoc"><p>A reference or declaration of an offset of code in a function's body, used for jump instructions. </p>
 </td></tr>

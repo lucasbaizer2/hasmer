@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['imm32_598',['Imm32',['../namespace_hasmer.html#a57209db7d32f23259d1558d7363b3a1eadf0ec7ebee029b4b84bde5a4dcbadcd5',1,'Hasmer']]]
+  ['identifier_619',['Identifier',['../namespace_hasmer.html#a5362acbdd4b6f55c4573ef20523eda0ea29ee5d1ebcc033234938a5234f1f2075',1,'Hasmer']]],
+  ['imm32_620',['Imm32',['../namespace_hasmer.html#a57209db7d32f23259d1558d7363b3a1eadf0ec7ebee029b4b84bde5a4dcbadcd5',1,'Hasmer']]]
 ];
