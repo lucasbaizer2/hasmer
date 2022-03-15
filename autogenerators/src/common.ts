@@ -1,4 +1,6 @@
 import simpleGit from 'simple-git';
+import fs from 'fs';
+import path from 'path';
 
 /**
  * Represents an entire Hermes bytecode format definitions file.
@@ -110,4 +112,19 @@ export const git = simpleGit();
  */
 export async function cloneHermesRepository() {
     await git.clone('https://github.com/facebook/hermes.git');
+}
+
+/**
+ * Parses the definition files in the `./definitions` directory and returns them in ascending order.
+ */
+export function getDefinitionFiles(): DefinitionFile[] {
+    const files: DefinitionFile[] = [];
+    const definitionFiles = fs.readdirSync('definitions');
+    definitionFiles.sort();
+    for (const definitionFile of definitionFiles) {
+        const fileRaw = fs.readFileSync(path.join('definitions', definitionFile), 'utf8');
+        files.push(JSON.parse(fileRaw));
+    }
+
+    return files;
 }

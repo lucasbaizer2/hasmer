@@ -152,5 +152,17 @@ namespace Hasmer.Decompiler.Visitor {
             // CreateThis is a VM construct more or less, so we can just consider the prototype definition as the "this" instance
             context.State.Registers[resultRegister] = context.State.Registers[prototypeRegister];
         }
+
+        /// <summary>
+        /// Creates a regular expression literal from the given pattern and flags.
+        /// </summary>
+        [Visitor]
+        public static void CreateRegExp(DecompilerContext context) {
+            byte resultRegister = context.Instruction.Operands[0].GetValue<byte>();
+            string pattern = context.Instruction.Operands[1].GetResolvedValue<string>(context.Source);
+            string flags = context.Instruction.Operands[2].GetResolvedValue<string>(context.Source);
+
+            context.State.Registers[resultRegister] = new RegExpLiteral(pattern, flags);
+        }
     }
 }

@@ -1,6 +1,6 @@
 import fs from 'fs';
 import fsExtra from 'fs-extra';
-import { cloneHermesRepository, DefinitionFile, git } from './common';
+import { cloneHermesRepository, DefinitionFile, getDefinitionFiles, git } from './common';
 import child_process from 'child_process';
 import path from 'path';
 import os from 'os';
@@ -70,17 +70,14 @@ async function main() {
 
     await git.cwd('hermes');
 
-    const definitionFiles = fs.readdirSync('definitions').reverse();
-    for (const definitionFile of definitionFiles) {
-        const fileRaw = fs.readFileSync(path.join('definitions', definitionFile), 'utf8');
-        const parsedFile: DefinitionFile = JSON.parse(fileRaw);
-
-        if (versionsFilter !== null && !versionsFilter.includes(parsedFile.Version)) {
+    const definitions = getDefinitionFiles().reverse();
+    for (const definition of definitions) {
+        if (versionsFilter !== null && !versionsFilter.includes(definition.Version)) {
             continue;
         }
 
-        console.log('Checking out commit for HBC version: ' + parsedFile.Version);
-        await git.checkout(parsedFile.GitCommitHash, ['--force']);
+        console.log('Checking out commit for HBC version: ' + definition.Version);
+        await git.checkout(definition.GitCommitHash, ['--force']);
 
         const buildSystem = getPlatformBuildSystem();
 
@@ -171,7 +168,7 @@ async function main() {
         }
 
         console.log('Copying build CLI to `cli-versions` directory...');
-        const destDir = `cli-versions/${parsedFile.Version}/${os.platform()}`;
+        const destDir = `cli-versions/${definition.Version}/${os.platform()}`;
         fsExtra.copySync(outputDirectory, destDir, {
             overwrite: true,
             recursive: true,

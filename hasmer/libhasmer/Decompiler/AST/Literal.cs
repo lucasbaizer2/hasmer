@@ -15,7 +15,7 @@ namespace Hasmer.Decompiler.AST {
         public override void Write(SourceCodeBuilder builder) {
             if (Value.TypeCode == TypeCode.String) {
                 builder.Write("'");
-                builder.Write(Value.ToString());
+                builder.Write(StringEscape.Escape(Value.ToString()));
                 builder.Write("'");
             } else {
                 builder.Write(Value.ToString());

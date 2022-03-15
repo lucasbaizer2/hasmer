@@ -6,35 +6,6 @@ using System.Threading.Tasks;
 using Hasmer.Decompiler.AST;
 
 namespace Hasmer.Decompiler.Analysis {
-    public class ControlFlowBlock {
-        /// <summary>
-        /// The offset of the first instruction in the control flow block.
-        /// </summary>
-        public uint BaseOffset { get; set; }
-
-        /// <summary>
-        /// The bytecode length of the instructions in the control flow block.
-        /// </summary>
-        public uint Length { get; set; }
-
-        /// <summary>
-        /// The bytecode offset of the block that is jumped to as a consequence of this block ending.
-        /// The consequent block could be either a destination in an unconditional jump (e.g. the Jmp instruction),
-        /// or a destination of a conditional jump (e.g. the JNotEqual instruction).
-        /// <br />
-        /// If this block ends with a returning instruction (e.g. the Ret instruction),
-        /// then the Consequent will be null, representing that this block does not execute further code in the function.
-        /// </summary>
-        public uint? Consequent { get; set; }
-
-        /// <summary>
-        /// The bytecode offset of the block that is executed as a consequence of this block ending without jumping.
-        /// The alternate block is the code that is executed immediately after a conditional jump instruction
-        /// (e.g. the JNotEqual instruction) when the jumping operation is not executed (i.e. it does not jump to another block).
-        /// </summary>
-        public uint? Alternate { get; set; }
-    }
-
     /// <summary>
     /// Represents the control flow of a function as a graph.
     /// </summary>
@@ -72,6 +43,7 @@ namespace Hasmer.Decompiler.Analysis {
 
             BuildControlFlowBlocks();
             BuildBlockLengths();
+            BuildDefaultConsequents();
         }
 
         /// <summary>
@@ -82,9 +54,50 @@ namespace Hasmer.Decompiler.Analysis {
         }
 
         /// <summary>
+        /// Gets the <see cref="ControlFlowBlockType"/> of a given block in the graph.
+        /// </summary>
+        public ControlFlowBlockType GetBlockType(ControlFlowBlock block) {
+            List<ControlFlowBlock> consequentPointers = CachedBlocks.Values.Where(other => other.Consequent == block.BaseOffset).ToList();
+            List<ControlFlowBlock> alternatePointers = CachedBlocks.Values.Where(other => other.Alternate == block.BaseOffset).ToList();
+
+            if (consequentPointers.Count == 0 && alternatePointers.Count == 0) {
+                // if the block is not pointed to by any other blocks, it is general code
+                return ControlFlowBlockType.General;
+            }
+
+            if (consequentPointers.Count >= 2 || alternatePointers.Count >= 2) {
+                // if the block is pointed to by multiple other blocks, it is a general block
+                return ControlFlowBlockType.General;
+            }
+
+            if (consequentPointers.Count == 1 && alternatePointers.Count == 1) {
+                // if the block is pointed to as both a consequent and an alternate, it is a general block
+                return ControlFlowBlockType.General;
+            }
+
+            if (consequentPointers.Count == 1) {
+                return ControlFlowBlockType.IfStatement;
+            }
+
+            if (alternatePointers.Count == 1) {
+                return ControlFlowBlockType.ElseStatement;
+            }
+
+            throw new Exception("unreachable");
+        }
+
+        /// <summary>
+        /// Returns the control flow block whose <see cref="ControlFlowBlock.BaseOffset"/> is exactly equal to the given offset,
+        /// or `null` if there is no block which starts at the offset.
+        /// </summary>
+        public ControlFlowBlock GetBlockAtOffset(uint offset) {
+            return CachedBlocks.GetValueOrDefault(offset, null);
+        }
+
+        /// <summary>
         /// Returns the control flow block which contains the bytecode at the given offset. 
         /// </summary>
-        private ControlFlowBlock GetBlockContainingOffset(uint offset) {
+        public ControlFlowBlock GetBlockContainingOffset(uint offset) {
             if (CachedBlocks.Count == 1) {
                 return CachedBlocks[0]; // return the starting block (offset = 0) if it's the only one
             }
@@ -157,7 +170,7 @@ namespace Hasmer.Decompiler.Analysis {
                 block.Length = nextBlock.BaseOffset - block.BaseOffset;
             }
 
-            uint totalLength = (uint) Instructions.Select(insn => (int)insn.Length).Sum();
+            uint totalLength = (uint)Instructions.Select(insn => (int)insn.Length).Sum();
 
             ControlFlowBlock lastBlock = CachedBlocks[keys[keys.Count - 1]];
             if (keys.Count == 1) {
@@ -165,6 +178,26 @@ namespace Hasmer.Decompiler.Analysis {
             } else {
                 ControlFlowBlock penultimateBlock = CachedBlocks[keys[keys.Count - 2]];
                 lastBlock.Length = totalLength - penultimateBlock.BaseOffset;
+            }
+        }
+
+        /// <summary>
+        /// Sets the <see cref="ControlFlowBlock.Consequent"/> property for all the blocks whose last instruction is not a jump or `Ret` instruction.
+        /// The consequent offset is set to be the instruction immediately after the last instruction in the non-jumping/non-returning block.
+        /// </summary>
+        private void BuildDefaultConsequents() {
+            List<uint> keys = new List<uint>(CachedBlocks.Keys);
+            keys.Sort();
+
+            for (int i = 0; i < keys.Count - 1; i++) {
+                ControlFlowBlock block = CachedBlocks[keys[i]];
+                ControlFlowBlock nextBlock = CachedBlocks[keys[i + 1]];
+
+                HbcInstruction lastInsn = GetBlockInstructions(block).Last();
+                HbcInstructionDefinition lastDef = File.BytecodeFormat.Definitions[lastInsn.Opcode];
+                if (!lastDef.IsJump && lastDef.Name != "Ret") {
+                    block.Consequent = nextBlock.BaseOffset;
+                }
             }
         }
 
@@ -179,7 +212,7 @@ namespace Hasmer.Decompiler.Analysis {
 
             foreach (uint key in keys) {
                 ControlFlowBlock block = CachedBlocks[key];
-                str.Write($"### BLOCK OFFSET: {block.BaseOffset}");
+                str.Write($"### BLOCK OFFSET: {block.BaseOffset} --- BLOCK TYPE: {GetBlockType(block)}");
                 str.AddIndent(1);
                 str.NewLine();
 

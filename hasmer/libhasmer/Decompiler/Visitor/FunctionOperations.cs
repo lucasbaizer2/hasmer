@@ -51,6 +51,15 @@ namespace Hasmer.Decompiler.Visitor {
         }
 
         /// <summary>
+        /// Gets the actual "arguments" array and stores the result.
+        /// </summary>
+        [Visitor]
+        public static void ReifyArguments(DecompilerContext context) {
+            byte register = context.Instruction.Operands[0].GetValue<byte>();
+            context.State.Registers[register] = new Identifier("arguments");
+        }
+
+        /// <summary>
         /// Gets the length of the "arguments" array and stores the result.
         /// </summary>
         [Visitor]

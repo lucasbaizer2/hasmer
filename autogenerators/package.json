@@ -6,7 +6,8 @@
   "scripts": {
     "compile": "tsc",
     "generate-bytecode-definitions": "yarn compile && node build/generate-bytecode-definitions.js",
-    "compile-hermes-cli": "yarn compile && node build/compile-hermes-cli.js"
+    "compile-hermes-cli": "yarn compile && node build/compile-hermes-cli.js",
+    "generate-instruction-documentation": "yarn compile && node build/generate-instruction-documentation.js"
   },
   "dependencies": {
     "fs-extra": "^10.0.1",

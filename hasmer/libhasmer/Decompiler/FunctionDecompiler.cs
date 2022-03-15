@@ -108,8 +108,25 @@ namespace Hasmer.Decompiler {
                 throw new Exception($"No handler for instruction: {opcodeName}");
             }
 
+            ControlFlowBlock beforeGraph = context.ControlFlowGraph.GetBlockContainingOffset(insn.Offset);
+
+
             if (context.CurrentInstructionIndex == insnIndex) {
                 context.CurrentInstructionIndex++;
+
+                // TODO
+                /*
+                ControlFlowBlock afterGraph = context.ControlFlowGraph.GetBlockAtOffset(context.Instructions[context.CurrentInstructionIndex].Offset);
+                // true if a new control flow block started at the next instruction
+                if (afterGraph != null) {
+                    ControlFlowBlockType beforeType = context.ControlFlowGraph.GetBlockType(beforeGraph);
+                    ControlFlowBlockType afterType = context.ControlFlowGraph.GetBlockType(afterGraph);
+
+\                    if (beforeGraph.Consequent == afterGraph.BaseOffset && beforeType != ControlFlowBlockType.General && afterType == ControlFlowBlockType.General) {
+
+                    }
+                }
+                */
             }
         }
 
@@ -128,11 +145,13 @@ namespace Hasmer.Decompiler {
                 ControlFlowGraph = new ControlFlowGraph(Source, Instructions)
             };
 
+            /*
             if (Header.FunctionId != 0) {
                 ControlFlowGraph graph = new ControlFlowGraph(Source, Instructions);
 
                 Console.WriteLine(graph);
             }
+            */
 
             FunctionDeclaration func = new FunctionDeclaration {
                 Name = new Identifier(Source.SmallFuncHeaders[Header.FunctionId].GetFunctionName(Source)),

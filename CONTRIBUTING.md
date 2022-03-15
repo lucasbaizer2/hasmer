@@ -14,10 +14,9 @@ The `hasmer` directory contains the .NET 5 C# project for the actual code of the
 
 The `hasm-vscode` directory contains the source for the Visual Studio Code extension for working with Hasm assembly.
 
-The `bytecode-format-generator` directory contains a Node.js script, used for scraping the Hermes git repository for modifications to Hermes bytecode, and parsing the changes made.
-This is used for generating definition files for prior versions, as well as new ones.
+The `autogenerators` directory contains various Node.js scripts used for generating utilities, documentation, and other resources for each version of Hermes bytecode.
 
 See each subproject's README for more detailed information on how to build/run/test/etc it:
 * [hasmer](./hasmer/README.md)
 * [hasm-vscode](./hasm-vscode/README.md)
-* [bytecode-format-generator](./bytecode-format-generator/README.md)
+* [autogenerators](./autogenerators/README.md)

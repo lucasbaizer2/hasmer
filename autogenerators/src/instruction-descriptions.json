@@ -1,0 +1,122 @@
+{
+    "Unreachable": {
+        "Description": "Unreachable opcode for stubs and similar."
+    },
+    "NewObjectWithBuffer": {
+        "Description": "Creates an object from a static map of keys and values, e.g. `var x = { 'a': 3, 'b': 4 }`. Any non-constant elements can be set afterwards with I[PutOwnByIndex].",
+        "Operands": [
+            "The destination.",
+            "The preallocation size hint.",
+            "The number of static elements.",
+            "The offset in the C[ObjectKeyBuffer] to get keys from.",
+            "The offset in the C[ObjectValueBuffer] to get values from."
+        ]
+    },
+    "NewObject": {
+        "Description": "Creates a new, empty Object using the built-in constructor (regardless of whether it was overridden), e.g. `var x = {}`.",
+        "Operands": [
+            "The destination."
+        ]
+    },
+    "NewObjectWithParent": {
+        "Description": "Creates a new empty Object with the specified parent. If the parent is null, no parent is used. If the parent is not an object, the builtin Object.prototype is used. Otherwise the parent itself is used.",
+        "Operands": [
+            "The destination.",
+            "The parent."
+        ]
+    },
+    "NewArrayWithBuffer": {
+        "Description": "Creates an array from a static list of values, e.g. `var x = [1, 2, 3].`. Any non-constant elements can be set afterwards with I[PutOwnByIndex].",
+        "Operands": [
+            "The destination.",
+            "The preallocation size hint.",
+            "The number of static elements.",
+            "The offset in the C[ArrayBuffer] to get values from."
+        ]
+    },
+    "NewArray": {
+        "Description": "Creates a new array of a given size, e.g. `var x = new Array(size)`.",
+        "Operands": [
+            "The destination.",
+            "The size of the array."
+        ]
+    },
+    "Mov": {
+        "Description": "Copies the value of one register into another, e.g. `x = y`.",
+        "Operands": [
+            "The destination.",
+            "The source."
+        ]
+    },
+    "Negate": {
+        "Description": "Performs a unary minus operation, e.g. `x = -y`.",
+        "Operands": [
+            "The destination.",
+            "The source."
+        ]
+    },
+    "GetEnvironment": {
+        "Description": "Gets an C[Environment] from N levels up the stack. 0 is the current environment, 1 is the caller's environment, etc.",
+        "Operands": [
+            "The destination.",
+            "The amount of levels up the stack to retrieve the environment from."
+        ]
+    },
+    "StoreToEnvironment": {
+        "Description": "Stores a value in an C[Environment].",
+        "Operands": [
+            "The environment (as fetched by I[GetEnvironment]).",
+            "The environment slot number to store the value into.",
+            "The value to store."
+        ]
+    },
+    "StoreNPToEnvironment": {
+        "Description": "Stores a non-pointer value in an C[Environment].",
+        "Operands": [
+            "The environment (as fetched by I[GetEnvironment]).",
+            "The environment slot number to store the value into.",
+            "The value to store."
+        ]
+    },
+    "LoadFromEnvironment": {
+        "Description": "Reads a value from an C[Environment].",
+        "Operands": [
+            "The destination.",
+            "The environment (as fetched by I[GetEnvironment]).",
+            "The environment slot number to read the value from."
+        ]
+    },
+    "GetGlobalObject": {
+        "Description": "Gets a reference to the C[GlobalObject].",
+        "Operands": [
+            "The destination."
+        ]
+    },
+    "GetNewTarget": {
+        "Description": "Gets the value of NewTarget from the frame. // TODO: elaborate",
+        "Operands": [
+            "The destination."
+        ]
+    },
+    "CreateEnvironment": {
+        "Description": "Creates a new C[Environment] to store values captured by closures.",
+        "Operands": [
+            "The destination."
+        ]
+    },
+    "DeclareGlobalVar": {
+        "Description": "Declare a global variable by C[StringTable] index. The variable will be set to undefined.",
+        "Operands": [
+            "The name of the variable to declare."
+        ]
+    },
+    "GetById": {
+        "Description": "Get an object property by C[StringTable] index.",
+        "Operands": [
+            "The destination.",
+            "The object to retrieve the property from.",
+            "The cache index of the property. This is omitted from Hasm when in C[AutoMode].",
+            "The name of the property to retrieve from the object."
+        ]
+    }
+}

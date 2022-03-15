@@ -1,8 +1,8 @@
-# Hasmer Bytecode Format Generator
+# Hasmer Autogenerators
 
 This subproject contains Node.js scripts that interact with the Hermes source repository, providing tooling for each version of Hermes bytecode.
 
-There are two scripts:
+These are the scripts:
 
 * `generate-bytecode-definitions`: This script finds every version of Hermes bytecode and creates a definitions file for it, which is used internally by hasmer. A definitions file describes the all instructions and their operands for a Hermes bytecode version.
 * `compile-hermes-cli`: This script compiles the Hermes CLI executables for every Hermes bytecode version (which are found by `generate-bytecode-definitions`). The Hermes CLI provides tools for compiling JavaScript into Hermes bytecode, as well as executing Hermes bytecode files.

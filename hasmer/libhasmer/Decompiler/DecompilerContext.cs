@@ -97,6 +97,7 @@ namespace Hasmer.Decompiler {
                 CurrentInstructionIndex = CurrentInstructionIndex,
                 Parent = Parent,
                 Function = Function,
+                ControlFlowGraph = ControlFlowGraph,
             };
             copy.State = new FunctionState(copy, (uint)State.Registers.Length);
 
