@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['objectkeybuffer_623',['ObjectKeyBuffer',['../namespace_hasmer_1_1_assembler_1_1_parser.html#a575c55ae51120ff3a96e76e50ae30aeca653b8534e1636b2f1bfe6986cb4f16a8',1,'Hasmer::Assembler::Parser']]],
-  ['objectvaluebuffer_624',['ObjectValueBuffer',['../namespace_hasmer_1_1_assembler_1_1_parser.html#a575c55ae51120ff3a96e76e50ae30aeca1f209914c511cbc8e1bc6724dfb15e6d',1,'Hasmer::Assembler::Parser']]]
+  ['keep_640',['Keep',['../namespace_hasmer_1_1_assembler_1_1_parser.html#a1c4909d5002193aa288eec9a6ea1e99da02bce93bff905887ad2233110bf9c49e',1,'Hasmer::Assembler::Parser']]]
 ];

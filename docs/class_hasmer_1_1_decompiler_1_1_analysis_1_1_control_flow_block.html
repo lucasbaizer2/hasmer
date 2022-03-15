@@ -72,6 +72,9 @@ $(function() {
 <div class="title">Hasmer.Decompiler.Analysis.ControlFlowBlock Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Represents a block of code in a <a class="el" href="class_hasmer_1_1_decompiler_1_1_analysis_1_1_control_flow_graph.html" title="Represents the control flow of a function as a graph.">ControlFlowGraph</a>. The block of code begins at either a position that is jumped to, or the start of the function. The block of code ends at the first jump instruction found after the code beyond the start position, or the end of the function.  
+ <a href="class_hasmer_1_1_decompiler_1_1_analysis_1_1_control_flow_block.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
 Properties</h2></td></tr>
@@ -89,7 +92,9 @@ Properties</h2></td></tr>
 <tr class="memdesc:a19c6baa6722d562b627088bb6d5f145f"><td class="mdescLeft">&#160;</td><td class="mdescRight">The bytecode offset of the block that is executed as a consequence of this block ending without jumping. The alternate block is the code that is executed immediately after a conditional jump instruction (e.g. the JNotEqual instruction) when the jumping operation is not executed (i.e. it does not jump to another block).  <a href="class_hasmer_1_1_decompiler_1_1_analysis_1_1_control_flow_block.html#a19c6baa6722d562b627088bb6d5f145f">More...</a><br /></td></tr>
 <tr class="separator:a19c6baa6722d562b627088bb6d5f145f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Property Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Represents a block of code in a <a class="el" href="class_hasmer_1_1_decompiler_1_1_analysis_1_1_control_flow_graph.html" title="Represents the control flow of a function as a graph.">ControlFlowGraph</a>. The block of code begins at either a position that is jumped to, or the start of the function. The block of code ends at the first jump instruction found after the code beyond the start position, or the end of the function. </p>
+</div><h2 class="groupheader">Property Documentation</h2>
 <a id="a19c6baa6722d562b627088bb6d5f145f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a19c6baa6722d562b627088bb6d5f145f">&#9670;&nbsp;</a></span>Alternate</h2>
 
@@ -188,7 +193,7 @@ Properties</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>libhasmer/Decompiler/Analysis/ControlFlowGraph.cs</li>
+<li>libhasmer/Decompiler/Analysis/ControlFlowBlock.cs</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

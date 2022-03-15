@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['string_629',['String',['../namespace_hasmer_1_1_assembler_1_1_parser.html#aebc640be0120f6da52f5489a6fece067a27118326006d3829667a400ad23d5d98',1,'Hasmer.Assembler.Parser.String()'],['../namespace_hasmer.html#a5362acbdd4b6f55c4573ef20523eda0ea27118326006d3829667a400ad23d5d98',1,'Hasmer.String()']]]
+  ['objectkeybuffer_642',['ObjectKeyBuffer',['../namespace_hasmer_1_1_assembler_1_1_parser.html#a575c55ae51120ff3a96e76e50ae30aeca653b8534e1636b2f1bfe6986cb4f16a8',1,'Hasmer::Assembler::Parser']]],
+  ['objectvaluebuffer_643',['ObjectValueBuffer',['../namespace_hasmer_1_1_assembler_1_1_parser.html#a575c55ae51120ff3a96e76e50ae30aeca1f209914c511cbc8e1bc6724dfb15e6d',1,'Hasmer::Assembler::Parser']]]
 ];
