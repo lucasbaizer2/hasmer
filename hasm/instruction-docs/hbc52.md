@@ -1,3 +1,8 @@
+---
+title: Hermes Bytecode 52 Documentation
+parent: Hermes Bytecode Documentation
+---
+
 # Hermes Bytecode 52 Documentation
 
 # NewObjectWithBuffer

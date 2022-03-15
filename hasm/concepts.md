@@ -1,3 +1,8 @@
+---
+title: Hermes Concepts
+parent: Hasm Format
+---
+
 # Hermes Concepts
 
 This document contains documentation on the concepts of Hermes assembly and the Hasm format.
