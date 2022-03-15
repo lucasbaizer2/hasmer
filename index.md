@@ -3,6 +3,10 @@ title: Hasmer
 nav_order: 1
 ---
 
+<head>
+    <link rel="shortcut icon" type="image/png" href="/hasmer/assets/hasm-logo.png">
+</head>
+
 # hasmer
 
 This is the website for [hasmer](https://github.com/lucasbaizer2/hasmer).
