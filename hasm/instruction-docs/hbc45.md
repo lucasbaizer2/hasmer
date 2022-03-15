@@ -2,6 +2,7 @@
 title: Hermes Bytecode 45 Documentation
 nav_order: 6
 parent: Hermes Bytecode Documentation
+grand_parent: Hasm Assembly Docs
 ---
 
 # Hermes Bytecode 45 Documentation
