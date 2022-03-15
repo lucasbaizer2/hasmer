@@ -1,3 +1,8 @@
+---
+title: Hermes CLI Downloads
+nav_order: 4
+---
+
 # Hermes CLI Downloads
 
 Below are download links to prebuilt archives of the Hermes CLI for each Hermes bytecode version. Each archive contains the following CLI executables:
