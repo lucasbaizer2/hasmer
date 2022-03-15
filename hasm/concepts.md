@@ -1,6 +1,6 @@
 ---
 title: Hermes Concepts
-nav_order: 1
+nav_order: 2
 parent: Hasm Assembly Docs
 ---
 
@@ -127,3 +127,28 @@ function main() {
 ```
 The output would include the `main` function, as well as other Hermes built-ins
 (such as the [Global Function](#global-function)).
+
+### Variant Instructions
+
+Many HBC instructions have "variants".
+A variant instruction is defined as an instruction which performs the same action as another instruction, but takes differently sized operands.
+
+As an example, there are two variants for the `JNotEqual` instruction:
+```
+JNotEqual <Addr8> <Reg8> <Reg8>
+JNotEqualLong <Addr32> <Reg8> <Reg8>
+```
+The `JNotEqualLong` instruction performs the exact same action as `JNotEqual` when executed, but has the capability of jumping up to 4 bytes (per the `Addr32` operand), whereas the `JNotEqual` instruction can only jump up to 1 byte (per the `Addr8` operand).
+
+The hasmer dis(assembler) has two modes: `auto` and `exact`. 
+
+When an HBC file is disassembled in `auto` mode, variant instructions (e.g. `JNotEqualLong`) are converted to their base instruction (e.g. `JNotEqual`).
+
+When an HBC file is disassembled in `exact` mode, variant instructions are kept literally and not converted to their base variant.
+
+When a Hasm file is assembled in `auto` mode, the instructions are converted to their respective variants automatically by the assembly by determining the needs of the operands.
+
+When a Hasm file is assembled in `exact` mode, the instructions are interpeted literally. If the operand is out of bounds of the values the instruction takes, an error is thrown.
+
+This makes programming in `exact` mode quite difficult. 
+In the vast majority of use cases, `auto` mode is preferable to `exact` mode when using hasmer.
