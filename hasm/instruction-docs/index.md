@@ -1,6 +1,6 @@
 ---
-title: Hasm Bytecode Documentation
-parent: Hasm Format
+title: Hermes Bytecode Documentation
+parent: Hasm Assembly Docs
 has_children: true
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Hermes Concepts
-parent: Hasm Format
+parent: Hasm Assembly Docs
 ---
 
 # Hermes Concepts
