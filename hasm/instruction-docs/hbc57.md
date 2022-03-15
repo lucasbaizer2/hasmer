@@ -1,11 +1,11 @@
 ---
-title: Hermes Bytecode 57 Documentation
+title: HBC Version 57
 nav_order: 18
 parent: Hermes Bytecode Documentation
 grand_parent: Hasm Assembly Docs
 ---
 
-# Hermes Bytecode 57 Documentation
+# HBC Version 57
 
 # NewObjectWithBuffer
 

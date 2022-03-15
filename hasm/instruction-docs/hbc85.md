@@ -1,11 +1,11 @@
 ---
-title: Hermes Bytecode 85 Documentation
+title: HBC Version 85
 nav_order: 46
 parent: Hermes Bytecode Documentation
 grand_parent: Hasm Assembly Docs
 ---
 
-# Hermes Bytecode 85 Documentation
+# HBC Version 85
 
 # Unreachable
 
