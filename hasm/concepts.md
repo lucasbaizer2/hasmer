@@ -1,5 +1,6 @@
 ---
 title: Hermes Concepts
+nav_order: 1
 parent: Hasm Assembly Docs
 ---
 

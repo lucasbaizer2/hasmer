@@ -3,22 +3,19 @@ title: Hasmer
 nav_order: 1
 ---
 
-<head>
-    <link rel="shortcut icon" type="image/png" href="/hasmer/assets/hasm-logo.png">
-</head>
-
 # hasmer
 
 This is the website for [hasmer](https://github.com/lucasbaizer2/hasmer).
-Here you can find usage documentation, examples, code documentation, and other useful information.
+hasmer is a utility for working with [Hermes](https://github.com/facebook/hermes) bytecode.
+Here you can find usage downloads, documentation, and other useful information.
 
 ## Download
 
-You can download the latest version of the hasmer command line from the [Releases page](https://github.com/lucasbaizer2/hasmer/releases).
+You can download the latest version of the hasmer command line tool from the [Releases page](https://github.com/lucasbaizer2/hasmer/releases) on GitHub.
 
 ## Usage
 
-You can find detailed documentation on how to use the command line interface for hasmer [here](./cli).
+You can find detailed documentation on how to use the CLI for hasmer [here](./cli).
 
 ## Hasm Format / Hermes Instructions Docs
 
