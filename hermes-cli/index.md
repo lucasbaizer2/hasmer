@@ -1,5 +1,15 @@
 # Hermes CLI Downloads
 
+Below are download links to prebuilt archives of the Hermes CLI for each Hermes bytecode version. Each archive contains the following CLI executables:
+
+* `hermes`
+* `hermesc`
+* `hvm`
+* `hdb`
+* `hbcdump`
+
+You rarely need to use these binaries yourself, as most of their actions are wrapped by [hasmer](https://lucasbaizer2.github.io/hasmer), but if you need the binaries they are available here.
+
 | Hermes Bytecode Version | Windows Download | MacOS Download | Linux Download |
 |---|---|---|---|---|
 | 86 | [hermes-cli-86-win32.zip](https://hasmer.s3.us-west-2.amazonaws.com/hermes-cli/86/win32/hermes-cli-86-win32.zip) | Unavailable | [hermes-cli-86-linux.zip](https://hasmer.s3.us-west-2.amazonaws.com/hermes-cli/86/linux/hermes-cli-86-linux.zip) |
