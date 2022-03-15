@@ -3,10 +3,4 @@ description: command line tool for reverse engineering Hermes bytecode
 baseurl: /
 url: "https://lucasbaizer2.github.io"
 remote_theme: just-the-docs/just-the-docs
-
-collections:
-  docs:
-    output: true
-    permalink: "/:collection:/path"
-    order:
-
+search_enabled: false
