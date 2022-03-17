@@ -66,7 +66,8 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#enum-members">Enumerations</a>  </div>
   <div class="headertitle">
 <div class="title">Hasmer.Decompiler.Analysis Namespace Reference</div>  </div>
 </div><!--header-->
@@ -75,6 +76,7 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_decompiler_1_1_analysis_1_1_control_flow_block.html">ControlFlowBlock</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a block of code in a <a class="el" href="class_hasmer_1_1_decompiler_1_1_analysis_1_1_control_flow_graph.html" title="Represents the control flow of a function as a graph.">ControlFlowGraph</a>. The block of code begins at either a position that is jumped to, or the start of the function. The block of code ends at the first jump instruction found after the code beyond the start position, or the end of the function.  <a href="class_hasmer_1_1_decompiler_1_1_analysis_1_1_control_flow_block.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_decompiler_1_1_analysis_1_1_control_flow_graph.html">ControlFlowGraph</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents the control flow of a function as a graph.  <a href="class_hasmer_1_1_decompiler_1_1_analysis_1_1_control_flow_graph.html#details">More...</a><br /></td></tr>
@@ -82,7 +84,49 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_decompiler_1_1_analysis_1_1_static_analyzer.html">StaticAnalyzer</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The baae class for performing static analysis on a decmopiled <a class="el" href="namespace_hasmer_1_1_decompiler_1_1_a_s_t.html">AST</a>. This allows for optimizing the <a class="el" href="namespace_hasmer_1_1_decompiler_1_1_a_s_t.html">AST</a> to make it as readable as possible.  <a href="class_hasmer_1_1_decompiler_1_1_analysis_1_1_static_analyzer.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:abbc4383bc69a654ccd18607a3dc82382"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_hasmer_1_1_decompiler_1_1_analysis.html#abbc4383bc69a654ccd18607a3dc82382">ControlFlowBlockType</a> { <a class="el" href="namespace_hasmer_1_1_decompiler_1_1_analysis.html#abbc4383bc69a654ccd18607a3dc82382a0db377921f4ce762c62526131097968f">ControlFlowBlockType.General</a>, 
+<a class="el" href="namespace_hasmer_1_1_decompiler_1_1_analysis.html#abbc4383bc69a654ccd18607a3dc82382a69bf1eda358268e97a9d792c0e88b10d">ControlFlowBlockType.IfStatement</a>, 
+<a class="el" href="namespace_hasmer_1_1_decompiler_1_1_analysis.html#abbc4383bc69a654ccd18607a3dc82382affe69b660ba55a5f2d68e56ac13f31c6">ControlFlowBlockType.ElseStatement</a>
+ }</td></tr>
+<tr class="memdesc:abbc4383bc69a654ccd18607a3dc82382"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of structure that a ControlFlowBlock represents.  <a href="namespace_hasmer_1_1_decompiler_1_1_analysis.html#abbc4383bc69a654ccd18607a3dc82382">More...</a><br /></td></tr>
+<tr class="separator:abbc4383bc69a654ccd18607a3dc82382"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="abbc4383bc69a654ccd18607a3dc82382"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abbc4383bc69a654ccd18607a3dc82382">&#9670;&nbsp;</a></span>ControlFlowBlockType</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="namespace_hasmer_1_1_decompiler_1_1_analysis.html#abbc4383bc69a654ccd18607a3dc82382">Hasmer.Decompiler.Analysis.ControlFlowBlockType</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The type of structure that a <a class="el" href="class_hasmer_1_1_decompiler_1_1_analysis_1_1_control_flow_block.html" title="Represents a block of code in a ControlFlowGraph. The block of code begins at either a position that ...">ControlFlowBlock</a> represents. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="abbc4383bc69a654ccd18607a3dc82382a0db377921f4ce762c62526131097968f"></a>General&#160;</td><td class="fielddoc"><p>The control flow block is not within a control flow structure. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="abbc4383bc69a654ccd18607a3dc82382a69bf1eda358268e97a9d792c0e88b10d"></a>IfStatement&#160;</td><td class="fielddoc"><p>The control flow block is within an if or if-else statement in an if/if-else/else chain. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="abbc4383bc69a654ccd18607a3dc82382affe69b660ba55a5f2d68e56ac13f31c6"></a>ElseStatement&#160;</td><td class="fielddoc"><p>The control flow block is within an else statement in an if/if-else/else chian. </p>
+</td></tr>
+</table>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

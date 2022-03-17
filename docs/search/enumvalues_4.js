@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['keep_621',['Keep',['../namespace_hasmer_1_1_assembler_1_1_parser.html#a1c4909d5002193aa288eec9a6ea1e99da02bce93bff905887ad2233110bf9c49e',1,'Hasmer::Assembler::Parser']]]
+  ['general_636',['General',['../namespace_hasmer_1_1_decompiler_1_1_analysis.html#abbc4383bc69a654ccd18607a3dc82382a0db377921f4ce762c62526131097968f',1,'Hasmer::Decompiler::Analysis']]]
 ];

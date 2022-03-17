@@ -85,6 +85,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a0d74ba07b5c73a30833b51b7a42bf807"><td class="memItemLeft" align="right" valign="top">IEnumerable&lt; <a class="el" href="class_hasmer_1_1_hbc_instruction.html">HbcInstruction</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_decompiler_1_1_analysis_1_1_control_flow_graph.html#a0d74ba07b5c73a30833b51b7a42bf807">GetBlockInstructions</a> (<a class="el" href="class_hasmer_1_1_decompiler_1_1_analysis_1_1_control_flow_block.html">ControlFlowBlock</a> block)</td></tr>
 <tr class="memdesc:a0d74ba07b5c73a30833b51b7a42bf807"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets all of the instructions deifned within the given control flow block.  <a href="class_hasmer_1_1_decompiler_1_1_analysis_1_1_control_flow_graph.html#a0d74ba07b5c73a30833b51b7a42bf807">More...</a><br /></td></tr>
 <tr class="separator:a0d74ba07b5c73a30833b51b7a42bf807"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7093ba3e749bb14287dfed0f449ca9b9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_hasmer_1_1_decompiler_1_1_analysis.html#abbc4383bc69a654ccd18607a3dc82382">ControlFlowBlockType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_decompiler_1_1_analysis_1_1_control_flow_graph.html#a7093ba3e749bb14287dfed0f449ca9b9">GetBlockType</a> (<a class="el" href="class_hasmer_1_1_decompiler_1_1_analysis_1_1_control_flow_block.html">ControlFlowBlock</a> block)</td></tr>
+<tr class="memdesc:a7093ba3e749bb14287dfed0f449ca9b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the <a class="el" href="namespace_hasmer_1_1_decompiler_1_1_analysis.html#abbc4383bc69a654ccd18607a3dc82382" title="The type of structure that a ControlFlowBlock represents.">ControlFlowBlockType</a> of a given block in the graph.  <a href="class_hasmer_1_1_decompiler_1_1_analysis_1_1_control_flow_graph.html#a7093ba3e749bb14287dfed0f449ca9b9">More...</a><br /></td></tr>
+<tr class="separator:a7093ba3e749bb14287dfed0f449ca9b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53b2afc23eda631539e1cd61d7d81617"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_hasmer_1_1_decompiler_1_1_analysis_1_1_control_flow_block.html">ControlFlowBlock</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_decompiler_1_1_analysis_1_1_control_flow_graph.html#a53b2afc23eda631539e1cd61d7d81617">GetBlockAtOffset</a> (uint offset)</td></tr>
+<tr class="memdesc:a53b2afc23eda631539e1cd61d7d81617"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the control flow block whose <a class="el" href="class_hasmer_1_1_decompiler_1_1_analysis_1_1_control_flow_block.html#ad29112daefa72439f9992a0e48fd43ee" title="The offset of the first instruction in the control flow block.">ControlFlowBlock.BaseOffset</a> is exactly equal to the given offset, or <code>null</code> if there is no block which starts at the offset.  <a href="class_hasmer_1_1_decompiler_1_1_analysis_1_1_control_flow_graph.html#a53b2afc23eda631539e1cd61d7d81617">More...</a><br /></td></tr>
+<tr class="separator:a53b2afc23eda631539e1cd61d7d81617"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a736ae1bd796c2767e772acfc0b9bf7f1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_hasmer_1_1_decompiler_1_1_analysis_1_1_control_flow_block.html">ControlFlowBlock</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_decompiler_1_1_analysis_1_1_control_flow_graph.html#a736ae1bd796c2767e772acfc0b9bf7f1">GetBlockContainingOffset</a> (uint offset)</td></tr>
+<tr class="memdesc:a736ae1bd796c2767e772acfc0b9bf7f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the control flow block which contains the bytecode at the given offset.  <a href="class_hasmer_1_1_decompiler_1_1_analysis_1_1_control_flow_graph.html#a736ae1bd796c2767e772acfc0b9bf7f1">More...</a><br /></td></tr>
+<tr class="separator:a736ae1bd796c2767e772acfc0b9bf7f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a91129cedb9b38ffdcb0234aac415311b"><td class="memItemLeft" align="right" valign="top">override string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_decompiler_1_1_analysis_1_1_control_flow_graph.html#a91129cedb9b38ffdcb0234aac415311b">ToString</a> ()</td></tr>
 <tr class="memdesc:a91129cedb9b38ffdcb0234aac415311b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts the control flow graph into a readable string format showing each block, its instructions, and where it jumps to.  <a href="class_hasmer_1_1_decompiler_1_1_analysis_1_1_control_flow_graph.html#a91129cedb9b38ffdcb0234aac415311b">More...</a><br /></td></tr>
 <tr class="separator:a91129cedb9b38ffdcb0234aac415311b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -137,6 +146,62 @@ Properties</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a53b2afc23eda631539e1cd61d7d81617"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53b2afc23eda631539e1cd61d7d81617">&#9670;&nbsp;</a></span>GetBlockAtOffset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_hasmer_1_1_decompiler_1_1_analysis_1_1_control_flow_block.html">ControlFlowBlock</a> Hasmer.Decompiler.Analysis.ControlFlowGraph.GetBlockAtOffset </td>
+          <td>(</td>
+          <td class="paramtype">uint&#160;</td>
+          <td class="paramname"><em>offset</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the control flow block whose <a class="el" href="class_hasmer_1_1_decompiler_1_1_analysis_1_1_control_flow_block.html#ad29112daefa72439f9992a0e48fd43ee" title="The offset of the first instruction in the control flow block.">ControlFlowBlock.BaseOffset</a> is exactly equal to the given offset, or <code>null</code> if there is no block which starts at the offset. </p>
+
+</div>
+</div>
+<a id="a736ae1bd796c2767e772acfc0b9bf7f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a736ae1bd796c2767e772acfc0b9bf7f1">&#9670;&nbsp;</a></span>GetBlockContainingOffset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_hasmer_1_1_decompiler_1_1_analysis_1_1_control_flow_block.html">ControlFlowBlock</a> Hasmer.Decompiler.Analysis.ControlFlowGraph.GetBlockContainingOffset </td>
+          <td>(</td>
+          <td class="paramtype">uint&#160;</td>
+          <td class="paramname"><em>offset</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the control flow block which contains the bytecode at the given offset. </p>
+
+</div>
+</div>
 <a id="a0d74ba07b5c73a30833b51b7a42bf807"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0d74ba07b5c73a30833b51b7a42bf807">&#9670;&nbsp;</a></span>GetBlockInstructions()</h2>
 
@@ -162,6 +227,34 @@ Properties</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Gets all of the instructions deifned within the given control flow block. </p>
+
+</div>
+</div>
+<a id="a7093ba3e749bb14287dfed0f449ca9b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7093ba3e749bb14287dfed0f449ca9b9">&#9670;&nbsp;</a></span>GetBlockType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespace_hasmer_1_1_decompiler_1_1_analysis.html#abbc4383bc69a654ccd18607a3dc82382">ControlFlowBlockType</a> Hasmer.Decompiler.Analysis.ControlFlowGraph.GetBlockType </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_hasmer_1_1_decompiler_1_1_analysis_1_1_control_flow_block.html">ControlFlowBlock</a>&#160;</td>
+          <td class="paramname"><em>block</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the <a class="el" href="namespace_hasmer_1_1_decompiler_1_1_analysis.html#abbc4383bc69a654ccd18607a3dc82382" title="The type of structure that a ControlFlowBlock represents.">ControlFlowBlockType</a> of a given block in the graph. </p>
 
 </div>
 </div>

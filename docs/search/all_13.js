@@ -1,10 +1,13 @@
 var searchData=
 [
-  ['value_345',['Value',['../class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_function_modifier_token.html#ac89b111173be98aa465d84be65922b75',1,'Hasmer.Assembler.Parser.HasmFunctionModifierToken.Value()'],['../class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_operand_token.html#aacb457702a0b84cafc4fb202d3c6b64d',1,'Hasmer.Assembler.Parser.HasmOperandToken.Value()'],['../class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_number_token.html#a9f0d314d36febf5be4d0ecf51cd4c959',1,'Hasmer.Assembler.Parser.HasmNumberToken.Value()'],['../class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_simple_token.html#a2a3787dc364d5dad4759a3789ca6faf8',1,'Hasmer.Assembler.Parser.HasmSimpleToken.Value()'],['../class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_string_token.html#a3b9bb5ce51fb16818ae2bb1936be076f',1,'Hasmer.Assembler.Parser.HasmStringToken.Value()'],['../class_hasmer_1_1_hbc_instruction_operand.html#abca19a35766ec60e45220b943061d5d7',1,'Hasmer.HbcInstructionOperand.Value()']]],
-  ['valuebuffer_346',['ValueBuffer',['../class_hasmer_1_1_assembler_1_1_data_disassembler.html#a8464da0faef59475621117827ebe9851',1,'Hasmer::Assembler::DataDisassembler']]],
-  ['variables_347',['Variables',['../class_hasmer_1_1_decompiler_1_1_function_state.html#a6a4fe7eb9273e100f8eedac5f188991f',1,'Hasmer::Decompiler::FunctionState']]],
-  ['variants_348',['Variants',['../class_hasmer_1_1_hbc_abstract_instruction_definition.html#abcc7c8a263983c76ed361ac05cd45f75',1,'Hasmer::HbcAbstractInstructionDefinition']]],
-  ['version_349',['Version',['../class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_header_declaration_token.html#aa37f9879351f1e9a8856f806e04f92e2',1,'Hasmer.Assembler.Parser.HasmHeaderDeclarationToken.Version()'],['../class_hasmer_1_1_hbc_bytecode_format.html#ac5f34afc8149552779f993519253a325',1,'Hasmer.HbcBytecodeFormat.Version()'],['../class_hasmer_1_1_hbc_header.html#aa095d674dfe7cc5245c185e597a57dd0',1,'Hasmer.HbcHeader.Version()']]],
-  ['visitorattribute_350',['VisitorAttribute',['../class_hasmer_1_1_decompiler_1_1_visitor_1_1_visitor_attribute.html',1,'Hasmer::Decompiler::Visitor']]],
-  ['visitorcollectionattribute_351',['VisitorCollectionAttribute',['../class_hasmer_1_1_decompiler_1_1_visitor_1_1_visitor_collection_attribute.html',1,'Hasmer::Decompiler::Visitor']]]
+  ['uint_344',['UInt',['../namespace_hasmer_1_1_assembler_1_1_parser.html#aebc640be0120f6da52f5489a6fece067a0b1291eded63143ac04709711274785a',1,'Hasmer::Assembler::Parser']]],
+  ['uint16_345',['UInt16',['../namespace_hasmer.html#a57209db7d32f23259d1558d7363b3a1ea8bd950a9d7779b83f5c30046c9aaf1cf',1,'Hasmer']]],
+  ['uint16s_346',['UInt16S',['../namespace_hasmer.html#a57209db7d32f23259d1558d7363b3a1eac7d2e85ff1290c5821545881ca32062a',1,'Hasmer']]],
+  ['uint32_347',['UInt32',['../namespace_hasmer.html#a57209db7d32f23259d1558d7363b3a1eae7956ed7be1c5025a27ed3cb42a396bd',1,'Hasmer']]],
+  ['uint32s_348',['UInt32S',['../namespace_hasmer.html#a57209db7d32f23259d1558d7363b3a1ea3a6ec8551971c88d4de7261420be1390',1,'Hasmer']]],
+  ['uint8_349',['UInt8',['../namespace_hasmer.html#a57209db7d32f23259d1558d7363b3a1eab31df9c476d20e85ff898121efe11b5a',1,'Hasmer']]],
+  ['uint8s_350',['UInt8S',['../namespace_hasmer.html#a57209db7d32f23259d1558d7363b3a1ea194ae023f5d103bd33c54d6491816d28',1,'Hasmer']]],
+  ['unaryexpression_351',['UnaryExpression',['../class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_unary_expression.html',1,'Hasmer::Decompiler::AST']]],
+  ['unaryoperations_352',['UnaryOperations',['../class_hasmer_1_1_decompiler_1_1_visitor_1_1_unary_operations.html',1,'Hasmer::Decompiler::Visitor']]],
+  ['unescape_353',['Unescape',['../class_hasmer_1_1_string_escape.html#a8714333e398bf338cab3cd4817c5793a',1,'Hasmer::StringEscape']]]
 ];

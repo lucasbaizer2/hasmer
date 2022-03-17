@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['objectexpression_451',['ObjectExpression',['../class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_object_expression.html',1,'Hasmer::Decompiler::AST']]],
-  ['objectexpressionproperty_452',['ObjectExpressionProperty',['../class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_object_expression_property.html',1,'Hasmer::Decompiler::AST']]]
+  ['mathoperations_457',['MathOperations',['../class_hasmer_1_1_decompiler_1_1_visitor_1_1_math_operations.html',1,'Hasmer::Decompiler::Visitor']]],
+  ['memberexpression_458',['MemberExpression',['../class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_member_expression.html',1,'Hasmer::Decompiler::AST']]],
+  ['methoddefinition_459',['MethodDefinition',['../class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_method_definition.html',1,'Hasmer::Decompiler::AST']]]
 ];
