@@ -58,7 +58,7 @@ Format:
 .end
 ```
 Example:
-```hasm
+```
 .start Function <myFuncName>(this)
     .id 263
     .params 1
