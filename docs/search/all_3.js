@@ -21,6 +21,5 @@ var searchData=
   ['disassembleoptions_75',['DisassembleOptions',['../class_hasmer_1_1_c_l_i_1_1_program_1_1_disassemble_options.html',1,'Hasmer::CLI::Program']]],
   ['disassembler_76',['Disassembler',['../class_hasmer_1_1_assembler_1_1_function_disassembler.html#a718a889a2c3cd118fb6c2ad8291b246f',1,'Hasmer::Assembler::FunctionDisassembler']]],
   ['disassembleroptions_77',['DisassemblerOptions',['../struct_hasmer_1_1_assembler_1_1_disassembler_options.html',1,'Hasmer::Assembler']]],
-  ['double_78',['Double',['../namespace_hasmer_1_1_assembler_1_1_parser.html#aebc640be0120f6da52f5489a6fece067ad909d38d705ce75386dd86e611a82f5b',1,'Hasmer.Assembler.Parser.Double()'],['../namespace_hasmer.html#a57209db7d32f23259d1558d7363b3a1ead909d38d705ce75386dd86e611a82f5b',1,'Hasmer.Double()']]],
-  ['dup_79',['Dup',['../class_hasmer_1_1_l_s_p_1_1_dup.html',1,'Hasmer::LSP']]]
+  ['double_78',['Double',['../namespace_hasmer_1_1_assembler_1_1_parser.html#aebc640be0120f6da52f5489a6fece067ad909d38d705ce75386dd86e611a82f5b',1,'Hasmer.Assembler.Parser.Double()'],['../namespace_hasmer.html#a57209db7d32f23259d1558d7363b3a1ead909d38d705ce75386dd86e611a82f5b',1,'Hasmer.Double()']]]
 ];
