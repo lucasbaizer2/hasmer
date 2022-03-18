@@ -14,8 +14,8 @@ namespace Hasmer.LSP {
         private static async Task MainAsync() {
             Stream stdin = Console.OpenStandardInput();
             Stream stdout = Console.OpenStandardOutput();
-            stdin = new Tee(stdin, new Dup("editor"), Tee.StreamOwnership.OwnNone);
-            stdout = new Tee(stdout, new Dup("server"), Tee.StreamOwnership.OwnNone);
+            stdin = new Tee(stdin, stdin, Tee.StreamOwnership.OwnNone);
+            stdout = new Tee(stdout, stdout, Tee.StreamOwnership.OwnNone);
             new LSPServer(stdout, stdin);
             await Task.Delay(-1);
         }

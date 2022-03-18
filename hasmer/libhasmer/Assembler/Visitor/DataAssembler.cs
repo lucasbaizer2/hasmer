@@ -65,6 +65,8 @@ namespace Hasmer.Assembler.Visitor {
             Stream = stream;
             StringTable = new Dictionary<string, uint>();
             ArrayBuffer = new HasmAssemblerDataBuffer();
+            ObjectKeyBuffer = new HasmAssemblerDataBuffer();
+            ObjectValueBuffer = new HasmAssemblerDataBuffer();
         }
 
         /// <summary>
@@ -131,15 +133,13 @@ namespace Hasmer.Assembler.Visitor {
                     using MemoryStream ms = new MemoryStream();
                     using BinaryWriter bw = new BinaryWriter(ms);
 
+                    const byte TAG_MASK = 0x70;
                     if (data.Data.Count > 0x0F) {
-                        throw new Exception("I'm bad at math and need to figure this out. TODO.");
-
-                        /*
-                        byte keyTag = (byte)((byte)tagType | (byte)data.Data.Count | 0x08);
+                        byte keyTag = (byte)(((byte)tagType | (byte)(data.Data.Count >> 8) | 0x80) & TAG_MASK);
                         bw.Write(keyTag);
-                        */
+                        bw.Write((byte) (data.Data.Count & 0xFF));
                     } else {
-                        byte keyTag = (byte)((byte)tagType | (byte)data.Data.Count);
+                        byte keyTag = (byte)(((byte)tagType | (byte)data.Data.Count) & TAG_MASK);
                         bw.Write(keyTag);
                     }
 
@@ -155,7 +155,7 @@ namespace Hasmer.Assembler.Visitor {
                             } else if (tagType == HbcDataBufferTagType.ShortString) {
                                 bw.Write((ushort)id);
                             } else if (tagType == HbcDataBufferTagType.LongString) {
-                                bw.Write((uint)id);
+                                bw.Write(id);
                             } else {
                                 throw new Exception("invalid tag type");
                             }

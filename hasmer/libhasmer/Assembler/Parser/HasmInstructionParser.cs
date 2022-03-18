@@ -156,6 +156,23 @@ namespace Hasmer.Assembler.Parser {
                 throw new HasmParserException(asm.Stream, $"unknown instruction: '{instruction}'");
             }
 
+            if (!asm.IsExact) {
+                // any instruction which takes a cache index should have the cache index removed in auto mode
+                if (def.Name == "GetById" || def.Name == "TryGetById" || def.Name == "PutById" || def.Name == "TryPutById"
+                    || def.Name == "GetByIdShort" || def.Name == "GetByIdLong" || def.Name == "TryGetByIdLong" || def.Name == "PutByIdLong" || def.Name == "TryPutByIdLong") {
+                    List<HbcInstructionOperandType> operandTypes = new List<HbcInstructionOperandType>(def.OperandTypes);
+                    operandTypes.RemoveAt(2); // remove the cache index
+
+                    def = new HbcInstructionDefinition {
+                        Name = def.Name,
+                        AbstractDefinition = def.AbstractDefinition,
+                        IsJump = def.IsJump,
+                        Opcode = def.Opcode,
+                        OperandTypes = operandTypes
+                    };
+                }
+            }
+
             HasmInstructionToken token = new HasmInstructionToken(state) {
                 Instruction = instruction,
                 Operands = new List<HasmOperandToken>()

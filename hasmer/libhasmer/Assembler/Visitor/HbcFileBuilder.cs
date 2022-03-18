@@ -28,6 +28,8 @@ namespace Hasmer.Assembler.Visitor {
         /// </summary>
         public HbcFileBuilder(HbcAssembler assembler) {
             HbcAssembler = assembler;
+
+            File = new HbcFile();
             File.Header = new HbcHeader {
                 GlobalCodeIndex = 0,
                 Magic = HbcHeader.HBC_MAGIC_HEADER,
@@ -38,14 +40,15 @@ namespace Hasmer.Assembler.Visitor {
         }
 
         public HbcFile Build() {
-            File.Header.ArrayBufferSize = (uint)HbcAssembler.DataAssembler.ArrayBuffer.RawBuffer.Count;
-            File.Header.ObjKeyBufferSize = (uint)HbcAssembler.DataAssembler.ObjectKeyBuffer.RawBuffer.Count;
-            File.Header.ObjValueBufferSize = (uint)HbcAssembler.DataAssembler.ObjectValueBuffer.RawBuffer.Count;
             File.Header.StringCount = (uint)HbcAssembler.DataAssembler.StringTable.Count;
 
             File.ArrayBuffer = new HbcDataBuffer(HbcAssembler.DataAssembler.ArrayBuffer.RawBuffer.ToArray());
             File.ObjectKeyBuffer = new HbcDataBuffer(HbcAssembler.DataAssembler.ObjectKeyBuffer.RawBuffer.ToArray());
             File.ObjectValueBuffer = new HbcDataBuffer(HbcAssembler.DataAssembler.ObjectValueBuffer.RawBuffer.ToArray());
+
+            File.Header.ArrayBufferSize = (uint)File.ArrayBuffer.Buffer.Length;
+            File.Header.ObjKeyBufferSize = (uint)File.ObjectKeyBuffer.Buffer.Length;
+            File.Header.ObjValueBufferSize = (uint)File.ObjectValueBuffer.Buffer.Length;
 
             return File;
         }

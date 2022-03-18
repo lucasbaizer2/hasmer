@@ -241,6 +241,7 @@ namespace Hasmer.Assembler.Parser {
                 };
             } else if (word == "label") {
                 // TODO
+                asm.Stream.AdvanceWord();
                 return null;
             }
 

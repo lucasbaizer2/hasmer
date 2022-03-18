@@ -30,6 +30,7 @@ namespace Hasmer.Assembler.Visitor {
         /// Creates a new function assembler instance.
         /// </summary>
         public FunctionAssembler(HbcAssembler hbcAssembler, HasmTokenStream stream) {
+            Functions = new List<HbcFunctionBuilder>();
             HbcAssembler = hbcAssembler;
             Stream = stream;
         }
@@ -98,7 +99,7 @@ namespace Hasmer.Assembler.Visitor {
         /// <summary>
         /// Serializes the instructions of every function to a buffer sequentially.
         /// </summary>
-        private void BuildBytecode() {
+        private byte[] BuildBytecode() {
             using MemoryStream ms = new MemoryStream();
             using BinaryWriter writer = new BinaryWriter(ms);
 
@@ -110,6 +111,8 @@ namespace Hasmer.Assembler.Visitor {
                 }
                 file.SmallFuncHeaders[builder.FunctionId].BytecodeSizeInBytes = (uint)ms.Position - file.SmallFuncHeaders[builder.FunctionId].Offset;
             }
+
+            return ms.ToArray();
         }
 
         private void AssembleFunction(HasmFunctionToken func, HbcFunctionBuilder builder) {
@@ -166,10 +169,12 @@ namespace Hasmer.Assembler.Visitor {
                         ParamCount = builder.ParamCount,
                         Flags = builder.Flags,
                     };
+
+                    Functions.Add(builder);
                 }
             }
 
-            BuildBytecode();
+            file.Instructions = BuildBytecode();
         }
     }
 }

@@ -94,6 +94,13 @@ namespace Hasmer {
         }
 
         /// <summary>
+        /// Writes the serialized buffer to a stream.
+        /// </summary>
+        public void WriteAll(BinaryWriter writer) {
+            writer.Write(Buffer);
+        }
+
+        /// <summary>
         /// Disassembles a single HbcDataBufferItems from an offset in the data buffer (i.e. from an instruction operand).
         /// </summary>
         public HbcDataBufferItems Read(HbcFile source, uint offset) {

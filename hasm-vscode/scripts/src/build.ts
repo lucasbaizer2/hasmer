@@ -22,7 +22,11 @@ interface BytecodeDefinitionFile {
         cwd: lspDir,
         stdio: 'inherit',
     });
-    child_process.execFileSync('dotnet', ['build'], {
+    child_process.execFileSync('dotnet', ['build', '--runtime', 'linux-x64'], {
+        cwd: lspDir,
+        stdio: 'inherit',
+    });
+    child_process.execFileSync('dotnet', ['build', '--runtime', 'win-x64'], {
         cwd: lspDir,
         stdio: 'inherit',
     });

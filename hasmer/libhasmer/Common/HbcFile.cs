@@ -57,6 +57,11 @@ namespace Hasmer {
         public uint InstructionOffset { get; set; }
 
         /// <summary>
+        /// The types of the strings in the string table.
+        /// </summary>
+        public StringKind[] StringKinds { get; set; }
+
+        /// <summary>
         /// The parsed string table. Index = string index (i.e. from an operand, etc.), Value = string at that index.
         /// </summary>
         public string[] StringTable { get; private set; }
@@ -110,7 +115,10 @@ namespace Hasmer {
 
             reader.Align();
 
-            reader.BaseStream.Position += Header.IdentifierCount * 4;
+            for (uint i = 0; i < Header.IdentifierCount; i++) {
+                uint identifier = reader.ReadUInt32();
+                Console.WriteLine(Convert.ToString(identifier, 2));
+            }
             reader.Align();
 
             HbcSmallStringTableEntry[] smallStringTable = new HbcSmallStringTableEntry[Header.StringCount];
@@ -150,7 +158,7 @@ namespace Hasmer {
             RegExpStorage = reader.ReadBytes((int)Header.RegExpStorageSize);
             reader.Align();
 
-            CjsModuleTable = new HbcCjsModuleTableEntry[Header.RegExpCount];
+            CjsModuleTable = new HbcCjsModuleTableEntry[Header.CjsModuleCount];
             for (int i = 0; i < Header.CjsModuleCount; i++) {
                 HbcCjsModuleTableEntry entry = HbcEncodedItem.Decode<HbcCjsModuleTableEntry>(reader, (JObject)def["CjsModuleTableEntry"]);
                 CjsModuleTable[i] = entry;
@@ -185,6 +193,38 @@ namespace Hasmer {
             }
             writer.Align();
 
+            // write string kind count
+            foreach (StringKind kind in StringKinds) {
+
+            }
+
+            // write identifier count
+
+            // write small string table
+
+            // write overflow string table
+
+            // write string storage
+
+            // write array buffer
+            ArrayBuffer.WriteAll(writer);
+            writer.Align();
+
+            // write object key buffer
+            ObjectKeyBuffer.WriteAll(writer);
+            writer.Align();
+
+            // write object value buffer
+            ObjectValueBuffer.WriteAll(writer);
+            writer.Align();
+
+            // write regexp table
+
+            // write cjs modules
+
+            // write instructions
+            InstructionOffset = (uint) ms.Position;
+            writer.Write(Instructions);
 
             // re-write the header with the final values after writing the rest of the stream
             Header.FileLength = (uint)ms.Position;
