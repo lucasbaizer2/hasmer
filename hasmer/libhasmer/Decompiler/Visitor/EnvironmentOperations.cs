@@ -20,7 +20,7 @@ namespace Hasmer.Decompiler.Visitor {
         /// </summary>
         public string EnvironmentName => EnvironmentContext.Source.StringTable[EnvironmentContext.Function.FunctionName];
 
-        public override void Write(SourceCodeBuilder builder) {
+        public override void WriteDirect(SourceCodeBuilder builder) {
             throw new Exception();
         }
     }
@@ -100,7 +100,7 @@ namespace Hasmer.Decompiler.Visitor {
         /// </summary>
         [Visitor]
         public static void GetNewTarget(DecompilerContext context) {
-            byte register = context.Instruction.Operands[0].GetValue<byte>();
+            byte register = context.Instruction.Operands[0].GetValue< byte>();
 
             context.State.Registers[register] = new Identifier("NewTarget");
         }

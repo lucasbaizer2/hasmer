@@ -2,7 +2,7 @@
 
 namespace Hasmer.Decompiler.Analysis {
     /// <summary>
-    /// The baae class for performing static analysis on a decmopiled AST.
+    /// The base class for performing static analysis on a decmopiled AST.
     /// This allows for optimizing the AST to make it as readable as possible.
     /// </summary>
     public class StaticAnalyzer {
@@ -25,8 +25,9 @@ namespace Hasmer.Decompiler.Analysis {
         private static void OptimizeObjectDeclarations(BlockStatement block) {
             ObjectExpression currentObject = null;
             Identifier currentObjectName = null;
-            for (int i = 0; i < block.Body.Count; i++) {
-                SyntaxNode node = block.Body[i];
+
+            SyntaxNode node = block.Body[0];
+            while ((node = node.Next) != null) {
                 if (node is AssignmentExpression assn && assn.Operator == "=") {
                     if (assn.Right is ObjectExpression expr && assn.Left is Identifier objName) {
                         currentObject = expr;
@@ -41,12 +42,12 @@ namespace Hasmer.Decompiler.Analysis {
                             Value = assn.Right
                         });
 
-                        block.Body[block.Body.IndexOf(node)] = new EmptyExpression(); // replace the assignment with an empty expression
-                                                                                      // this preserves the length of the body
+                        node.ReplaceWith(new EmptyExpression()); // replace the assignment with an empty expression
+                                                                 // this preserves the length of the body
                     } else {
                         currentObject = null;
                     }
-                } else {
+                } else if (node is not EmptyExpression) {
                     currentObject = null;
                 }
             }
@@ -75,12 +76,18 @@ namespace Hasmer.Decompiler.Analysis {
         /// <summary>
         /// Optimizes all the statements witin a block of code.
         /// </summary>
-        private static void OptimizeBlock(BlockStatement block) {
+        private static void OptimizeBlock(FunctionDeclaration func, BlockStatement block) {
             foreach (SyntaxNode node in block.Body) {
                 if (node is IfStatement ifStatement) {
                     OptimizeIfStatement(ifStatement);
+                    if (ifStatement.Consequent is BlockStatement cb) {
+                        OptimizeBlock(func, cb);
+                    }
+                    if (ifStatement.Alternate is BlockStatement ab) {
+                        OptimizeBlock(func, ab);
+                    }
                 } else if (node is BlockStatement blockStatement) {
-                    OptimizeBlock(blockStatement);
+                    OptimizeBlock(func, blockStatement);
                 }
             }
 
@@ -90,7 +97,14 @@ namespace Hasmer.Decompiler.Analysis {
         /// <summary>
         /// Optimizes the declaration and body of a fuction.
         /// </summary>
-        public static void OptimizeFunction(FunctionDeclaration func) {
+        public static void OptimizeFunction(FunctionDeclaration func, DecompilerOptions options) {
+            InstructionAnalyzer insnAnalyzer = new InstructionAnalyzer {
+                Body = func.Body.Body,
+                State = new StaticAnalyzerState(),
+                Options = options
+            };
+            insnAnalyzer.Optimize(func.Body);
+
             if (func.HbcHeader.FunctionId == 0) {
                 // add the declaration of the gloal variable to the start of the global function
                 func.Body.Body.Insert(0, new AssignmentExpression {
@@ -111,7 +125,7 @@ namespace Hasmer.Decompiler.Analysis {
                             func.Body.Body[i] = arg;
                         } else {
                             // remove return instructions which do not modify the state of the program
-                            func.Body.Body.RemoveAt(i);
+                            func.Body.Body[i] = new EmptyExpression();
                         }
 
                         break;
@@ -119,7 +133,7 @@ namespace Hasmer.Decompiler.Analysis {
                 }
             }
 
-            OptimizeBlock(func.Body);
+            OptimizeBlock(func, func.Body);
         }
     }
 }

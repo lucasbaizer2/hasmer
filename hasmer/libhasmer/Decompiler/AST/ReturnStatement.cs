@@ -8,7 +8,7 @@ namespace Hasmer.Decompiler.AST {
     public class ReturnStatement : SyntaxNode {
         public SyntaxNode Argument { get; set; }
 
-        public override void Write(SourceCodeBuilder builder) {
+        public override void WriteDirect(SourceCodeBuilder builder) {
             builder.Write("return ");
             Argument.Write(builder);
         }

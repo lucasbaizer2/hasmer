@@ -52,11 +52,11 @@ namespace Hasmer.Decompiler.Visitor {
         public static void LoadThisNS(DecompilerContext context) {
             byte register = context.Instruction.Operands[0].GetValue<byte>();
             if (context.Function.FunctionId == 0) { // global function
-                context.State.Registers[register] = new Identifier("global") {
+                context.Block.WriteResult(register, new Identifier("global") {
                     IsRedundant = context.Decompiler.Options.OmitExplicitGlobal
-                };
+                });
             } else {
-                context.State.Registers[register] = new Identifier("this");
+                context.Block.WriteResult(register, new Identifier("this"));
             }
         }
 
@@ -66,9 +66,8 @@ namespace Hasmer.Decompiler.Visitor {
         [Visitor]
         public static void GetGlobalObject(DecompilerContext context) {
             byte register = context.Instruction.Operands[0].GetValue<byte>();
-            context.State.Registers[register] = new Identifier("global") {
-                IsRedundant = context.Decompiler.Options.OmitExplicitGlobal
-            };
+
+            context.Block.WriteResult(register, new Identifier("global"));
         }
 
         /// <summary>
@@ -81,26 +80,17 @@ namespace Hasmer.Decompiler.Visitor {
 
             context.State.Registers.MarkUsage(sourceRegister);
 
-            context.State.Registers[resultRegister] = new MemberExpression {
-                Object = context.State.Registers[sourceRegister],
+            context.Block.WriteResult(resultRegister, new MemberExpression {
+                Object = new Identifier($"r{sourceRegister}"),
                 Property = new Identifier(identifier)
-            };
+            });
         }
 
         [Visitor]
         public static void GetById(DecompilerContext context) => CommonGetById(context);
 
         [Visitor]
-        public static void GetByIdShort(DecompilerContext context) => CommonGetById(context);
-
-        [Visitor]
-        public static void GetByIdLong(DecompilerContext context) => CommonGetById(context);
-
-        [Visitor]
         public static void TryGetById(DecompilerContext context) => CommonGetById(context);
-
-        [Visitor]
-        public static void TryGetByIdLong(DecompilerContext context) => CommonGetById(context);
 
         /// <summary>
         /// Sets the value of a field reference by name (i.e. by identifier).
@@ -122,11 +112,13 @@ namespace Hasmer.Decompiler.Visitor {
             context.Block.Body.Add(new AssignmentExpression {
                 Operator = "=",
                 Left = new MemberExpression(false) {
-                    Object = obj,
+                    // Object = obj,
+                    Object = new Identifier($"r{objRegister}"),
                     Property = property,
                     IsComputed = false
                 },
-                Right = context.State.Registers[sourceRegister]
+                // Right = context.State.Registers[sourceRegister]
+                Right = new Identifier($"r{sourceRegister}")
             });
         }
 
@@ -154,10 +146,10 @@ namespace Hasmer.Decompiler.Visitor {
                 Operator = "=",
                 Left = new MemberExpression(false) {
                     Object = obj,
-                    Property = context.State.Registers[valRegister],
+                    Property = new Identifier($"r{valRegister}"),
                     IsComputed = true
                 },
-                Right = context.State.Registers[sourceRegister]
+                Right = new Identifier($"r{sourceRegister}"),
             });
         }
 
@@ -167,10 +159,6 @@ namespace Hasmer.Decompiler.Visitor {
 
         [Visitor]
         public static void PutNewOwnById(DecompilerContext context) =>
-            CommonPutById(context, new Identifier(context.Source.StringTable[context.Instruction.Operands[2].GetValue<uint>()]));
-
-        [Visitor]
-        public static void PutNewOwnByIdShort(DecompilerContext context) =>
             CommonPutById(context, new Identifier(context.Source.StringTable[context.Instruction.Operands[2].GetValue<uint>()]));
 
         [Visitor]
@@ -192,11 +180,11 @@ namespace Hasmer.Decompiler.Visitor {
             context.State.Registers.MarkUsage(sourceRegister);
             context.State.Registers.MarkUsage(identifierRegister);
 
-            context.State.Registers[resultRegister] = new MemberExpression(false) {
-                Object = context.State.Registers[sourceRegister],
-                Property = context.State.Registers[identifierRegister],
+            context.Block.Body.Add(new MemberExpression(false) {
+                Object = new Identifier($"r{sourceRegister}"),
+                Property = new Identifier($"r{identifierRegister}"),
                 IsComputed = true
-            };
+            });
         }
 
         /// <summary>
@@ -211,15 +199,14 @@ namespace Hasmer.Decompiler.Visitor {
             context.State.Registers.MarkUsage(sourceRegister);
             context.State.Registers.MarkUsage(identifierRegister);
 
-            context.Block.Body.Add(new UnaryExpression {
+            context.Block.WriteResult(resultRegister, new UnaryExpression {
                 Operator = "delete",
                 Argument = new MemberExpression(false) {
-                    Object = context.State.Registers[sourceRegister],
-                    Property = context.State.Registers[identifierRegister],
+                    Object = new Identifier($"r{sourceRegister}"),
+                    Property = new Identifier($"r{identifierRegister}"),
                     IsComputed = true
                 }
             });
-            context.State.Registers[resultRegister] = new Literal(new PrimitiveValue(true)); // for the purposes of decompilation, the delete operator always returns true
         }
 
         /// <summary>
@@ -232,12 +219,12 @@ namespace Hasmer.Decompiler.Visitor {
 
             context.State.Registers.MarkUsage(sourceRegister);
 
-            context.State.Registers[resultRegister] = new CallExpression {
+            context.Block.WriteResult(resultRegister, new CallExpression {
                 Callee = new Identifier("Number"),
                 Arguments = new List<SyntaxNode> {
-                    context.State.Registers[sourceRegister]
+                    new Identifier($"r{sourceRegister}")
                 }
-            };
+            });
         }
     }
 }

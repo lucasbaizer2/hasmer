@@ -17,7 +17,7 @@ namespace Hasmer.Decompiler.Visitor {
         [Visitor]
         public static void LoadConstEmpty(DecompilerContext context) {
             byte register = context.Instruction.Operands[0].GetValue<byte>();
-            context.State.Registers[register] = null;
+            context.Block.WriteResult(register, new Identifier("undefined"));
         }
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace Hasmer.Decompiler.Visitor {
         [Visitor]
         public static void LoadConstUndefined(DecompilerContext context) {
             byte register = context.Instruction.Operands[0].GetValue<byte>();
-            context.State.Registers[register] = new Identifier("undefined");
+            context.Block.WriteResult(register, new Identifier("undefined"));
         }
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace Hasmer.Decompiler.Visitor {
         [Visitor]
         public static void LoadConstNull(DecompilerContext context) {
             byte register = context.Instruction.Operands[0].GetValue<byte>();
-            context.State.Registers[register] = new Literal(new PrimitiveValue(null));
+            context.Block.WriteResult(register, new Literal(new PrimitiveValue(null)));
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace Hasmer.Decompiler.Visitor {
         [Visitor]
         public static void LoadConstTrue(DecompilerContext context) {
             byte register = context.Instruction.Operands[0].GetValue<byte>();
-            context.State.Registers[register] = new Literal(new PrimitiveValue(true));
+            context.Block.WriteResult(register, new Literal(new PrimitiveValue(true)));
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace Hasmer.Decompiler.Visitor {
         [Visitor]
         public static void LoadConstFalse(DecompilerContext context) {
             byte register = context.Instruction.Operands[0].GetValue<byte>();
-            context.State.Registers[register] = new Literal(new PrimitiveValue(false));
+            context.Block.WriteResult(register, new Literal(new PrimitiveValue(false)));
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace Hasmer.Decompiler.Visitor {
         [Visitor]
         public static void LoadConstZero(DecompilerContext context) {
             byte register = context.Instruction.Operands[0].GetValue<byte>();
-            context.State.Registers[register] = new Literal(new PrimitiveValue(0));
+            context.Block.WriteResult(register, new Literal(new PrimitiveValue(0)));
         }
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace Hasmer.Decompiler.Visitor {
         public static void LoadConstString(DecompilerContext context) {
             byte register = context.Instruction.Operands[0].GetValue<byte>();
             string str = context.Instruction.Operands[1].GetResolvedValue<string>(context.Source);
-            context.State.Registers[register] = new Literal(new PrimitiveValue(str));
+            context.Block.WriteResult(register, new Literal(new PrimitiveValue(str)));
         }
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace Hasmer.Decompiler.Visitor {
         private static void LoadConstNumerical<T>(DecompilerContext context) {
             byte register = context.Instruction.Operands[0].GetValue<byte>();
             T value = context.Instruction.Operands[1].GetValue<T>();
-            context.State.Registers[register] = new Literal(new PrimitiveValue(value));
+            context.Block.WriteResult(register, new Literal(new PrimitiveValue(value)));
         }
 
         /// <summary>

@@ -14,7 +14,7 @@ namespace Hasmer.Decompiler.AST {
             Arguments = new List<SyntaxNode>();
         }
 
-        public override void Write(SourceCodeBuilder builder) {
+        public override void WriteDirect(SourceCodeBuilder builder) {
             if (IsCalleeConstructor) {
                 builder.Write("new ");
             }
@@ -27,6 +27,10 @@ namespace Hasmer.Decompiler.AST {
                 }
             }
             builder.Write(")");
+        }
+
+        public override string ToString() {
+            return $"{Callee}()";
         }
     }
 }

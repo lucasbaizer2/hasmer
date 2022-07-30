@@ -10,7 +10,7 @@ namespace Hasmer.Decompiler.AST {
         public SyntaxNode Right { get; set; }
         public string Operator { get; set; }
 
-        public override void Write(SourceCodeBuilder builder) {
+        public override void WriteDirect(SourceCodeBuilder builder) {
             if (Left is BinaryExpression) {
                 builder.Write("(");
                 Left.Write(builder);
@@ -28,6 +28,10 @@ namespace Hasmer.Decompiler.AST {
             } else {
                 Right.Write(builder);
             }
+        }
+
+        public override string ToString() {
+            return $"{Left} {Operator} {Right}";
         }
     }
 }

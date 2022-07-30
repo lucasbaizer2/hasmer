@@ -49,6 +49,7 @@ namespace Hasmer.Decompiler.Visitor {
                 Test = expr
             };
 
+            BlockStatement general = null;
             if (jump < 0) {
                 throw new NotImplementedException();
             } else if (jump > 0) {
@@ -60,7 +61,14 @@ namespace Hasmer.Decompiler.Visitor {
 
                 DecompilerContext alternateContext = context.DeepCopy();
                 ControlFlowBlock alternateControlBlock = context.ControlFlowGraph.GetBlockAtOffset(jumpingBlock.Alternate.Value);
-                ifBlock.Alternate = DecompileConditionalBlock(alternateContext, context.ControlFlowGraph.GetBlockInstructions(alternateControlBlock).ToList());
+
+                BlockStatement elseBlock = DecompileConditionalBlock(alternateContext, context.ControlFlowGraph.GetBlockInstructions(alternateControlBlock).ToList());
+                // TODO
+                if (context.ControlFlowGraph.GetBlockType(alternateControlBlock) == ControlFlowBlockType.General) {
+                    general = elseBlock;
+                } else {
+                    ifBlock.Alternate = elseBlock;
+                }
 
                 FunctionDecompiler.WriteRemainingRegisters(consequentContext);
                 FunctionDecompiler.WriteRemainingRegisters(alternateContext);
@@ -72,6 +80,9 @@ namespace Hasmer.Decompiler.Visitor {
             }
 
             context.Block.Body.Add(ifBlock);
+            if (general != null) {
+                context.Block.Body.AddRange(general.Body);
+            }
         }
 
         private static void JumpBinaryExpression(DecompilerContext context, string op) {
@@ -81,15 +92,15 @@ namespace Hasmer.Decompiler.Visitor {
             context.State.Registers.MarkUsages(left, right);
 
             ConditionalJump(context, new BinaryExpression {
-                Left = context.State.Registers[left],
-                Right = context.State.Registers[right],
+                Left = new Identifier($"r{left}"),
+                Right = new Identifier($"r{right}"),
                 Operator = op
             });
         }
 
         [Visitor]
         public static void Jmp(DecompilerContext _) {
-            
+
         }
 
         [Visitor]
@@ -141,8 +152,5 @@ namespace Hasmer.Decompiler.Visitor {
             context.State.Registers.MarkUsage(arg);
             ConditionalJump(context, context.State.Registers[arg]);
         }
-
-        [Visitor]
-        public static void JmpFalseLong(DecompilerContext context) => JmpFalse(context);
     }
 }

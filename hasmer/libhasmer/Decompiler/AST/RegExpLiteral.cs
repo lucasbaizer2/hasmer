@@ -14,11 +14,15 @@ namespace Hasmer.Decompiler.AST {
             Flags = flags;
         }
 
-        public override void Write(SourceCodeBuilder builder) {
+        public override void WriteDirect(SourceCodeBuilder builder) {
             builder.Write("/");
             builder.Write(Pattern);
             builder.Write("/");
             builder.Write(Flags);
+        }
+
+        public override string ToString() {
+            return $"RegExp(/{Pattern}/{Flags})";
         }
     }
 }

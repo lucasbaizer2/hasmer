@@ -70,16 +70,19 @@ namespace Hasmer.Decompiler.Visitor {
 
             context.State.Registers.MarkUsages(args.Select(x => (uint)x).ToArray());
 
+            /*
             List<SyntaxNode> arguments = args.Select(arg => context.State.Registers[arg]).ToList();
+            */
+            List<SyntaxNode> arguments = args.Select(arg => new Identifier($"r{arg}")).Cast<SyntaxNode>().ToList();
             if (context.Decompiler.Options.OmitThisFromFunctionInvocation) {
                 arguments.RemoveAt(0);
             }
-
             CallExpression expr = new CallExpression {
-                Callee = context.State.Registers[functionRegister],
+                Callee = new Identifier($"r{functionRegister}"),
                 Arguments = arguments
             };
-            AnalyzeCallUsage(context, resultRegister, expr);
+            // AnalyzeCallUsage(context, resultRegister, expr);
+            context.Block.WriteResult(resultRegister, expr);
         }
 
         /// <summary>
@@ -105,11 +108,12 @@ namespace Hasmer.Decompiler.Visitor {
             }
 
             CallExpression expr = new CallExpression {
-                Callee = context.State.Registers[constructorRegister],
+                Callee = new Identifier($"r{constructorRegister}"),
                 Arguments = arguments,
                 IsCalleeConstructor = construct
             };
-            AnalyzeCallUsage(context, resultRegister, expr);
+            context.Block.WriteResult(resultRegister, expr);
+            // AnalyzeCallUsage(context, resultRegister, expr);
         }
 
         /// <summary>

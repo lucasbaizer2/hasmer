@@ -21,7 +21,7 @@ namespace Hasmer.Decompiler.AST {
             Parameters = new List<Identifier>();
         }
 
-        public override void Write(SourceCodeBuilder builder) {
+        public override void WriteDirect(SourceCodeBuilder builder) {
             if (IsAsync) {
                 builder.Write("async ");
             }

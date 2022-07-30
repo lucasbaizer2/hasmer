@@ -10,7 +10,7 @@ namespace Hasmer.Decompiler.AST {
         public SyntaxNode Value { get; set; }
         public bool IsComputed { get; set; }
 
-        public override void Write(SourceCodeBuilder builder) {
+        public override void WriteDirect(SourceCodeBuilder builder) {
             if (IsComputed) {
                 builder.Write("[");
             }
@@ -30,7 +30,7 @@ namespace Hasmer.Decompiler.AST {
             Properties = new List<ObjectExpressionProperty>();
         }
 
-        public override void Write(SourceCodeBuilder builder) {
+        public override void WriteDirect(SourceCodeBuilder builder) {
             if (Properties.Count == 0) {
                 builder.Write("{}");
                 return;

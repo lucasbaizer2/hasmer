@@ -21,10 +21,10 @@ namespace Hasmer.Decompiler.Visitor {
 
             context.State.Registers.MarkUsage(sourceRegister);
 
-            context.State.Registers[resultRegister] = new UnaryExpression {
+            context.Block.WriteResult(resultRegister, new UnaryExpression {
                 Operator = "typeof",
-                Argument = context.State.Registers[sourceRegister]
-            };
+                Argument = new Identifier($"r{sourceRegister}")
+            });
         }
     }
 }

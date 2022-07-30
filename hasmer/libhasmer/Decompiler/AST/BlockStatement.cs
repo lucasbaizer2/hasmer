@@ -12,7 +12,15 @@ namespace Hasmer.Decompiler.AST {
             Body = new List<SyntaxNode>();
         }
 
-        public override void Write(SourceCodeBuilder builder) {
+        public void WriteResult(uint register, SyntaxNode ast) {
+            Body.Add(new AssignmentExpression {
+                Left = new Identifier($"r{register}"),
+                Right = ast,
+                Operator = "="
+            });
+        }
+
+        public override void WriteDirect(SourceCodeBuilder builder) {
             builder.Write("{");
             builder.AddIndent(1);
             builder.NewLine();
@@ -23,6 +31,9 @@ namespace Hasmer.Decompiler.AST {
                 }
 
                 syntax.Write(builder);
+                if (syntax is not IfStatement && syntax is not FunctionDeclaration) {
+                    builder.Write(";");
+                }
                 builder.NewLine();
             }
 

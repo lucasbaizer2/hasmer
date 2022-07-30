@@ -33,11 +33,15 @@ namespace Hasmer.Decompiler.AST {
             Name = name;
         }
 
-        public override void Write(SourceCodeBuilder builder) {
+        public override void WriteDirect(SourceCodeBuilder builder) {
             if (IsRedundant) {
                 throw new Exception("cannot write redunant identifier");
             }
             builder.Write(Name);
+        }
+
+        public override string ToString() {
+            return Name;
         }
     }
 }

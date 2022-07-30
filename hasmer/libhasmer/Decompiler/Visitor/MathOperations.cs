@@ -19,11 +19,12 @@ namespace Hasmer.Decompiler.Visitor {
             context.State.Registers.MarkUsages(left, right);
 
             BinaryExpression expr = new BinaryExpression {
-                Left = context.State.Registers[left],
-                Right = context.State.Registers[right],
+                Left = new Identifier($"r{left}"),
+                Right = new Identifier($"r{right}"),
                 Operator = op
             };
-            context.State.Registers[result] = expr;
+            context.Block.WriteResult(result, expr);
+            // context.State.Registers[result] = expr;
         }
 
         [Visitor]

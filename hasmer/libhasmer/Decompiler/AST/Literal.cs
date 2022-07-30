@@ -12,7 +12,7 @@ namespace Hasmer.Decompiler.AST {
             Value = value;
         }
 
-        public override void Write(SourceCodeBuilder builder) {
+        public override void WriteDirect(SourceCodeBuilder builder) {
             if (Value.TypeCode == TypeCode.String) {
                 builder.Write("'");
                 builder.Write(StringEscape.Escape(Value.ToString()));
@@ -20,6 +20,13 @@ namespace Hasmer.Decompiler.AST {
             } else {
                 builder.Write(Value.ToString());
             }
+        }
+
+        public override string ToString() {
+            if (Value.TypeCode == TypeCode.String) {
+                return $"'{Value}'";
+            }
+            return Value?.ToString() ?? "Literal(null)";
         }
     }
 }

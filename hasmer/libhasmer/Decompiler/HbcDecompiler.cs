@@ -69,9 +69,9 @@ namespace Hasmer.Decompiler {
 
                 if (funcId == 0) { // write the global function as just its body withou the header
                     FunctionDeclaration globalFunc = (FunctionDeclaration)ast;
-                    root.Tokens = root.Tokens.Concat(globalFunc.Body.Body).ToList();
+                    root.Body = root.Body.Concat(globalFunc.Body.Body).ToList();
                 } else {
-                    root.Tokens.Add(ast);
+                    root.Body.Add(ast);
                 }
             }
 

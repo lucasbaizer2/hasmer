@@ -18,7 +18,18 @@ namespace Hasmer.Decompiler.AST {
             AutoCompute = autoCompute;
         }
 
-        public override void Write(SourceCodeBuilder builder) {
+        public SyntaxNode GetUltimateProperty() {
+            SyntaxNode property = Property;
+            while (true) {
+                if (property is MemberExpression sub) {
+                    property = sub.Property;
+                } else {
+                    return property;
+                }
+            }
+        }
+
+        public override void WriteDirect(SourceCodeBuilder builder) {
             if (AutoCompute) {
                 if (Property is not Identifier ident) {
                     IsComputed = true;
@@ -26,7 +37,7 @@ namespace Hasmer.Decompiler.AST {
                     IsComputed = !Identifier.NamePattern.IsMatch(ident.Name);
                 }
             }
-            
+
             if (Object is Identifier red && red.IsRedundant) {
                 // if the object is a redundant identifier, just write the property
                 Property.Write(builder);
@@ -42,6 +53,10 @@ namespace Hasmer.Decompiler.AST {
                 builder.Write(".");
                 Property.Write(builder);
             }
+        }
+
+        public override string ToString() {
+            return $"{Object}.{Property}";
         }
     }
 }

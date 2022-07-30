@@ -9,7 +9,7 @@ namespace Hasmer.Decompiler.AST {
         public string Operator { get; set; }
         public SyntaxNode Argument { get; set; }
 
-        public override void Write(SourceCodeBuilder builder) {
+        public override void WriteDirect(SourceCodeBuilder builder) {
             builder.Write(Operator);
             if (Operator != "!") {
                 builder.Write(" ");
@@ -17,6 +17,10 @@ namespace Hasmer.Decompiler.AST {
             builder.Write("(");
             Argument.Write(builder);
             builder.Write(")");
+        }
+
+        public override string ToString() {
+            return $"{Operator} ({Argument})";
         }
     }
 }

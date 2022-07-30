@@ -11,7 +11,7 @@ namespace Hasmer.Decompiler.AST {
         public SyntaxNode Right { get; set; }
         public string Operator { get; set; }
 
-        public override void Write(SourceCodeBuilder builder) {
+        public override void WriteDirect(SourceCodeBuilder builder) {
             if (DeclarationKind != null) {
                 builder.Write(DeclarationKind);
                 builder.Write(" ");
@@ -22,6 +22,10 @@ namespace Hasmer.Decompiler.AST {
             builder.Write(Operator);
             builder.Write(" ");
             Right.Write(builder);
+        }
+
+        public override string ToString() {
+            return $"{Left} = {Right}";
         }
     }
 }

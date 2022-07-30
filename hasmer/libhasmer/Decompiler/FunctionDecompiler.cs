@@ -98,7 +98,11 @@ namespace Hasmer.Decompiler {
         public static void ObserveInstruction(DecompilerContext context, int insnIndex) {
             context.CurrentInstructionIndex = insnIndex;
             HbcInstruction insn = context.Instructions[insnIndex];
-            string opcodeName = context.Source.BytecodeFormat.Definitions[insn.Opcode].Name;
+            HbcInstructionDefinition def = context.Source.BytecodeFormat.Definitions[insn.Opcode];
+            string opcodeName = def.Name;
+            if (def.AbstractDefinition != null) {
+                opcodeName = context.Source.BytecodeFormat.AbstractDefinitions[def.AbstractDefinition.Value].Name;
+            }
 
             if (InstructionHandlers.ContainsKey(opcodeName)) {
                 Console.WriteLine("Observing instruction: " + insn.ToDisassembly(context.Source));
@@ -156,7 +160,7 @@ namespace Hasmer.Decompiler {
             FunctionDeclaration func = new FunctionDeclaration {
                 Name = new Identifier(Source.SmallFuncHeaders[Header.FunctionId].GetFunctionName(Source)),
                 Parameters = Header.ParamCount > 1
-                                    ? Enumerable.Range(0, (int)Header.ParamCount - 1).Select(x => new Identifier($"par{x}")).ToList()
+                                    ? Enumerable.Range(0, (int)Header.ParamCount - 1).Select(x => new Identifier($"par{x + 1}")).ToList()
                                     : new List<Identifier>(),
                 Body = block,
                 HbcHeader = Header
@@ -169,7 +173,7 @@ namespace Hasmer.Decompiler {
             }
             WriteRemainingRegisters(context);
 
-            StaticAnalyzer.OptimizeFunction(func);
+            StaticAnalyzer.OptimizeFunction(func, Decompiler.Options);
 
             return func;
         }

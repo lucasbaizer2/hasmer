@@ -30,13 +30,13 @@ namespace Hasmer.CLI {
 
         [Verb("decompile", HelpText = "Decompiles the bytecode into a JavaScript file.")]
         public class DecompileOptions : DecodeOptions {
-            [Option('p', "omit-protoype", Required = false, HelpText = "Omit prototypes being passed to constructors.")]
+            [Option('p', "omit-protoype", Required = false, HelpText = "Omit prototypes being passed to constructors.", Default = true)]
             public bool OmitPrototypeFromConstructorInvocation { get; set; }
 
-            [Option('t', "omit-this", Required = false, HelpText = "Omit the passing of the 'this' parameter when invoking functions.")]
+            [Option('t', "omit-this", Required = false, HelpText = "Omit the passing of the 'this' parameter when invoking functions.", Default = true)]
             public bool OmitThisFromFunctionInvocation { get; set; }
 
-            [Option('g', "omit-global", Required = false, HelpText = "Omit explicit references to the global object when applicable.")]
+            [Option('g', "omit-global", Required = false, HelpText = "Omit explicit references to the global object when applicable.", Default = false)]
             public bool OmitExplicitGlobal { get; set; }
 
             [Option("token-tree", Required = false, HelpText = "Writes the decompiled JSON AST instead of JavaScript source code.")]

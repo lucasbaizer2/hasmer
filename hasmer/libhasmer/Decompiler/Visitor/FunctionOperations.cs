@@ -15,24 +15,13 @@ namespace Hasmer.Decompiler.Visitor {
         /// Copies the value of one register into another.
         /// </summary>
         [Visitor]
-        public static void CommonMov(DecompilerContext context) {
-            uint toRegister = context.Instruction.Operands[0].GetValue<uint>();
-            uint fromRegister = context.Instruction.Operands[1].GetValue<uint>();
-
-            context.State.Registers[toRegister] = context.State.Registers[fromRegister];
-        }
-
-        /// <summary>
-        /// Copies the value of one register into another.
-        /// </summary>
-        [Visitor]
         public static void Mov(DecompilerContext context) {
-            byte toRegister = context.Instruction.Operands[0].GetValue<byte>();
-            byte fromRegister = context.Instruction.Operands[1].GetValue<byte>();
+            uint toRegister = context.Instruction.Operands[0].GetValue<uint>();
+            uint fromRegister = context.Instruction.Operands[1].GetValue<byte>();
 
             // TODO: context.State.Registers.MarkUsage here?
 
-            context.State.Registers[toRegister] = context.State.Registers[fromRegister];
+            context.Block.WriteResult(toRegister, new Identifier($"r{fromRegister}"));
         }
 
         /// <summary>
@@ -44,10 +33,10 @@ namespace Hasmer.Decompiler.Visitor {
             byte paramIndex = context.Instruction.Operands[1].GetValue<byte>();
             string identifier = paramIndex switch {
                 0 => "this",
-                _ => "par" + (paramIndex - 1)
+                _ => "par" + paramIndex
             };
 
-            context.State.Registers[register] = new Identifier(identifier);
+            context.Block.WriteResult(register, new Identifier(identifier));
         }
 
         /// <summary>
@@ -56,7 +45,7 @@ namespace Hasmer.Decompiler.Visitor {
         [Visitor]
         public static void ReifyArguments(DecompilerContext context) {
             byte register = context.Instruction.Operands[0].GetValue<byte>();
-            context.State.Registers[register] = new Identifier("arguments");
+            context.Block.WriteResult(register, new Identifier("arguments"));
         }
 
         /// <summary>
@@ -65,10 +54,10 @@ namespace Hasmer.Decompiler.Visitor {
         [Visitor]
         public static void GetArgumentsLength(DecompilerContext context) {
             byte register = context.Instruction.Operands[0].GetValue<byte>();
-            context.State.Registers[register] = new MemberExpression {
+            context.Block.WriteResult(register, new MemberExpression {
                 Object = new Identifier("arguments"),
                 Property = new Identifier("length")
-            };
+            });
         }
 
         /// <summary>
@@ -81,10 +70,10 @@ namespace Hasmer.Decompiler.Visitor {
 
             context.State.Registers.MarkUsage(index);
 
-            context.State.Registers[register] = new MemberExpression {
+            context.Block.WriteResult(register, new MemberExpression {
                 Object = new Identifier("arguments"),
                 Property = context.State.Registers[index]
-            };
+            });
         }
 
         /// <summary>
@@ -99,7 +88,8 @@ namespace Hasmer.Decompiler.Visitor {
             ReturnStatement ret = new ReturnStatement {
                 // functions sometimes return an empty register
                 // in that case, just coerce empty into undefined
-                Argument = context.State.Registers[register] ?? new Identifier("undefined")
+                // Argument = context.State.Registers[register] ?? new Identifier("undefined")
+                Argument = new Identifier($"r{register}")
             };
 
             context.Block.Body.Add(ret);

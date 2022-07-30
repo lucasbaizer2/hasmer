@@ -11,7 +11,7 @@ namespace Hasmer.Decompiler.AST {
         public bool IsStatic { get; set; }
         public bool IsComputed { get; set; }
 
-        public override void Write(SourceCodeBuilder builder) {
+        public override void WriteDirect(SourceCodeBuilder builder) {
             Value.Name = null;
             Value.IsExpression = true;
 

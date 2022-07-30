@@ -12,7 +12,7 @@ namespace Hasmer.Decompiler.AST {
             Elements = new List<SyntaxNode>();
         }
 
-        public override void Write(SourceCodeBuilder builder) {
+        public override void WriteDirect(SourceCodeBuilder builder) {
             builder.Write("[");
             for (int i = 0; i < Elements.Count; i++) {
                 Elements[i].Write(builder);

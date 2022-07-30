@@ -20,11 +20,7 @@ namespace Hasmer.Decompiler.Visitor {
             context.State.Variables[resultRegister] = "obj" + resultRegister;
             context.State.Registers[resultRegister] = new Identifier(context.State.Variables[resultRegister]);
 
-            context.Block.Body.Add(new AssignmentExpression {
-                Left = new Identifier(context.State.Variables[resultRegister]),
-                Right = new ObjectExpression(),
-                Operator = "="
-            });
+            context.Block.WriteResult(resultRegister, new ObjectExpression());
         }
 
         /// <summary>
@@ -37,21 +33,17 @@ namespace Hasmer.Decompiler.Visitor {
             context.State.Variables[resultRegister] = "arr" + resultRegister;
             context.State.Registers[resultRegister] = new Identifier(context.State.Variables[resultRegister]);
 
-            context.Block.Body.Add(new AssignmentExpression {
-                Left = context.State.Registers[resultRegister],
-                Right = new CallExpression {
-                    Callee = new MemberExpression {
-                        Object = new Identifier("global") {
-                            IsRedundant = context.Decompiler.Options.OmitExplicitGlobal
-                        },
-                        Property = new Identifier("Array")
+            context.Block.WriteResult(resultRegister, new CallExpression {
+                Callee = new MemberExpression {
+                    Object = new Identifier("global") {
+                        IsRedundant = context.Decompiler.Options.OmitExplicitGlobal
                     },
-                    Arguments = new List<SyntaxNode>() {
+                    Property = new Identifier("Array")
+                },
+                Arguments = new List<SyntaxNode>() {
                         new Literal(new PrimitiveValue(arrayLength))
                     },
-                    IsCalleeConstructor = true
-                },
-                Operator = "="
+                IsCalleeConstructor = true
             });
         }
 
@@ -89,16 +81,12 @@ namespace Hasmer.Decompiler.Visitor {
                 }
 
                 obj.Properties.Add(new ObjectExpressionProperty {
-                    Key =key,
+                    Key = key,
                     Value = new Literal(values[i])
                 });
             }
 
-            context.Block.Body.Add(new AssignmentExpression {
-                Left = context.State.Registers[resultRegister],
-                Right = obj,
-                Operator = "="
-            });
+            context.Block.WriteResult(resultRegister, obj);
         }
 
         /// <summary>
@@ -118,11 +106,7 @@ namespace Hasmer.Decompiler.Visitor {
             ArrayExpression arr = new ArrayExpression();
             arr.Elements = items.Select(item => new Literal(item)).Cast<SyntaxNode>().ToList();
 
-            context.Block.Body.Add(new AssignmentExpression {
-                Left = context.State.Registers[resultRegister],
-                Right = arr,
-                Operator = "="
-            });
+            context.Block.WriteResult(resultRegister, arr);
         }
 
         /// <summary>
@@ -136,9 +120,15 @@ namespace Hasmer.Decompiler.Visitor {
 
             FunctionDecompiler closureDecompiler = new FunctionDecompiler(context.Decompiler, context.Source.SmallFuncHeaders[closureId].GetAssemblerHeader());
             SyntaxNode closureAST = closureDecompiler.CreateAST(context);
+            // SyntaxNode closureAST = new Identifier($"closure${closureId}");
 
-            context.State.Registers[resultRegister] = closureAST;
+            // context.State.Registers[resultRegister] = closureAST;
             // context.State.Registers[resultRegister] = new Identifier($"$closure${closureId}");
+            context.Block.Body.Add(new AssignmentExpression {
+                Left = new Identifier($"r{resultRegister}"),
+                Right = closureAST,
+                Operator = "="
+            });
         }
 
         /// <summary>
@@ -150,7 +140,7 @@ namespace Hasmer.Decompiler.Visitor {
             byte prototypeRegister = context.Instruction.Operands[1].GetValue<byte>();
 
             // CreateThis is a VM construct more or less, so we can just consider the prototype definition as the "this" instance
-            context.State.Registers[resultRegister] = context.State.Registers[prototypeRegister];
+            context.Block.WriteResult(resultRegister, new Identifier($"r{prototypeRegister}"));
         }
 
         /// <summary>
@@ -162,7 +152,7 @@ namespace Hasmer.Decompiler.Visitor {
             string pattern = context.Instruction.Operands[1].GetResolvedValue<string>(context.Source);
             string flags = context.Instruction.Operands[2].GetResolvedValue<string>(context.Source);
 
-            context.State.Registers[resultRegister] = new RegExpLiteral(pattern, flags);
+            context.Block.WriteResult(resultRegister, new RegExpLiteral(pattern, flags));
         }
     }
 }

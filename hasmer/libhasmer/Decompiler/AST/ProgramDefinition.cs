@@ -9,19 +9,20 @@ namespace Hasmer.Decompiler.AST {
     /// Represents the entire decompile program as a sequence of tokens.
     /// This is the root token of the output.
     /// </summary>
-    public class ProgramDefinition : SyntaxNode {
-        public List<SyntaxNode> Tokens { get; set; }
-
-        public ProgramDefinition() {
-            Tokens = new List<SyntaxNode>();
+    public class ProgramDefinition : BlockStatement {
+        public ProgramDefinition() : base() {
         }
 
-        public override void Write(SourceCodeBuilder builder) {
-            foreach (SyntaxNode node in Tokens) {
+        public override void WriteDirect(SourceCodeBuilder builder) {
+            foreach (SyntaxNode node in Body) {
                 if (node is EmptyExpression) {
                     continue;
                 }
+
                 node.Write(builder);
+                if (node is not IfStatement && node is not FunctionDeclaration) {
+                    builder.Write(";");
+                }
                 builder.NewLine();
             }
         }

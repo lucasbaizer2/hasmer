@@ -10,7 +10,7 @@ namespace Hasmer.Decompiler.AST {
     /// This is commonly used a placeholder during decompilation.
     /// </summary>
     public class EmptyExpression : SyntaxNode {
-        public override void Write(SourceCodeBuilder builder) {
+        public override void WriteDirect(SourceCodeBuilder builder) {
             // no-op
         }
     }

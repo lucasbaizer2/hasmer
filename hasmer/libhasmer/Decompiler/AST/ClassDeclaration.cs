@@ -14,7 +14,7 @@ namespace Hasmer.Decompiler.AST {
             Body = new List<MethodDefinition>();
         }
 
-        public override void Write(SourceCodeBuilder builder) {
+        public override void WriteDirect(SourceCodeBuilder builder) {
             builder.Write("class ");
             Name.Write(builder);
 

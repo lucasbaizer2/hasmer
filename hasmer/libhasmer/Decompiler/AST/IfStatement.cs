@@ -10,7 +10,7 @@ namespace Hasmer.Decompiler.AST {
         public SyntaxNode Consequent { get; set; }
         public SyntaxNode Alternate { get; set; }
 
-        public override void Write(SourceCodeBuilder builder) {
+        public override void WriteDirect(SourceCodeBuilder builder) {
             if (Alternate != null && Consequent is not BlockStatement && Alternate is not BlockStatement) {
                 // if the consequent and alternate are both simple expressions,
                 // then the if statement can be simplified to a ternary operation
