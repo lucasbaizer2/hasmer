@@ -67,6 +67,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#properties">Properties</a> &#124;
 <a href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_syntax_node-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Hasmer.Decompiler.AST.SyntaxNode Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
@@ -96,25 +97,39 @@ Inheritance diagram for Hasmer.Decompiler.AST.SyntaxNode:</div>
 <area href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_method_definition.html" alt="Hasmer.Decompiler.AST.MethodDefinition" shape="rect" coords="313,728,616,752"/>
 <area href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_object_expression.html" alt="Hasmer.Decompiler.AST.ObjectExpression" shape="rect" coords="313,784,616,808"/>
 <area href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_object_expression_property.html" alt="Hasmer.Decompiler.AST.ObjectExpressionProperty" shape="rect" coords="313,840,616,864"/>
-<area href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_program_definition.html" title="Represents the entire decompile program as a sequence of tokens. This is the root token of the output..." alt="Hasmer.Decompiler.AST.ProgramDefinition" shape="rect" coords="313,896,616,920"/>
-<area href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_reg_exp_literal.html" alt="Hasmer.Decompiler.AST.RegExpLiteral" shape="rect" coords="313,952,616,976"/>
-<area href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_return_statement.html" alt="Hasmer.Decompiler.AST.ReturnStatement" shape="rect" coords="313,1008,616,1032"/>
-<area href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_unary_expression.html" alt="Hasmer.Decompiler.AST.UnaryExpression" shape="rect" coords="313,1064,616,1088"/>
-<area href="class_hasmer_1_1_decompiler_1_1_visitor_1_1_environment_identifier.html" title="Represents an internal identifier referring to an environment context." alt="Hasmer.Decompiler.Visitor.EnvironmentIdentifier" shape="rect" coords="313,1120,616,1144"/>
+<area href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_reg_exp_literal.html" alt="Hasmer.Decompiler.AST.RegExpLiteral" shape="rect" coords="313,896,616,920"/>
+<area href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_return_statement.html" alt="Hasmer.Decompiler.AST.ReturnStatement" shape="rect" coords="313,952,616,976"/>
+<area href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_unary_expression.html" alt="Hasmer.Decompiler.AST.UnaryExpression" shape="rect" coords="313,1008,616,1032"/>
+<area href="class_hasmer_1_1_decompiler_1_1_visitor_1_1_environment_identifier.html" title="Represents an internal identifier referring to an environment context." alt="Hasmer.Decompiler.Visitor.EnvironmentIdentifier" shape="rect" coords="313,1064,616,1088"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ae7ea4f3f3373cd958f443ec826a395aa"><td class="memItemLeft" align="right" valign="top">abstract void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_syntax_node.html#ae7ea4f3f3373cd958f443ec826a395aa">Write</a> (<a class="el" href="class_hasmer_1_1_source_code_builder.html">SourceCodeBuilder</a> builder)</td></tr>
-<tr class="memdesc:ae7ea4f3f3373cd958f443ec826a395aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes the token as a string to the given <a class="el" href="class_hasmer_1_1_source_code_builder.html" title="Represents source code. Used for maintaining indentation and other source code syntax.">SourceCodeBuilder</a>.  <a href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_syntax_node.html#ae7ea4f3f3373cd958f443ec826a395aa">More...</a><br /></td></tr>
-<tr class="separator:ae7ea4f3f3373cd958f443ec826a395aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22fb1b9a0601e4194fe8c37e7e0001f4"><td class="memItemLeft" align="right" valign="top"><a id="a22fb1b9a0601e4194fe8c37e7e0001f4"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>ReplaceWith</b> (<a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_syntax_node.html">SyntaxNode</a> node)</td></tr>
+<tr class="separator:a22fb1b9a0601e4194fe8c37e7e0001f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d078cf9faface10db88bcb0435f425e"><td class="memItemLeft" align="right" valign="top"><a id="a1d078cf9faface10db88bcb0435f425e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>Write</b> (<a class="el" href="class_hasmer_1_1_source_code_builder.html">SourceCodeBuilder</a> builder)</td></tr>
+<tr class="separator:a1d078cf9faface10db88bcb0435f425e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8a8c206fc9f9ed6b5bb3fff4a2c5d03"><td class="memItemLeft" align="right" valign="top">abstract void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_syntax_node.html#ae8a8c206fc9f9ed6b5bb3fff4a2c5d03">WriteDirect</a> (<a class="el" href="class_hasmer_1_1_source_code_builder.html">SourceCodeBuilder</a> builder)</td></tr>
+<tr class="memdesc:ae8a8c206fc9f9ed6b5bb3fff4a2c5d03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes the token as a string to the given <a class="el" href="class_hasmer_1_1_source_code_builder.html" title="Represents source code. Used for maintaining indentation and other source code syntax.">SourceCodeBuilder</a>.  <a href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_syntax_node.html#ae8a8c206fc9f9ed6b5bb3fff4a2c5d03">More...</a><br /></td></tr>
+<tr class="separator:ae8a8c206fc9f9ed6b5bb3fff4a2c5d03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af058bdd56cd40f27c1ba6bd2e2886476"><td class="memItemLeft" align="right" valign="top"><a id="af058bdd56cd40f27c1ba6bd2e2886476"></a>
+T&#160;</td><td class="memItemRight" valign="bottom"><b>Cast&lt; T &gt;</b> ()</td></tr>
+<tr class="separator:af058bdd56cd40f27c1ba6bd2e2886476"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
+Properties</h2></td></tr>
+<tr class="memitem:ac68d0e90c72d1f7e4c0472a185d75cbd"><td class="memItemLeft" align="right" valign="top"><a id="ac68d0e90c72d1f7e4c0472a185d75cbd"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>Replaced</b><code> [get]</code></td></tr>
+<tr class="separator:ac68d0e90c72d1f7e4c0472a185d75cbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents a token in the JavaScript syntax tree. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="ae7ea4f3f3373cd958f443ec826a395aa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae7ea4f3f3373cd958f443ec826a395aa">&#9670;&nbsp;</a></span>Write()</h2>
+<a id="ae8a8c206fc9f9ed6b5bb3fff4a2c5d03"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8a8c206fc9f9ed6b5bb3fff4a2c5d03">&#9670;&nbsp;</a></span>WriteDirect()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -123,7 +138,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">abstract void Hasmer.Decompiler.AST.SyntaxNode.Write </td>
+          <td class="memname">abstract void Hasmer.Decompiler.AST.SyntaxNode.WriteDirect </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_hasmer_1_1_source_code_builder.html">SourceCodeBuilder</a>&#160;</td>
           <td class="paramname"><em>builder</em></td><td>)</td>
@@ -139,7 +154,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Writes the token as a string to the given <a class="el" href="class_hasmer_1_1_source_code_builder.html" title="Represents source code. Used for maintaining indentation and other source code syntax.">SourceCodeBuilder</a>. </p>
 
-<p>Implemented in <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_identifier.html#a9fc393c4091f20420e3575a7fad3afd5">Hasmer.Decompiler.AST.Identifier</a>, <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_object_expression.html#a6f2b14715ea5eae8221fa5b6819475b6">Hasmer.Decompiler.AST.ObjectExpression</a>, <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_function_declaration.html#a6a561f7f245900b1c7d551c837308e9b">Hasmer.Decompiler.AST.FunctionDeclaration</a>, <a class="el" href="class_hasmer_1_1_decompiler_1_1_visitor_1_1_environment_identifier.html#aa073c8c08563fbe0e040533a9d339ff5">Hasmer.Decompiler.Visitor.EnvironmentIdentifier</a>, <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_member_expression.html#aac6ae39944cba8fdfc297cc8566ddad6">Hasmer.Decompiler.AST.MemberExpression</a>, <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_program_definition.html#a98893ae1cb1e755374509704c5ac350f">Hasmer.Decompiler.AST.ProgramDefinition</a>, <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_call_expression.html#a7cfda7f80ddeb5b41143e7e9330b5468">Hasmer.Decompiler.AST.CallExpression</a>, <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_class_declaration.html#aaa964898da27cf40b1de853fe4fad9f2">Hasmer.Decompiler.AST.ClassDeclaration</a>, <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_reg_exp_literal.html#a774b19cf4b0e67c01a7e8928f8fff84e">Hasmer.Decompiler.AST.RegExpLiteral</a>, <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_array_expression.html#a892186ae0fbd6f93938957f54c963dc0">Hasmer.Decompiler.AST.ArrayExpression</a>, <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_block_statement.html#a14587b9a8982a55948e3568ea9214a56">Hasmer.Decompiler.AST.BlockStatement</a>, <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_literal.html#a07bc9d620606557adddd7cc4a73fff3d">Hasmer.Decompiler.AST.Literal</a>, <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_assignment_expression.html#aaae1dfaaf75276bb8d676c56ab9c6076">Hasmer.Decompiler.AST.AssignmentExpression</a>, <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_method_definition.html#a78cc9952508f01c524fbc4e15b6022e3">Hasmer.Decompiler.AST.MethodDefinition</a>, <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_binary_expression.html#ab2a812f3f33a36086b237ffd8a776623">Hasmer.Decompiler.AST.BinaryExpression</a>, <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_empty_expression.html#aa788818fdb6dc3ada34c5cad77460dd8">Hasmer.Decompiler.AST.EmptyExpression</a>, <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_if_statement.html#a5fc50add44ab4d3f317a8e120ac70cf2">Hasmer.Decompiler.AST.IfStatement</a>, <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_object_expression_property.html#aefb6cdebad2029f4a7e70575546dc99b">Hasmer.Decompiler.AST.ObjectExpressionProperty</a>, <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_unary_expression.html#a45999bf08d62f26e6619745eecfbbe12">Hasmer.Decompiler.AST.UnaryExpression</a>, and <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_return_statement.html#aa093c32c32095b14a8f196ef046ca90c">Hasmer.Decompiler.AST.ReturnStatement</a>.</p>
+<p>Implemented in <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_identifier.html#a40c0e983e7a2e7317054f60f7be5295b">Hasmer.Decompiler.AST.Identifier</a>, <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_object_expression.html#ad789ddb77c3d1297bac83b3cc3e0a4f3">Hasmer.Decompiler.AST.ObjectExpression</a>, <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_member_expression.html#ae55cf39900720e57e341432b7071d0f1">Hasmer.Decompiler.AST.MemberExpression</a>, <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_function_declaration.html#afa85d90530b83b1e072bc29a3867ce8d">Hasmer.Decompiler.AST.FunctionDeclaration</a>, <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_block_statement.html#a63d5dd16d46ab67dd39540354a7b3bf3">Hasmer.Decompiler.AST.BlockStatement</a>, <a class="el" href="class_hasmer_1_1_decompiler_1_1_visitor_1_1_environment_identifier.html#ae595be998750ad56e4c9ea3d37094929">Hasmer.Decompiler.Visitor.EnvironmentIdentifier</a>, <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_call_expression.html#a10c90d933f9a9f1a3b089c0bca1fb59c">Hasmer.Decompiler.AST.CallExpression</a>, <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_class_declaration.html#add021a71f3117447b5733bdcea7933da">Hasmer.Decompiler.AST.ClassDeclaration</a>, <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_reg_exp_literal.html#a7002669bc093f83faf5c96142278a893">Hasmer.Decompiler.AST.RegExpLiteral</a>, <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_program_definition.html#afd81801f39d72336820969a27d3c9a96">Hasmer.Decompiler.AST.ProgramDefinition</a>, <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_array_expression.html#a4d41ad86da4593ff6be68ca191381fc8">Hasmer.Decompiler.AST.ArrayExpression</a>, <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_literal.html#adba34d1a911195b890d336ba309a1bfd">Hasmer.Decompiler.AST.Literal</a>, <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_assignment_expression.html#a56ffd24e068476cc3cff0b1bad9f4808">Hasmer.Decompiler.AST.AssignmentExpression</a>, <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_method_definition.html#a413620bd703f5667ecfb5a7d75d90b01">Hasmer.Decompiler.AST.MethodDefinition</a>, <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_binary_expression.html#abe6e9ef0ca3590cd3f79531e2f5b05cb">Hasmer.Decompiler.AST.BinaryExpression</a>, <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_empty_expression.html#a5c8f929c3b980f159bceeee8014556a9">Hasmer.Decompiler.AST.EmptyExpression</a>, <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_if_statement.html#aaa9a2b00660b1270c6e80fc5b8870862">Hasmer.Decompiler.AST.IfStatement</a>, <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_object_expression_property.html#ad7008ce68f0ffe306d9a9c9bae699fa6">Hasmer.Decompiler.AST.ObjectExpressionProperty</a>, <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_unary_expression.html#a953b2f07890131b1272be172c7a8b7f5">Hasmer.Decompiler.AST.UnaryExpression</a>, and <a class="el" href="class_hasmer_1_1_decompiler_1_1_a_s_t_1_1_return_statement.html#ae065490494286bb5603e78cab1780bac">Hasmer.Decompiler.AST.ReturnStatement</a>.</p>
 
 </div>
 </div>

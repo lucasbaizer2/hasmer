@@ -15,7 +15,7 @@ var searchData=
   ['operands_272',['Operands',['../class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_instruction_token.html#ab904a0618968deef8413f9851c2e9561',1,'Hasmer.Assembler.Parser.HasmInstructionToken.Operands()'],['../class_hasmer_1_1_hbc_instruction.html#aefbb0ee78ac85b6b45cdbf732a093536',1,'Hasmer.HbcInstruction.Operands()']]],
   ['operandtype_273',['OperandType',['../class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_operand_token.html#ae1de9529656ba7ef6909c2f30074f41d',1,'Hasmer::Assembler::Parser::HasmOperandToken']]],
   ['operandtypes_274',['OperandTypes',['../class_hasmer_1_1_hbc_instruction_definition.html#a86d6a87002af0297d83e8a531506c308',1,'Hasmer::HbcInstructionDefinition']]],
-  ['optimizefunction_275',['OptimizeFunction',['../class_hasmer_1_1_decompiler_1_1_analysis_1_1_static_analyzer.html#a7d7b6119f1585baf990ae7098ddd455a',1,'Hasmer::Decompiler::Analysis::StaticAnalyzer']]],
+  ['optimizefunction_275',['OptimizeFunction',['../class_hasmer_1_1_decompiler_1_1_analysis_1_1_static_analyzer.html#ab49cea0dcc2e00abe940a76c72fb0479',1,'Hasmer::Decompiler::Analysis::StaticAnalyzer']]],
   ['options_276',['Options',['../class_hasmer_1_1_assembler_1_1_hbc_disassembler.html#a0aaa66a37c848e72b2aaefa204636efd',1,'Hasmer.Assembler.HbcDisassembler.Options()'],['../class_hasmer_1_1_hbc_header.html#a2fe7572f344771f1f2916cda24bbef88',1,'Hasmer.HbcHeader.Options()'],['../class_hasmer_1_1_decompiler_1_1_hbc_decompiler.html#aa009a798350a62726c2678e87d2bd4b7',1,'Hasmer.Decompiler.HbcDecompiler.Options()']]],
   ['overflowstringcount_277',['OverflowStringCount',['../class_hasmer_1_1_hbc_header.html#a1fe19e0c1060d56ed8dca165f6fe712d',1,'Hasmer::HbcHeader']]]
 ];
