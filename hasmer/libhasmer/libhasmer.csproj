@@ -55,6 +55,16 @@
     <None Remove="Resources\Bytecode84.json" />
     <None Remove="Resources\Bytecode85.json" />
     <None Remove="Resources\Bytecode86.json" />
+    <None Remove="Resources\Bytecode87.json" />
+    <None Remove="Resources\Bytecode88.json" />
+    <None Remove="Resources\Bytecode89.json" />
+    <None Remove="Resources\Bytecode90.json" />
+    <None Remove="Resources\Bytecode91.json" />
+    <None Remove="Resources\Bytecode92.json" />
+    <None Remove="Resources\Bytecode93.json" />
+    <None Remove="Resources\Bytecode94.json" />
+    <None Remove="Resources\Bytecode95.json" />
+    <None Remove="Resources\Bytecode96.json" />
     <None Remove="Resources\BytecodeFileFormat.json" />
   </ItemGroup>
 
@@ -106,6 +116,16 @@
     <EmbeddedResource Include="Resources\Bytecode84.json" />
     <EmbeddedResource Include="Resources\Bytecode85.json" />
     <EmbeddedResource Include="Resources\Bytecode86.json" />
+    <EmbeddedResource Include="Resources\Bytecode87.json" />
+    <EmbeddedResource Include="Resources\Bytecode88.json" />
+    <EmbeddedResource Include="Resources\Bytecode89.json" />
+    <EmbeddedResource Include="Resources\Bytecode90.json" />
+    <EmbeddedResource Include="Resources\Bytecode91.json" />
+    <EmbeddedResource Include="Resources\Bytecode92.json" />
+    <EmbeddedResource Include="Resources\Bytecode93.json" />
+    <EmbeddedResource Include="Resources\Bytecode94.json" />
+    <EmbeddedResource Include="Resources\Bytecode95.json" />
+    <EmbeddedResource Include="Resources\Bytecode96.json" />
     <EmbeddedResource Include="Resources\BytecodeFileFormat.json" />
   </ItemGroup>
 
