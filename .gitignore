@@ -350,5 +350,6 @@ MigrationBackup/
 .ionide/
 
 # custom hasmer ignore
-**/launchSettings.json
+launchSettings.json
 /hasmer/docs
+.netcoredbg_hist
