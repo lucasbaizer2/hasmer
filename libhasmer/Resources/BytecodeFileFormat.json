@@ -1,0 +1,66 @@
+﻿{
+  "Header": {
+    "Magic": "UInt64",
+    "Version": "UInt32",
+    "SourceHash": [ "UInt8", 20 ],
+    "FileLength": "UInt32",
+    "GlobalCodeIndex": "UInt32",
+    "FunctionCount": "UInt32",
+    "StringKindCount": "UInt32",
+    "IdentifierCount": "UInt32",
+    "StringCount": "UInt32",
+    "OverflowStringCount": "UInt32",
+    "StringStorageSize": "UInt32",
+    "RegExpCount": "UInt32",
+    "RegExpStorageSize": "UInt32",
+    "ArrayBufferSize": "UInt32",
+    "ObjKeyBufferSize": "UInt32",
+    "ObjValueBufferSize": "UInt32",
+    "CjsModuleOffset": "UInt32",
+    "CjsModuleCount": "UInt32",
+    "DebugInfoOffset": "UInt32",
+    "Options": "UInt8",
+    "Padding": [ "UInt8", 31 ]
+  },
+  "SmallFuncHeader": {
+    "Offset": [ "Bit", 25 ],
+    "ParamCount": [ "Bit", 7 ],
+    "BytecodeSizeInBytes": [ "Bit", 15 ],
+    "FunctionName": [ "Bit", 17 ],
+    "InfoOffset": [ "Bit", 25 ],
+    "FrameSize": [ "Bit", 7 ],
+    "EnvironmentSize": [ "Bit", 8 ],
+    "HighestReadCacheIndex": [ "Bit", 8 ],
+    "HighestWriteCacheIndex": [ "Bit", 8 ],
+    "Flags": "UInt8"
+  },
+  "FuncHeader": {
+    "Offset": "UInt32",
+    "ParamCount": "UInt32",
+    "BytecodeSizeInBytes": "UInt32",
+    "FunctionName": "UInt32",
+    "InfoOffset": "UInt32",
+    "FrameSize": "UInt32",
+    "EnvironmentSize": "UInt32",
+    "HighestReadCacheIndex": "UInt8",
+    "HighestWriteCacheIndex": "UInt8",
+    "Flags": "UInt8"
+  },
+  "SmallStringTableEntry": {
+    "IsUTF16": [ "Bit", 1 ],
+    "Offset": [ "Bit", 23 ],
+    "Length": [ "Bit", 8 ]
+  },
+  "OverflowStringTableEntry": {
+    "Offset": "UInt32",
+    "Length": "UInt32"
+  },
+  "RegExpTableEntry": {
+    "Offset": "UInt32",
+    "Length": "UInt32"
+  },
+  "CjsModuleTableEntry": {
+    "First": "UInt32",
+    "Second": "UInt32"
+  }
+}

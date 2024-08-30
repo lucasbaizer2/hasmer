@@ -1,23 +1,36 @@
-# What is hasmer?
+# hasmer
 
-hasmer is a utility for working with [Hermes](https://github.com/facebook/hermes) bytecode.
+This directory contains the C# source code for `hasmer`, using the .NET 8.0 platform.
 
-hasmer can disassemble bytecode of any Hermes version into a human and machine-readable format called Hasm (i.e. Hermes + assembly).
+# Setup
 
-hasmer can assemble Hasm files back into Hermes bytecode files, allowing you to edit the disassembly of a Hermes file and then assemble your changes back into bytecode.
+You will need the .NET 5 SDK to compile this project. See the [.NET SDK download page](https://dotnet.microsoft.com/en-us/download) for information on how to download the .NET SDK for your operating system.
 
-hasmer also has a very WIP decompiler, which decompiles Hermes bytecode into JavaScript.
+# Building
 
-You can find detailed documentation and other various information regarding usage of hasmer on the [hasmer website](https://lucasbaizer2.github.io/hasmer).
+You can open the solution file (see `hasmer.sln`) in Visual Studio and build and run from Visual Studio.
 
-# Downloads and Usage
+You can also build from the command line using the .NET SDK CLI:
+```
+dotnet build
+```
+Ensure you run the above command with the current working directory being the one containing the `hasmer.sln` file.
 
-You can find downloads and documentation on the [hasmer website](https://lucasbaizer2.github.io/hasmer).
+Building with the .NET SDK CLI will generate the executable in the `.hasmer-cli/bin/Debug/net8.0` directory. You can make a release build using:
+```
+dotnet build -c Release
+```
 
-# Contributing
+# Running / Testing
 
-Check out the [contributing document](./CONTRIBUTING.md) for information on how to contribute to hasmer.
+You can find documentation on the hasmer CLI and a sample Hermes bytecode file on the [hasmer website](https://lucasbaizer2.github.io/hasmer).
 
-# License
+# Code Documentation
 
-hasmer is licensed under the [MIT License](./LICENSE).
+The latest auto-generated docs can be found online [here](https://lucasbaizer2.github.io/hasmer/docs/annotated.html).
+
+You can generate your own docs locally using [Doxygen](https://www.doxygen.nl/index.html). Run in this directory:
+```
+doxygen Doxyfile
+```
+The output docs can be found at `./docs/html`.

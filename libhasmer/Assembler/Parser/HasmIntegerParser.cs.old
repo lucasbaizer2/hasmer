@@ -1,0 +1,45 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Hasmer.Assembler.Parser {
+    /// <summary>
+    /// Parses an integer.
+    /// </summary>
+    public class HasmIntegerParser : IHasmTokenParser {
+        public bool CanParse(HasmReaderState asm) {
+            int state = asm.Stream.SaveState();
+            if (asm.Stream.PeekOperator() == "-") { // negative number
+                asm.Stream.AdvanceOperator();
+            }
+
+            string word = asm.Stream.PeekWord();
+            if (word == null) {
+                asm.Stream.LoadState(state);
+                return false;
+            }
+
+            asm.Stream.LoadState(state);
+            return long.TryParse(word, out long _);
+        }
+
+        public HasmToken Parse(HasmReaderState asm) {
+            if (!CanParse(asm)) {
+                throw new HasmParserException(asm.Stream, "invalid integer");
+            }
+
+            int state = asm.Stream.SaveState();
+
+            int multiplier = 1;
+            if (asm.Stream.PeekOperator() == "-") { // negative number
+                asm.Stream.AdvanceOperator();
+                multiplier = -1;
+            }
+
+            string word = asm.Stream.AdvanceWord();
+            return new HasmIntegerToken(state, long.Parse(word) * multiplier);
+        }
+    }
+}
