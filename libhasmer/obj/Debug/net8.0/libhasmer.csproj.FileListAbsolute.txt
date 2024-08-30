@@ -1,0 +1,12 @@
+/home/lucas/code/projects/hasmer/libhasmer/obj/Debug/net8.0/libhasmer.csproj.AssemblyReference.cache
+/home/lucas/code/projects/hasmer/libhasmer/obj/Debug/net8.0/libhasmer.GeneratedMSBuildEditorConfig.editorconfig
+/home/lucas/code/projects/hasmer/libhasmer/obj/Debug/net8.0/libhasmer.AssemblyInfoInputs.cache
+/home/lucas/code/projects/hasmer/libhasmer/obj/Debug/net8.0/libhasmer.AssemblyInfo.cs
+/home/lucas/code/projects/hasmer/libhasmer/obj/Debug/net8.0/libhasmer.csproj.CoreCompileInputs.cache
+/home/lucas/code/projects/hasmer/libhasmer/bin/Debug/net8.0/libhasmer.deps.json
+/home/lucas/code/projects/hasmer/libhasmer/bin/Debug/net8.0/libhasmer.dll
+/home/lucas/code/projects/hasmer/libhasmer/bin/Debug/net8.0/libhasmer.pdb
+/home/lucas/code/projects/hasmer/libhasmer/obj/Debug/net8.0/libhasmer.dll
+/home/lucas/code/projects/hasmer/libhasmer/obj/Debug/net8.0/refint/libhasmer.dll
+/home/lucas/code/projects/hasmer/libhasmer/obj/Debug/net8.0/libhasmer.pdb
+/home/lucas/code/projects/hasmer/libhasmer/obj/Debug/net8.0/ref/libhasmer.dll

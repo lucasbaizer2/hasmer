@@ -1,0 +1,1974 @@
+{
+	"Version": 43,
+	"Definitions": [
+		{
+			"Opcode": 0,
+			"Name": "NewObjectWithBuffer",
+			"OperandTypes": [
+				"Reg8",
+				"UInt16",
+				"UInt16",
+				"UInt16",
+				"UInt16"
+			],
+			"IsJump": false,
+			"AbstractDefinition": 0
+		},
+		{
+			"Opcode": 1,
+			"Name": "NewObjectWithBufferLong",
+			"OperandTypes": [
+				"Reg8",
+				"UInt16",
+				"UInt16",
+				"UInt32",
+				"UInt32"
+			],
+			"IsJump": false,
+			"AbstractDefinition": 0
+		},
+		{
+			"Opcode": 2,
+			"Name": "NewObject",
+			"OperandTypes": [
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 3,
+			"Name": "NewArrayWithBuffer",
+			"OperandTypes": [
+				"Reg8",
+				"UInt16",
+				"UInt16",
+				"UInt16"
+			],
+			"IsJump": false,
+			"AbstractDefinition": 1
+		},
+		{
+			"Opcode": 4,
+			"Name": "NewArrayWithBufferLong",
+			"OperandTypes": [
+				"Reg8",
+				"UInt16",
+				"UInt16",
+				"UInt32"
+			],
+			"IsJump": false,
+			"AbstractDefinition": 1
+		},
+		{
+			"Opcode": 5,
+			"Name": "NewArray",
+			"OperandTypes": [
+				"Reg8",
+				"UInt16"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 6,
+			"Name": "Mov",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": false,
+			"AbstractDefinition": 2
+		},
+		{
+			"Opcode": 7,
+			"Name": "MovLong",
+			"OperandTypes": [
+				"Reg32",
+				"Reg32"
+			],
+			"IsJump": false,
+			"AbstractDefinition": 2
+		},
+		{
+			"Opcode": 8,
+			"Name": "Negate",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 9,
+			"Name": "Not",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 10,
+			"Name": "BitNot",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 11,
+			"Name": "TypeOf",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 12,
+			"Name": "Eq",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 13,
+			"Name": "StrictEq",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 14,
+			"Name": "Neq",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 15,
+			"Name": "StrictNeq",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 16,
+			"Name": "Less",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 17,
+			"Name": "LessEq",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 18,
+			"Name": "Greater",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 19,
+			"Name": "GreaterEq",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 20,
+			"Name": "Add",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 21,
+			"Name": "AddN",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 22,
+			"Name": "Mul",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 23,
+			"Name": "MulN",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 24,
+			"Name": "Div",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 25,
+			"Name": "DivN",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 26,
+			"Name": "Mod",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 27,
+			"Name": "Sub",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 28,
+			"Name": "SubN",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 29,
+			"Name": "LShift",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 30,
+			"Name": "RShift",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 31,
+			"Name": "URshift",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 32,
+			"Name": "BitAnd",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 33,
+			"Name": "BitXor",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 34,
+			"Name": "BitOr",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 35,
+			"Name": "InstanceOf",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 36,
+			"Name": "IsIn",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 37,
+			"Name": "GetEnvironment",
+			"OperandTypes": [
+				"Reg8",
+				"UInt8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 38,
+			"Name": "StoreToEnvironment",
+			"OperandTypes": [
+				"Reg8",
+				"UInt8",
+				"Reg8"
+			],
+			"IsJump": false,
+			"AbstractDefinition": 3
+		},
+		{
+			"Opcode": 39,
+			"Name": "StoreToEnvironmentL",
+			"OperandTypes": [
+				"Reg8",
+				"UInt16",
+				"Reg8"
+			],
+			"IsJump": false,
+			"AbstractDefinition": 3
+		},
+		{
+			"Opcode": 40,
+			"Name": "StoreNPToEnvironment",
+			"OperandTypes": [
+				"Reg8",
+				"UInt8",
+				"Reg8"
+			],
+			"IsJump": false,
+			"AbstractDefinition": 4
+		},
+		{
+			"Opcode": 41,
+			"Name": "StoreNPToEnvironmentL",
+			"OperandTypes": [
+				"Reg8",
+				"UInt16",
+				"Reg8"
+			],
+			"IsJump": false,
+			"AbstractDefinition": 4
+		},
+		{
+			"Opcode": 42,
+			"Name": "LoadFromEnvironment",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"UInt8"
+			],
+			"IsJump": false,
+			"AbstractDefinition": 5
+		},
+		{
+			"Opcode": 43,
+			"Name": "LoadFromEnvironmentL",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"UInt16"
+			],
+			"IsJump": false,
+			"AbstractDefinition": 5
+		},
+		{
+			"Opcode": 44,
+			"Name": "GetGlobalObject",
+			"OperandTypes": [
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 45,
+			"Name": "CreateEnvironment",
+			"OperandTypes": [
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 46,
+			"Name": "DeclareGlobalVar",
+			"OperandTypes": [
+				"UInt32S"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 47,
+			"Name": "GetByIdShort",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"UInt8",
+				"UInt8S"
+			],
+			"IsJump": false,
+			"AbstractDefinition": 6
+		},
+		{
+			"Opcode": 48,
+			"Name": "GetById",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"UInt8",
+				"UInt16S"
+			],
+			"IsJump": false,
+			"AbstractDefinition": 6
+		},
+		{
+			"Opcode": 49,
+			"Name": "GetByIdLong",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"UInt8",
+				"UInt32S"
+			],
+			"IsJump": false,
+			"AbstractDefinition": 6
+		},
+		{
+			"Opcode": 50,
+			"Name": "TryGetById",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"UInt8",
+				"UInt16S"
+			],
+			"IsJump": false,
+			"AbstractDefinition": 7
+		},
+		{
+			"Opcode": 51,
+			"Name": "TryGetByIdLong",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"UInt8",
+				"UInt32S"
+			],
+			"IsJump": false,
+			"AbstractDefinition": 7
+		},
+		{
+			"Opcode": 52,
+			"Name": "PutById",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"UInt8",
+				"UInt16S"
+			],
+			"IsJump": false,
+			"AbstractDefinition": 8
+		},
+		{
+			"Opcode": 53,
+			"Name": "PutByIdLong",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"UInt8",
+				"UInt32S"
+			],
+			"IsJump": false,
+			"AbstractDefinition": 8
+		},
+		{
+			"Opcode": 54,
+			"Name": "TryPutById",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"UInt8",
+				"UInt16S"
+			],
+			"IsJump": false,
+			"AbstractDefinition": 9
+		},
+		{
+			"Opcode": 55,
+			"Name": "TryPutByIdLong",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"UInt8",
+				"UInt32S"
+			],
+			"IsJump": false,
+			"AbstractDefinition": 9
+		},
+		{
+			"Opcode": 56,
+			"Name": "PutOwnByIdShort",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"UInt8S"
+			],
+			"IsJump": false,
+			"AbstractDefinition": 10
+		},
+		{
+			"Opcode": 57,
+			"Name": "PutOwnById",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"UInt16S"
+			],
+			"IsJump": false,
+			"AbstractDefinition": 10
+		},
+		{
+			"Opcode": 58,
+			"Name": "PutOwnByIdLong",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"UInt32S"
+			],
+			"IsJump": false,
+			"AbstractDefinition": 10
+		},
+		{
+			"Opcode": 59,
+			"Name": "PutOwnByIndex",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"UInt8"
+			],
+			"IsJump": false,
+			"AbstractDefinition": 11
+		},
+		{
+			"Opcode": 60,
+			"Name": "PutOwnByIndexL",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"UInt32"
+			],
+			"IsJump": false,
+			"AbstractDefinition": 11
+		},
+		{
+			"Opcode": 61,
+			"Name": "DelById",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"UInt16S"
+			],
+			"IsJump": false,
+			"AbstractDefinition": 12
+		},
+		{
+			"Opcode": 62,
+			"Name": "DelByIdLong",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"UInt32S"
+			],
+			"IsJump": false,
+			"AbstractDefinition": 12
+		},
+		{
+			"Opcode": 63,
+			"Name": "GetByVal",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 64,
+			"Name": "PutByVal",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 65,
+			"Name": "DelByVal",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 66,
+			"Name": "PutGetterSetter",
+			"OperandTypes": [
+				"Reg8",
+				"UInt32S",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 67,
+			"Name": "GetPNameList",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 68,
+			"Name": "GetNextPName",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"Reg8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 69,
+			"Name": "Call",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"UInt8"
+			],
+			"IsJump": false,
+			"AbstractDefinition": 13
+		},
+		{
+			"Opcode": 70,
+			"Name": "Construct",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"UInt8"
+			],
+			"IsJump": false,
+			"AbstractDefinition": 14
+		},
+		{
+			"Opcode": 71,
+			"Name": "Call1",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 72,
+			"Name": "CallDirect",
+			"OperandTypes": [
+				"Reg8",
+				"UInt8",
+				"UInt16"
+			],
+			"IsJump": false,
+			"AbstractDefinition": 15
+		},
+		{
+			"Opcode": 73,
+			"Name": "Call2",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 74,
+			"Name": "Call3",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"Reg8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 75,
+			"Name": "Call4",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"Reg8",
+				"Reg8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 76,
+			"Name": "CallLong",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"UInt32"
+			],
+			"IsJump": false,
+			"AbstractDefinition": 13
+		},
+		{
+			"Opcode": 77,
+			"Name": "ConstructLong",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"UInt32"
+			],
+			"IsJump": false,
+			"AbstractDefinition": 14
+		},
+		{
+			"Opcode": 78,
+			"Name": "CallDirectLongIndex",
+			"OperandTypes": [
+				"Reg8",
+				"UInt8",
+				"UInt32"
+			],
+			"IsJump": false,
+			"AbstractDefinition": 15
+		},
+		{
+			"Opcode": 79,
+			"Name": "CallBuiltin",
+			"OperandTypes": [
+				"Reg8",
+				"UInt8",
+				"UInt8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 80,
+			"Name": "Ret",
+			"OperandTypes": [
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 81,
+			"Name": "Catch",
+			"OperandTypes": [
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 82,
+			"Name": "DirectEval",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 83,
+			"Name": "Throw",
+			"OperandTypes": [
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 84,
+			"Name": "Debugger",
+			"OperandTypes": [],
+			"IsJump": false
+		},
+		{
+			"Opcode": 85,
+			"Name": "DebuggerCheckBreak",
+			"OperandTypes": [],
+			"IsJump": false
+		},
+		{
+			"Opcode": 86,
+			"Name": "ProfilePoint",
+			"OperandTypes": [
+				"UInt16"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 87,
+			"Name": "Unreachable",
+			"OperandTypes": [],
+			"IsJump": false
+		},
+		{
+			"Opcode": 88,
+			"Name": "CreateClosure",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"UInt16"
+			],
+			"IsJump": false,
+			"AbstractDefinition": 16
+		},
+		{
+			"Opcode": 89,
+			"Name": "CreateClosureLongIndex",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"UInt32"
+			],
+			"IsJump": false,
+			"AbstractDefinition": 16
+		},
+		{
+			"Opcode": 90,
+			"Name": "CreateThis",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 91,
+			"Name": "SelectObject",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 92,
+			"Name": "LoadParam",
+			"OperandTypes": [
+				"Reg8",
+				"UInt8"
+			],
+			"IsJump": false,
+			"AbstractDefinition": 17
+		},
+		{
+			"Opcode": 93,
+			"Name": "LoadParamLong",
+			"OperandTypes": [
+				"Reg8",
+				"UInt32"
+			],
+			"IsJump": false,
+			"AbstractDefinition": 17
+		},
+		{
+			"Opcode": 94,
+			"Name": "LoadConstUInt8",
+			"OperandTypes": [
+				"Reg8",
+				"UInt8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 95,
+			"Name": "LoadConstInt",
+			"OperandTypes": [
+				"Reg8",
+				"Imm32"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 96,
+			"Name": "LoadConstDouble",
+			"OperandTypes": [
+				"Reg8",
+				"Double"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 97,
+			"Name": "LoadConstString",
+			"OperandTypes": [
+				"Reg8",
+				"UInt16S"
+			],
+			"IsJump": false,
+			"AbstractDefinition": 18
+		},
+		{
+			"Opcode": 98,
+			"Name": "LoadConstStringLongIndex",
+			"OperandTypes": [
+				"Reg8",
+				"UInt32S"
+			],
+			"IsJump": false,
+			"AbstractDefinition": 18
+		},
+		{
+			"Opcode": 99,
+			"Name": "LoadConstUndefined",
+			"OperandTypes": [
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 100,
+			"Name": "LoadConstNull",
+			"OperandTypes": [
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 101,
+			"Name": "LoadConstTrue",
+			"OperandTypes": [
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 102,
+			"Name": "LoadConstFalse",
+			"OperandTypes": [
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 103,
+			"Name": "LoadConstZero",
+			"OperandTypes": [
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 104,
+			"Name": "CoerceThisNS",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 105,
+			"Name": "LoadThisNS",
+			"OperandTypes": [
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 106,
+			"Name": "ToNumber",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 107,
+			"Name": "ToInt32",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 108,
+			"Name": "AddEmptyString",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 109,
+			"Name": "GetArgumentsPropByVal",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 110,
+			"Name": "GetArgumentsLength",
+			"OperandTypes": [
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 111,
+			"Name": "ReifyArguments",
+			"OperandTypes": [
+				"Reg8"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 112,
+			"Name": "CreateRegExp",
+			"OperandTypes": [
+				"Reg8",
+				"UInt32S",
+				"UInt32S",
+				"UInt32"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 113,
+			"Name": "SwitchImm",
+			"OperandTypes": [
+				"Reg8",
+				"UInt32",
+				"Addr32",
+				"UInt32",
+				"UInt32"
+			],
+			"IsJump": false
+		},
+		{
+			"Opcode": 114,
+			"Name": "Jmp",
+			"OperandTypes": [
+				"Addr8"
+			],
+			"IsJump": true,
+			"AbstractDefinition": 19
+		},
+		{
+			"Opcode": 115,
+			"Name": "JmpLong",
+			"OperandTypes": [
+				"Addr32"
+			],
+			"IsJump": true,
+			"AbstractDefinition": 19
+		},
+		{
+			"Opcode": 116,
+			"Name": "JmpTrue",
+			"OperandTypes": [
+				"Addr8",
+				"Reg8"
+			],
+			"IsJump": true,
+			"AbstractDefinition": 20
+		},
+		{
+			"Opcode": 117,
+			"Name": "JmpTrueLong",
+			"OperandTypes": [
+				"Addr32",
+				"Reg8"
+			],
+			"IsJump": true,
+			"AbstractDefinition": 20
+		},
+		{
+			"Opcode": 118,
+			"Name": "JmpFalse",
+			"OperandTypes": [
+				"Addr8",
+				"Reg8"
+			],
+			"IsJump": true,
+			"AbstractDefinition": 21
+		},
+		{
+			"Opcode": 119,
+			"Name": "JmpFalseLong",
+			"OperandTypes": [
+				"Addr32",
+				"Reg8"
+			],
+			"IsJump": true,
+			"AbstractDefinition": 21
+		},
+		{
+			"Opcode": 120,
+			"Name": "JmpUndefined",
+			"OperandTypes": [
+				"Addr8",
+				"Reg8"
+			],
+			"IsJump": true,
+			"AbstractDefinition": 22
+		},
+		{
+			"Opcode": 121,
+			"Name": "JmpUndefinedLong",
+			"OperandTypes": [
+				"Addr32",
+				"Reg8"
+			],
+			"IsJump": true,
+			"AbstractDefinition": 22
+		},
+		{
+			"Opcode": 122,
+			"Name": "JLess",
+			"OperandTypes": [
+				"Addr8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": true,
+			"AbstractDefinition": 23
+		},
+		{
+			"Opcode": 123,
+			"Name": "JLessLong",
+			"OperandTypes": [
+				"Addr32",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": true,
+			"AbstractDefinition": 23
+		},
+		{
+			"Opcode": 124,
+			"Name": "JNotLess",
+			"OperandTypes": [
+				"Addr8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": true,
+			"AbstractDefinition": 24
+		},
+		{
+			"Opcode": 125,
+			"Name": "JNotLessLong",
+			"OperandTypes": [
+				"Addr32",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": true,
+			"AbstractDefinition": 24
+		},
+		{
+			"Opcode": 126,
+			"Name": "JLessN",
+			"OperandTypes": [
+				"Addr8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": true,
+			"AbstractDefinition": 25
+		},
+		{
+			"Opcode": 127,
+			"Name": "JLessNLong",
+			"OperandTypes": [
+				"Addr32",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": true,
+			"AbstractDefinition": 25
+		},
+		{
+			"Opcode": 128,
+			"Name": "JNotLessN",
+			"OperandTypes": [
+				"Addr8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": true,
+			"AbstractDefinition": 26
+		},
+		{
+			"Opcode": 129,
+			"Name": "JNotLessNLong",
+			"OperandTypes": [
+				"Addr32",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": true,
+			"AbstractDefinition": 26
+		},
+		{
+			"Opcode": 130,
+			"Name": "JLessEqual",
+			"OperandTypes": [
+				"Addr8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": true,
+			"AbstractDefinition": 27
+		},
+		{
+			"Opcode": 131,
+			"Name": "JLessEqualLong",
+			"OperandTypes": [
+				"Addr32",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": true,
+			"AbstractDefinition": 27
+		},
+		{
+			"Opcode": 132,
+			"Name": "JNotLessEqual",
+			"OperandTypes": [
+				"Addr8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": true,
+			"AbstractDefinition": 28
+		},
+		{
+			"Opcode": 133,
+			"Name": "JNotLessEqualLong",
+			"OperandTypes": [
+				"Addr32",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": true,
+			"AbstractDefinition": 28
+		},
+		{
+			"Opcode": 134,
+			"Name": "JLessEqualN",
+			"OperandTypes": [
+				"Addr8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": true,
+			"AbstractDefinition": 29
+		},
+		{
+			"Opcode": 135,
+			"Name": "JLessEqualNLong",
+			"OperandTypes": [
+				"Addr32",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": true,
+			"AbstractDefinition": 29
+		},
+		{
+			"Opcode": 136,
+			"Name": "JNotLessEqualN",
+			"OperandTypes": [
+				"Addr8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": true,
+			"AbstractDefinition": 30
+		},
+		{
+			"Opcode": 137,
+			"Name": "JNotLessEqualNLong",
+			"OperandTypes": [
+				"Addr32",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": true,
+			"AbstractDefinition": 30
+		},
+		{
+			"Opcode": 138,
+			"Name": "JGreater",
+			"OperandTypes": [
+				"Addr8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": true,
+			"AbstractDefinition": 31
+		},
+		{
+			"Opcode": 139,
+			"Name": "JGreaterLong",
+			"OperandTypes": [
+				"Addr32",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": true,
+			"AbstractDefinition": 31
+		},
+		{
+			"Opcode": 140,
+			"Name": "JNotGreater",
+			"OperandTypes": [
+				"Addr8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": true,
+			"AbstractDefinition": 32
+		},
+		{
+			"Opcode": 141,
+			"Name": "JNotGreaterLong",
+			"OperandTypes": [
+				"Addr32",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": true,
+			"AbstractDefinition": 32
+		},
+		{
+			"Opcode": 142,
+			"Name": "JGreaterN",
+			"OperandTypes": [
+				"Addr8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": true,
+			"AbstractDefinition": 33
+		},
+		{
+			"Opcode": 143,
+			"Name": "JGreaterNLong",
+			"OperandTypes": [
+				"Addr32",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": true,
+			"AbstractDefinition": 33
+		},
+		{
+			"Opcode": 144,
+			"Name": "JNotGreaterN",
+			"OperandTypes": [
+				"Addr8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": true,
+			"AbstractDefinition": 34
+		},
+		{
+			"Opcode": 145,
+			"Name": "JNotGreaterNLong",
+			"OperandTypes": [
+				"Addr32",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": true,
+			"AbstractDefinition": 34
+		},
+		{
+			"Opcode": 146,
+			"Name": "JGreaterEqual",
+			"OperandTypes": [
+				"Addr8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": true,
+			"AbstractDefinition": 35
+		},
+		{
+			"Opcode": 147,
+			"Name": "JGreaterEqualLong",
+			"OperandTypes": [
+				"Addr32",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": true,
+			"AbstractDefinition": 35
+		},
+		{
+			"Opcode": 148,
+			"Name": "JNotGreaterEqual",
+			"OperandTypes": [
+				"Addr8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": true,
+			"AbstractDefinition": 36
+		},
+		{
+			"Opcode": 149,
+			"Name": "JNotGreaterEqualLong",
+			"OperandTypes": [
+				"Addr32",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": true,
+			"AbstractDefinition": 36
+		},
+		{
+			"Opcode": 150,
+			"Name": "JGreaterEqualN",
+			"OperandTypes": [
+				"Addr8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": true,
+			"AbstractDefinition": 37
+		},
+		{
+			"Opcode": 151,
+			"Name": "JGreaterEqualNLong",
+			"OperandTypes": [
+				"Addr32",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": true,
+			"AbstractDefinition": 37
+		},
+		{
+			"Opcode": 152,
+			"Name": "JNotGreaterEqualN",
+			"OperandTypes": [
+				"Addr8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": true,
+			"AbstractDefinition": 38
+		},
+		{
+			"Opcode": 153,
+			"Name": "JNotGreaterEqualNLong",
+			"OperandTypes": [
+				"Addr32",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": true,
+			"AbstractDefinition": 38
+		},
+		{
+			"Opcode": 154,
+			"Name": "JEqual",
+			"OperandTypes": [
+				"Addr8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": true,
+			"AbstractDefinition": 39
+		},
+		{
+			"Opcode": 155,
+			"Name": "JEqualLong",
+			"OperandTypes": [
+				"Addr32",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": true,
+			"AbstractDefinition": 39
+		},
+		{
+			"Opcode": 156,
+			"Name": "JNotEqual",
+			"OperandTypes": [
+				"Addr8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": true,
+			"AbstractDefinition": 40
+		},
+		{
+			"Opcode": 157,
+			"Name": "JNotEqualLong",
+			"OperandTypes": [
+				"Addr32",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": true,
+			"AbstractDefinition": 40
+		},
+		{
+			"Opcode": 158,
+			"Name": "JStrictEqual",
+			"OperandTypes": [
+				"Addr8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": true,
+			"AbstractDefinition": 41
+		},
+		{
+			"Opcode": 159,
+			"Name": "JStrictEqualLong",
+			"OperandTypes": [
+				"Addr32",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": true,
+			"AbstractDefinition": 41
+		},
+		{
+			"Opcode": 160,
+			"Name": "JStrictNotEqual",
+			"OperandTypes": [
+				"Addr8",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": true,
+			"AbstractDefinition": 42
+		},
+		{
+			"Opcode": 161,
+			"Name": "JStrictNotEqualLong",
+			"OperandTypes": [
+				"Addr32",
+				"Reg8",
+				"Reg8"
+			],
+			"IsJump": true,
+			"AbstractDefinition": 42
+		}
+	],
+	"AbstractDefinitions": [
+		{
+			"Name": "NewObjectWithBuffer",
+			"VariantOpcodes": [
+				0,
+				1
+			]
+		},
+		{
+			"Name": "NewArrayWithBuffer",
+			"VariantOpcodes": [
+				3,
+				4
+			]
+		},
+		{
+			"Name": "Mov",
+			"VariantOpcodes": [
+				6,
+				7
+			]
+		},
+		{
+			"Name": "StoreToEnvironment",
+			"VariantOpcodes": [
+				38,
+				39
+			]
+		},
+		{
+			"Name": "StoreNPToEnvironment",
+			"VariantOpcodes": [
+				40,
+				41
+			]
+		},
+		{
+			"Name": "LoadFromEnvironment",
+			"VariantOpcodes": [
+				42,
+				43
+			]
+		},
+		{
+			"Name": "GetById",
+			"VariantOpcodes": [
+				48,
+				47,
+				49
+			]
+		},
+		{
+			"Name": "TryGetById",
+			"VariantOpcodes": [
+				50,
+				51
+			]
+		},
+		{
+			"Name": "PutById",
+			"VariantOpcodes": [
+				52,
+				53
+			]
+		},
+		{
+			"Name": "TryPutById",
+			"VariantOpcodes": [
+				54,
+				55
+			]
+		},
+		{
+			"Name": "PutOwnById",
+			"VariantOpcodes": [
+				57,
+				56,
+				58
+			]
+		},
+		{
+			"Name": "PutOwnByIndex",
+			"VariantOpcodes": [
+				59,
+				60
+			]
+		},
+		{
+			"Name": "DelById",
+			"VariantOpcodes": [
+				61,
+				62
+			]
+		},
+		{
+			"Name": "Call",
+			"VariantOpcodes": [
+				69,
+				76
+			]
+		},
+		{
+			"Name": "Construct",
+			"VariantOpcodes": [
+				70,
+				77
+			]
+		},
+		{
+			"Name": "CallDirect",
+			"VariantOpcodes": [
+				72,
+				78
+			]
+		},
+		{
+			"Name": "CreateClosure",
+			"VariantOpcodes": [
+				88,
+				89
+			]
+		},
+		{
+			"Name": "LoadParam",
+			"VariantOpcodes": [
+				92,
+				93
+			]
+		},
+		{
+			"Name": "LoadConstString",
+			"VariantOpcodes": [
+				97,
+				98
+			]
+		},
+		{
+			"Name": "Jmp",
+			"VariantOpcodes": [
+				114,
+				115
+			]
+		},
+		{
+			"Name": "JmpTrue",
+			"VariantOpcodes": [
+				116,
+				117
+			]
+		},
+		{
+			"Name": "JmpFalse",
+			"VariantOpcodes": [
+				118,
+				119
+			]
+		},
+		{
+			"Name": "JmpUndefined",
+			"VariantOpcodes": [
+				120,
+				121
+			]
+		},
+		{
+			"Name": "JLess",
+			"VariantOpcodes": [
+				122,
+				123
+			]
+		},
+		{
+			"Name": "JNotLess",
+			"VariantOpcodes": [
+				124,
+				125
+			]
+		},
+		{
+			"Name": "JLessN",
+			"VariantOpcodes": [
+				126,
+				127
+			]
+		},
+		{
+			"Name": "JNotLessN",
+			"VariantOpcodes": [
+				128,
+				129
+			]
+		},
+		{
+			"Name": "JLessEqual",
+			"VariantOpcodes": [
+				130,
+				131
+			]
+		},
+		{
+			"Name": "JNotLessEqual",
+			"VariantOpcodes": [
+				132,
+				133
+			]
+		},
+		{
+			"Name": "JLessEqualN",
+			"VariantOpcodes": [
+				134,
+				135
+			]
+		},
+		{
+			"Name": "JNotLessEqualN",
+			"VariantOpcodes": [
+				136,
+				137
+			]
+		},
+		{
+			"Name": "JGreater",
+			"VariantOpcodes": [
+				138,
+				139
+			]
+		},
+		{
+			"Name": "JNotGreater",
+			"VariantOpcodes": [
+				140,
+				141
+			]
+		},
+		{
+			"Name": "JGreaterN",
+			"VariantOpcodes": [
+				142,
+				143
+			]
+		},
+		{
+			"Name": "JNotGreaterN",
+			"VariantOpcodes": [
+				144,
+				145
+			]
+		},
+		{
+			"Name": "JGreaterEqual",
+			"VariantOpcodes": [
+				146,
+				147
+			]
+		},
+		{
+			"Name": "JNotGreaterEqual",
+			"VariantOpcodes": [
+				148,
+				149
+			]
+		},
+		{
+			"Name": "JGreaterEqualN",
+			"VariantOpcodes": [
+				150,
+				151
+			]
+		},
+		{
+			"Name": "JNotGreaterEqualN",
+			"VariantOpcodes": [
+				152,
+				153
+			]
+		},
+		{
+			"Name": "JEqual",
+			"VariantOpcodes": [
+				154,
+				155
+			]
+		},
+		{
+			"Name": "JNotEqual",
+			"VariantOpcodes": [
+				156,
+				157
+			]
+		},
+		{
+			"Name": "JStrictEqual",
+			"VariantOpcodes": [
+				158,
+				159
+			]
+		},
+		{
+			"Name": "JStrictNotEqual",
+			"VariantOpcodes": [
+				160,
+				161
+			]
+		}
+	],
+	"GitCommitHash": "4ee8ccf03e6385a4921e077b0e9a1a655ce322f8"
+}

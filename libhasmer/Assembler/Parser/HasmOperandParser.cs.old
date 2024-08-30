@@ -1,0 +1,88 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Hasmer.Assembler.Parser {
+    /// <summary>
+    /// Parses a Hasm instruction's operand.
+    /// </summary>
+    public class HasmOperandParser : IHasmTokenParser {
+        private HbcInstructionDefinition Instruction;
+        private int OperandIndex;
+        private HbcInstructionOperandType Type => Instruction.OperandTypes[OperandIndex];
+
+        public HasmOperandParser(HbcInstructionDefinition insn, int operand) {
+            Instruction = insn;
+            OperandIndex = operand;
+        }
+
+        public bool CanParse(HasmReaderState asm) {
+            throw new NotImplementedException();
+        }
+
+        public HasmToken Parse(HasmReaderState asm) {
+            int state = asm.Stream.SaveState();
+            if (Type == HbcInstructionOperandType.Reg8 || Type == HbcInstructionOperandType.Reg32) {
+                string reg = asm.Stream.PeekWord();
+                if (reg == null || !reg.StartsWith("r") || reg.Length < 2) {
+                    throw new HasmParserException(asm.Stream, "expecting register");
+                }
+                if (!long.TryParse(reg.Substring(1), out long regIndex)) {
+                    throw new HasmParserException(asm.Stream, "invalid register format");
+                }
+                asm.Stream.AdvanceWord();
+
+                HasmIntegerToken token = new HasmIntegerToken(state, regIndex);
+                return new HasmOperandToken(state) {
+                    OperandType = HasmOperandTokenType.Register,
+                    Value = asm.IsExact ? token.GetValue(false, Type.GetSizeof()) : token.GetCompactValue(false),
+                };
+            } else if (Type == HbcInstructionOperandType.Addr8 || Type == HbcInstructionOperandType.Addr32) {
+                HasmLabelToken labelToken = (HasmLabelToken)IHasmTokenParser.LabelParser.Parse(asm);
+                return new HasmOperandToken(state) {
+                    OperandType = HasmOperandTokenType.Label,
+                    Value = asm.IsExact ? labelToken.LabelIndex.GetValue(true, Type.GetSizeof()) : labelToken.LabelIndex.GetCompactValue(true),
+                };
+            } else if (Type == HbcInstructionOperandType.UInt8 || Type == HbcInstructionOperandType.UInt16 || Type == HbcInstructionOperandType.UInt32 || Type == HbcInstructionOperandType.Imm32) {
+                if (OperandIndex == 3 && (Instruction.Name == "NewArrayWithBuffer" || Instruction.Name == "NewArrayWithBufferLong")) {
+                    HasmLabelToken labelToken = (HasmLabelToken)IHasmTokenParser.LabelParser.Parse(asm);
+                    return new HasmOperandToken(state) {
+                        OperandType = HasmOperandTokenType.Label,
+                        Value = asm.IsExact ? labelToken.LabelIndex.GetValue(false, Type.GetSizeof()) : labelToken.LabelIndex.GetCompactValue(false),
+                    };
+                }
+
+                HasmIntegerToken intToken = (HasmIntegerToken)IHasmTokenParser.IntegerParser.Parse(asm);
+                return new HasmOperandToken(state) {
+                    OperandType = HasmOperandTokenType.UInt,
+                    Value = asm.IsExact ? intToken.GetValue(false, Type.GetSizeof()) : intToken.GetCompactValue(false),
+                };
+            } else if (Type == HbcInstructionOperandType.UInt8S || Type == HbcInstructionOperandType.UInt16S || Type == HbcInstructionOperandType.UInt32S) {
+                HasmToken token = IHasmTokenParser.StringParser.Parse(asm);
+                if (token is HasmStringToken s) {
+                    return new HasmOperandToken(state) {
+                        OperandType = HasmOperandTokenType.String,
+                        Value = new PrimitiveValue(s.Value),
+                    };
+                } else if (token is HasmIdentifierToken i) {
+                    return new HasmOperandToken(state) {
+                        OperandType = HasmOperandTokenType.Identifier,
+                        Value = new PrimitiveValue(i.Value),
+                    };
+                } else {
+                    throw new Exception($"expecting a string literal or identifier, got {token.GetType().Name}");
+                }
+            } else if (Type == HbcInstructionOperandType.Double) {
+                HasmNumberToken doubleToken = (HasmNumberToken)IHasmTokenParser.NumberParser.Parse(asm);
+                return new HasmOperandToken(state) {
+                    OperandType = HasmOperandTokenType.Double,
+                    Value = new PrimitiveValue(doubleToken.Value)
+                };
+            }
+
+            throw new NotImplementedException(Type.ToString());
+        }
+    }
+}
