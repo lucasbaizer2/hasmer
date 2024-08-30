@@ -82,23 +82,12 @@ Inheritance diagram for Hasmer.Assembler.Parser.HasmIntegerToken:</div>
   <img src="class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_integer_token.png" usemap="#Hasmer.Assembler.Parser.HasmIntegerToken_map" alt=""/>
   <map id="Hasmer.Assembler.Parser.HasmIntegerToken_map" name="Hasmer.Assembler.Parser.HasmIntegerToken_map">
 <area href="class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_literal_token.html" title="Represents a literal value, such as a numeric or string value." alt="Hasmer.Assembler.Parser.HasmLiteralToken" shape="rect" coords="0,56,268,80"/>
-<area href="class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_literal_token.html" title="Represents a literal value, such as a numeric or string value." alt="Hasmer.Assembler.Parser.HasmLiteralToken" shape="rect" coords="278,56,546,80"/>
 <area href="class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_token.html" title="Represents a token in a Hasm assembly file." alt="Hasmer.Assembler.Parser.HasmToken" shape="rect" coords="0,0,268,24"/>
-<area href="class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_token.html" title="Represents a token in a Hasm assembly file." alt="Hasmer.Assembler.Parser.HasmToken" shape="rect" coords="278,0,546,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ab8238ee9c026dc9ee62e444a80a62a33"><td class="memItemLeft" align="right" valign="top">uint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_integer_token.html#ab8238ee9c026dc9ee62e444a80a62a33">GetValueAsUInt32</a> ()</td></tr>
-<tr class="memdesc:ab8238ee9c026dc9ee62e444a80a62a33"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the value as a 4-byte unsigned integer; throws an exception if the value is not in bounds.  <a href="class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_integer_token.html#ab8238ee9c026dc9ee62e444a80a62a33">More...</a><br /></td></tr>
-<tr class="separator:ab8238ee9c026dc9ee62e444a80a62a33"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a168a0df13a36824f873a2f56ce2ef43d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_integer_token.html#a168a0df13a36824f873a2f56ce2ef43d">GetValueAsInt32</a> ()</td></tr>
-<tr class="memdesc:a168a0df13a36824f873a2f56ce2ef43d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the value as a 4-byte signed integer; throws an exception if the value is not in bounds.  <a href="class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_integer_token.html#a168a0df13a36824f873a2f56ce2ef43d">More...</a><br /></td></tr>
-<tr class="separator:a168a0df13a36824f873a2f56ce2ef43d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae5e2c8bd79d66d22c74a347527da4153"><td class="memItemLeft" align="right" valign="top"><a id="ae5e2c8bd79d66d22c74a347527da4153"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>HasmIntegerToken</b> (<a class="el" href="struct_hasmer_1_1_assembler_1_1_parser_1_1_hasm_string_stream_state.html">HasmStringStreamState</a> state, long value)</td></tr>
-<tr class="separator:ae5e2c8bd79d66d22c74a347527da4153"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a876a4c70cfe23e72678d54bcb97955e3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_hasmer_1_1_primitive_value.html">PrimitiveValue</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_integer_token.html#a876a4c70cfe23e72678d54bcb97955e3">GetCompactValue</a> (bool signed)</td></tr>
 <tr class="memdesc:a876a4c70cfe23e72678d54bcb97955e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a <a class="el" href="class_hasmer_1_1_primitive_value.html" title="A wrapper type for any other given type, which keeps track of the original type that was passed....">PrimitiveValue</a> whose underlying byte count is equal to the smallest multiple of 2 that can hold Value.  <a href="class_hasmer_1_1_assembler_1_1_parser_1_1_hasm_integer_token.html#a876a4c70cfe23e72678d54bcb97955e3">More...</a><br /></td></tr>
 <tr class="separator:a876a4c70cfe23e72678d54bcb97955e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -212,34 +201,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>Column</b><code> [get,
 </div>
 </div>
 <a id="a168a0df13a36824f873a2f56ce2ef43d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a168a0df13a36824f873a2f56ce2ef43d">&#9670;&nbsp;</a></span>GetValueAsInt32() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">int Hasmer.Assembler.Parser.HasmIntegerToken.GetValueAsInt32 </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Returns the value as a 4-byte signed integer; throws an exception if the value is not in bounds. </p>
-
-</div>
-</div>
-<a id="a168a0df13a36824f873a2f56ce2ef43d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a168a0df13a36824f873a2f56ce2ef43d">&#9670;&nbsp;</a></span>GetValueAsInt32() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a168a0df13a36824f873a2f56ce2ef43d">&#9670;&nbsp;</a></span>GetValueAsInt32()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -266,7 +228,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>Column</b><code> [get,
 </div>
 </div>
 <a id="ab8238ee9c026dc9ee62e444a80a62a33"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab8238ee9c026dc9ee62e444a80a62a33">&#9670;&nbsp;</a></span>GetValueAsUInt32() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8238ee9c026dc9ee62e444a80a62a33">&#9670;&nbsp;</a></span>GetValueAsUInt32()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -292,35 +254,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>Column</b><code> [get,
 
 </div>
 </div>
-<a id="ab8238ee9c026dc9ee62e444a80a62a33"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab8238ee9c026dc9ee62e444a80a62a33">&#9670;&nbsp;</a></span>GetValueAsUInt32() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint Hasmer.Assembler.Parser.HasmIntegerToken.GetValueAsUInt32 </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Returns the value as a 4-byte unsigned integer; throws an exception if the value is not in bounds. </p>
-
-</div>
-</div>
-<hr/>The documentation for this class was generated from the following files:<ul>
-<li>libhasmer/Assembler/Parser/HasmIntegerParser.cs</li>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>libhasmer/Assembler/Parser/HasmIntegerToken.cs</li>
 </ul>
 </div><!-- contents -->
