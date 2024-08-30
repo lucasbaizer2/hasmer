@@ -44,6 +44,9 @@ namespace Hasmer {
             if (amount > 32) {
                 throw new IndexOutOfRangeException("cannot read more than 32 bits at once");
             }
+            if (amount < 1) {
+                throw new IndexOutOfRangeException("bits must be >= 1");
+            }
 
             uint val = 0;
             for (int i = 0; i < amount; i++) {

@@ -33,10 +33,10 @@ namespace Hasmer.Decompiler.Analysis {
                         currentObject = expr;
                         currentObjectName = objName;
                     } else if (currentObject != null &&
-                        assn.Left is MemberExpression memberExpr &&
-                        memberExpr.Object is Identifier objIndent &&
-                        !objIndent.IsRedundant &&
-                        objIndent.Name == currentObjectName.Name) {
+                          assn.Left is MemberExpression memberExpr &&
+                          memberExpr.Object is Identifier objIndent &&
+                          !objIndent.IsRedundant &&
+                          objIndent.Name == currentObjectName.Name) {
                         currentObject.Properties.Add(new ObjectExpressionProperty {
                             Key = memberExpr.Property,
                             Value = assn.Right

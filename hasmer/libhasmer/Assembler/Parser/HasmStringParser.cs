@@ -18,57 +18,129 @@ namespace Hasmer.Assembler.Parser {
     }
 
     /// <summary>
+    /// Represents an identifier.
+    /// </summary>
+    public class HasmIdentifierToken : HasmLiteralToken {
+        /// <summary>
+        /// The name of the identifier, without the angled brackets.
+        /// </summary>
+        public string Value { get; set; }
+
+        public HasmIdentifierToken(HasmStringStreamState state) : base(state) { }
+    }
+
+    /// <summary>
     /// Parses an escaped string surrounded by double quotes.
     /// </summary>
     public class HasmStringParser : IHasmTokenParser {
-        public bool CanParse(HasmReaderState asm) {
-            string op = asm.Stream.PeekCharacters(1);
-            if (op != "\"") {
-                return false;
+        enum ParserState {
+            Normal,
+            Escape
+        }
+
+        private HasmLiteralToken TryParse(HasmReaderState asm) {
+            HasmStringStreamWhitespaceMode prevMode = asm.Stream.WhitespaceMode;
+            asm.Stream.WhitespaceMode = HasmStringStreamWhitespaceMode.Keep;
+
+            char c = asm.Stream.PeekChar();
+            if (c == '\0' || c != '"' && c != '<') {
+                return null;
             }
+            HasmStringStreamState streamState = asm.Stream.SaveState();
+            asm.Stream.Advance(1);
 
-            HasmStringStreamState state = asm.Stream.SaveState();
-            asm.Stream.AdvanceCharacters(1);
+            StringBuilder res = new StringBuilder();
+            ParserState parserState = ParserState.Normal;
+            if (c == '"') {
+                while ((c = asm.Stream.AdvanceChar()) != '\0') {
+                    if (parserState == ParserState.Normal) {
+                        if (c == '"') {
+                            asm.Stream.WhitespaceMode = prevMode;
+                            return new HasmStringToken(streamState) {
+                                Value = res.ToString(),
+                            };
+                        } else if (c == '\\') {
+                            parserState = ParserState.Escape;
+                        } else {
+                            res.Append(c);
+                        }
+                    } else if (parserState == ParserState.Escape) {
+                        char m;
+                        switch (c) {
+                            case '"': m = '"'; break;
+                            case '\\': m = '\\'; break;
+                            case '0': m = '\0'; break;
+                            case 'a': m = '\a'; break;
+                            case 'b': m = '\b'; break;
+                            case 'f': m = '\f'; break;
+                            case 'n': m = '\n'; break;
+                            case 'r': m = '\r'; break;
+                            case 't': m = '\t'; break;
+                            case 'v': m = '\v'; break;
+                            case 'u':
+                                string hex = asm.Stream.AdvanceCharacters(4);
+                                if (hex == null) {
+                                    asm.Stream.WhitespaceMode = prevMode;
+                                    return null;
+                                }
+                                m = (char)Convert.ToInt32(hex, 16);
+                                break;
+                            default:
+                                throw new Exception($"invalid string escape code: \\{c}");
+                        }
 
-            char lastChar = '\0';
-            while (asm.Stream.PeekCharacters(1) != null) {
-                string character = asm.Stream.AdvanceCharacters(1);
-                if (character == "\"" && lastChar != '\\') {
-                    asm.Stream.LoadState(state);
-                    return true;
+                        parserState = ParserState.Normal;
+                        res.Append(m);
+                    }
                 }
-                lastChar = character[0];
+            } else if (c == '<') {
+                while ((c = asm.Stream.AdvanceChar()) != '\0') {
+                    if (parserState == ParserState.Normal) {
+                        if (c == '>') {
+                            asm.Stream.WhitespaceMode = prevMode;
+                            return new HasmIdentifierToken(streamState) {
+                                Value = res.ToString(),
+                            };
+                        } else if (c == '\\') {
+                            parserState = ParserState.Escape;
+                        } else {
+                            res.Append(c);
+                        }
+                    } else if (parserState == ParserState.Escape) {
+                        char m;
+                        switch (c) {
+                            case '<': m = '<'; break;
+                            case '>': m = '>'; break;
+                            case '\\': m = '\\'; break;
+                            default:
+                                throw new Exception($"invalid identifier escape code: \\{c}");
+                        }
+
+                        parserState = ParserState.Normal;
+                        res.Append(m);
+                    }
+                }
             }
 
+            asm.Stream.WhitespaceMode = prevMode;
+            return null;
+        }
+
+        public bool CanParse(HasmReaderState asm) {
+            HasmStringStreamState state = asm.Stream.SaveState();
+            HasmLiteralToken s = TryParse(asm);
             asm.Stream.LoadState(state);
-            return false;
+            return s != null;
         }
 
         public HasmToken Parse(HasmReaderState asm) {
-            if (!CanParse(asm)) {
-                throw new HasmParserException(asm.Stream, "invalid string");
-            }
-
             HasmStringStreamState state = asm.Stream.SaveState();
-            asm.Stream.AdvanceCharacters(1); // skip first double quote
-
-            asm.Stream.WhitespaceMode = HasmStringStreamWhitespaceMode.Keep;
-            StringBuilder builder = new StringBuilder();
-            char lastChar = '\0';
-            while (asm.Stream.PeekCharacters(1) != null) {
-                string character = asm.Stream.AdvanceCharacters(1);
-                if (character == "\"" && lastChar != '\\') {
-                    break;
-                }
-                builder.Append(character);
-                lastChar = character[0];
+            HasmLiteralToken s = TryParse(asm);
+            if (s == null) {
+                throw new HasmParserException(asm.Stream, "invalid string literal or identifier");
             }
-            asm.Stream.WhitespaceMode = HasmStringStreamWhitespaceMode.Remove;
 
-            string toString = builder.ToString();
-            return new HasmStringToken(state) {
-                Value = toString
-            };
+            return s;
         }
     }
 }

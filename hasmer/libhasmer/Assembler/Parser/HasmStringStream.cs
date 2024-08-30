@@ -1,22 +1,14 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Hasmer.Assembler.Parser {
-    /// <summary>
-    /// Represents the state of a <see cref="HasmStringStream"/>.
-    /// </summary>
     public struct HasmStringStreamState {
-        /// <summary>
-        /// The line the stream was on.
-        /// </summary>
-        public int CurrentLine { get; set; }
-        /// <summary>
-        /// The column the stream was on.
-        /// </summary>
-        public int CurrentColumn { get; set; }
+        public int Offset { get; set; }
+        public int Line { get; set; }
+        public int Column { get; set; }
     }
 
     /// <summary>
@@ -40,93 +32,114 @@ namespace Hasmer.Assembler.Parser {
         /// <summary>
         /// The characters that are valid in a word, returned by <see cref="PeekWord"/>.
         /// </summary>
-        private const string WordCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_";
+        private const string WordCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_$";
+
         /// <summary>
         /// The valid characters for operators, returned by <see cref="PeekOperator"/>
         /// </summary>
         private const string OperatorCharacters = "<>[]()+-/*{},.";
 
         /// <summary>
-        /// The current line of the file the stream is on.
+        /// The current offset of the file the stream is currently at.
         /// </summary>
-        public int CurrentLine { get; set; }
-        /// <summary>
-        /// The current column of the current line of the file the stream is on.
-        /// </summary>
-        public int CurrentColumn { get; set; }
-        /// <summary>
+        public int Cursor { get; set; }
+
+        public int CurrentLine {
+            get {
+                if (Cursor == 0) {
+                    return 0;
+                }
+
+                // returns the amount of new lines between the start and the cursor
+                string s = Source.Substring(0, Cursor);
+                return s.Count(c => c == '\n');
+            }
+        }
+
+        public int CurrentColumn {
+            get {
+                if (Cursor == 0) {
+                    return 0;
+                }
+                
+                // returns the amount of characters between the cursor and the last new line
+                int i = Source.LastIndexOf('\n', Cursor);
+                return Cursor - i;
+            }
+        }
+
         /// Contains each individual line of the Hasm file.
         /// </summary>
-        public string[] Lines { get; set; }
+        public string Source { get; set; }
+
         /// <summary>
         /// The method that the stream should use to treat whitespace.
         /// </summary>
         public HasmStringStreamWhitespaceMode WhitespaceMode { get; set; }
 
         /// <summary>
-        /// The content of the current line, starting at the current column and ending at the end of the line.
-        /// </summary>
-        private string CurrentContent => Lines[CurrentLine].Substring(CurrentColumn);
-
-        /// <summary>
         /// true if the stream is finished (i.e. all data has been read from it), otherwise false.
         /// </summary>
-        public bool IsFinished => CurrentLine == Lines.Length;
+        public bool IsFinished => Cursor == Source.Length;
 
         /// <summary>
         /// Returns a new HasmStringStream given the raw Hasm assembly.
         /// </summary>
         public HasmStringStream(string hasm) {
-            string lineSeparator = hasm.Contains("\r\n") ? "\r\n" : "\n";
-            Lines = hasm.Split(lineSeparator).ToArray();
+            Source = hasm;
             WhitespaceMode = HasmStringStreamWhitespaceMode.Remove;
         }
 
         /// <summary>
-        /// Returns *length* characters of the <see cref="CurrentContent"/>.
-        /// <br />
-        /// If the requested length is the beyond the amount of characters in the CurrentContent, null is returned.
-        /// <br />
-        /// If the stream is finished, an exception is thrown.
+        /// Returns *length* characters of the <see cref="Source" /> starting at the <see cref="Cursor" />.
+        /// If the requested length is the beyond the amount of characters in the Source, null is returned.
         /// </summary>
-        private string Peek(int length) {
-            if (IsFinished) {
-                throw new Exception("asm.Stream is finished");
-            }
-            if (length > CurrentContent.Length) {
+        public string Peek(int length) {
+            SkipWhitespace();
+
+            int r = Cursor + length;
+            if (r < 0 || r > Source.Length) {
                 return null;
             }
-            return CurrentContent.Substring(0, length);
+            return Source.Substring(Cursor, length);
+        }
+
+        public char PeekChar() {
+            SkipWhitespace();
+            
+            if (IsFinished) {
+                return '\0';
+            }
+            return Source[Cursor];
         }
 
         /// <summary>
-        /// Skips all whitespace starting at the current column until there is a character which is not whitespace.
-        /// <br />
-        /// This will not advance the stream to another line.
+        /// Skips all whitespace until there is a character which is not whitespace or the end of the input.
         /// </summary>
         public void SkipWhitespace() {
             if (WhitespaceMode == HasmStringStreamWhitespaceMode.Remove) {
-                while (Peek(1) == " ") {
-                    Advance(1);
+                while (!IsFinished) {
+                    char c = Source[Cursor];
+                    if (c == '\0') {
+                        break;
+                    }
+                    if (!char.IsWhiteSpace(c)) {
+                        break;
+                    }
+                    Cursor++;
                 }
             }
-        }
-
-        /// <summary>
-        /// Peeks *length* arbitray characters from the stream.
-        /// </summary>
-        public string PeekCharacters(int length) {
-            SkipWhitespace();
-            return Peek(length);
         }
 
         /// <summary>
         /// Advances the stream by *length* characters.
         /// </summary>
         public string AdvanceCharacters(int length) {
-            string chars = PeekCharacters(length);
+            string chars = Peek(length);
+            if (chars == null) {
+                return null;
+            }
             Advance(chars.Length);
-            SkipWhitespace();
             return chars;
         }
 
@@ -135,27 +148,39 @@ namespace Hasmer.Assembler.Parser {
         /// <br />
         /// If the stream has ended, or the operator is not contained within <see cref="OperatorCharacters"/>, null is returned.
         /// </summary>
-        public string PeekOperator() {
-            SkipWhitespace();
-            string peeked = Peek(1);
-            if (peeked == null) {
-                return null;
+        public char PeekOperator() {
+            char peeked = PeekChar();
+            if (peeked == '\0') {
+                return '\0';
             }
             if (!OperatorCharacters.Contains(peeked)) {
-                return null;
+                return '\0';
             }
-            SkipWhitespace();
             return peeked;
         }
 
         /// <summary>
         /// Advances the stream beyond the current operator.
         /// </summary>
-        public string AdvanceOperator() {
-            string op = PeekOperator();
-            Advance(op.Length);
-            SkipWhitespace();
+        public char AdvanceOperator() {
+            char op = PeekOperator();
+            if (op == '\0') {
+                return '\0';
+            }
+            AdvanceChar();
             return op;
+        }
+
+        /// <summary>
+        /// Advances the stream beyond the current character.
+        /// </summary>
+        public char AdvanceChar() {
+            char c = PeekChar();
+            if (c == '\0') {
+                return '\0';
+            }
+            Advance(1);
+            return c;
         }
 
         /// <summary>
@@ -178,21 +203,31 @@ namespace Hasmer.Assembler.Parser {
         /// </example>
         /// </summary>
         public string PeekWord() {
-            SkipWhitespace();
+            int cursor = Cursor;
+            HasmStringStreamWhitespaceMode wm = WhitespaceMode;
+
+            WhitespaceMode = HasmStringStreamWhitespaceMode.Keep;
+
+            StringBuilder builder = new StringBuilder();
             for (int i = 1; ; i++) {
-                string peeked = Peek(i);
-                if (peeked == null) { // end of line, return token
-                    return Peek(i - 1);
+                char peeked = AdvanceChar();
+                if (peeked == '\0') { // end of input, return token
+                    break;
                 }
-                if (!WordCharacters.Contains(peeked[peeked.Length - 1])) {
-                    string word = peeked.Substring(0, peeked.Length - 1);
-                    if (word == "") {
-                        return null;
-                    }
-                    SkipWhitespace();
-                    return word;
+                if (!WordCharacters.Contains(peeked)) { // end of word, return token
+                    break;
                 }
+                builder.Append(peeked);
             }
+            
+            Cursor = cursor;
+            WhitespaceMode = wm;
+
+            string word = builder.ToString();
+            if (word == "") {
+                return null;
+            }
+            return word;
         }
 
         /// <summary>
@@ -201,8 +236,10 @@ namespace Hasmer.Assembler.Parser {
         /// <returns>the word that was read</returns>
         public string AdvanceWord() {
             string word = PeekWord();
+            if (word == null) {
+                return null;
+            }
             Advance(word.Length);
-            SkipWhitespace();
             return word;
         }
 
@@ -214,17 +251,14 @@ namespace Hasmer.Assembler.Parser {
         /// If length advances the stream to the end of the current line, the stream goes to the next line and sets the current column to zero.
         /// </summary>
         public void Advance(int length) {
-            if (IsFinished) {
-                throw new Exception("asm.Stream is finished");
+            int r = Cursor + length;
+            if (r < 0 || r > Source.Length) {
+                throw new IndexOutOfRangeException($"new cursor position out of bounds: {r}");
             }
-            if (length > CurrentContent.Length) {
-                throw new Exception("cannot advance beyond line length");
-            }
-            CurrentColumn += length;
-            if (CurrentColumn == Lines[CurrentLine].Length) {
-                CurrentLine++;
-                CurrentColumn = 0;
-            }
+
+            Cursor = r;
+
+            SkipWhitespace();
         }
 
         /// <summary>
@@ -232,8 +266,9 @@ namespace Hasmer.Assembler.Parser {
         /// </summary>
         public HasmStringStreamState SaveState() {
             return new HasmStringStreamState {
-                CurrentLine = CurrentLine,
-                CurrentColumn = CurrentColumn
+                Offset = Cursor,
+                Line = CurrentLine,
+                Column = CurrentColumn,
             };
         }
 
@@ -241,8 +276,11 @@ namespace Hasmer.Assembler.Parser {
         /// Sets the current state of the stream to *state*, which is generally used as the value returned by <see cref="SaveState"/>.
         /// </summary>
         public void LoadState(HasmStringStreamState state) {
-            CurrentLine = state.CurrentLine;
-            CurrentColumn = state.CurrentColumn;
+            int cursor = state.Offset;
+            if (cursor < 0 || cursor > Source.Length) {
+                throw new IndexOutOfRangeException($"loaded cursor position out of bounds: {cursor}");
+            }
+            Cursor = cursor;
         }
     }
 }

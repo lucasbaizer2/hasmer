@@ -9,14 +9,6 @@ namespace Hasmer.Assembler.Parser {
     /// Represents a class which can parse Hasm tokens from a Hasm file.
     /// </summary>
     public interface IHasmTokenParser {
-        public static readonly IHasmTokenParser CommentParser = new HasmCommentParser();
-        public static readonly IHasmTokenParser DeclarationParser = new HasmDeclarationParser();
-        public static readonly IHasmTokenParser IntegerParser = new HasmIntegerParser();
-        public static readonly IHasmTokenParser NumberParser = new HasmNumberParser();
-        public static readonly IHasmTokenParser StringParser = new HasmStringParser();
-        public static readonly IHasmTokenParser LabelParser = new HasmLabelParser();
-        public static readonly IHasmTokenParser InstructionParser = new HasmInstructionParser();
-
         /// <summary>
         /// Returns true if a valid token can be parsed immediately, or false if one cannot.
         /// 

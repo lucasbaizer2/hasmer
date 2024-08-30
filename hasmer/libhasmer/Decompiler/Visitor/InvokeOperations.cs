@@ -40,7 +40,7 @@ namespace Hasmer.Decompiler.Visitor {
                         break;
                     }
                 } else if (hasBeenReferenced) { // if there was a reference made, but it was cleared with a different value, stop
-                    break;                                                                                                                                                                                                      
+                    break;
                 }
             }
 

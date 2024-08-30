@@ -13,16 +13,6 @@ namespace Hasmer.Assembler {
     /// </summary>
     public class HbcAssembler {
         /// <summary>
-        /// Represents the data contained with in the header of the Hasm file (i.e. the initial ".hasm" declaration)./
-        /// </summary>
-        public HasmHeaderReader Header { get; set; }
-
-        /// <summary>
-        /// The file builder instance which creates the final <see cref="HbcFile"/> to be serialized.
-        /// </summary>
-        public HbcFileBuilder FileBuilder { get; set; }
-
-        /// <summary>
         /// The data assembler instance.
         /// </summary>
         public DataAssembler DataAssembler { get; set; }
@@ -31,6 +21,13 @@ namespace Hasmer.Assembler {
         /// The function assembler instance.
         /// </summary>
         public FunctionAssembler FunctionAssembler { get; set; }
+
+        /// <summary>
+        /// The Hermes bytecode file being assembled.
+        /// </summary>
+        public HbcFile File { get; set; }
+
+        public bool IsExact { get; set; }
 
         /// <summary>
         /// The Hasm assembly to disassemble.
@@ -48,21 +45,41 @@ namespace Hasmer.Assembler {
         /// Assembles the given Hasm assembly into a Hermes bytecode file, serialized into a byte array.
         /// </summary>
         public byte[] Assemble() {
-            HasmTokenStream stream = new HasmTokenStream(Source);
+            Console.WriteLine("Parsing Hasm file...");
+            HasmTokenizer tokenizer = new HasmTokenizer();
+            tokenizer.TokenizeProgram(Source);
 
-            Header = new HasmHeaderReader(stream);
-            Header.Read();
+            // List<HasmToken> tokens = null;
 
-            FileBuilder = new HbcFileBuilder(this);
+            // IsExact = tokenStream.State.IsExact;
+            // File = new HbcFile {
+            //     Header = new HbcHeader {
+            //         Magic = HbcHeader.HBC_MAGIC_HEADER,
+            //         Version = tokenStream.State.BytecodeFormat.Version,
+            //         SourceHash = new byte[20],
+            //         GlobalCodeIndex = 0,
+            //         Padding = new byte[31],
+            //     },
+            //     BytecodeFormat = tokenStream.State.BytecodeFormat,
+            // };
 
-            DataAssembler = new DataAssembler(stream);
-            DataAssembler.Assemble();
+            // Console.WriteLine("Assembling data...");
+            // DataAssembler = new DataAssembler(tokens);
+            // DataAssembler.Assemble();
 
-            FunctionAssembler = new FunctionAssembler(this, stream);
-            FunctionAssembler.Assemble();
+            // Console.WriteLine("Assembling functions...");
+            // FunctionAssembler = new FunctionAssembler(this, tokens);
+            // FunctionAssembler.Assemble();
 
-            HbcFile hbcFile = FileBuilder.Build();
-            return hbcFile.Write();
+            // Console.WriteLine("Assembling Hermes bytecode file...");
+            // File.StringTable = DataAssembler.StringTable.ToArray();
+            // File.ArrayBuffer = new HbcDataBuffer(DataAssembler.ArrayBuffer.RawBuffer.ToArray());
+            // File.ObjectKeyBuffer = new HbcDataBuffer(DataAssembler.ObjectKeyBuffer.RawBuffer.ToArray());
+            // File.ObjectValueBuffer = new HbcDataBuffer(DataAssembler.ObjectValueBuffer.RawBuffer.ToArray());
+
+            // return File.Write();
+
+            return new byte[0];
         }
     }
 }

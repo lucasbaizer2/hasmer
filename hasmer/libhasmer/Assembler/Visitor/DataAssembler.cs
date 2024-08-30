@@ -14,16 +14,22 @@ namespace Hasmer.Assembler.Visitor {
         /// <summary>
         /// The raw bytes of the buffer.
         /// </summary>
-        public List<byte> RawBuffer { get; set; }
+        public MemoryStream RawBuffer { get; set; }
+
+        /// <summary>
+        /// A writer for <see cref="RawBuffer" />.
+        /// </summary>
+        public BinaryWriter BufferWriter { get; set; }
 
         /// <summary>
         /// Represents key-value between the label in the buffer (i.e. A5, key = 5) and the offset of that label in the <see cref="RawBuffer"/>.
         /// </summary>
-        public Dictionary<uint, int> HasmBuffer { get; set; }
+        public Dictionary<uint, long> HasmBuffer { get; set; }
 
         public HasmAssemblerDataBuffer() {
-            RawBuffer = new List<byte>();
-            HasmBuffer = new Dictionary<uint, int>();
+            RawBuffer = new MemoryStream();
+            BufferWriter = new BinaryWriter(RawBuffer);
+            HasmBuffer = new Dictionary<uint, long>();
         }
     }
 
@@ -32,9 +38,9 @@ namespace Hasmer.Assembler.Visitor {
     /// </summary>
     public class DataAssembler {
         /// <summary>
-        /// The token stream of the Hasm file.
+        /// The tokens of the Hasm program.
         /// </summary>
-        private HasmTokenStream Stream;
+        private HasmProgram Program;
 
         /// <summary>
         /// The array buffer.
@@ -52,18 +58,24 @@ namespace Hasmer.Assembler.Visitor {
         public HasmAssemblerDataBuffer ObjectValueBuffer { get; set; }
 
         /// <summary>
-        /// Represents the string table.
-        /// The key is the string and the value is the ID of the string.
-        /// The ID is a sequential value, incremented for each new string.
+        /// The string table, where each index is the entry's ID.
         /// </summary>
-        public Dictionary<string, uint> StringTable { get; set; }
+        public List<StringTableEntry> StringTable { get; set; }
+
+        /// <summary>
+        /// Fast lookup into the string table by the string's value.
+        /// The key is the string and the value is the ID of the string.
+        /// That is, the index into <see cref="StringTable" />.
+        /// </summary>
+        private Dictionary<string, uint> StringTableLookup { get; set; }
 
         /// <summary>
         /// Creates a new data assembler.
         /// </summary>
-        public DataAssembler(HasmTokenStream stream) {
-            Stream = stream;
-            StringTable = new Dictionary<string, uint>();
+        public DataAssembler(HasmProgram program) {
+            Program = program;
+            StringTable = new List<StringTableEntry>();
+            StringTableLookup = new Dictionary<string, uint>();
             ArrayBuffer = new HasmAssemblerDataBuffer();
             ObjectKeyBuffer = new HasmAssemblerDataBuffer();
             ObjectValueBuffer = new HasmAssemblerDataBuffer();
@@ -72,12 +84,12 @@ namespace Hasmer.Assembler.Visitor {
         /// <summary>
         /// Gets a <see cref="HasmAssemblerDataBuffer"/> by its label (i.e. "A", "K", or "V").
         /// </summary>
-        private HasmAssemblerDataBuffer GetBufferByName(LabelType type) {
-            return type switch {
-                LabelType.ArrayBuffer => ArrayBuffer,
-                LabelType.ObjectKeyBuffer => ObjectKeyBuffer,
-                LabelType.ObjectValueBuffer => ObjectValueBuffer,
-                _ => throw new Exception("invalid buffer label: " + type)
+        private HasmAssemblerDataBuffer GetBufferByName(HasmLabelKind kind) {
+            return kind switch {
+                HasmLabelKind.ArrayBuffer => ArrayBuffer,
+                HasmLabelKind.ObjectKeyBuffer => ObjectKeyBuffer,
+                HasmLabelKind.ObjectValueBuffer => ObjectValueBuffer,
+                _ => throw new Exception($"invalid buffer label '{kind}'")
             };
         }
 
@@ -86,76 +98,85 @@ namespace Hasmer.Assembler.Visitor {
         /// If the string is not already present in the string table,
         /// it is added and the ID of the newly added string is returned.
         /// </summary>
-        public uint GetStringId(string str) {
-            if (StringTable.ContainsKey(str)) {
-                return StringTable[str];
+        public uint GetStringId(string s, StringKind kind) {
+            uint id;
+            if (StringTableLookup.TryGetValue(s, out id)) {
+                return id;
             }
 
-            uint newId = (uint)StringTable.Count;
-            StringTable[str] = newId;
-            return newId;
+            id = (uint)StringTable.Count;
+            bool isUTF16 = !s.All(char.IsAscii);
+            StringTable.Add(new StringTableEntry(kind, s, isUTF16));
+            StringTableLookup[s] = id;
+
+            return id;
         }
 
         /// <summary>
         /// Parses all the data tokens and assembles them into data.
         /// </summary>
         public void Assemble() {
-            foreach (HasmToken token in Stream.ReadTokens()) {
-                if (token is HasmDataDeclarationToken data) {
-                    HasmDataDeclarationType type = data.DataType;
-                    uint labelIndex = data.Label.LabelIndex.GetValueAsUInt32();
+            foreach (HasmDataDeclaration data in Program.Data) {
+                HasmDataDeclarationKind kind = data.Kind;
+                uint labelIndex = data.Label.Index.GetValueAsUInt32();
 
-                    HasmAssemblerDataBuffer buffer = GetBufferByName(data.Label.LabelType);
-                    buffer.HasmBuffer[labelIndex] = buffer.RawBuffer.Count;
+                HasmAssemblerDataBuffer buffer = GetBufferByName(data.Label.Kind);
+                buffer.HasmBuffer[labelIndex] = buffer.RawBuffer.Position;
 
-                    HbcDataBufferTagType tagType = type switch {
-                        HasmDataDeclarationType.Null => HbcDataBufferTagType.Null,
-                        HasmDataDeclarationType.True => HbcDataBufferTagType.True,
-                        HasmDataDeclarationType.False => HbcDataBufferTagType.False,
-                        HasmDataDeclarationType.String => HbcDataBufferTagType.ByteString, // this gets overwritten depending on the string offsets
-                        HasmDataDeclarationType.Number => HbcDataBufferTagType.Number,
-                        HasmDataDeclarationType.Integer => HbcDataBufferTagType.Integer,
-                        _ => throw new Exception("invalid declaration type")
-                    };
+                HbcDataBufferTagType tagType = kind switch {
+                    HasmDataDeclarationKind.Null => HbcDataBufferTagType.Null,
+                    HasmDataDeclarationKind.True => HbcDataBufferTagType.True,
+                    HasmDataDeclarationKind.False => HbcDataBufferTagType.False,
+                    HasmDataDeclarationKind.String => HbcDataBufferTagType.ByteString, // this gets overwritten depending on the string offsets
+                    HasmDataDeclarationKind.Number => HbcDataBufferTagType.Number,
+                    HasmDataDeclarationKind.Integer => HbcDataBufferTagType.Integer,
+                    _ => throw new Exception("invalid declaration type")
+                };
 
-                    if (type == HasmDataDeclarationType.String) {
-                        List<uint> ids = data.Data.Cast<HasmStringToken>().Select(str => GetStringId(str.Value)).ToList();
-                        foreach (uint id in ids) {
-                            if (id > ushort.MaxValue) {
-                                tagType = HbcDataBufferTagType.LongString;
-                                break;
-                            } else if (id > byte.MaxValue) {
-                                tagType = HbcDataBufferTagType.ShortString;
-                            }
+                if (kind == HasmDataDeclarationKind.String) {
+                    IEnumerable<uint> ids = data.Elements.Cast<HasmStringToken>().Select(str => GetStringId(str.Value, StringKind.Literal));
+                    foreach (uint id in ids) {
+                        if (id > ushort.MaxValue) {
+                            tagType = HbcDataBufferTagType.LongString;
+                            break;
+                        } else if (id > byte.MaxValue) {
+                            tagType = HbcDataBufferTagType.ShortString;
                         }
                     }
+                }
 
-                    using MemoryStream ms = new MemoryStream();
-                    using BinaryWriter bw = new BinaryWriter(ms);
+                const byte TAG_MASK = 0x70;
+                if (data.Count > 0x0F) {
+                    byte keyTag = (byte)(((byte)tagType | (byte)(data.Count >> 8) | 0x80) & TAG_MASK);
+                    buffer.BufferWriter.Write(keyTag);
+                    buffer.BufferWriter.Write((byte)(data.Count & 0xFF));
+                } else {
+                    byte keyTag = (byte)(((byte)tagType | (byte)data.Count) & TAG_MASK);
+                    buffer.BufferWriter.Write(keyTag);
+                }
 
-                    const byte TAG_MASK = 0x70;
-                    if (data.Data.Count > 0x0F) {
-                        byte keyTag = (byte)(((byte)tagType | (byte)(data.Data.Count >> 8) | 0x80) & TAG_MASK);
-                        bw.Write(keyTag);
-                        bw.Write((byte) (data.Data.Count & 0xFF));
-                    } else {
-                        byte keyTag = (byte)(((byte)tagType | (byte)data.Data.Count) & TAG_MASK);
-                        bw.Write(keyTag);
-                    }
-
-                    foreach (HasmLiteralToken literal in data.Data) {
+                if (data.Elements != null) {
+                    foreach (HasmLiteralToken literal in data.Elements) {
+                        uint id = uint.MaxValue;
                         if (literal is HasmIntegerToken integer) {
-                            bw.Write(integer.GetValueAsInt32());
+                            buffer.BufferWriter.Write(integer.GetValueAsInt32());
+                            continue;
                         } else if (literal is HasmNumberToken number) {
-                            bw.Write(number.Value);
+                            buffer.BufferWriter.Write(number.Value);
+                            continue;
                         } else if (literal is HasmStringToken str) {
-                            uint id = GetStringId(str.Value);
+                            id = GetStringId(str.Value, StringKind.Literal);
+                        } else if (literal is HasmIdentifierToken ident) {
+                            id = GetStringId(ident.Value, StringKind.Identifier);
+                        }
+
+                        if (id != uint.MaxValue) {
                             if (tagType == HbcDataBufferTagType.ByteString) {
-                                bw.Write((byte)id);
+                                buffer.BufferWriter.Write((byte)id);
                             } else if (tagType == HbcDataBufferTagType.ShortString) {
-                                bw.Write((ushort)id);
+                                buffer.BufferWriter.Write((ushort)id);
                             } else if (tagType == HbcDataBufferTagType.LongString) {
-                                bw.Write(id);
+                                buffer.BufferWriter.Write(id);
                             } else {
                                 throw new Exception("invalid tag type");
                             }
@@ -165,9 +186,6 @@ namespace Hasmer.Assembler.Visitor {
                         // the length of the data represents the amount of constant values in the buffer
                         // and since those values are constant they don't need to be written
                     }
-
-                    byte[] dataArray = ms.ToArray();
-                    buffer.RawBuffer.AddRange(dataArray);
                 }
             }
         }

@@ -5,16 +5,16 @@ using System.Reflection;
 using System.Text;
 
 namespace Hasmer {
-    internal class ObjectDumper {
-        private int _level;
-        private readonly int _indentSize;
-        private readonly StringBuilder _stringBuilder;
-        private readonly List<int> _hashListOfFoundElements;
+    public class ObjectDumper {
+        private int Level;
+        private readonly int IndentSize;
+        private readonly StringBuilder Builder;
+        private readonly List<int> FoundElements;
 
         private ObjectDumper(int indentSize) {
-            _indentSize = indentSize;
-            _stringBuilder = new StringBuilder();
-            _hashListOfFoundElements = new List<int>();
+            IndentSize = indentSize;
+            Builder = new StringBuilder();
+            FoundElements = new List<int>();
         }
 
         public static string Dump(object element) {
@@ -22,7 +22,7 @@ namespace Hasmer {
         }
 
         public static string Dump(object element, int indentSize) {
-            var instance = new ObjectDumper(indentSize);
+            ObjectDumper instance = new ObjectDumper(indentSize);
             return instance.DumpElement(element);
         }
 
@@ -30,107 +30,116 @@ namespace Hasmer {
             if (element == null || element is ValueType || element is string) {
                 Write(FormatValue(element));
             } else {
-                var objectType = element.GetType();
-                if (!typeof(IEnumerable).IsAssignableFrom(objectType)) {
+                Type objectType = element.GetType();
+                IEnumerable enumerableElement = element as IEnumerable;
+
+                if (enumerableElement == null) {
                     Write("{{{0}}}", objectType.FullName);
-                    _hashListOfFoundElements.Add(element.GetHashCode());
-                    _level++;
-                }
+                    FoundElements.Add(element.GetHashCode());
+                    Level++;
 
-                var enumerableElement = element as IEnumerable;
-                if (enumerableElement != null) {
-                    foreach (object item in enumerableElement) {
-                        if (item is IEnumerable && !(item is string)) {
-                            _level++;
-                            DumpElement(item);
-                            _level--;
-                        } else {
-                            if (!AlreadyTouched(item))
-                                DumpElement(item);
-                            else
-                                Write("{{{0}}} <-- bidirectional reference found", item.GetType().FullName);
-                        }
-                    }
-                } else {
-                    MemberInfo[] members = element.GetType().GetMembers(BindingFlags.Public | BindingFlags.Instance);
-                    foreach (var memberInfo in members) {
-                        var fieldInfo = memberInfo as FieldInfo;
-                        var propertyInfo = memberInfo as PropertyInfo;
+                    MemberInfo[] members = element.GetType().GetMembers(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+                    foreach (MemberInfo memberInfo in members) {
+                        FieldInfo fieldInfo = memberInfo as FieldInfo;
+                        PropertyInfo propertyInfo = memberInfo as PropertyInfo;
 
-                        if (fieldInfo == null && propertyInfo == null)
+                        if (fieldInfo == null && propertyInfo == null) {
                             continue;
+                        }
 
-                        var type = fieldInfo != null ? fieldInfo.FieldType : propertyInfo.PropertyType;
+                        Type type = fieldInfo != null ? fieldInfo.FieldType : propertyInfo.PropertyType;
                         object value = fieldInfo != null
-                                           ? fieldInfo.GetValue(element)
-                                           : propertyInfo.GetValue(element, null);
+                                            ? fieldInfo.GetValue(element)
+                                            : propertyInfo.GetValue(element, null);
 
                         if (type.IsValueType || type == typeof(string)) {
                             Write("{0}: {1}", memberInfo.Name, FormatValue(value));
                         } else {
-                            var isEnumerable = typeof(IEnumerable).IsAssignableFrom(type);
+                            bool isEnumerable = typeof(IEnumerable).IsAssignableFrom(type);
                             Write("{0}: {1}", memberInfo.Name, isEnumerable ? "..." : "{ }");
 
-                            var alreadyTouched = !isEnumerable && AlreadyTouched(value);
-                            _level++;
-                            if (!alreadyTouched)
+                            bool alreadyTouched = !isEnumerable && AlreadyTouched(value);
+                            Level++;
+                            if (!alreadyTouched) {
                                 DumpElement(value);
-                            else
+                            } else {
                                 Write("{{{0}}} <-- bidirectional reference found", value.GetType().FullName);
-                            _level--;
+                            }
+                            Level--;
+                        }
+                    }
+                } else {
+                    foreach (object item in enumerableElement) {
+                        if (item is IEnumerable && !(item is string)) {
+                            Level++;
+                            DumpElement(item);
+                            Level--;
+                        } else {
+                            if (!AlreadyTouched(item)) {
+                                DumpElement(item);
+                            } else {
+                                Write("{{{0}}} <-- bidirectional reference found", item.GetType().FullName);
+                            }
                         }
                     }
                 }
 
-                if (!typeof(IEnumerable).IsAssignableFrom(objectType)) {
-                    _level--;
-                }
+                Level--;
             }
 
-            return _stringBuilder.ToString();
+            return Builder.ToString();
         }
 
         private bool AlreadyTouched(object value) {
             if (value == null)
                 return false;
 
-            var hash = value.GetHashCode();
-            for (var i = 0; i < _hashListOfFoundElements.Count; i++) {
-                if (_hashListOfFoundElements[i] == hash)
+            int hash = value.GetHashCode();
+            for (int i = 0; i < FoundElements.Count; i++) {
+                if (FoundElements[i] == hash) {
                     return true;
+                }
             }
             return false;
         }
 
         private void Write(string value, params object[] args) {
-            var space = new string(' ', _level * _indentSize);
+            string space = new string(' ', Level * IndentSize);
 
-            if (args != null)
+            if (args != null) {
                 value = string.Format(value, args);
+            }
 
-            _stringBuilder.AppendLine(space + value);
+            Builder.Append(space);
+            Builder.AppendLine(value);
         }
 
         private string FormatValue(object o) {
-            if (o == null)
-                return ("null");
+            if (o == null) {
+                return "null";
+            }
 
-            if (o is DateTime)
-                return (((DateTime)o).ToShortDateString());
+            if (o is DateTime dt) {
+                return dt.ToShortDateString();
+            }
 
-            if (o is string)
-                return string.Format("\"{0}\"", o);
+            if (o is string) {
+                return string.Format($"\"{o}\"");
+            }
 
-            if (o is char && (char)o == '\0')
+            if (o is char c && c == '\0') {
                 return string.Empty;
+            }
 
-            if (o is ValueType)
-                return (o.ToString());
+            if (o is ValueType) {
+                return o.ToString();
+            }
 
-            if (o is IEnumerable)
-                return ("...");
+            if (o is IEnumerable) {
+                return "...";
+            }
 
-            return ("{ }");
+            return "{ }";
         }
     }
 }

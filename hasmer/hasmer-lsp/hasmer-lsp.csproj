@@ -2,11 +2,12 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <RootNamespace>Hasmer.LSP</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="StreamJsonRpc" Version="2.17.8" />>
     <PackageReference Include="LspTypes" Version="3.16.6" />
   </ItemGroup>
 

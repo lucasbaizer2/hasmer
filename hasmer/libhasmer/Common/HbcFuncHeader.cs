@@ -46,7 +46,7 @@ namespace Hasmer {
         public uint BytecodeSizeInBytes { get; set; }
 
         /// <summary>
-        /// The index in the string table of the function's name (i.e. HbcFile.StringTable[FunctionName]).
+        /// The index in the string table of the function's name (i.e. HbcFile.GetStringTableEntry(FunctionName)).
         /// </summary>
         public uint FunctionName { get; set; }
 
@@ -95,7 +95,7 @@ namespace Hasmer {
         /// </summary>
         public string GetFunctionName(HbcFile source) {
             HbcSmallFuncHeader func = source.SmallFuncHeaders[FunctionId];
-            string functionName = source.StringTable[func.FunctionName];
+            string functionName = source.GetStringTableEntry((int)func.FunctionName).Value;
             if (functionName == "") {
                 return $"$closure${FunctionId}";
             }

@@ -1,6 +1,6 @@
 # hasmer
 
-This directory contains the C# source code for `hasmer`, using the .NET 5.0 platform.
+This directory contains the C# source code for `hasmer`, using the .NET 8.0 platform.
 
 # Setup
 
@@ -16,7 +16,7 @@ dotnet build
 ```
 Ensure you run the above command with the current working directory being the one containing the `hasmer.sln` file.
 
-Building with the .NET SDK CLI will generate the executable in the `.hasmer-cli/bin/Debug/net5.0` directory. You can make a release build using:
+Building with the .NET SDK CLI will generate the executable in the `.hasmer-cli/bin/Debug/net8.0` directory. You can make a release build using:
 ```
 dotnet build -c Release
 ```

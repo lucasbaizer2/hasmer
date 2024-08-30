@@ -74,9 +74,18 @@ namespace Hasmer.Assembler {
         private void AppendDisassembly(StringBuilder builder, List<HbcDataBufferItems> buffer, char prefix) {
             for (int i = 0; i < buffer.Count; i++) {
                 HbcDataBufferItems items = buffer[i];
+                switch (items.Prefix.TagType) {
+                    case HbcDataBufferTagType.Null:
+                    case HbcDataBufferTagType.True:
+                    case HbcDataBufferTagType.False:
+                        builder.AppendLine($".data {prefix}{i} {items.Prefix.TagType}[{items.Items.Length}]");
+                        continue;
+                    default:
+                        break;
+                }
                 IEnumerable<PrimitiveValue> mapped = items.Items.Select(x => {
                     if (x.TypeCode == TypeCode.String) {
-                        x.SetValue('"' + x.GetValue<string>().Replace("\"", "\\\"") + '"');
+                        x.SetValue(StringEscape.Escape(x.GetValue<string>()));
                     }
                     return x;
                 });
@@ -85,7 +94,7 @@ namespace Hasmer.Assembler {
                     _ => items.Prefix.TagType.ToString()
                 };
                 string joined = string.Join(", ", mapped);
-                builder.AppendLine($".data {prefix}{i} {tagType}[{joined}] # offset = {items.Offset}");
+                builder.AppendLine($".data {prefix}{i} {tagType}[] {{ {joined} }}");
             }
             if (buffer.Count > 0) {
                 builder.AppendLine();
@@ -93,8 +102,11 @@ namespace Hasmer.Assembler {
         }
 
         public void DisassembleData() {
+            Console.WriteLine("Parsing array buffer...");
             ArrayBuffer = Source.ArrayBuffer.ReadAll(Source);
+            Console.WriteLine("Parsing object key buffer...");
             KeyBuffer = Source.ObjectKeyBuffer.ReadAll(Source);
+            Console.WriteLine("Parsing object value buffer...");
             ValueBuffer = Source.ObjectValueBuffer.ReadAll(Source);
         }
 

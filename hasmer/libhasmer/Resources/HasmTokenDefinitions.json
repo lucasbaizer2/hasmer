@@ -1,0 +1,363 @@
+{
+    "Header": [
+        {
+            "Kind": "literal",
+            "Match": ".hasm"
+        },
+        {
+            "Kind": "integer",
+            "Var": "version"
+        },
+        {
+            "Kind": "enum",
+            "Match": [
+                "exact",
+                "auto"
+            ],
+            "Var": "mode"
+        }
+    ],
+    "Register": [
+        {
+            "Modifier": "contiguous"
+        },
+        {
+            "Kind": "literal",
+            "Match": "r"
+        },
+        {
+            "Kind": "integer",
+            "Var": "reg"
+        }
+    ],
+    "Label": [
+        {
+            "Modifier": "contiguous"
+        },
+        {
+            "Kind": "enum",
+            "Match": [
+                "A",
+                "K",
+                "V",
+                "L"
+            ],
+            "Var": "kind"
+        },
+        {
+            "Kind": "integer",
+            "Var": "index"
+        },
+        {
+            "Optional": true,
+            "Match": [
+                {
+                    "Kind": "integer",
+                    "Var": "value"
+                }
+            ],
+            "Var": "offset"
+        }
+    ],
+    "Literal": [
+        {
+            "Kind": "or",
+            "Match": [
+                {
+                    "Kind": "string"
+                },
+                {
+                    "Kind": "integer"
+                },
+                {
+                    "Kind": "number"
+                },
+                {
+                    "Kind": "enum",
+                    "Match": ["true", "false"]
+                },
+                {
+                    "Kind": "literal",
+                    "Match": "null"
+                }
+            ]
+        }
+    ],
+    "Operand": [
+        {
+            "Kind": "or",
+            "Match": [
+                {
+                    "Kind": "string"
+                },
+                {
+                    "Kind": "ident"
+                },
+                {
+                    "Kind": "integer"
+                },
+                {
+                    "Kind": "number"
+                },
+                {
+                    "Kind": "$Register"
+                },
+                {
+                    "Kind": "$Label"
+                }
+            ]
+        }
+    ],
+    "DatumElements": [
+        {
+            "Kind": "literal",
+            "Match": "{"
+        },
+        {
+            "Modifier": "move"
+        },
+        {
+            "Repeated": true,
+            "Optional": true,
+            "Match": [
+                {
+                    "Kind": "$Literal",
+                    "Var": "elements"
+                },
+                {
+                    "Kind": "literal",
+                    "Match": ","
+                }
+            ]
+        },
+        {
+            "Kind": "literal",
+            "Match": "}"
+        }
+    ],
+    "Datum": [
+        {
+            "Kind": "literal",
+            "Match": ".data",
+            "Var": "decl"
+        },
+        {
+            "Kind": "$Label",
+            "Var": "label"
+        },
+        {
+            "Kind": "enum",
+            "Match": [
+                "String",
+                "Integer",
+                "Number",
+                "Null",
+                "True",
+                "False"
+            ],
+            "Var": "kind"
+        },
+        {
+            "Kind": "literal",
+            "Match": "["
+        },
+        {
+            "Optional": true,
+            "Kind": "integer",
+            "Var": "length"
+        },
+        {
+            "Kind": "literal",
+            "Match": "]"
+        },
+        {
+            "Optional": true,
+            "Kind": "$DatumElements",
+            "Var": "elements"
+        }
+        
+    ],
+    "DirectiveID": [
+        {
+            "Kind": "literal",
+            "Match": ".id"
+        },
+        {
+            "Kind": "integer",
+            "Var": "n"
+        }
+    ],
+    "DirectiveParams": [
+        {
+            "Kind": "literal",
+            "Match": ".params"
+        },
+        {
+            "Kind": "integer",
+            "Var": "n"
+        }
+    ],
+    "DirectiveRegisters": [
+        {
+            "Kind": "literal",
+            "Match": ".registers"
+        },
+        {
+            "Kind": "integer",
+            "Var": "n"
+        }
+    ],
+    "DirectiveSymbols": [
+        {
+            "Kind": "literal",
+            "Match": ".symbols"
+        },
+        {
+            "Kind": "integer",
+            "Var": "n"
+        }
+    ],
+    "DirectiveStrict": [
+        {
+            "Kind": "literal",
+            "Match": ".strict"
+        }
+    ],
+    "DirectiveLabel": [
+        {
+            "Kind": "literal",
+            "Match": ".label"
+        },
+        {
+            "Kind": "$Label",
+            "Var": "label"
+        }
+    ],
+    "Directive": [
+        {
+            "Kind": "$DirectiveID"
+        },
+        {
+            "Kind": "$DirectiveParams"
+        },
+        {
+            "Kind": "$DirectiveRegisters"
+        },
+        {
+            "Kind": "$DirectiveSymbols"
+        },
+        {
+            "Kind": "$DirectiveStrict"
+        },
+        {
+            "Kind": "$DirectiveLabel"
+        }
+    ],
+    "Instruction": [
+        {
+            "Kind": "word",
+            "Var": "name"
+        },
+        {
+            "Repeated": true,
+            "Optional": true,
+            "Match": [
+                {
+                    "Kind": "$Operand",
+                    "Var": "operands"
+                },
+                {
+                    "Kind": "literal",
+                    "Match": ","
+                }
+            ]
+        },
+        {
+            "Optional": true,
+            "Kind": "$Operand",
+            "Var": "operands"
+        }
+    ],
+    "Function": [
+        {
+            "Kind": "literal",
+            "Match": ".start"
+        },
+        {
+            "Kind": "enum",
+            "Match": ["Function", "Constructor", "NSFunction"],
+            "Var": "kind"
+        },
+        {
+            "Kind": "ident",
+            "Var": "name"
+        },
+        {
+            "Kind": "literal",
+            "Match": "("
+        },
+        {
+            "Repeated": true,
+            "Optional": true,
+            "Match": [
+                {
+                    "Kind": "$Register",
+                    "Var": "params"
+                },
+                {
+                    "Kind": "literal",
+                    "Match": ","
+                }
+            ]
+        },
+        {
+            "Optional": true,
+            "Kind": "$Register",
+            "Var": "params"
+        },
+        {
+            "Kind": "literal",
+            "Match": ")"
+        },
+        {
+            "Repeated": true,
+            "Optional": true,
+            "Match": [
+                {
+                    "Kind": "or",
+                    "Match": [
+                        {
+                            "Kind": "$Directive"
+                        },
+                        {
+                            "Kind": "$Instruction"
+                        }
+                    ]
+                }
+            ],
+            "Var": "body"
+        },
+        {
+            "Kind": "literal",
+            "Match": ".end"
+        }
+    ],
+    "Program": [
+        {
+            "Kind": "$Header",
+            "Var": "header"
+        },
+        {
+            "Optional": true,
+            "Repeated": true,
+            "Kind": "$Datum",
+            "Var": "data"
+        },
+        {
+            "Optional": true,
+            "Repeated": true,
+            "Kind": "$Function",
+            "Var": "funcs"
+        }
+    ]
+}

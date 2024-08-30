@@ -50,11 +50,18 @@ namespace Hasmer.Assembler {
             builder.AppendLine();
             builder.AppendLine(DataDisassembler.Disassemble());
 
-            foreach (HbcSmallFuncHeader func in Source.SmallFuncHeaders) {
-                FunctionDisassembler decompiler = new FunctionDisassembler(this, func.GetAssemblerHeader());
-                builder.AppendLine(decompiler.Disassemble());
-                builder.AppendLine();
+            Console.Write("Disassembling functions... ");
+            using (ConsoleProgressBar progress = new ConsoleProgressBar()) {
+                for (int i = 0; i < Source.SmallFuncHeaders.Length; i++) {
+                    progress.Report(i / (double)Source.SmallFuncHeaders.Length);
+
+                    HbcSmallFuncHeader func = Source.SmallFuncHeaders[i];
+                    FunctionDisassembler decompiler = new FunctionDisassembler(this, func.GetAssemblerHeader());
+                    builder.AppendLine(decompiler.Disassemble());
+                    builder.AppendLine();
+                }
             }
+            Console.WriteLine("done!");
 
             return builder.ToString();
         }

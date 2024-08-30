@@ -13,7 +13,7 @@ namespace Hasmer.Decompiler.AST {
         /// <summary>
         /// A regular expression which represents a valid JavaScript identifier.
         /// </summary>
-        public static readonly Regex NamePattern = new Regex(@"^([A-Za-z]|_|\$)([A-Za-z]|_|\$|[0-9])+$", RegexOptions.Compiled);
+        public static readonly Regex NamePattern = new Regex(@"^([A-Za-z]|_|\$)([A-Za-z]|_|\$|[0-9])*$", RegexOptions.Compiled);
 
         /// <summary>
         /// The name of the identifier.
@@ -40,8 +40,20 @@ namespace Hasmer.Decompiler.AST {
             builder.Write(Name);
         }
 
+        private static string EscapeIdentifier(string ident) {
+            return ident.Replace(@"\", @"\\").Replace("<", @"\<").Replace(">", @"\>");
+        }
+
         public override string ToString() {
-            return Name;
+            if (Name.Length == 0) {
+                return "<>";
+            } else {
+                if (Identifier.NamePattern.IsMatch(Name)) {
+                    return $"<{Name}>";
+                } else {
+                    return $"<{EscapeIdentifier(Name)}>";
+                }
+            }
         }
     }
 }

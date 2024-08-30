@@ -12,7 +12,7 @@ namespace Hasmer.Assembler.Parser {
         /// <summary>
         /// The name of the function.
         /// </summary>
-        public string FunctionName { get; set; }
+        public HasmIdentifierToken Name { get; set; }
 
         /// <summary>
         /// The tokens in the body of the function.

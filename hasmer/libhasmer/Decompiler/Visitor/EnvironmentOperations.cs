@@ -18,7 +18,7 @@ namespace Hasmer.Decompiler.Visitor {
         /// <summary>
         /// The name of the function which defined the environment.
         /// </summary>
-        public string EnvironmentName => EnvironmentContext.Source.StringTable[EnvironmentContext.Function.FunctionName];
+        public string EnvironmentName => EnvironmentContext.Source.GetStringTableEntry((int)EnvironmentContext.Function.FunctionName).Value;
 
         public override void WriteDirect(SourceCodeBuilder builder) {
             throw new Exception();
@@ -100,7 +100,7 @@ namespace Hasmer.Decompiler.Visitor {
         /// </summary>
         [Visitor]
         public static void GetNewTarget(DecompilerContext context) {
-            byte register = context.Instruction.Operands[0].GetValue< byte>();
+            byte register = context.Instruction.Operands[0].GetValue<byte>();
 
             context.State.Registers[register] = new Identifier("NewTarget");
         }

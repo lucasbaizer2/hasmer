@@ -32,6 +32,10 @@ namespace Hasmer {
         /// The type of the data in the data buffer.
         /// </summary>
         public HbcDataBufferTagType TagType { get; set; }
+
+        public override string ToString() {
+            return $"{TagType.ToString()} x {Length}";
+        }
     }
 
     /// <summary>
@@ -80,8 +84,10 @@ namespace Hasmer {
                 uint offset = (uint)ms.Position;
                 HbcDataBufferPrefix prefix = ReadTagType(reader);
                 PrimitiveValue[] values = new PrimitiveValue[prefix.Length];
+                // Console.WriteLine("  prefix: " + prefix.ToString());
                 for (int i = 0; i < values.Length; i++) {
                     values[i] = ReadValue(source, prefix.TagType, reader);
+                    // Console.WriteLine("  Read value: " + values[i].ToString());
                 }
                 itemsList.Add(new HbcDataBufferItems {
                     Prefix = prefix,
@@ -101,7 +107,7 @@ namespace Hasmer {
         }
 
         /// <summary>
-        /// Disassembles a single HbcDataBufferItems from an offset in the data buffer (i.e. from an instruction operand).
+        /// Disassembles a single HbcDataBufferItems from an offset in the data buffer (e.g. from an instruction operand).
         /// </summary>
         public HbcDataBufferItems Read(HbcFile source, uint offset) {
             using MemoryStream ms = new MemoryStream(Buffer);
@@ -126,9 +132,9 @@ namespace Hasmer {
         private PrimitiveValue ReadValue(HbcFile source, HbcDataBufferTagType tagType, BinaryReader reader) {
             // new PrimitiveValue made for each switch to preserve the PrimitiveValue type tagging mechanism for numbers
             return tagType switch {
-                HbcDataBufferTagType.ByteString => new PrimitiveValue(source.StringTable[reader.ReadByte()]),
-                HbcDataBufferTagType.ShortString => new PrimitiveValue(source.StringTable[reader.ReadUInt16()]),
-                HbcDataBufferTagType.LongString => new PrimitiveValue(source.StringTable[reader.ReadUInt32()]),
+                HbcDataBufferTagType.ByteString => new PrimitiveValue(source.GetStringTableEntry((int)reader.ReadByte()).Value),
+                HbcDataBufferTagType.ShortString => new PrimitiveValue(source.GetStringTableEntry((int)reader.ReadUInt16()).Value),
+                HbcDataBufferTagType.LongString => new PrimitiveValue(source.GetStringTableEntry((int)reader.ReadUInt32()).Value),
                 HbcDataBufferTagType.Number => new PrimitiveValue(reader.ReadDouble()),
                 HbcDataBufferTagType.Integer => new PrimitiveValue(reader.ReadInt32()),
                 HbcDataBufferTagType.Null => new PrimitiveValue(null),

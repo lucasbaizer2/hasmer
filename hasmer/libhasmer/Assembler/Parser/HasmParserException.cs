@@ -34,20 +34,29 @@ namespace Hasmer.Assembler.Parser {
         }
 
         /// <summary>
+        /// Creates a new HasmParserException given a token and a message.
+        /// </summary>
+        public HasmParserException(HasmToken token, string message) {
+            Line = token.Line + 1;
+            Column = token.Column + 1;
+            ErrorMessage = message;
+        }
+
+        /// <summary>
+        /// Creates a new HasmParserException given a token and a message.
+        /// </summary>
+        public HasmParserException(HasmStringStreamState state, string message) {
+            Line = state.Line + 1;
+            Column = state.Column + 1;
+            ErrorMessage = message;
+        }
+
+        /// <summary>
         /// Creates a new HasmParserException given the current stream and an exception.
         /// </summary>
         public HasmParserException(HasmStringStream stream, Exception e) : base(e.Message, e) {
             Line = stream.CurrentLine + 1;
             Column = stream.CurrentColumn + 1;
-        }
-
-        /// <summary>
-        /// Creates a new HasmParserException given the line and column of the error as well as a message.
-        /// </summary>
-        public HasmParserException(int line, int col, string message) {
-            Line = line + 1;
-            Column = col + 1;
-            ErrorMessage = message;
         }
     }
 }

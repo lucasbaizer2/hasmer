@@ -1,0 +1,193 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Hasmer.Assembler.Parser {
+    /// <summary>
+    /// Represents a ".hasm" header declaration, the first token of a Hasm file.
+    /// </summary>
+    public class HasmHeaderDeclarationToken : HasmToken {
+        /// <summary>
+        /// The token which declares the version of the Hasm bytecode.
+        /// </summary>
+        public HasmIntegerToken Version { get; set; }
+
+        /// <summary>
+        /// True if the version declaration specified that the instructions should be interpretered literally,
+        /// and not as abstracted forms. See <see cref="HbcDisassembler.IsExact"/> for more information.
+        /// </summary>
+        public bool IsExact { get; set; }
+
+        public HasmHeaderDeclarationToken(int state) : base(state) { }
+    }
+
+    /// <summary>
+    /// Parses a declaration (i.e. a token which starts with ".").
+    /// </summary>
+    public class HasmDeclarationParser : IHasmTokenParser {
+        public bool CanParse(HasmReaderState asm) {
+            string op = asm.Stream.PeekOperator();
+            if (op != ".") {
+                return false;
+            }
+            asm.Stream.AdvanceOperator();
+
+            string word = asm.Stream.PeekWord();
+            if (word == null) {
+                return false;
+            }
+
+            return word == "hasm" ||
+                word == "data" ||
+                word == "start" ||
+                word == "end" ||
+                word == "id" ||
+                word == "params" ||
+                word == "registers" ||
+                word == "symbols" ||
+                word == "strict" ||
+                word == "label";
+        }
+
+        public HasmToken Parse(HasmReaderState asm) {
+            int state = asm.Stream.SaveState();
+
+            asm.Stream.AdvanceOperator(); // skip "." before declaration
+            string word = asm.Stream.AdvanceWord();
+            if (word == "hasm") {
+                HasmIntegerToken version = (HasmIntegerToken)IHasmTokenParser.IntegerParser.Parse(asm);
+                bool isExact;
+                if (asm.Stream.PeekWord() == "exact") {
+                    isExact = true;
+                } else if (asm.Stream.PeekWord() == "auto") {
+                    isExact = false;
+                } else {
+                    throw new HasmParserException(asm.Stream, "expecting either 'auto' or 'exact' after version declaration");
+                }
+                asm.Stream.AdvanceWord();
+
+                return new HasmHeaderDeclarationToken(state) {
+                    Version = version,
+                    IsExact = isExact
+                };
+            } else if (word == "data") {
+                HasmLabelToken label = (HasmLabelToken)IHasmTokenParser.LabelParser.Parse(asm);
+                string dataTypeRaw = asm.Stream.PeekWord();
+                if (dataTypeRaw == null) {
+                    throw new HasmParserException(asm.Stream, "expecting data type");
+                }
+                asm.Stream.AdvanceWord();
+                if (!Enum.IsDefined(typeof(HasmDataDeclarationKind), dataTypeRaw)) {
+                    throw new HasmParserException(asm.Stream, $"invalid data type: '{dataTypeRaw}'");
+                }
+                HasmDataDeclarationKind dataType = Enum.Parse<HasmDataDeclarationKind>(dataTypeRaw);
+                if (asm.Stream.PeekOperator() != "[") {
+                    throw new HasmParserException(asm.Stream, "expecting '['");
+                }
+                asm.Stream.AdvanceOperator();
+
+                IHasmTokenParser dataParser = dataType switch {
+                    HasmDataDeclarationKind.String => IHasmTokenParser.StringParser,
+                    HasmDataDeclarationKind.Integer => IHasmTokenParser.IntegerParser,
+                    HasmDataDeclarationKind.Number => IHasmTokenParser.NumberParser,
+                    HasmDataDeclarationKind.Null => new HasmSimpleParser("null"),
+                    HasmDataDeclarationKind.True => new HasmSimpleParser("true"),
+                    HasmDataDeclarationKind.False => new HasmSimpleParser("false"),
+                    _ => throw new NotImplementedException()
+                };
+
+                List<HasmLiteralToken> data = new List<HasmLiteralToken>();
+                while (true) {
+                    data.Add((HasmLiteralToken)dataParser.Parse(asm));
+                    string peek = asm.Stream.PeekOperator();
+                    if (peek == "]") {
+                        asm.Stream.AdvanceOperator();
+                        break;
+                    }
+                    if (peek != ",") {
+                        throw new HasmParserException(asm.Stream, "expecting either ']' or ','");
+                    }
+                    asm.Stream.AdvanceOperator();
+                }
+
+                return new HasmDataDeclarationToken(state) {
+                    Label = label,
+                    DataType = dataType,
+                    Data = data
+                };
+            } else if (word == "start") {
+                string functionType = asm.Stream.PeekWord();
+                if (functionType != "Function" && functionType != "Constructor" && functionType != "NCFunction") {
+                    throw new HasmParserException(asm.Stream, "expecting either 'Function', 'Constructor', or 'NCFunction'");
+                }
+                asm.Stream.AdvanceWord();
+
+                string functionName;
+                int preNameState = asm.Stream.SaveState();
+                HasmToken identToken = IHasmTokenParser.StringParser.Parse(asm);
+                if (identToken is HasmIdentifierToken ident) {
+                    functionName = ident.Value;
+                } else {
+                    throw new HasmParserException(preNameState, "expecting function name identifier");
+                }
+
+                // the cursor is currently at the start of the parameters, which we ignore, so skip to the next line
+                // .start Function <helloWorld>(this, foo, bar, baz)
+                //     .id XYZ                 ^
+                //     ...
+                asm.Stream.CurrentLine++;
+                asm.Stream.CurrentColumn = 0;
+
+                List<HasmToken> body = new List<HasmToken>();
+                HasmFunctionToken function = new HasmFunctionToken(state) {
+                    FunctionName = functionName,
+                    Body = body
+                };
+                asm.CurrentFunction = function;
+
+                HasmTokenStream bodyStream = new HasmTokenStream(asm);
+                foreach (HasmToken token in bodyStream.ReadTokens()) {
+                    if (token is HasmSimpleToken simple && simple.Value == "end") {
+                        asm.CurrentFunction = null;
+                        break;
+                    }
+                    body.Add(token);
+                }
+
+                return function;
+            } else if (word == "end") {
+                return new HasmSimpleToken(state) {
+                    Value = "end"
+                };
+            } else if (word == "id" || word == "params" || word == "registers" || word == "symbols") {
+                if (!IHasmTokenParser.IntegerParser.CanParse(asm)) {
+                    throw new HasmParserException(asm.Stream, "expecting value after declaration");
+                }
+                HasmIntegerToken intToken = (HasmIntegerToken)IHasmTokenParser.IntegerParser.Parse(asm);
+                HasmFunctionModifierType modType = word switch {
+                    "id" => HasmFunctionModifierType.Id,
+                    "params" => HasmFunctionModifierType.Params,
+                    "registers" => HasmFunctionModifierType.Registers,
+                    "symbols" => HasmFunctionModifierType.Symbols,
+                    _ => throw new Exception("unreachable"),
+                };
+                return new HasmFunctionModifierToken(state) {
+                    ModifierType = modType,
+                    Value = intToken.GetValueAsUInt32(),
+                };
+            } else if (word == "strict") {
+                return new HasmFunctionModifierToken(state) {
+                    ModifierType = HasmFunctionModifierType.Strict
+                };
+            } else if (word == "label") {
+                // TODO
+                asm.Stream.AdvanceWord();
+                return null;
+            }
+
+            throw new Exception($"invalid declaration '.{word}'");
+        }
+    }
+}

@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Hasmer.Assembler.Parser {
     /// <summary>
-    /// Parses a comment (starting with a '#') from the stream.
+    /// Parses a comment (starting with a '//') from the stream.
     /// </summary>
     public class HasmCommentParser : IHasmTokenParser {
         public bool CanParse(HasmReaderState asm) {
-            return asm.Stream.PeekCharacters(1) == "#";
+            return asm.Stream.Peek(2) == "//";
         }
 
         public HasmToken Parse(HasmReaderState asm) {
@@ -18,8 +18,17 @@ namespace Hasmer.Assembler.Parser {
                 throw new HasmParserException(asm.Stream, "invalid comment");
             }
 
-            asm.Stream.CurrentLine++;
-            asm.Stream.CurrentColumn = 0;
+            while (true) {
+                char c = asm.Stream.PeekChar();
+                if (c == '\0') {
+                    break;
+                }
+                asm.Stream.Advance(1);
+                if (c == '\n') {
+                    break;
+                }
+            }
+
             if (!asm.Stream.IsFinished) {
                 asm.Stream.SkipWhitespace();
             }

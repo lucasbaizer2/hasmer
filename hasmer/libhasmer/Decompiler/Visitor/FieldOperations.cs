@@ -155,11 +155,11 @@ namespace Hasmer.Decompiler.Visitor {
 
         [Visitor]
         public static void PutById(DecompilerContext context) =>
-            CommonPutById(context, new Identifier(context.Source.StringTable[context.Instruction.Operands[3].GetValue<uint>()]));
+            CommonPutById(context, new Identifier(context.Source.GetStringTableEntry((int)context.Instruction.Operands[3].GetValue<uint>()).Value));
 
         [Visitor]
         public static void PutNewOwnById(DecompilerContext context) =>
-            CommonPutById(context, new Identifier(context.Source.StringTable[context.Instruction.Operands[2].GetValue<uint>()]));
+            CommonPutById(context, new Identifier(context.Source.GetStringTableEntry((int)context.Instruction.Operands[2].GetValue<uint>()).Value));
 
         [Visitor]
         public static void PutOwnByIndex(DecompilerContext context) =>

@@ -178,7 +178,7 @@ namespace Hasmer.Assembler {
         /// Adds a comment to an instruction if neccessary.
         /// </summary>
         private void AnnotateVerbose(SourceCodeBuilder builder, HbcInstruction insn) {
-            builder.Write("# offset = 0x");
+            builder.Write("// offset = 0x");
             builder.Write(insn.Offset.ToString("X"));
             builder.Write(", length = ");
             builder.Write(insn.Length.ToString());
@@ -205,7 +205,7 @@ namespace Hasmer.Assembler {
             };
 
             if (annotation != null) {
-                builder.Write("# ");
+                builder.Write("// ");
                 builder.Write(annotation);
             }
         }

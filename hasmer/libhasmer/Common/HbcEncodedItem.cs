@@ -15,52 +15,45 @@ namespace Hasmer {
         /// <summary>
         /// Converts the name of a type in JSON to the .NET type.
         /// </summary>
-        private static Type GetTypeFromName(string name) {
-            switch (name) {
-                case "UInt8":
-                    return typeof(byte);
-                case "UInt16":
-                    return typeof(ushort);
-                case "UInt32":
-                    return typeof(uint);
-                case "UInt64":
-                    return typeof(ulong);
-                default:
-                    throw new InvalidDataException("bad type: " + name);
-            }
-        }
+        private static Type GetTypeFromName(string name) => name switch {
+            "UInt8" => typeof(byte),
+            "UInt16" => typeof(ushort),
+            "UInt32" => typeof(uint),
+            "UInt64" => typeof(ulong),
+            _ => throw new InvalidDataException("bad type: " + name),
+        };
 
         /// <summary>
         /// Reads a value from the buffer given the type of the value.
         /// </summary>
-        private static object ReadType(HbcReader reader, string type) {
-            if (type == "UInt8") {
-                return reader.ReadByte();
-            } else if (type == "UInt16") {
-                return reader.ReadUInt16();
-            } else if (type == "UInt32") {
-                return reader.ReadUInt32();
-            } else if (type == "UInt64") {
-                return reader.ReadUInt64();
-            } else {
-                throw new InvalidDataException("bad type: " + type);
-            }
-        }
+        private static object ReadType(HbcReader reader, string type) => type switch {
+            // the explicit cast to object is necessary, the C# compiler casts all the values to UInt64 before casting to object
+            "UInt8" => (object)reader.ReadByte(),
+            "UInt16" => (object)reader.ReadUInt16(),
+            "UInt32" => (object)reader.ReadUInt32(),
+            "UInt64" => (object)reader.ReadUInt64(),
+            _ => throw new InvalidDataException("bad type: " + type),
+        };
 
         /// <summary>
         /// Writes a value to the buffer given the type.
         /// </summary>
         private static void WriteType(HbcWriter writer, string type, object value) {
-            if (type == "UInt8") {
-                writer.Write((byte)value);
-            } else if (type == "UInt16") {
-                writer.Write((ushort)value);
-            } else if (type == "UInt32") {
-                writer.Write((uint)value);
-            } else if (type == "UInt64") {
-                writer.Write((ulong)value);
-            } else {
-                throw new InvalidDataException("bad type: " + type);
+            switch (type) {
+                case "UInt8":
+                    writer.Write((byte)value);
+                    break;
+                case "UInt16":
+                    writer.Write((ushort)value);
+                    break;
+                case "UInt32":
+                    writer.Write((uint)value);
+                    break;
+                case "UInt64":
+                    writer.Write((ulong)value);
+                    break;
+                default:
+                    throw new InvalidDataException("bad type: " + type);
             }
         }
 
@@ -139,7 +132,12 @@ namespace Hasmer {
             foreach (JProperty property in obj.Properties()) {
                 PropertyInfo info = typeof(T).GetProperty(property.Name, BindingFlags.Public | BindingFlags.Instance);
                 object value = ReadFromDefinition(reader, property.Value);
-                info.SetValue(decoded, value);
+                try {
+                    info.SetValue(decoded, value);
+                } catch (Exception e) {
+                    Console.WriteLine($"Failed to set {info.PropertyType.FullName} property '{typeof(T).FullName}.{property.Name}' (expecting {property.Value}, read {value.GetType().FullName} {value}): {e}");
+                    Environment.Exit(1);
+                }
             }
 
             return decoded;

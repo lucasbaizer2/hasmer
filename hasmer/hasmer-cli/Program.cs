@@ -19,7 +19,7 @@ namespace Hasmer.CLI {
             public bool IsApk { get; set; }
         }
 
-        [Verb("disassemble", HelpText = "Disassembles the bytecode into a Hasm file.")]
+        [Verb("disassemble", HelpText = "Disassembles Hermes bytecode into a Hasm file.")]
         public class DisassembleOptions : DecodeOptions {
             [Option("exact", Required = false, HelpText = "Disassembles the exact instructions instead of optimizing them at assemble time.")]
             public bool IsExact { get; set; }
@@ -28,7 +28,7 @@ namespace Hasmer.CLI {
             public bool IsVerbose { get; set; }
         }
 
-        [Verb("decompile", HelpText = "Decompiles the bytecode into a JavaScript file.")]
+        [Verb("decompile", HelpText = "Decompiles Hermes bytecode into a JavaScript file.")]
         public class DecompileOptions : DecodeOptions {
             [Option('p', "omit-protoype", Required = false, HelpText = "Omit prototypes being passed to constructors.", Default = true)]
             public bool OmitPrototypeFromConstructorInvocation { get; set; }
@@ -89,7 +89,7 @@ namespace Hasmer.CLI {
             }
             string fileName = Path.GetFileName(options.InputPath);
             if (fileName.Contains(".")) {
-                fileName = fileName.Substring(0, fileName.IndexOf('.'));
+                fileName = fileName.Substring(0, fileName.LastIndexOf('.'));
             }
             string outputDirectory = Path.GetDirectoryName(options.InputPath);
 
@@ -110,7 +110,7 @@ namespace Hasmer.CLI {
 
             string fileName = Path.GetFileName(options.InputPath);
             if (fileName.Contains(".")) {
-                fileName = fileName.Substring(0, fileName.IndexOf('.'));
+                fileName = fileName.Substring(0, fileName.LastIndexOf('.'));
             }
             string outputDirectory = Path.GetDirectoryName(options.InputPath);
             byte[] hermesBytecode;
@@ -121,7 +121,8 @@ namespace Hasmer.CLI {
                 using MemoryStream fileStream = new MemoryStream((int)bundleEntry.UncompressedSize);
                 bundleEntry.Extract(fileStream);
                 hermesBytecode = fileStream.ToArray();
-            } else {
+            }
+            else {
                 hermesBytecode = File.ReadAllBytes(options.InputPath);
             }
 

@@ -8,7 +8,7 @@ using Hasmer.Decompiler.AST;
 namespace Hasmer.Decompiler.Analysis {
     public class StaticAnalyzerState {
         public Dictionary<Identifier, SyntaxNode> Registers { get; set; }
-        public List<string> Variables { get; set;  }
+        public List<string> Variables { get; set; }
 
         public StaticAnalyzerState() {
             Registers = new Dictionary<Identifier, SyntaxNode>();

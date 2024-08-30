@@ -3,126 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System.Runtime.Serialization;
 using Newtonsoft.Json.Converters;
 
 namespace Hasmer {
-    /// <summary>
-    /// Represents the type of an operand.
-    /// </summary>
-    [JsonConverter(typeof(StringEnumConverter))]
-    public enum HbcInstructionOperandType {
-        /// <summary>
-        /// The operand is a one-byte register reference.
-        /// </summary>
-        Reg8,
-        /// <summary>
-        /// The operand is a four-byte register reference.
-        /// </summary>
-        Reg32,
-        /// <summary>
-        /// The operand is an unsigned byte.
-        /// </summary>
-        UInt8,
-        /// <summary>
-        /// The operand is an unsigned two-byte integer.
-        /// </summary>
-        UInt16,
-        /// <summary>
-        /// The operand is an unsigned four-byte integer.
-        /// </summary>
-        UInt32,
-        /// <summary>
-        /// The operand is a one-byte code address reference.
-        /// </summary>
-        Addr8,
-        /// <summary>
-        /// The operand is a four-byte code address reference.
-        /// </summary>
-        Addr32,
-        /// <summary>
-        /// The operand is a four-byte unsigned integer.
-        /// </summary>
-        Imm32,
-        /// <summary>
-        /// The operand is an eight-byte IEEE754 floating-point value.
-        /// </summary>
-        Double,
-        /// <summary>
-        /// The operand is a one-byte reference to the string table.
-        /// </summary>
-        UInt8S,
-        /// <summary>
-        /// The operand is a two-byte reference to the string table.
-        /// </summary>
-        UInt16S,
-        /// <summary>
-        /// The operand is a four-byte reference to the string table.
-        /// </summary>
-        UInt32S
-    }
-
-    /// <summary>
-    /// Represents the definition of an instruction in a JSON bytecode definitions file.
-    /// </summary>
-    public class HbcInstructionDefinition {
-        /// <summary>
-        /// The opcode of the instruction in the binary.
-        /// </summary>
-        [JsonProperty]
-        public int Opcode { get; set; }
-        /// <summary>
-        /// The human-readable name of the instruction.
-        /// </summary>
-        [JsonProperty]
-        public string Name { get; set; }
-        /// <summary>
-        /// The types of all the operands the operand handles.
-        /// </summary>
-        [JsonProperty]
-        public List<HbcInstructionOperandType> OperandTypes { get; set; }
-        /// <summary>
-        /// true if the operation is a jumping instruction (i.e. changes the current instruction being executed), or otherwise false.
-        /// </summary>
-        [JsonProperty]
-        public bool IsJump { get; set; }
-        /// <summary>
-        /// The index in the abstract definition table of the abstract form of the instruction, or null if the instruction does not have an abstract form.
-        /// </summary>
-        [JsonProperty]
-        public int? AbstractDefinition { get; set; }
-    }
-
-    /// <summary>
-    /// Represents the abstract form of variant instructions.
-    /// Variant instructions are instructions which perform the same action, but can have differently sized operands.
-    /// By abstracting these instructions to all have one name, the assembler can optimize the size of the operands.
-    /// Thus, programmers do not have to figure out the proper sizes when they write Hasm code.
-    /// <br /> <br />
-    /// Passing the "--exact" flag to the hasmer disassmbler will ignore abstract definitions,
-    /// and instead emit the exact instruction.
-    /// </summary>
-    public class HbcAbstractInstructionDefinition {
-        /// <summary>
-        /// The abstract name that can be used to represent any of the <see cref="Variants"/>.
-        /// <br />
-        /// For example, the instructions "JStrictNotEqual" and "JStrictNotEqualLong"
-        /// will have an abstract name of simply "JStrictNotEqual".
-        /// <br />
-        /// The assembler will decide which to use based on the operands at assemble time.
-        /// </summary>
-        [JsonProperty]
-        public string Name { get; set; }
-
-        /// <summary>
-        /// The opcodes of each variant that can be defined by this abstract definition.
-        /// </summary>
-        [JsonProperty]
-        public List<uint> Variants { get; set; }
-    }
-
     /// <summary>
     /// Represents a definition of the bytecode operations for a given Hermes version.
     /// <br />

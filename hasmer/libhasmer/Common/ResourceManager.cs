@@ -21,6 +21,9 @@ namespace Hasmer {
             Assembly assembly = Assembly.GetExecutingAssembly();
 
             using Stream stream = assembly.GetManifestResourceStream("Hasmer.Resources." + name + ".json");
+            if (stream == null) {
+                throw new Exception("embedded resource does not exist: " + name);
+            }
             using StreamReader reader = new StreamReader(stream);
             return reader.ReadToEnd();
         }

@@ -49,23 +49,36 @@ namespace Hasmer {
         }
 
         /// <summary>
-        /// Returns the raw value coerced to type T. It is the duty of the caller to ensure that the type actually is of type T before calling.
+        /// Returns the raw value coerced to a ulong.
+        /// The the raw value is not an integer type, an exception is thrown.
         /// </summary>
-        public T GetValue<T>() {
-            return Type.GetTypeCode(typeof(T)) switch {
-                TypeCode.Byte => (T)Convert.ChangeType(Convert.ToByte(RawValue), typeof(T)),
-                TypeCode.SByte => (T)Convert.ChangeType(Convert.ToSByte(RawValue), typeof(T)),
-                TypeCode.Int16 => (T)Convert.ChangeType(Convert.ToInt16(RawValue), typeof(T)),
-                TypeCode.UInt16 => (T)Convert.ChangeType(Convert.ToUInt16(RawValue), typeof(T)),
-                TypeCode.Int32 => (T)Convert.ChangeType(Convert.ToInt32(RawValue), typeof(T)),
-                TypeCode.UInt32 => (T)Convert.ChangeType(Convert.ToUInt32(RawValue), typeof(T)),
-                TypeCode.Double => (T)Convert.ChangeType(Convert.ToDouble(RawValue), typeof(T)),
-                TypeCode.Boolean => (T)Convert.ChangeType(Convert.ToBoolean(RawValue), typeof(T)),
-                TypeCode.String => (T)RawValue,
-                TypeCode.Empty => default(T),
-                _ => throw new NotImplementedException()
-            };
-        }
+        public ulong GetIntegerValue() => TypeCode switch {
+            TypeCode.Byte => (ulong)Convert.ToByte(RawValue),
+            TypeCode.SByte => (ulong)Convert.ToSByte(RawValue),
+            TypeCode.Int16 => (ulong)Convert.ToInt16(RawValue),
+            TypeCode.UInt16 => (ulong)Convert.ToUInt16(RawValue),
+            TypeCode.Int32 => (ulong)Convert.ToInt32(RawValue),
+            TypeCode.UInt32 => (ulong)Convert.ToUInt32(RawValue),
+            _ => throw new Exception("cannot get integer value of non-integer PrimitiveValue"),
+        };
+
+        /// <summary>
+        /// Returns the raw value coerced to type T.
+        /// It is the duty of the caller to ensure that the type actually is of type T before calling.
+        /// </summary>
+        public T GetValue<T>() => TypeCode switch {
+            TypeCode.Byte => (T)Convert.ChangeType(Convert.ToByte(RawValue), typeof(T)),
+            TypeCode.SByte => (T)Convert.ChangeType(Convert.ToSByte(RawValue), typeof(T)),
+            TypeCode.Int16 => (T)Convert.ChangeType(Convert.ToInt16(RawValue), typeof(T)),
+            TypeCode.UInt16 => (T)Convert.ChangeType(Convert.ToUInt16(RawValue), typeof(T)),
+            TypeCode.Int32 => (T)Convert.ChangeType(Convert.ToInt32(RawValue), typeof(T)),
+            TypeCode.UInt32 => (T)Convert.ChangeType(Convert.ToUInt32(RawValue), typeof(T)),
+            TypeCode.Double => (T)Convert.ChangeType(Convert.ToDouble(RawValue), typeof(T)),
+            TypeCode.Boolean => (T)Convert.ChangeType(Convert.ToBoolean(RawValue), typeof(T)),
+            TypeCode.String => (T)RawValue,
+            TypeCode.Empty => default(T),
+            _ => throw new NotImplementedException()
+        };
 
         public override int GetHashCode() {
             if (RawValue == null) {
@@ -95,7 +108,7 @@ namespace Hasmer {
                 TypeCode.UInt16 => Convert.ToUInt16(RawValue).ToString(),
                 TypeCode.Int32 => Convert.ToInt32(RawValue).ToString(),
                 TypeCode.UInt32 => Convert.ToUInt32(RawValue).ToString(),
-                TypeCode.Double => Convert.ToDouble(RawValue).ToString(),
+                TypeCode.Double => StringEscape.DoubleToString(Convert.ToDouble(RawValue)),
                 TypeCode.Boolean => Convert.ToBoolean(RawValue) ? "true" : "false",
                 TypeCode.String => (string)RawValue,
                 TypeCode.Empty => "null",
