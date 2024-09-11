@@ -80,9 +80,15 @@
         /// </summary>
         public uint ObjValueBufferSize { get; set; }
 
+        // Replaced CjsModuleOffset in HBC version 78.
+        public uint SegmentID { get; set; }
+
         public uint CjsModuleOffset { get; set; }
 
         public uint CjsModuleCount { get; set; }
+
+        // Added in HBC version 84.
+        public uint FunctionSourceCount { get; set; }
 
         /// <summary>
         /// The offset in the binary of debug information, if present.

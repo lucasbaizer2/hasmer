@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Hasmer {
-    public class HbcRegExpTableEntry : HbcEncodedItem {
+    public class HbcGenericTableEntry : HbcEncodedItem {
         public uint Offset { get; set; }
         public uint Length { get; set; }
     }

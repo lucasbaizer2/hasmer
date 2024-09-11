@@ -28,7 +28,9 @@ namespace Hasmer {
         /// </summary>
         public HbcSmallFuncHeader[] SmallFuncHeaders { get; set; }
 
-        public HbcRegExpTableEntry[] RegExpTable { get; set; }
+        public HbcGenericTableEntry[] BigIntTable { get; set; }
+
+        public HbcGenericTableEntry[] RegExpTable { get; set; }
 
         public HbcCjsModuleTableEntry[] CjsModuleTable { get; set; }
 
@@ -46,6 +48,8 @@ namespace Hasmer {
         /// The Object Value Buffer, which contains the values of all constant objects.
         /// </summary>
         public HbcDataBuffer ObjectValueBuffer { get; set; }
+
+        public byte[] BigIntStorage { get; set; }
 
         public byte[] RegExpStorage { get; set; }
 
@@ -80,6 +84,8 @@ namespace Hasmer {
                 throw new Exception("invalid magic header: not a Hermes bytecode file");
             }
 
+            int padding = 31;
+
             Header.Version = reader.ReadUInt32();
             Header.SourceHash = new byte[20];
             reader.Read(Header.SourceHash);
@@ -94,17 +100,26 @@ namespace Hasmer {
             if (Header.Version >= 87) {
                 Header.BigIntCount = reader.ReadUInt32();
                 Header.BigIntStorageSize = reader.ReadUInt32();
+                padding -= sizeof(uint) * 2;
             }
             Header.RegExpCount = reader.ReadUInt32();
             Header.RegExpStorageSize = reader.ReadUInt32();
             Header.ArrayBufferSize = reader.ReadUInt32();
             Header.ObjKeyBufferSize = reader.ReadUInt32();
             Header.ObjValueBufferSize = reader.ReadUInt32();
-            Header.CjsModuleOffset = reader.ReadUInt32();
+            if (Header.Version >= 78) {
+                Header.SegmentID = reader.ReadUInt32();
+            } else {
+                Header.CjsModuleOffset = reader.ReadUInt32();
+            }
             Header.CjsModuleCount = reader.ReadUInt32();
+            if (Header.Version >= 84) {
+                Header.FunctionSourceCount = reader.ReadUInt32();
+                padding -= sizeof(uint);
+            }
             Header.DebugInfoOffset = reader.ReadUInt32();
             Header.Options = (HbcBytecodeOptions)reader.ReadByte();
-            Header.Padding = new byte[31];
+            Header.Padding = new byte[padding];
             reader.Read(Header.Padding);
 
             reader.Align();
@@ -184,8 +199,10 @@ namespace Hasmer {
             reader.Align();
 
             if (Header.Version >= 87) {
-                // TODO: parse the BigIntTable
-                throw new Exception("BigIntTable not yet implemented");
+                uint bigIntCount = Header.BigIntCount.Value;
+                BigIntTable = new HbcGenericTableEntry[bigIntCount];
+                Console.WriteLine($"ReadGenericTable: bigIntCount = ${bigIntCount}, storageSize = ${Header.BigIntStorageSize}");
+                BigIntStorage = ReadGenericTable(reader, BigIntTable, bigIntCount, Header.BigIntStorageSize.Value);
             }
 
             ArrayBuffer = new HbcDataBuffer(reader.ReadBytes((int)Header.ArrayBufferSize));
@@ -197,18 +214,9 @@ namespace Hasmer {
             ObjectValueBuffer = new HbcDataBuffer(reader.ReadBytes((int)Header.ObjValueBufferSize));
             reader.Align();
 
-            RegExpTable = new HbcRegExpTableEntry[Header.RegExpCount];
-            for (int i = 0; i < Header.RegExpCount; i++) {
-                RegExpTable[i] = new HbcRegExpTableEntry {
-                    Offset = reader.ReadUInt32(),
-                    Length = reader.ReadUInt32(),
-                };
-            }
-
-            reader.Align();
-
-            RegExpStorage = reader.ReadBytes((int)Header.RegExpStorageSize);
-            reader.Align();
+            RegExpTable = new HbcGenericTableEntry[Header.RegExpCount];
+            Console.WriteLine($"ReadGenericTable: RegExpCount = ${Header.RegExpCount}, storageSize = ${Header.RegExpStorageSize}");
+            RegExpStorage = ReadGenericTable(reader, RegExpTable, Header.RegExpCount, Header.RegExpStorageSize);
 
             CjsModuleTable = new HbcCjsModuleTableEntry[Header.CjsModuleCount];
             for (int i = 0; i < Header.CjsModuleCount; i++) {
@@ -226,6 +234,28 @@ namespace Hasmer {
             CreateStringTable(stringStorage, smallStringTable, overflowStringTable, stringKinds, identifierHashes);
 
             BytecodeFormat = ResourceManager.ReadEmbeddedResource<HbcBytecodeFormat>($"Bytecode{Header.Version}");
+        }
+
+        private static byte[] ReadGenericTable(HbcReader reader, HbcGenericTableEntry[] table, uint count, uint storageSize) {
+            if (count == 0) {
+                if (storageSize != 0) {
+                    throw new Exception($"ReadGenericTable: count is zero but storageSize is {storageSize}");
+                }
+                return [];
+            }
+            for (int i = 0; i < count; i++) {
+                table[i] = new HbcGenericTableEntry {
+                    Offset = reader.ReadUInt32(),
+                    Length = reader.ReadUInt32(),
+                };
+            }
+
+            reader.Align();
+
+            byte[] storage = reader.ReadBytes((int)storageSize);
+            reader.Align();
+
+            return storage;
         }
 
         /// <summary>
@@ -403,11 +433,12 @@ namespace Hasmer {
         /// Creates a parsed string table from the raw string storage data.
         /// </summary>
         private void CreateStringTable(byte[] stringStorage, HbcSmallStringTableEntry[] smallStringTable, HbcOverflowStringTableEntry[] overflowStringTable, StringKindEntry[] stringKinds, uint[] identifierHashes) {
-            Console.WriteLine($"stringStorage.Length = {stringStorage.Length}");
+            Console.WriteLine($"stringStorage.Length = {stringStorage.Length}, stringKinds = {stringKinds.Length}, smallStringTable.Length = {smallStringTable.Length}");
 
             StringKind[] kindLookup = new StringKind[smallStringTable.Length];
             int k = 0;
             foreach (StringKindEntry entry in stringKinds) {
+                Console.WriteLine($"entry.Count = {entry.Count}");
                 for (int i = 0; i < entry.Count; i++, k++) {
                     kindLookup[k] = entry.Kind;
                 }
