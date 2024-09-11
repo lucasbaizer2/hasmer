@@ -110,8 +110,8 @@ export const git = simpleGit();
 /**
  * Clones the Hermes git repository to the current workiung directory.
  */
-export async function cloneHermesRepository() {
-    await git.clone('https://github.com/facebook/hermes.git');
+export async function cloneHermesRepository(options?: any) {
+    await git.clone('https://github.com/facebook/hermes.git', options);
 }
 
 /**

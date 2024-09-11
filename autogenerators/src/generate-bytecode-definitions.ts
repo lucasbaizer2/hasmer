@@ -170,7 +170,7 @@ async function main() {
     await git.checkout('main', ['--force']).catch(createCommitCatcher('main'));
 
     const tags = await git.tags();
-    for (const tag of tags.all) {
+    for (const tag of tags.all.filter(tag => tag.startsWith('v'))) {
         console.log(`Checking out tag '${tag}'...`);
         await git.checkout(tag, ['--force']).catch(createCommitCatcher(tag));
 

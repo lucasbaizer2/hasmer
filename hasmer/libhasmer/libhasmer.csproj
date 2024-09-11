@@ -65,7 +65,6 @@
     <None Remove="Resources\Bytecode94.json" />
     <None Remove="Resources\Bytecode95.json" />
     <None Remove="Resources\Bytecode96.json" />
-    <None Remove="Resources\BytecodeFileFormat.json" />
     <None Remove="Resources\HasmTokenDefinitions.json" />
   </ItemGroup>
 
@@ -127,7 +126,6 @@
     <EmbeddedResource Include="Resources\Bytecode94.json" />
     <EmbeddedResource Include="Resources\Bytecode95.json" />
     <EmbeddedResource Include="Resources\Bytecode96.json" />
-    <EmbeddedResource Include="Resources\BytecodeFileFormat.json" />
     <EmbeddedResource Include="Resources\HasmTokenDefinitions.json" />
   </ItemGroup>
 

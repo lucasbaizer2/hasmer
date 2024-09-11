@@ -57,6 +57,10 @@
         /// </summary>
         public uint StringStorageSize { get; set; }
 
+        public uint? BigIntCount { get; set; }
+
+        public uint? BigIntStorageSize { get; set; }
+
         public uint RegExpCount { get; set; }
 
         public uint RegExpStorageSize { get; set; }

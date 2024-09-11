@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace Hasmer {
     /// <summary>
@@ -72,28 +73,76 @@ namespace Hasmer {
         /// Parses an entire Hermes bytecode file from the given reader.
         /// </summary>
         public HbcFile(HbcReader reader) {
-            JObject def = ResourceManager.LoadJsonObject("BytecodeFileFormat");
-            Header = HbcEncodedItem.Decode<HbcHeader>(reader, (JObject)def["Header"]);
-
+            Header = new HbcHeader {
+                Magic = reader.ReadUInt64()
+            };
             if (Header.Magic != HbcHeader.HBC_MAGIC_HEADER) {
                 throw new Exception("invalid magic header: not a Hermes bytecode file");
             }
+
+            Header.Version = reader.ReadUInt32();
+            Header.SourceHash = new byte[20];
+            reader.Read(Header.SourceHash);
+            Header.FileLength = reader.ReadUInt32();
+            Header.GlobalCodeIndex = reader.ReadUInt32();
+            Header.FunctionCount = reader.ReadUInt32();
+            Header.StringKindCount = reader.ReadUInt32();
+            Header.IdentifierCount = reader.ReadUInt32();
+            Header.StringCount = reader.ReadUInt32();
+            Header.OverflowStringCount = reader.ReadUInt32();
+            Header.StringStorageSize = reader.ReadUInt32();
+            if (Header.Version >= 87) {
+                Header.BigIntCount = reader.ReadUInt32();
+                Header.BigIntStorageSize = reader.ReadUInt32();
+            }
+            Header.RegExpCount = reader.ReadUInt32();
+            Header.RegExpStorageSize = reader.ReadUInt32();
+            Header.ArrayBufferSize = reader.ReadUInt32();
+            Header.ObjKeyBufferSize = reader.ReadUInt32();
+            Header.ObjValueBufferSize = reader.ReadUInt32();
+            Header.CjsModuleOffset = reader.ReadUInt32();
+            Header.CjsModuleCount = reader.ReadUInt32();
+            Header.DebugInfoOffset = reader.ReadUInt32();
+            Header.Options = (HbcBytecodeOptions)reader.ReadByte();
+            Header.Padding = new byte[31];
+            reader.Read(Header.Padding);
 
             reader.Align();
 
             SmallFuncHeaders = new HbcSmallFuncHeader[Header.FunctionCount];
             for (uint i = 0; i < Header.FunctionCount; i++) {
-                HbcSmallFuncHeader header = HbcEncodedItem.Decode<HbcSmallFuncHeader>(reader, (JObject)def["SmallFuncHeader"]);
-                header.DeclarationFile = this;
-                header.FunctionId = i;
+                HbcSmallFuncHeader header = new HbcSmallFuncHeader {
+                    Offset = reader.ReadBits(25),
+                    ParamCount = reader.ReadBits(7),
+                    BytecodeSizeInBytes = reader.ReadBits(15),
+                    FunctionName = reader.ReadBits(17),
+                    InfoOffset = reader.ReadBits(25),
+                    FrameSize = reader.ReadBits(7),
+                    EnvironmentSize = reader.ReadBits(8),
+                    HighestReadCacheIndex = reader.ReadBits(8),
+                    HighestWriteCacheIndex = reader.ReadBits(8),
+                    Flags = (HbcFuncHeaderFlags)reader.ReadByte(),
+                    DeclarationFile = this,
+                    FunctionId = i
+                };
                 if (header.Flags.HasFlag(HbcFuncHeaderFlags.Overflowed)) {
                     long currentPos = reader.BaseStream.Position;
                     reader.BaseStream.Position = (header.InfoOffset << 16) | header.Offset;
 
-                    header.Large = HbcEncodedItem.Decode<HbcFuncHeader>(reader, (JObject)def["FuncHeader"]);
-                    header.Large.DeclarationFile = this;
-                    header.Large.FunctionId = i;
-
+                    header.Large = new HbcFuncHeader {
+                        Offset = reader.ReadUInt32(),
+                        ParamCount = reader.ReadUInt32(),
+                        BytecodeSizeInBytes = reader.ReadUInt32(),
+                        FunctionName = reader.ReadUInt32(),
+                        InfoOffset = reader.ReadUInt32(),
+                        FrameSize = reader.ReadUInt32(),
+                        EnvironmentSize = reader.ReadUInt32(),
+                        HighestReadCacheIndex = reader.ReadByte(),
+                        HighestWriteCacheIndex = reader.ReadByte(),
+                        Flags = (HbcFuncHeaderFlags)reader.ReadByte(),
+                        DeclarationFile = this,
+                        FunctionId = i
+                    };
                     reader.BaseStream.Position = currentPos;
                 }
                 SmallFuncHeaders[i] = header;
@@ -112,25 +161,29 @@ namespace Hasmer {
             }
             reader.Align();
 
-            Console.WriteLine($"  rSmallStrings @ {reader.BaseStream.Position}");
-
             HbcSmallStringTableEntry[] smallStringTable = new HbcSmallStringTableEntry[Header.StringCount];
             for (int i = 0; i < Header.StringCount; i++) {
-                smallStringTable[i] = HbcEncodedItem.Decode<HbcSmallStringTableEntry>(reader, (JObject)def["SmallStringTableEntry"]);
+                smallStringTable[i] = new HbcSmallStringTableEntry {
+                    IsUTF16 = reader.ReadBit(),
+                    Offset = reader.ReadBits(23),
+                    Length = reader.ReadBits(8),
+                };
             }
             reader.Align();
 
             HbcOverflowStringTableEntry[] overflowStringTable = new HbcOverflowStringTableEntry[Header.OverflowStringCount];
             for (int i = 0; i < Header.OverflowStringCount; i++) {
-                overflowStringTable[i] = HbcEncodedItem.Decode<HbcOverflowStringTableEntry>(reader, (JObject)def["OverflowStringTableEntry"]);
+                overflowStringTable[i] = new HbcOverflowStringTableEntry {
+                    Offset = reader.ReadUInt32(),
+                    Length = reader.ReadUInt32(),
+                };
             }
             reader.Align();
 
             byte[] stringStorage = reader.ReadBytes((int)Header.StringStorageSize);
             reader.Align();
 
-            // TODO: find the actual bytecode version that BigIntTable was added
-            if (Header.Version >= 100) {
+            if (Header.Version >= 87) {
                 // TODO: parse the BigIntTable
                 throw new Exception("BigIntTable not yet implemented");
             }
@@ -146,8 +199,10 @@ namespace Hasmer {
 
             RegExpTable = new HbcRegExpTableEntry[Header.RegExpCount];
             for (int i = 0; i < Header.RegExpCount; i++) {
-                HbcRegExpTableEntry entry = HbcEncodedItem.Decode<HbcRegExpTableEntry>(reader, (JObject)def["RegExpTableEntry"]);
-                RegExpTable[i] = entry;
+                RegExpTable[i] = new HbcRegExpTableEntry {
+                    Offset = reader.ReadUInt32(),
+                    Length = reader.ReadUInt32(),
+                };
             }
 
             reader.Align();
@@ -157,8 +212,10 @@ namespace Hasmer {
 
             CjsModuleTable = new HbcCjsModuleTableEntry[Header.CjsModuleCount];
             for (int i = 0; i < Header.CjsModuleCount; i++) {
-                HbcCjsModuleTableEntry entry = HbcEncodedItem.Decode<HbcCjsModuleTableEntry>(reader, (JObject)def["CjsModuleTableEntry"]);
-                CjsModuleTable[i] = entry;
+                CjsModuleTable[i] = new HbcCjsModuleTableEntry {
+                    First = reader.ReadUInt32(),
+                    Second = reader.ReadUInt32(),
+                };
             }
             reader.Align();
 

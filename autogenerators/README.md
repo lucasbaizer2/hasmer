@@ -44,6 +44,6 @@ Wait for it to complete, then copy all the JSON definition files from `./definit
 
 ### Using `compile-hermes-cli`
 ```
-yarn generate-bytecode-definitions
+yarn compile-hermes-cli -- [--versions <N|N1-N2>]
 ```
 This can take several hours to complete if you are compiling every single version. As each version is compiled the executable files are written to `cli-versions/{version}/{platform}` (e.g. `cli-versions/84/win32` for bytecode version 84 being compiled on Windows).
