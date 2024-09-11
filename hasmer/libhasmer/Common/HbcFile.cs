@@ -201,7 +201,6 @@ namespace Hasmer {
             if (Header.Version >= 87) {
                 uint bigIntCount = Header.BigIntCount.Value;
                 BigIntTable = new HbcGenericTableEntry[bigIntCount];
-                Console.WriteLine($"ReadGenericTable: bigIntCount = ${bigIntCount}, storageSize = ${Header.BigIntStorageSize}");
                 BigIntStorage = ReadGenericTable(reader, BigIntTable, bigIntCount, Header.BigIntStorageSize.Value);
             }
 
@@ -215,7 +214,6 @@ namespace Hasmer {
             reader.Align();
 
             RegExpTable = new HbcGenericTableEntry[Header.RegExpCount];
-            Console.WriteLine($"ReadGenericTable: RegExpCount = ${Header.RegExpCount}, storageSize = ${Header.RegExpStorageSize}");
             RegExpStorage = ReadGenericTable(reader, RegExpTable, Header.RegExpCount, Header.RegExpStorageSize);
 
             CjsModuleTable = new HbcCjsModuleTableEntry[Header.CjsModuleCount];
@@ -433,12 +431,9 @@ namespace Hasmer {
         /// Creates a parsed string table from the raw string storage data.
         /// </summary>
         private void CreateStringTable(byte[] stringStorage, HbcSmallStringTableEntry[] smallStringTable, HbcOverflowStringTableEntry[] overflowStringTable, StringKindEntry[] stringKinds, uint[] identifierHashes) {
-            Console.WriteLine($"stringStorage.Length = {stringStorage.Length}, stringKinds = {stringKinds.Length}, smallStringTable.Length = {smallStringTable.Length}");
-
             StringKind[] kindLookup = new StringKind[smallStringTable.Length];
             int k = 0;
             foreach (StringKindEntry entry in stringKinds) {
-                Console.WriteLine($"entry.Count = {entry.Count}");
                 for (int i = 0; i < entry.Count; i++, k++) {
                     kindLookup[k] = entry.Kind;
                 }
@@ -453,13 +448,10 @@ namespace Hasmer {
                 uint length = entry.Length;
                 bool isUTF16 = entry.IsUTF16 != 0;
 
-                Console.WriteLine($"  offset = {offset}, length = {length}, isUTF16 = {isUTF16}");
-
                 if (length >= MAX_STRING_LENGTH) {
                     HbcOverflowStringTableEntry overflow = overflowStringTable[offset];
                     offset = overflow.Offset;
                     length = overflow.Length;
-                    Console.WriteLine($"    overflow; offset = {offset}, length = {length}");
                 }
 
                 if (isUTF16) {
