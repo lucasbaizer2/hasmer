@@ -4,9 +4,23 @@ This directory contains the C# source code for `hasmer`, using the .NET 8.0 plat
 
 # Setup
 
-You will need the .NET 8 SDK to compile this project. See the [.NET SDK download page](https://dotnet.microsoft.com/en-us/download) for information on how to download the .NET SDK for your operating system.
+If you don't use the Docker image then you will need to install the .NET 8 SDK to compile this project. See the [.NET SDK download page](https://dotnet.microsoft.com/en-us/download) for information on how to download the .NET SDK for your operating system.
 
 # Building
+
+## Using Docker
+
+```
+docker build -t hasmer .
+```
+
+From the directory where your bundle is you can then run commands, for example:
+
+```
+docker run --volume $(pwd):/assets hasmer disassemble -i index.android.bundle
+```
+
+## Manually
 
 You can open the solution file (see `hasmer.sln`) in Visual Studio and build and run from Visual Studio.
 
