@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "fs-extra": "^10.0.1",
-    "simple-git": "^3.3.0"
+    "simple-git": "^3.16.0"
   },
   "devDependencies": {
     "@types/fs-extra": "^9.0.13",
