@@ -4,7 +4,7 @@ This directory contains the C# source code for `hasmer`, using the .NET 8.0 plat
 
 # Setup
 
-You will need the .NET 5 SDK to compile this project. See the [.NET SDK download page](https://dotnet.microsoft.com/en-us/download) for information on how to download the .NET SDK for your operating system.
+You will need the .NET 8 SDK to compile this project. See the [.NET SDK download page](https://dotnet.microsoft.com/en-us/download) for information on how to download the .NET SDK for your operating system.
 
 # Building
 
