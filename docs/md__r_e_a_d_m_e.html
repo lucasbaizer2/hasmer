@@ -68,17 +68,24 @@ $(function() {
 <div class="textblock"><p>This directory contains the C# source code for <code>hasmer</code>, using the .NET 8.0 platform.</p>
 <h1><a class="anchor" id="autotoc_md1"></a>
 Setup</h1>
-<p>You will need the .NET 8 SDK to compile this project. See the <a href="https://dotnet.microsoft.com/en-us/download">.NET SDK download page</a> for information on how to download the .NET SDK for your operating system.</p>
+<p>If you don't use the Docker image then you will need to install the .NET 8 SDK to compile this project. See the <a href="https://dotnet.microsoft.com/en-us/download">.NET SDK download page</a> for information on how to download the .NET SDK for your operating system.</p>
 <h1><a class="anchor" id="autotoc_md2"></a>
 Building</h1>
+<h2><a class="anchor" id="autotoc_md3"></a>
+Using Docker</h2>
+<div class="fragment"><div class="line">docker build -t hasmer .</div>
+</div><!-- fragment --><p>From the directory where your bundle is you can then run commands, for example:</p>
+<div class="fragment"><div class="line">docker run --volume $(pwd):/assets hasmer disassemble -i index.android.bundle</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md4"></a>
+Manually</h2>
 <p>You can open the solution file (see <code>hasmer.sln</code>) in Visual Studio and build and run from Visual Studio.</p>
 <p>You can also build from the command line using the .NET SDK CLI: </p><div class="fragment"><div class="line">dotnet build</div>
 </div><!-- fragment --><p> Ensure you run the above command with the current working directory being the one containing the <code>hasmer.sln</code> file.</p>
 <p>Building with the .NET SDK CLI will generate the executable in the <code>.hasmer-cli/bin/Debug/net8.0</code> directory. You can make a release build using: </p><div class="fragment"><div class="line">dotnet build -c Release</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md3"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md5"></a>
 Running / Testing</h1>
 <p>You can find documentation on the hasmer CLI and a sample Hermes bytecode file on the <a href="https://lucasbaizer2.github.io/hasmer">hasmer website</a>.</p>
-<h1><a class="anchor" id="autotoc_md4"></a>
+<h1><a class="anchor" id="autotoc_md6"></a>
 Code Documentation</h1>
 <p>The latest auto-generated docs can be found online <a href="https://lucasbaizer2.github.io/hasmer/docs/annotated.html">here</a>.</p>
 <p>You can generate your own docs locally using <a href="https://www.doxygen.nl/index.html">Doxygen</a>. Run in this directory: </p><div class="fragment"><div class="line">doxygen Doxyfile</div>
